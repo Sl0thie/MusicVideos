@@ -14,4 +14,4 @@ This cshtml razor page provides a simple video player for output of the video. T
 The remote razor page provides control of the Player via a SignalR hub.
 
 # File Importer
-File Importer is a console application that imports video files to a base directory for using in the web application. It stores the files in a folder for the artist and then a folder for the video title. If then creates a thumbnail for the video as well as two waveform files using ffmepg.
+File Importer is a console application that imports video files to a base directory for use in the web application. It stores the files in a folder for the artist and then a folder for the video title. If then creates a thumbnail for the video as well as two waveform files using ffmepg.
