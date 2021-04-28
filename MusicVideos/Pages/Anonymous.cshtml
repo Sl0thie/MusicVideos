@@ -1,0 +1,26 @@
+﻿@page
+@model MusicVideos.Pages.AnonymousModel
+@{
+    @section Styles {
+        <link href="@Url.Content("/css/anonymous.css")" rel="stylesheet" type="text/css" />
+    }
+    @section Scripts
+    {
+        <script type="text/javascript" src="@Url.Content("/js/anonymous.js")" defer></script>
+    }
+}
+
+<div id="container">
+    <h1>Welcome Neighbour</h1>
+    <p>Below is a button that will lower the volume on my daughters HI-Fi Sound System. It will do this in small increments, one minute at a time every time you press the button. This will stop them from noticing the sound volume has been decreasing. </p>
+    <p>This application will also remember the time that you do this as well so you should not have to repeat yourself next time.</p>
+    <p>This application is also completely anonymous. We consider privacy to be very important in the age and we don't record any data from this application so you can have peice of mind that the only intention is to notify us that the sound is too loud.</p>
+
+    <div class="centered">
+        <input id="buttonVolume" type="button" value="It's too loud!" onclick="lowerVolume()" />
+    </div>
+
+    <div class="centered">
+        <span id="clock"></span>
+    </div>
+</div>

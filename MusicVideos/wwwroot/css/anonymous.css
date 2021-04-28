@@ -1,0 +1,31 @@
+﻿body{
+    padding:20px;
+}
+
+h1 {
+    color: #FFFFFF;
+    text-align: center;
+    font-family: 'Segoe UI';
+    font-size: 32px;
+    font-weight:400;
+}
+
+p {
+    color: #AAAAAA;
+    text-align: justify;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+span {
+    color: #FFFFFF;
+    text-align: center;
+    font-family: 'Segoe UI';
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.centered {
+    text-align: center;
+}

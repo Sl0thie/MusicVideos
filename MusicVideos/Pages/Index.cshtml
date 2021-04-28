@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<h1>Debug Options</h1>
+
+<table>
+    <tr>
+        <td>Player Page</td>
+        <td><a asp-page="Player">Open</a></td>
+    </tr>
+    <tr>
+        <td>Remote Page</td>
+        <td><a asp-page="Remote">Open</a></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input id="Button1" type="button" value="Close All Windows" onclick="closeWindows"/>
+        </td>
+    </tr>
+</table>
+
+<script>
+    var playerWindow;
+    var remoteWindow;
+    var anonymousWindow;
+
+    openWindows();
+    window.addEventListener('beforeunload', closeWindows);
+
+    function openWindows() {
+        playerWindow = window.open("Player", "Player", "left=1960,top=45,width=1440,height=900");
+        remoteWindow = window.open("Remote", "Remote", "left=3650,top=45,width=412,height=846");
+        //anonymousWindow = window.open("Anonymous", "Anonymous", "left=1540,top=45,width=412,height=846");
+    }
+
+    function closeWindows() {
+        playerWindow.close();
+        remoteWindow.close();
+        //anonymousWindow.close();
+    }
+</script>

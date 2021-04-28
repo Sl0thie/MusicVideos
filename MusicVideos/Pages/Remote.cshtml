@@ -1,0 +1,284 @@
+﻿@page
+@model MusicVideos.Pages.RemoteModel
+@{
+    @section Styles {
+        <link href="@Url.Content("/css/remote.css")" rel="stylesheet" type="text/css" />
+    }
+    @section Scripts
+    {
+        <script type="text/javascript" src="@Url.Content("/js/remote.js")" defer></script>
+    }
+}
+<div id="container">
+    <input id="Id" type="hidden" />
+    <div id="headFrame">
+        <div id="head">
+            <span id="headArtist"></span>
+            <span id="headTitle"></span>
+        </div>
+    </div>
+
+    <div class="buttonHolderTop">
+        <div class="buttonFrameTop" id="buttonFramePrevious">
+            <div id="buttonPrevious" class="buttonTop" onclick="buttonPrevious()">
+                <img src="/images/mediaPrevious.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameTop" id="buttonFramePlay">
+            <div id="buttonPlay" class="buttonTop" onclick="buttonPlay()">
+                <img src="/images/mediaPlay.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameTop" id="buttonFramePause">
+            <div id="buttonPause" class="buttonTop" onclick="buttonPause()">
+                <img src="/images/mediaPause.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameTop" id="buttonFrameNext">
+            <div id="buttonNext" class="buttonTop" onclick="buttonNext()">
+                <img src="/images/mediaForward.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameTop" id="buttonFrameDetails">
+            <div id="buttonDetails" class="buttonTop" onclick="buttonDetails()">
+                <img src="/images/mediaDetails.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+    </div>
+
+    <div id="songlistFrame">
+    </div>
+    <div id="songlist" class="noscrollbar">
+    </div>
+    <div id="queuelist" class="noscrollbar">
+    </div>
+
+    <div id="buttonHolderBottom">
+        <div class="buttonFrameBottom" id="buttonFrameVolume">
+            <div id="buttonVolume" class="buttonBottom" onclick="buttonVolume()">
+                <img id="volumeImage" src="/images/volumeMute.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameBottom" id="buttonFramePlaylist">
+            <div id="buttonPlaylist" class="buttonBottom" onclick="buttonPlaylist()">
+                <img src="/images/mediaDetails2.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameBottom" id="buttonFrameFilter">
+            <div id="buttonFilter" class="buttonBottom" onclick="buttonFilter()">
+                <img src="/images/playlistFilter.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+        <div class="buttonFrameBottom" id="buttonFrameQueue">
+            <div id="buttonQueue" class="buttonBottom"  onclick="buttonQueuelist()">
+                <img src="/images/mediaDetails3.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+    </div>
+
+    <div id="popupVolume">
+        <div class="popup" id="formVolume">
+            <div>
+                <h1>Volume</h1>
+            </div>
+            <div>
+                <h1 id="volumeValue">100</h1>
+            </div>
+            <input id="sliderVolume" type="range" min="0" max="100" value="100" step="1" onchange="updateVolume(this.value)" orient="vertical" />
+        </div>
+    </div>
+
+    <div id="popupDetails">
+        <div id="popupDetailsFrame">
+        </div>
+        <div class="popup" id="formDetails">
+            <h1>Details</h1>
+            <table>
+                <tr>
+                    <td class="tdKey">Artist</td>
+                    <td class="tdValue" colspan="3"><span id="detailsArtist"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Title</td>
+                    <td class="tdValue" colspan="3"><span id="detailsTitle"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Duration</td>
+                    <td class="tdValue" colspan="3"><span id="detailsDuration"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Extension</td>
+                    <td class="tdValue" colspan="3"><span id="detailsExtension"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Last Played</td>
+                    <td class="tdValue" colspan="3"><span id="detailsLastplayed"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Rating</td>
+                    <td class="tdValue"><span id="detailsRating"></span></td>
+                    <td colspan="2"><input id="sliderRating" type="range" min="1" max="100" value="1" step="1" onchange="updateRating(this.value)" orient="horizontal" /></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Released</td>
+                    <td class="tdValue" colspan="3"><span id="detailsReleased"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdKey">Genres</td>
+                    <td class="tdValue" colspan="3"><span id="detailsGenres"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Alternative</td>
+                    <td class="tdGenre">Blues</td>
+                    <td class="tdGenre">Classical</td>
+                    <td class="tdGenre">Country</td>
+                </tr>
+                <tr>
+                    <td><img id="check1" src="~/images/checkoff.png" onclick="checkClick(1)" /></td>
+                    <td><img id="check2" src="~/images/checkoff.png" onclick="checkClick(2)" /></td>
+                    <td><img id="check3" src="~/images/checkoff.png" onclick="checkClick(3)" /></td>
+                    <td><img id="check4" src="~/images/checkoff.png" onclick="checkClick(4)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Dance</td>
+                    <td class="tdGenre">Dubstep</td>
+                    <td class="tdGenre">EasyListening</td>
+                    <td class="tdGenre">Electronic</td>
+                </tr>
+                <tr>
+                    <td><img id="check5" src="~/images/checkoff.png" onclick="checkClick(5)" /></td>
+                    <td><img id="check6" src="~/images/checkoff.png" onclick="checkClick(6)" /></td>
+                    <td><img id="check7" src="~/images/checkoff.png" onclick="checkClick(7)" /></td>
+                    <td><img id="check8" src="~/images/checkoff.png" onclick="checkClick(8)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Grunge</td>
+                    <td class="tdGenre">HipHop</td>
+                    <td class="tdGenre">House</td>
+                    <td class="tdGenre">Jazz</td>
+                </tr>
+                <tr>
+                    <td><img id="check9" src="~/images/checkoff.png" onclick="checkClick(9)" /></td>
+                    <td><img id="check10" src="~/images/checkoff.png" onclick="checkClick(10)" /></td>
+                    <td><img id="check11" src="~/images/checkoff.png" onclick="checkClick(11)" /></td>
+                    <td><img id="check12" src="~/images/checkoff.png" onclick="checkClick(12)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Metal</td>
+                    <td class="tdGenre">Pop</td>
+                    <td class="tdGenre">Punk</td>
+                    <td class="tdGenre">Reggae</td>
+                </tr>
+                <tr>
+                    <td><img id="check13" src="~/images/checkoff.png" onclick="checkClick(13)" /></td>
+                    <td><img id="check14" src="~/images/checkoff.png" onclick="checkClick(14)" /></td>
+                    <td><img id="check15" src="~/images/checkoff.png" onclick="checkClick(15)" /></td>
+                    <td><img id="check16" src="~/images/checkoff.png" onclick="checkClick(16)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">R & B</td>
+                    <td class="tdGenre">Rock</td>
+                    <td class="tdGenre">Ska</td>
+                    <td class="tdGenre">Techno</td>
+                </tr>
+                <tr>
+                    <td><img id="check17" src="~/images/checkoff.png" onclick="checkClick(17)" /></td>
+                    <td><img id="check18" src="~/images/checkoff.png" onclick="checkClick(18)" /></td>
+                    <td><img id="check19" src="~/images/checkoff.png" onclick="checkClick(19)" /></td>
+                    <td><img id="check20" src="~/images/checkoff.png" onclick="checkClick(20)" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="popupFilter">
+        <div id="popupFilterFrame">
+        </div>
+
+        <div class="popup" id="formFilter">
+            <h1>Playlist Filter</h1>
+            <table>
+                <tr>
+                    <td colspan="3" class="tdKey">Show All</td>
+                    <td><img id="toggleShowAll" src="~/images/checkoff.png" onclick="switchShowAll()" /></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" class="tdKey">Show Unrated</td>
+                    <td><img id="toggleShowUnrated" src="~/images/checkoff.png" onclick="switchShowUnrated()" /></td>
+                </tr>
+
+                <tr>
+                    <td class="tdKey">Rating</td>
+                    <td class="tdValue"><span id="valueFilterRating">1</span></td>
+                    <td colspan="2"><input id="sliderFilterRating" type="range" min="1" max="100" value="1" step="1" onchange="updateFilterRating(this.value)" orient="horizontal" /></td>
+                </tr>
+
+                <tr>
+                    <td class="tdKey">Genres</td>
+                    <td class="tdValue" colspan="3"><span id="detailsGenres"></span></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Alternative</td>
+                    <td class="tdGenre">Blues</td>
+                    <td class="tdGenre">Classical</td>
+                    <td class="tdGenre">Country</td>
+                </tr>
+                <tr>
+                    <td><img id="filter1" src="~/images/checkoff.png" onclick="setFilterGenre(1)" /></td>
+                    <td><img id="filter2" src="~/images/checkoff.png" onclick="setFilterGenre(2)" /></td>
+                    <td><img id="filter3" src="~/images/checkoff.png" onclick="setFilterGenre(3)" /></td>
+                    <td><img id="filter4" src="~/images/checkoff.png" onclick="setFilterGenre(4)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Dance</td>
+                    <td class="tdGenre">Dubstep</td>
+                    <td class="tdGenre">EasyListening</td>
+                    <td class="tdGenre">Electronic</td>
+                </tr>
+                <tr>
+                    <td><img id="filter5" src="~/images/checkoff.png" onclick="setFilterGenre(5)" /></td>
+                    <td><img id="filter6" src="~/images/checkoff.png" onclick="setFilterGenre(6)" /></td>
+                    <td><img id="filter7" src="~/images/checkoff.png" onclick="setFilterGenre(7)" /></td>
+                    <td><img id="filter8" src="~/images/checkoff.png" onclick="setFilterGenre(8)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Grunge</td>
+                    <td class="tdGenre">HipHop</td>
+                    <td class="tdGenre">House</td>
+                    <td class="tdGenre">Jazz</td>
+                </tr>
+                <tr>
+                    <td><img id="filter9" src="~/images/checkoff.png" onclick="setFilterGenre(9)" /></td>
+                    <td><img id="filter10" src="~/images/checkoff.png" onclick="setFilterGenre(10)" /></td>
+                    <td><img id="filter11" src="~/images/checkoff.png" onclick="setFilterGenre(11)" /></td>
+                    <td><img id="filter12" src="~/images/checkoff.png" onclick="setFilterGenre(12)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">Metal</td>
+                    <td class="tdGenre">Pop</td>
+                    <td class="tdGenre">Punk</td>
+                    <td class="tdGenre">Reggae</td>
+                </tr>
+                <tr>
+                    <td><img id="filter13" src="~/images/checkoff.png" onclick="setFilterGenre(13)" /></td>
+                    <td><img id="filter14" src="~/images/checkoff.png" onclick="setFilterGenre(14)" /></td>
+                    <td><img id="filter15" src="~/images/checkoff.png" onclick="setFilterGenre(15)" /></td>
+                    <td><img id="filter16" src="~/images/checkoff.png" onclick="setFilterGenre(16)" /></td>
+                </tr>
+                <tr>
+                    <td class="tdGenre">R & B</td>
+                    <td class="tdGenre">Rock</td>
+                    <td class="tdGenre">Ska</td>
+                    <td class="tdGenre">Techno</td>
+                </tr>
+                <tr>
+                    <td><img id="filter17" src="~/images/checkoff.png" onclick="setFilterGenre(17)" /></td>
+                    <td><img id="filter18" src="~/images/checkoff.png" onclick="setFilterGenre(18)" /></td>
+                    <td><img id="filter19" src="~/images/checkoff.png" onclick="setFilterGenre(19)" /></td>
+                    <td><img id="filter20" src="~/images/checkoff.png" onclick="setFilterGenre(20)" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

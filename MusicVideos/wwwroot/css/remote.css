@@ -1,0 +1,558 @@
+﻿/*846x412*/
+/*#region Elements */
+
+h1 {
+    font-family: Tahoma;
+    font-size: 22px;
+    color: #FFFFFF;
+    text-align:center;
+}
+
+h2 {
+    font-family: Tahoma;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+li {
+    list-style: none;
+    color: #FFFFFF;
+    margin-left: -38px;
+    margin-top: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 2px;
+    border: solid;
+    border-color: #646464;
+    border-width: 1px;
+    border-radius: 8px;
+    font-family: lcd;
+    font-size: 18px;
+}
+
+.noscrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+input[type=range][orient=vertical] {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 18px;
+    height: 375px;
+    padding: 0px;
+}
+
+input[type=range][orient=horizontal] {
+    width: 160px;
+    height: 35px;
+    padding: 0px;
+}
+
+/*#endregion */
+/*#region Container */
+
+#container {
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+    left: 0px;
+    top: 0px;
+    width: 412px;
+    min-width: 412px;
+    max-width: 412px;
+    height: 846px;
+    min-height: 846px;
+    max-height: 846px;
+    background-color: #222222;
+}
+
+/*#endregion */
+/*#region Head */
+#headFrame {
+    position: absolute;
+    z-index: 1;
+    left: 5px;
+    top: 29px;
+    width: 402px;
+    min-width: 402px;
+    max-width: 402px;
+    height: 82px;
+    min-height: 82px;
+    max-height: 82px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 11px;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+}
+
+#head {
+    background-color: #000000;
+    /*position: absolute;*/
+    overflow: hidden;
+    z-index: 2;
+    /*left: 0px;
+    top: 0px;*/
+    width: 400px;
+    /*min-width: 400px;
+    max-width: 400px;*/
+    height: 80px;
+    /*min-height: 80px;
+    max-height: 80px;*/
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-left-color: #777777;
+    border-top-color: #777777;
+    border-right-color: #BBBBBB;
+    border-bottom-color: #BBBBBB;
+}
+
+#headArtist {
+    position: absolute;
+    left: 16px;
+    top: 3px;
+    color: #3254FF;
+    font-family: lcd;
+    font-size: 32px;
+}
+
+#headTitle {
+    position: absolute;
+    left: 16px;
+    top: 33px;
+    color: #3254FF;
+    font-family: lcd;
+    font-size: 32px;
+}
+
+/*#endregion */
+/*#region Buttons Top Row */
+.buttonHolderTop {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    left: 6px;
+    top: 118px;
+    width: 408px;
+    height: 44px;
+    background-color: #222222;
+}
+
+.buttonFrameTop {
+    position: absolute;
+    display: inline;
+    z-index: 2;
+    height: 44px;
+    border: solid;
+    border-width: 1px;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+    border-radius: 10px;
+}
+
+.buttonFrameInnerTop {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border: solid;
+    border-width: 1px;
+    border-left-color: #444444;
+    border-top-color: #444444;
+    border-right-color: #888888;
+    border-bottom-color: #888888;
+    border-radius: 9px;
+}
+
+.buttonTop {
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    border-left-color: #333333;
+    border-top-color: #333333;
+    border-right-color: #666666;
+    border-bottom-color: #666666;
+    background-color: #222222;
+    text-align: center;
+}
+
+#buttonFramePrevious {
+    left: 0px;
+    top: 0px;
+    width: 74px;
+}
+
+#buttonFramePlay {
+    left: 81px;
+    top: 0px;
+    width: 74px;
+}
+
+#buttonFramePause {
+    left: 162px;
+    top: 0px;
+    width: 74px;
+}
+
+#buttonFrameNext {
+    left: 243px;
+    top: 0px;
+    width: 74px;
+}
+
+#buttonFrameDetails {
+    left: 324px;
+    top: 0px;
+    width: 74px;
+}
+/*#endregion */
+/*#region Song List */
+#songlistFrame {
+    position: absolute;
+    z-index: 1;
+    left: 5px;
+    top: 169px;
+    width: 402px;
+    min-width: 402px;
+    max-width: 402px;
+    height: 592px;
+    min-height: 592px;
+    max-height: 592px;
+    border: solid;
+    border-width: 10px;
+    border-radius: 11px;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+}
+
+#songlist {
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #000000;
+    z-index: 2;
+    left: 6px;
+    top: 170px;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 590px;
+    min-height: 590px;
+    max-height: 590px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-left-color: #777777;
+    border-top-color: #777777;
+    border-right-color: #BBBBBB;
+    border-bottom-color: #BBBBBB;
+}
+
+.item {
+    margin-top: 0px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+    padding-left: 6px;
+    padding-right: 2px;
+    border: solid;
+    border-color: #242424;
+    border-width: 1px;
+    border-radius: 10px;
+    font-family: lcd;
+    font-size: 22px;
+}
+
+.itemartist {
+    color: #3254FF;
+    font-family: lcd;
+    font-size: 18px;
+}
+
+.itemtitle {
+    color: #3254FF;
+    margin-top: -6px;
+    font-family: lcd;
+    font-size: 18px;
+}
+
+/*#endregion */
+/*#region Queue List */
+#queuelist {
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #000000;
+    z-index: -2;
+    left: 6px;
+    top: 170px;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 590px;
+    min-height: 590px;
+    max-height: 590px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-left-color: #777777;
+    border-top-color: #777777;
+    border-right-color: #BBBBBB;
+    border-bottom-color: #BBBBBB;
+}
+
+/*#endregion */
+/*#region Button Row Bottom */
+#buttonHolderBottom {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #222222;
+    left: 6px;
+    top: 771px;
+    width: 400px;
+    /*min-width: 400px;
+    max-width: 400px;*/
+    height: 48px;
+    /*min-height: 42px;
+    max-height: 42px;*/
+}
+
+.buttonFrameBottom {
+    position: absolute;
+    display: inline;
+    z-index: 2;
+    height: 44px;
+    background-color: #222222;
+    border: solid;
+    border-width: 1px;
+    border-left-color: #333333;
+    border-top-color: #333333;
+    border-right-color: #777777;
+    border-bottom-color: #777777;
+    border-radius: 10px;
+}
+
+.buttonFrameInnerBottom {
+    /*position: absolute;
+    display: inline;*/
+    z-index: 2;
+    background-color: #222222;
+    border: solid;
+    border-width: 1px;
+    border-radius: 9px;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+    width: 100%;
+    height: 100%;
+}
+
+.buttonBottom {
+    z-index: 3;
+    background-color: #222222;
+    margin: 0px;
+    border: solid;
+    border-width: 1px;
+    border-left-color: #777777;
+    border-top-color: #777777;
+    border-right-color: #BBBBBB;
+    border-bottom-color: #BBBBBB;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#buttonFramePlaylist {
+    left: 0px;
+    top: 0px;
+    width: 124px;
+}
+
+#buttonFrameVolume {
+    left: 135px;
+    top: 0px;
+    width:60px;
+}
+
+#buttonFrameFilter {
+    left: 205px;
+    top: 0px;
+    width: 60px;
+}
+
+#buttonFrameQueue {
+    left: 276px;
+    top: 0px;
+    width: 124px;
+}
+
+/*#endregion */
+/*#region Popup Volume */
+
+#popupVolume {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#formVolume {
+    position: relative;
+    background-color: #666666;
+    z-index: 11;
+    top: 120px;
+    width: 120px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #646464;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    padding-top: 26px;
+    text-align: center;
+}
+
+/*#endregion */
+/*#region Popup Details */
+
+#popupDetails {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#popupDetailsFrame {
+    position: absolute;
+    background-color: #222222;
+    z-index: 11;
+    left: 5px;
+    top: 115px;
+    width: 402px;
+    height: 702px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 12px;
+}
+
+#formDetails {
+    position: absolute;
+    background-color: #222222;
+    z-index: 12;
+    left: 6px;
+    top: 116px;
+    width: 400px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #646464;
+    border-left-color: #333333;
+    border-top-color: #333333;
+    border-right-color: #666666;
+    border-bottom-color: #666666;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.tdKey {
+    color: #888888;
+    font-family: Tahoma;
+    font-size: 14px;
+}
+
+.tdValue {
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 16px;
+}
+
+.tdGenre {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 14px;
+}
+
+/*#endregion */
+/*#region Popup Filter */
+#popupFilter {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#popupFilterFrame {
+    position: absolute;
+    background-color: #222222;
+    z-index: 11;
+    left: 5px;
+    top: 115px;
+    width: 402px;
+    height: 702px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 12px;
+}
+
+#formFilter {
+    position: absolute;
+    background-color: #222222;
+    z-index: 12;
+    left: 6px;
+    top: 116px;
+    width: 400px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #646464;
+    border-left-color: #333333;
+    border-top-color: #333333;
+    border-right-color: #666666;
+    border-bottom-color: #666666;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/*#endregion */
