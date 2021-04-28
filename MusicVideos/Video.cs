@@ -75,6 +75,11 @@ namespace MusicVideos
         public int PlayCount { get; set; }
 
         /// <summary>
+        /// Gets or sets the total number or times the video has beem queued.
+        /// </summary>
+        public int QueuedCount { get; set; }
+
+        /// <summary>
         /// Gets or sets the total time the video has been played.
         /// </summary>
         public double PlayTime { get; set; }
