@@ -228,6 +228,7 @@ function updateVolume(value) {
 
 function closeVolume() {
     popupVolume.style.display = "none";
+    event.stopPropagation();
 }
 
 //#endregion
@@ -241,6 +242,7 @@ function updateRating(value) {
 //#region Details
 function closeDetails() {
     popupDetails.style.display = "none";
+    event.stopPropagation();
 }
 
 function cancelEvent() {
@@ -288,6 +290,7 @@ function closeFilter() {
     popupFilter.style.display = "none";
     setFilter();
     connection.invoke("GetPlaylistAsync");
+    event.stopPropagation();
 }
 
 function setFilterGenre(id) {
