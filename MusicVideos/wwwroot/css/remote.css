@@ -487,12 +487,14 @@ input[type=range][orient=horizontal] {
     color: #888888;
     font-family: Tahoma;
     font-size: 14px;
+    vertical-align:top;
 }
 
 .tdValue {
     color: #FFFFFF;
     font-family: Verdana;
     font-size: 16px;
+    vertical-align: top;
 }
 
 .tdGenre {
@@ -500,6 +502,7 @@ input[type=range][orient=horizontal] {
     color: #FFFFFF;
     font-family: Tahoma;
     font-size: 14px;
+    vertical-align: top;
 }
 
 /*#endregion */
