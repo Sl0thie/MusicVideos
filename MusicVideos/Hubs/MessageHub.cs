@@ -59,7 +59,7 @@ namespace MusicVideos.Hubs
                             {
                                 await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
                                 Model.FilteredVideoIds.Add(next.Value.Id);
-                                continue;
+                                break;
                             }
                         }
                     }
