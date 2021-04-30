@@ -218,7 +218,8 @@ function updateVolume(value) {
 }
 
 function closeVolume() {
-    popupVolume.style.display = 'none';
+    popupVolume.style.display = "none";
+    event.stopPropagation();
 }
 
 //#endregion
@@ -231,7 +232,8 @@ function updateRating(value) {
 //#endregion
 //#region Details
 function closeDetails() {
-    popupDetails.style.display = 'none';
+    popupDetails.style.display = "none";
+    event.stopPropagation();
 }
 
 function cancelEvent() {
@@ -278,7 +280,8 @@ function updateGenre(item, index) {
 function closeFilter() {
     popupFilter.style.display = 'none';
     setFilter();
-    connection.invoke('GetPlaylistAsync');
+    connection.invoke("GetPlaylistAsync");
+    event.stopPropagation();
 }
 
 function setFilterGenre(id) {

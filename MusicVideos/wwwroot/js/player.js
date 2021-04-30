@@ -33,7 +33,14 @@ window.addEventListener('load', function () {
     connection.start().then(function () {
         setTimeout(connectionStarted, 1000);
     });
+  
+    player.style.cursor = 'none';
+    overlay.style.cursor = 'none';
+    overlayShadow.style.cursor = 'none';
 });
+
+    
+
 //#endregion
 //#region Media
 function nextSong() {
@@ -100,14 +107,19 @@ function fadeout() {
 }
 
 function hide() {
-    opacity = Number(window.getComputedStyle(overlay).getPropertyValue('opacity'))
-    if (opacity > 0) {
-        opacity = opacity - 0.01;
-        overlay.style.opacity = opacity
-        overlayShadow.style.opacity = opacity
+    try {
+        opacity = Number(window.getComputedStyle(overlay).getPropertyValue("opacity"))
+        if (opacity > 0) {
+            opacity = opacity - 0.01;
+            overlay.style.opacity = opacity
+            overlayShadow.style.opacity = opacity
+        }
+        else {
+            clearInterval(fadeoutId);
+        }
     }
-    else {
-        clearInterval(fadeoutId);
+    catch (err) {
+        console.log(err.message);
     }
 }
 
