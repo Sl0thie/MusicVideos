@@ -1,64 +1,62 @@
 ﻿//#region Variables
-"use strict";
+'use strict';
 let fadeoutStartId;                                             // Fadeout interval Id.
 let fadeoutId;                                                  // Fade interval Id.
 let opacity;                                                    // Overlay opacity value.
 let connection;                                                 // SignalR connection object.
 let volume = 1;                                                 // Volume for the video element.
-let player = document.getElementById("player");                 // Player object.
-let overlay = document.getElementById("overlay");               // Text overlay object.
-let songartist = document.getElementsByClassName("songartist"); // Artist span object.
-let songtitle = document.getElementsByClassName("songtitle");   // Title span object.
-let clock = document.getElementsByClassName("clock");           // Clock span object.
-
+let player = document.getElementById('player');                 // Player object.
+let overlay = document.getElementById('overlay');               // Text overlay object.
+let songartist = document.getElementsByClassName('songartist'); // Artist span object.
+let songtitle = document.getElementsByClassName('songtitle');   // Title span object.
+let clock = document.getElementsByClassName('clock');           // Clock span object.
 //#endregion
 //#region Initialisation
-window.onload = initialise();
+window.addEventListener('load', function () {
+    player.addEventListener('mousedown', nextSong, true);
+    overlay.addEventListener('mousedown', nextSong, true);
 
-// Initialise SignalR after setting up events.
-function initialise() {
-    player.addEventListener("mousedown", nextSong, true);
-    overlay.addEventListener("mousedown", nextSong, true);
-
-    connection = new signalR.HubConnectionBuilder().withUrl("/messageHub").build();
-    connection.on("SetVideo", function (index, songPath, songArtist, songTitle, clockTime) {
+    connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
+    connection.on('SetVideo', function (index, songPath, songArtist, songTitle, clockTime) {
         setSong(index, songPath, songArtist, songTitle, clockTime);
     });
-    connection.on("MediaPlay", function () {
+    connection.on('MediaPlay', function () {
         player.play();
     });
-    connection.on("MediaPause", function () {
+    connection.on('MediaPause', function () {
         player.pause();
     });
-    connection.on("SetVolume", function (value) {
-        console.log("SetVolume() " + value)
+    connection.on('SetVolume', function (value) {
+        console.log('SetVolume() ' + value)
         player.volume = value / 100;
     });
     connection.start().then(function () {
         setTimeout(connectionStarted, 1000);
     });
-
+  
     player.style.cursor = 'none';
     overlay.style.cursor = 'none';
     overlayShadow.style.cursor = 'none';
-}
+});
+
+    
 
 //#endregion
 //#region Media
 function nextSong() {
-    connection.invoke("GetNextSongAsync");
+    connection.invoke('GetNextSongAsync');
 }
 
 function connectionStarted() {
-    connection.invoke("GetNextSongAsync");
+    connection.invoke('GetNextSongAsync');
 }
 
 function playerended() {
-    connection.invoke("GetNextSongAsync");
+    connection.invoke('GetNextSongAsync');
 }
 
 function playerError() {
-    connection.invoke("GetNextSongAsync");
+    connection.invoke('GetNextSongAsync');
 }
 
 function playerReady() {
@@ -126,4 +124,3 @@ function hide() {
 }
 
 //#endregion
-
