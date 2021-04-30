@@ -2,24 +2,33 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    @section Scripts
+    {
+        <script type="text/javascript" src="@Url.Content("/js/debugServer.js")" defer></script>
+    }
 }
 <h1>Debug Options</h1>
 
 <table>
     <tr>
-        <td>Player Page</td>
-        <td><a asp-page="Player">Open</a></td>
-    </tr>
-    <tr>
-        <td>Remote Page</td>
-        <td><a asp-page="Remote">Open</a></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input id="Button1" type="button" value="Close All Windows" onclick="closeWindows"/>
+        <td>
+            <input id="Button1" type="button" value="Open Player" onclick="openPlayer" />
+        </td>
+        <td>
+            <input id="Button2" type="button" value="Open Remote" onclick="openRemote" />
+        </td>
+
+        <td>
+            <input id="Button3" type="button" value="Open Anonymous" onclick="openAnonymous" />
+        </td>
+        <td>
+            <input id="Button4" type="button" value="Close All Windows" onclick="closeWindows" />
         </td>
     </tr>
 </table>
+
+<ul id="debugOutput" style="color:#FFFFFF;">
+</ul>
 
 <script>
     var playerWindow;
@@ -40,4 +49,17 @@
         remoteWindow.close();
         //anonymousWindow.close();
     }
+
+    function openPlayer() {
+        playerWindow = window.open("Player", "Player", "left=1960,top=45,width=1440,height=900");
+    }
+
+    function openRemote() {
+        remoteWindow = window.open("Remote", "Remote", "left=3650,top=45,width=412,height=846");
+    }
+
+    function openAnonymous() {
+        anonymousWindow = window.open("Anonymous", "Anonymous", "left=1540,top=45,width=412,height=846");
+    }
+
 </script>

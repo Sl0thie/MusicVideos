@@ -1,75 +1,68 @@
 ﻿//#region Variables
-"use strict";
+'use strict';
 let connection;
-let Id = document.getElementById("Id");
-let headArtist = document.getElementById("headArtist");
-let headTitle = document.getElementById("headTitle");
-//let headWaveform = document.getElementById("headWaveform");
-
-let songlist = document.getElementById("songlist");
-let queuelist = document.getElementById("queuelist");
-
-let popupVolume = document.getElementById("popupVolume");
-let formVolume = document.getElementById("formVolume");
-let volumeValue = document.getElementById("volumeValue");
-let volumeImage = document.getElementById("volumeImage");
-
-let popupDetails = document.getElementById("popupDetails");
-let formDetails = document.getElementById("formDetails");
-let detailsRating = document.getElementById("detailsRating");
-
-let popupFilter = document.getElementById("popupFilter");
-let formFilter = document.getElementById("formFilter");
-let toggleShowAll = document.getElementById("toggleShowAll");
-let toggleShowUnrated = document.getElementById("toggleShowUnrated");
-let sliderFilterRating = document.getElementById("sliderFilterRating");
-let valueFilterRating = document.getElementById("valueFilterRating");
+let Id = document.getElementById('Id');
+let headArtist = document.getElementById('headArtist');
+let headTitle = document.getElementById('headTitle');
+let songlist = document.getElementById('songlist');
+let queuelist = document.getElementById('queuelist');
+let popupVolume = document.getElementById('popupVolume');
+let formVolume = document.getElementById('formVolume');
+let volumeValue = document.getElementById('volumeValue');
+let volumeImage = document.getElementById('volumeImage');
+let popupDetails = document.getElementById('popupDetails');
+let formDetails = document.getElementById('formDetails');
+let detailsRating = document.getElementById('detailsRating');
+let popupFilter = document.getElementById('popupFilter');
+let formFilter = document.getElementById('formFilter');
+let toggleShowAll = document.getElementById('toggleShowAll');
+let toggleShowUnrated = document.getElementById('toggleShowUnrated');
+let sliderFilterRating = document.getElementById('sliderFilterRating');
+let valueFilterRating = document.getElementById('valueFilterRating');
 
 //#endregion
 //#region Initialisation
-window.onload = initialise();
-
-function initialise() {
+window.addEventListener('load', function () {
     popupVolume.addEventListener('mousedown', closeVolume);
     formVolume.addEventListener('mousedown', cancelEvent);
     popupDetails.addEventListener('mousedown', closeDetails);
     formDetails.addEventListener('mousedown', cancelEvent);
     popupFilter.addEventListener('mousedown', closeFilter);
     formFilter.addEventListener('mousedown', cancelEvent);
-    connection = new signalR.HubConnectionBuilder().withUrl("/messageHub").build();
-    connection.on("SetVideo", function (path, artist, title, timeStr) {
+    connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
+    connection.on('SetVideo', function (path, artist, title, timeStr) {
         setSong(path, artist, title, timeStr);
     });
-    connection.on("ClearPlaylist", function () {
+    connection.on('ClearPlaylist', function () {
         clearPlaylist();
     });
-    connection.on("SetPlaylistItem", function (id, artist, title) {
+    connection.on('SetPlaylistItem', function (id, artist, title) {
         addPlaylistItem(id, artist, title);
     });
-    connection.on("ClearQueuelist", function () {
+    connection.on('ClearQueuelist', function () {
         clearQueuelist();
     });
-    connection.on("SetQueuelistItem", function (id, artist, title) {
+    connection.on('SetQueuelistItem', function (id, artist, title) {
         addQueuelistItem(id, artist, title);
     });
-    connection.on("SetVideoDetails", function (duration,extension,genreslist,lastplayed,rating,released) {
+    connection.on('SetVideoDetails', function (duration, extension, genreslist, lastplayed, rating, released) {
         setVideoDetails(duration, extension, genreslist, lastplayed, rating, released);
     });
     connection.start().then(function () {
         setTimeout(connectionStarted, 1000);
     });
-}
+});
 
 function connectionStarted() {
     // Set volume from previous session via cookie.
-    let cookieVolume = getCookie("volume");
-    if (cookieVolume === "") {
+    let cookieVolume = getCookie('volume');
+    if (cookieVolume === '') {
         cookieVolume = 100;
     }
-    let sliderVolume = document.getElementById("sliderVolume");
+    let sliderVolume = document.getElementById('sliderVolume');
     sliderVolume.value = cookieVolume;
     updateVolume(cookieVolume);
-    connection.invoke("GetPlaylistAsync");
+    connection.invoke('GetPlaylistAsync');
 }
 
 //#endregion
@@ -78,7 +71,7 @@ function setSong(index, path, artist, title, timeStr) {
     Id.value = index;
     headArtist.innerText = artist;
     headTitle.innerText = title;
-    connection.invoke("GetVideoDetails", index.toString());
+    connection.invoke('GetVideoDetails', index.toString());
 }
 
 function clearPlaylist() {
@@ -86,20 +79,20 @@ function clearPlaylist() {
 }
 
 function addPlaylistItem(id, artist, title) {
-    let newOuter = document.createElement("div");
-    let newArtist = document.createElement("div");
-    let newTitle = document.createElement("div");
+    let newOuter = document.createElement('div');
+    let newArtist = document.createElement('div');
+    let newTitle = document.createElement('div');
     newArtist.innerHTML = artist;
-    newArtist.className = "itemartist";
+    newArtist.className = 'itemartist';
     newTitle.innerHTML = title;
-    newTitle.className = "itemtitle";
+    newTitle.className = 'itemtitle';
     newOuter.appendChild(newArtist);
     newOuter.appendChild(newTitle);
     newOuter.onmousedown = function () { mouseDownItem(id); };
     newOuter.onmouseup = function () { mouseUpItem(id); };
     //newOuter.ontouchend = function () { mouseUpItem(id); };
     newOuter.id = id;
-    newOuter.className = "item";
+    newOuter.className = 'item';
     songlist.appendChild(newOuter);
     doEvents();
 }
@@ -119,62 +112,60 @@ function doEvents() {
 function mouseDownItem(id) {
     addToQueue(id);
     let selectedItem = document.getElementById(id);
-    let artist = selectedItem.getElementsByClassName("itemartist");
-    let title = selectedItem.getElementsByClassName("itemtitle");
-    artist[0].style.color = "#AAAAFF";
-    title[0].style.color = "#AAAAFF";
+    let artist = selectedItem.getElementsByClassName('itemartist');
+    let title = selectedItem.getElementsByClassName('itemtitle');
+    artist[0].style.color = '#AAAAFF';
+    title[0].style.color = '#AAAAFF';
 }
 
 function mouseUpItem(id) {
     let selectedItem = document.getElementById(id);
-    let artist = selectedItem.getElementsByClassName("itemartist");
-    let title = selectedItem.getElementsByClassName("itemtitle");
-    artist[0].style.color = "#2424FF";
-    title[0].style.color = "#2424FF";
+    let artist = selectedItem.getElementsByClassName('itemartist');
+    let title = selectedItem.getElementsByClassName('itemtitle');
+    artist[0].style.color = '#2424FF';
+    title[0].style.color = '#2424FF';
 }
 
 function addToQueue(id) {
-    connection.invoke("AddToQueueAsync", id.toString());
+    connection.invoke('AddToQueueAsync', id.toString());
 }
 
 //#endregion
 //#region Buttons
 function buttonPrevious() {
-    connection.invoke("ButtonPrevAsync");
+    connection.invoke('ButtonPrevAsync');
 }
 
 function buttonPlay() {
-    connection.invoke("ButtonPlayAsync");
+    connection.invoke('ButtonPlayAsync');
 }
 
 function buttonPause() {
-    connection.invoke("ButtonPauseAsync");
+    connection.invoke('ButtonPauseAsync');
 }
 
 function buttonNext() {
-    connection.invoke("ButtonNextAsync");
+    connection.invoke('ButtonNextAsync');
 }
 
 function buttonVolume() {
-    popupVolume.style.display = "block";
+    popupVolume.style.display = 'block';
 }
 
 function buttonDetails() {
-    popupDetails.style.display = "block";
+    popupDetails.style.display = 'block';
 }
 
 function buttonFilter() {
-    popupFilter.style.display = "block";
+    popupFilter.style.display = 'block';
 }
 
 function buttonPlaylist() {
-    //connection.invoke("GetPlaylistAsync");
     songlist.style.zIndex = 2;
     queuelist.style.zIndex = -2;
 }
 
 function buttonQueuelist() {
-    //connection.invoke("GetQueuelistAsync");
     songlist.style.zIndex = -2;
     queuelist.style.zIndex = 2;
 }
@@ -199,48 +190,48 @@ function checkClick(id) {
 }
 
 function setGenres(genreId, state) {
-    connection.invoke("SetGenres", Id.value, genreId.toString(), state);
+    connection.invoke('SetGenres', Id.value, genreId.toString(), state);
 }
 
 //#endregion
 //#region Volume
 function updateVolume(value) {
-    setCookie("volume", value , 365);
+    setCookie('volume', value , 365);
     volumeValue.innerText = value;
-    connection.invoke("SetVolumeAsync", value);
+    connection.invoke('SetVolumeAsync', value);
 
     if (value > 75) {
-        volumeImage.src = "/images/volume75.png";
+        volumeImage.src = '/images/volume75.png';
     }
     else if (value > 50) {
-        volumeImage.src = "/images/volume50.png";
+        volumeImage.src = '/images/volume50.png';
     }
     else if (value > 25) {
-        volumeImage.src = "/images/volume25.png";
+        volumeImage.src = '/images/volume25.png';
     }
     else if (value > 0) {
-        volumeImage.src = "/images/volume0.png";
+        volumeImage.src = '/images/volume0.png';
     }
     else {
-        volumeImage.src = "/images/volumeMute.png";
+        volumeImage.src = '/images/volumeMute.png';
     }
 }
 
 function closeVolume() {
-    popupVolume.style.display = "none";
+    popupVolume.style.display = 'none';
 }
 
 //#endregion
 //#region Rating
 function updateRating(value) {
     detailsRating.innerText = value;
-    connection.invoke("SetRatingAsync", Id.value, value);
+    connection.invoke('SetRatingAsync', Id.value, value);
 }
 
 //#endregion
 //#region Details
 function closeDetails() {
-    popupDetails.style.display = "none";
+    popupDetails.style.display = 'none';
 }
 
 function cancelEvent() {
@@ -248,14 +239,14 @@ function cancelEvent() {
 }
 
 function setVideoDetails(duration, extension, genreslist, lastplayed, rating, released) {
-    let detailsArtist = document.getElementById("detailsArtist");
-    let detailsTitle = document.getElementById("detailsTitle");
-    let detailsDuration = document.getElementById("detailsDuration");
-    let detailsExtension = document.getElementById("detailsExtension");
-    let detailsLastplayed = document.getElementById("detailsLastplayed");
-    let detailsRating = document.getElementById("detailsRating");
-    let sliderRating = document.getElementById("sliderRating");
-    let detailsReleased = document.getElementById("detailsReleased");
+    let detailsArtist = document.getElementById('detailsArtist');
+    let detailsTitle = document.getElementById('detailsTitle');
+    let detailsDuration = document.getElementById('detailsDuration');
+    let detailsExtension = document.getElementById('detailsExtension');
+    let detailsLastplayed = document.getElementById('detailsLastplayed');
+    let detailsRating = document.getElementById('detailsRating');
+    let sliderRating = document.getElementById('sliderRating');
+    let detailsReleased = document.getElementById('detailsReleased');
     detailsArtist.innerText = headArtist.innerText;
     detailsTitle.innerText = headTitle.innerText;
     detailsDuration.innerText = duration;
@@ -265,11 +256,11 @@ function setVideoDetails(duration, extension, genreslist, lastplayed, rating, re
     sliderRating.value = rating;
     detailsReleased.innerText = released;
 
-    console.log("rating " + rating);
+    console.log('rating ' + rating);
 
     let i;
     for (i = 1; i < 21; i++) {
-        let check = document.getElementById("check" + i);
+        let check = document.getElementById('check' + i);
         check.src = '/images/checkoff.png';
     }
     var genres = JSON.parse(genreslist);
@@ -277,17 +268,17 @@ function setVideoDetails(duration, extension, genreslist, lastplayed, rating, re
 }
 
 function updateGenre(item, index) {
-    //console.log("updateGenre " + item + " " + index);
-    let check = document.getElementById("check" + item);
+    //console.log('updateGenre ' + item + ' ' + index);
+    let check = document.getElementById('check' + item);
     check.src = '/images/checkon.png';
 }
 
 //#endregion
 //#region Filter
 function closeFilter() {
-    popupFilter.style.display = "none";
+    popupFilter.style.display = 'none';
     setFilter();
-    connection.invoke("GetPlaylistAsync");
+    connection.invoke('GetPlaylistAsync');
 }
 
 function setFilterGenre(id) {
@@ -299,12 +290,12 @@ function setFilterGenre(id) {
     if (source === '/checkoff.png') {
         filter.src = '/images/checkon.png';
         //setFilter(id, 'add');
-        connection.invoke("SetFilterGenre", id.toString(), 'add');
+        connection.invoke('SetFilterGenre', id.toString(), 'add');
     }
     else {
         filter.src = '/images/checkoff.png';
         //setFilter(id, 'remove');
-        connection.invoke("SetFilterGenre", id.toString(), 'remove');
+        connection.invoke('SetFilterGenre', id.toString(), 'remove');
     }
 }
 
@@ -365,24 +356,24 @@ function setFilter() {
 
     filterrating = valueFilterRating.innerText;
 
-    connection.invoke("SetFilter", showall, showunrated, filterrating);
+    connection.invoke('SetFilter', showall, showunrated, filterrating);
 }
 
 //#endregion
 //#region Cookie
 function clearcookie() {
-    setCookie("volume", "", 0);
+    setCookie('volume', '', 0);
 }
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    var expires = 'expires=' + d.toUTCString();
+    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
+    var name = cname + '=';
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -393,7 +384,7 @@ function getCookie(cname) {
             return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return '';
 }
 
 //#endregion
