@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using Newtonsoft.Json;
-
 namespace MusicVideos
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Model object to hold the data.
     /// </summary>
@@ -56,6 +56,7 @@ namespace MusicVideos
 
             foreach (Video next in videos.Values)
             {
+                next.SearchArtist = next.Artist.Replace("The ", string.Empty);
                 FilteredVideoIds.Add(next.Id);
             }
         }

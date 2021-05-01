@@ -1,4 +1,4 @@
-﻿/*846x412*/
+﻿/*846x412 is my mobile phone display size (adjusted)*/
 /*#region Elements */
 
 h1 {
@@ -31,6 +31,10 @@ li {
     font-size: 18px;
 }
 
+td{
+    min-height:36px;
+}
+
 .noscrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -44,7 +48,7 @@ input[type=range][orient=vertical] {
 }
 
 input[type=range][orient=horizontal] {
-    width: 160px;
+    width: 354px;
     height: 35px;
     padding: 0px;
 }

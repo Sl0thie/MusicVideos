@@ -1,6 +1,14 @@
 ﻿//#region Variables
 'use strict';
-let connection;
+const maxVolume = 100;               // The volume is based between 0 and 1 but 100 is used for the sliders.
+const startupPause = 1000;           // Delay between the start of SignalR and sending the first message.
+const indexMinimum = 0;              // The minimum index value.
+const millisecondsPerDay = 86400000; // Number of Milliseconds in a day.
+const maximumDays = 365;             // Maximum days to set a cookie.
+const overlayZIndex = 2;             // Z-Index for the overlay elements.
+let connection;                      // SignalR connection.
+
+// Element objects.
 let Id = document.getElementById('Id');
 let headArtist = document.getElementById('headArtist');
 let headTitle = document.getElementById('headTitle');
@@ -31,7 +39,7 @@ window.addEventListener('load', function () {
     formFilter.addEventListener('mousedown', cancelEvent);
     connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
     connection.on('SetVideo', function (path, artist, title, timeStr) {
-        setSong(path, artist, title, timeStr);
+        setVideo(path, artist, title, timeStr);
     });
     connection.on('ClearPlaylist', function () {
         clearPlaylist();
@@ -49,7 +57,7 @@ window.addEventListener('load', function () {
         setVideoDetails(duration, extension, genreslist, lastplayed, rating, released);
     });
     connection.start().then(function () {
-        setTimeout(connectionStarted, 1000);
+        setTimeout(connectionStarted, startupPause);
     });
 });
 
@@ -57,7 +65,7 @@ function connectionStarted() {
     // Set volume from previous session via cookie.
     let cookieVolume = getCookie('volume');
     if (cookieVolume === '') {
-        cookieVolume = 100;
+        cookieVolume = maxVolume;
     }
     let sliderVolume = document.getElementById('sliderVolume');
     sliderVolume.value = cookieVolume;
@@ -67,7 +75,7 @@ function connectionStarted() {
 
 //#endregion
 //#region Playlist
-function setSong(index, path, artist, title, timeStr) {
+function setVideo(index, path, artist, title, timeStr) {
     Id.value = index;
     headArtist.innerText = artist;
     headTitle.innerText = title;
@@ -90,7 +98,6 @@ function addPlaylistItem(id, artist, title) {
     newOuter.appendChild(newTitle);
     newOuter.onmousedown = function () { mouseDownItem(id); };
     newOuter.onmouseup = function () { mouseUpItem(id); };
-    //newOuter.ontouchend = function () { mouseUpItem(id); };
     newOuter.id = id;
     newOuter.className = 'item';
     songlist.appendChild(newOuter);
@@ -114,16 +121,16 @@ function mouseDownItem(id) {
     let selectedItem = document.getElementById(id);
     let artist = selectedItem.getElementsByClassName('itemartist');
     let title = selectedItem.getElementsByClassName('itemtitle');
-    artist[0].style.color = '#AAAAFF';
-    title[0].style.color = '#AAAAFF';
+    artist[indexMinimum].style.color = '#AAAAFF';
+    title[indexMinimum].style.color = '#AAAAFF';
 }
 
 function mouseUpItem(id) {
     let selectedItem = document.getElementById(id);
     let artist = selectedItem.getElementsByClassName('itemartist');
     let title = selectedItem.getElementsByClassName('itemtitle');
-    artist[0].style.color = '#2424FF';
-    title[0].style.color = '#2424FF';
+    artist[indexMinimum].style.color = '#2424FF';
+    title[indexMinimum].style.color = '#2424FF';
 }
 
 function addToQueue(id) {
@@ -161,13 +168,13 @@ function buttonFilter() {
 }
 
 function buttonPlaylist() {
-    songlist.style.zIndex = 2;
-    queuelist.style.zIndex = -2;
+    songlist.style.zIndex = overlayZIndex;
+    queuelist.style.zIndex = -overlayZIndex;
 }
 
 function buttonQueuelist() {
-    songlist.style.zIndex = -2;
-    queuelist.style.zIndex = 2;
+    songlist.style.zIndex = -overlayZIndex;
+    queuelist.style.zIndex = overlayZIndex;
 }
 
 //#endregion
@@ -196,7 +203,7 @@ function setGenres(genreId, state) {
 //#endregion
 //#region Volume
 function updateVolume(value) {
-    setCookie('volume', value , 365);
+    setCookie('volume', value, maximumDays);
     volumeValue.innerText = value;
     connection.invoke('SetVolumeAsync', value);
 
@@ -226,7 +233,7 @@ function closeVolume() {
 //#region Rating
 function updateRating(value) {
     detailsRating.innerText = value;
-    connection.invoke('SetRatingAsync', Id.value, value);
+    connection.invoke('SetRating', Id.value, value);
 }
 
 //#endregion
@@ -258,8 +265,6 @@ function setVideoDetails(duration, extension, genreslist, lastplayed, rating, re
     sliderRating.value = rating;
     detailsReleased.innerText = released;
 
-    console.log('rating ' + rating);
-
     let i;
     for (i = 1; i < 21; i++) {
         let check = document.getElementById('check' + i);
@@ -270,7 +275,6 @@ function setVideoDetails(duration, extension, genreslist, lastplayed, rating, re
 }
 
 function updateGenre(item, index) {
-    //console.log('updateGenre ' + item + ' ' + index);
     let check = document.getElementById('check' + item);
     check.src = '/images/checkon.png';
 }
@@ -358,7 +362,6 @@ function setFilter() {
     }
 
     filterrating = valueFilterRating.innerText;
-
     connection.invoke('SetFilter', showall, showunrated, filterrating);
 }
 
@@ -370,7 +373,7 @@ function clearcookie() {
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (exdays * millisecondsPerDay));
     var expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
 }
