@@ -152,20 +152,18 @@
         /// </summary>
         /// <param name="id">Id of the Video.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public async Task AddToQueueAsync(string id)
+        public async Task AddToQueueAsync(string idString)
         {
-            int Id = Convert.ToInt32(id);
-            if (!Model.QueuedVideoIds.Contains(Id))
+            int id = Convert.ToInt32(idString);
+            if (!Model.QueuedVideoIds.Contains(id))
             {
-                Model.QueuedVideoIds.Add(Convert.ToInt32(id));
-            }
-
-            Model.Videos[Convert.ToInt32(id)].QueuedCount++;
-            Model.Videos[Convert.ToInt32(id)].LastQueued = DateTime.Now;
-
-            if (isRandom)
-            {
-                await GetNextSongAsync();
+                Model.QueuedVideoIds.Add(id);
+                Model.Videos[id].QueuedCount++;
+                Model.Videos[id].LastQueued = DateTime.Now;
+                if (isRandom)
+                {
+                    await GetNextSongAsync();
+                }
             }
         }
 
