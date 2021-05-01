@@ -1,15 +1,14 @@
 ﻿namespace MusicVideos.Hubs
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
 
+    /// <summary>
+    /// SignalR Hub to provide debugging over multiple pages.
+    /// TODO Remove from production.
+    /// </summary>
     public class DebugHub : Hub
     {
-
         /// <summary>
         /// Recieves error from page, posts to debug.
         /// </summary>

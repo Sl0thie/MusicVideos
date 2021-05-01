@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
-
-namespace MusicVideos.Hubs
+﻿namespace MusicVideos.Hubs
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.SignalR;
+    using Newtonsoft.Json;
+
     /// <summary>
     /// MessageHub provides functions via SignalR.
     /// </summary>
     public class MessageHub : Hub
     {
+        private const int IndexMinimum = 0;
+        private const int RepeatDelay = -10;
+        private const int UnratedValue = 0;
+        private const int Increment = 1;
         private static readonly List<Genre> Filter = new List<Genre>();
         private static bool isRandom = true;
         private static int previousIndex;
@@ -43,7 +47,7 @@ namespace MusicVideos.Hubs
                 {
                     if (showUnrated)
                     {
-                        if (next.Value.Rating == 0)
+                        if (next.Value.Rating == UnratedValue)
                         {
                             await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
                             Model.FilteredVideoIds.Add(next.Value.Id);
@@ -89,10 +93,9 @@ namespace MusicVideos.Hubs
         public async Task GetNextSongAsync()
         {
             string clockTime = DateTime.Now.ToString("h:mm");
-            Video nextVideo = new Video();
             int nextIndex;
 
-            if (previousIndex > 0)
+            if (previousIndex > IndexMinimum)
             {
                 isRandom = false;
                 if (previousIndex > Model.PreviousVideoIds.Count)
@@ -102,32 +105,34 @@ namespace MusicVideos.Hubs
 
                 nextIndex = Model.PreviousVideoIds[Model.PreviousVideoIds.Count - previousIndex--];
             }
-            else if (Model.QueuedVideoIds.Count > 0)
+            else if (Model.QueuedVideoIds.Count > IndexMinimum)
             {
                 isRandom = false;
-                nextIndex = Model.QueuedVideoIds[0];
-                Model.QueuedVideoIds.RemoveAt(0);
+                nextIndex = Model.QueuedVideoIds[IndexMinimum];
+                Model.QueuedVideoIds.RemoveAt(IndexMinimum);
             }
             else
             {
                 isRandom = true;
                 var rand = new Random();
-                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + 1];
+                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + Increment];
             }
 
-            nextVideo = Model.Videos[nextIndex];
             lastSongStart = DateTime.Now;
-            if (previousIndex == 0)
+            if (previousIndex == IndexMinimum)
             {
                 Model.PreviousVideoIds.Add(nextIndex);
             }
 
-            nextVideo.LastPlayed = DateTime.Now;
-            nextVideo.PlayCount++;
-            string path = nextVideo.Path.Substring(Model.FilesPath.Length);
+            Model.Videos[nextIndex].LastPlayed = DateTime.Now;
+            Model.Videos[nextIndex].PlayCount++;
+            string path = Model.Videos[nextIndex].Path.Substring(Model.FilesPath.Length);
             path = path.Replace(@"\", "/");
             path = Model.VirtualPath + path;
-            await Clients.All.SendAsync("SetVideo", nextIndex, path, nextVideo.Artist, nextVideo.Title, clockTime);
+            await Clients.All.SendAsync("SetVideo", nextIndex, path, Model.Videos[nextIndex].Artist, Model.Videos[nextIndex].Title, clockTime);
+
+            // To reduce the no of file operations save only when the video changes.
+            Model.SaveVideos();
         }
 
         /// <summary>
@@ -152,6 +157,9 @@ namespace MusicVideos.Hubs
             Debug.WriteLine(id);
             Model.QueuedVideoIds.Add(Convert.ToInt32(id));
 
+            Model.Videos[Convert.ToInt32(id)].QueuedCount++;
+            Model.Videos[Convert.ToInt32(id)].LastQueued = DateTime.Now;
+
             if (isRandom)
             {
                 await GetNextSongAsync();
@@ -164,7 +172,7 @@ namespace MusicVideos.Hubs
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task ButtonPrevAsync()
         {
-            if (lastSongStart > DateTime.Now.AddSeconds(-10))
+            if (lastSongStart > DateTime.Now.AddSeconds(RepeatDelay))
             {
                 previousIndex++;
             }
@@ -218,17 +226,14 @@ namespace MusicVideos.Hubs
         /// <param name="state">The state to change to.</param>
         public void SetGenres(string id, string genreId, string state)
         {
-            Video video = Model.Videos[Convert.ToInt32(id)];
             if (state == "add")
             {
-                video.Genres.Add((Genre)Convert.ToInt32(genreId));
+                Model.Videos[Convert.ToInt32(id)].Genres.Add((Genre)Convert.ToInt32(genreId));
             }
             else
             {
-                video.Genres.Remove((Genre)Convert.ToInt32(genreId));
+                Model.Videos[Convert.ToInt32(id)].Genres.Remove((Genre)Convert.ToInt32(genreId));
             }
-
-            Model.SaveVideos();
         }
 
         /// <summary>
@@ -284,11 +289,9 @@ namespace MusicVideos.Hubs
         /// </summary>
         /// <param name="id">The Id of the video.</param>
         /// <param name="rating">The new rating for the video.</param>
-        public void SetRatingAsync(string id, string rating)
+        public void SetRating(string id, string rating)
         {
-            Video video = Model.Videos[Convert.ToInt32(id)];
-            video.Rating = Convert.ToInt32(rating);
-            Model.SaveVideos();
+            Model.Videos[Convert.ToInt32(id)].Rating = Convert.ToInt32(rating);
         }
     }
 }

@@ -21,6 +21,12 @@ namespace MusicVideos
         public string Artist { get; set; }
 
         /// <summary>
+        /// Gets or sets the song's artist search name.
+        /// Artist's name with prefixes such as 'the' removed.
+        /// </summary>
+        public string SearchArtist { get; set; }
+
+        /// <summary>
         /// Gets or sets the song's title.
         /// </summary>
         public string Title { get; set; }
@@ -93,6 +99,11 @@ namespace MusicVideos
         /// Gets or sets the last time the video was played.
         /// </summary>
         public DateTime LastPlayed { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last time the video was queued.
+        /// </summary>
+        public DateTime LastQueued { get; set; }
 
         /// <summary>
         /// Gets or sets when the song was released.

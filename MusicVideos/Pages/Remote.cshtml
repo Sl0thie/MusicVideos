@@ -116,8 +116,12 @@
                 </tr>
                 <tr>
                     <td class="tdKey">Rating</td>
-                    <td class="tdValue"><span id="detailsRating"></span></td>
-                    <td colspan="2"><input id="sliderRating" type="range" min="1" max="100" value="1" step="1" onchange="updateRating(this.value)" orient="horizontal" /></td>
+                    <td></td>
+                    <td></td>
+                    <td class="tdValue"><span id="detailsRating" style="text-align:right;"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><input id="sliderRating" type="range" min="1" max="100" value="1" step="1" onchange="updateRating(this.value)" orient="horizontal" /></td>
                 </tr>
                 <tr>
                     <td class="tdKey">Released</td>
@@ -210,9 +214,15 @@
 
                 <tr>
                     <td class="tdKey">Rating</td>
-                    <td class="tdValue"><span id="valueFilterRating">1</span></td>
-                    <td colspan="2"><input id="sliderFilterRating" type="range" min="1" max="100" value="1" step="1" onchange="updateFilterRating(this.value)" orient="horizontal" /></td>
+                    <td></td>
+                    <td></td>
+                    <td class="tdValue"><span id="valueFilterRating" style="text-align:right;">1</span></td>
                 </tr>
+
+                <tr>
+                    <td colspan="4"><input id="sliderFilterRating" type="range" min="1" max="100" value="1" step="1" onchange="updateFilterRating(this.value)" orient="horizontal" /></td>
+                </tr>
+
 
                 <tr>
                     <td class="tdKey">Genres</td>
