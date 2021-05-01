@@ -154,8 +154,11 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task AddToQueueAsync(string id)
         {
-            Debug.WriteLine(id);
-            Model.QueuedVideoIds.Add(Convert.ToInt32(id));
+            int Id = Convert.ToInt32(id);
+            if (!Model.QueuedVideoIds.Contains(Id))
+            {
+                Model.QueuedVideoIds.Add(Convert.ToInt32(id));
+            }
 
             Model.Videos[Convert.ToInt32(id)].QueuedCount++;
             Model.Videos[Convert.ToInt32(id)].LastQueued = DateTime.Now;
