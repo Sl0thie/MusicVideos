@@ -296,6 +296,8 @@ function setFilterGenre(id) {
 
     if (source === '/checkoff.png') {
         filter.src = '/images/checkon.png';
+        toggleShowUnrated.src = '/images/checkoff.png';
+        toggleShowAll.src = '/images/checkoff.png';
         //setFilter(id, 'add');
         connection.invoke('SetFilterGenre', id.toString(), 'add');
     }
@@ -313,6 +315,12 @@ function switchShowAll() {
 
     if (source === '/checkoff.png') {
         toggleShowAll.src = '/images/checkon.png';
+        toggleShowUnrated.src = '/images/checkoff.png';
+
+        for (let i = 1; i < 21; i++) {
+            let filter = document.getElementById('filter' + i);
+            filter.src = '/images/checkoff.png';
+        }
     }
     else {
         toggleShowAll.src = '/images/checkoff.png';
@@ -326,6 +334,12 @@ function switchShowUnrated() {
 
     if (source === '/checkoff.png') {
         toggleShowUnrated.src = '/images/checkon.png';
+        toggleShowAll.src = '/images/checkoff.png';
+
+        for (let i = 1; i < 21; i++) {
+            let filter = document.getElementById('filter' + i);
+            filter.src = '/images/checkoff.png';
+        }
     }
     else {
         toggleShowUnrated.src = '/images/checkoff.png';

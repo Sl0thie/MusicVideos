@@ -16,13 +16,14 @@
         private const int RepeatDelay = -10;
         private const int UnratedValue = 0;
         private const int Increment = 1;
-        private static readonly List<Genre> Filter = new List<Genre>();
+        private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
+        private static int filterRating;
+        private static bool showUnrated = true;
+        private static bool showAll;
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
-        private static int filterRating;
-        private static bool showUnrated;
-        private static bool showAll = true;
+        private static int lastIndex = -1;
 
         /// <summary>
         /// Gets the playlist from the collection.
@@ -41,25 +42,27 @@
                     Model.FilteredVideoIds.Add(next.Value.Id);
                 }
             }
+            else if (showUnrated)
+            {
+                foreach (var next in Model.Videos)
+                {
+                    if (next.Value.Rating == UnratedValue)
+                    {
+                        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
+                        Model.FilteredVideoIds.Add(next.Value.Id);
+                        continue;
+                    }
+                }
+            }
             else
             {
                 foreach (var next in Model.Videos)
                 {
-                    if (showUnrated)
-                    {
-                        if (next.Value.Rating == UnratedValue)
-                        {
-                            await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
-                            Model.FilteredVideoIds.Add(next.Value.Id);
-                            continue;
-                        }
-                    }
-
                     if (next.Value.Rating >= filterRating)
                     {
                         foreach (Genre genre in next.Value.Genres)
                         {
-                            if (Filter.Contains(genre))
+                            if (filter.Contains(genre))
                             {
                                 await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
                                 Model.FilteredVideoIds.Add(next.Value.Id);
@@ -92,6 +95,26 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task GetNextSongAsync()
         {
+            if (lastIndex > 0)
+            {
+                if (lastSongStart.AddMinutes(1) > DateTime.Now)
+                {
+                    Model.Videos[lastIndex].Rating--;
+                    if (Model.Videos[lastIndex].Rating < 1)
+                    {
+                        Model.Videos[lastIndex].Rating = 1;
+                    }
+                }
+                else
+                {
+                    Model.Videos[lastIndex].Rating++;
+                    if (Model.Videos[lastIndex].Rating > 100)
+                    {
+                        Model.Videos[lastIndex].Rating = 100;
+                    }
+                }
+            }
+
             string clockTime = DateTime.Now.ToString("h:mm");
             int nextIndex;
 
@@ -131,6 +154,8 @@
             path = Model.VirtualPath + path;
             await Clients.All.SendAsync("SetVideo", nextIndex, path, Model.Videos[nextIndex].Artist, Model.Videos[nextIndex].Title, clockTime);
 
+            lastIndex = nextIndex;
+
             // To reduce the no of file operations save only when the video changes.
             Model.SaveVideos();
         }
@@ -150,7 +175,7 @@
         /// <summary>
         /// Adds a video to the queue.
         /// </summary>
-        /// <param name="id">Id of the Video.</param>
+        /// <param name="idString">Id of the Video.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task AddToQueueAsync(string idString)
         {
@@ -248,11 +273,11 @@
 
             if (state == "add")
             {
-                Filter.Add((Genre)Convert.ToInt32(id));
+                filter.Add((Genre)Convert.ToInt32(id));
             }
             else
             {
-                Filter.Remove((Genre)Convert.ToInt32(id));
+                filter.Remove((Genre)Convert.ToInt32(id));
             }
         }
 
@@ -267,6 +292,7 @@
             if (showall == "true")
             {
                 showAll = true;
+                filter = new List<Genre>();
             }
             else
             {
@@ -276,6 +302,7 @@
             if (showunrated == "true")
             {
                 showUnrated = true;
+                filter = new List<Genre>();
             }
             else
             {
