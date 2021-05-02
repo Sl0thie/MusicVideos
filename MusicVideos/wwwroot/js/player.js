@@ -12,6 +12,7 @@ let fadeoutId;                 // Fade interval Id.
 let opacity;                   // Overlay opacity value.
 let connection;                // SignalR connection object.
 let volume = 1;                // Volume for the video element.
+let currentIndex;              // Index of the current Video.
 
 // Element objects.
 let player = document.getElementById('player'); 
@@ -52,7 +53,7 @@ window.addEventListener('load', function () {
 // Once connected to hub get the first video to play.
 function connectionStarted() {
     window.addEventListener('error', logError);
-    connection.invoke('GetNextSongAsync');
+    connection.invoke('GetNextVideoAsync');
 }
 //#endregion
 //#region Debug
@@ -66,27 +67,29 @@ function log(message) {
 //#region Media
 // Get the next video from the hub.
 function nextVideo() {
-    connection.invoke('GetNextSongAsync');
+    connection.invoke('GetNextVideoAsync');
 }
 
 // When the video has ended get another video to play from the hub.
 function playerended() {
-    connection.invoke('GetNextSongAsync');
+    connection.invoke('GetNextVideoAsync');
 }
 // If there is an error with a video then get the next video.
 // TODO Add logging to this function to log the video that has raised the error on the hub.
 function playerError() {
-    connection.invoke('GetNextSongAsync');
+    connection.invoke('GetNextVideoAsync');
 }
 // Whe the player is ready auto start the video.
 function playerReady() {
-    log('Video Duration : ' + player.duration);
-    log('Video Width : ' + player.videoWidth);
-    log('Video Height : ' + player.videoHeight);
+    //log('Video Duration : ' + player.duration);
+    //log('Video Width : ' + player.videoWidth);
+    //log('Video Height : ' + player.videoHeight);
     player.play();
+    connection.invoke('UpdateVideoProperties', currentIndex.toString(), player.duration.toString(), player.videoWidth.toString(), player.videoHeight.toString());
 }
 // Play the next video.
 function setVideo(index, songPath, songArtist, songTitle, clockTime) {
+    currentIndex = index;
     // Update display elements.
     for (const element of songartist) { element.innerHTML = songArtist; }
     for (const element of songtitle) { element.innerHTML = songTitle; }

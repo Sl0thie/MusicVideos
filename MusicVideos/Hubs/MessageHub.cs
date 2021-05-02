@@ -12,6 +12,8 @@
     /// </summary>
     public class MessageHub : Hub
     {
+        #region Fields
+
         private const int IndexMinimum = 0;
         private const int RepeatDelay = -10;
         private const int UnratedValue = 0;
@@ -24,6 +26,8 @@
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
+
+        #endregion
 
         #region Debugging
 
@@ -114,8 +118,7 @@
 
         #endregion
 
-
-
+        #region Queue
 
         /// <summary>
         /// Gets the queuelist from the collection.
@@ -130,89 +133,6 @@
                 Video nextVideo = Model.Videos[next];
                 await Clients.All.SendAsync("SetQueuelistItem", nextVideo.Id, nextVideo.Artist, nextVideo.Title);
             }
-        }
-
-        /// <summary>
-        /// Gets the next song to be played.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public async Task GetNextSongAsync()
-        {
-            if (lastIndex > 0)
-            {
-                if (lastSongStart.AddMinutes(1) > DateTime.Now)
-                {
-                    Model.Videos[lastIndex].Rating--;
-                    if (Model.Videos[lastIndex].Rating < 1)
-                    {
-                        Model.Videos[lastIndex].Rating = 1;
-                    }
-                }
-                else
-                {
-                    Model.Videos[lastIndex].Rating++;
-                    if (Model.Videos[lastIndex].Rating > 100)
-                    {
-                        Model.Videos[lastIndex].Rating = 100;
-                    }
-                }
-            }
-
-            string clockTime = DateTime.Now.ToString("h:mm");
-            int nextIndex;
-
-            if (previousIndex > IndexMinimum)
-            {
-                isRandom = false;
-                if (previousIndex > Model.PreviousVideoIds.Count)
-                {
-                    previousIndex = Model.PreviousVideoIds.Count;
-                }
-
-                nextIndex = Model.PreviousVideoIds[Model.PreviousVideoIds.Count - previousIndex--];
-            }
-            else if (Model.QueuedVideoIds.Count > IndexMinimum)
-            {
-                isRandom = false;
-                nextIndex = Model.QueuedVideoIds[IndexMinimum];
-                Model.QueuedVideoIds.RemoveAt(IndexMinimum);
-            }
-            else
-            {
-                isRandom = true;
-                var rand = new Random();
-                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + Increment];
-            }
-
-            lastSongStart = DateTime.Now;
-            if (previousIndex == IndexMinimum)
-            {
-                Model.PreviousVideoIds.Add(nextIndex);
-            }
-
-            Model.Videos[nextIndex].LastPlayed = DateTime.Now;
-            Model.Videos[nextIndex].PlayCount++;
-            string path = Model.Videos[nextIndex].Path.Substring(Model.FilesPath.Length);
-            path = path.Replace(@"\", "/");
-            path = Model.VirtualPath + path;
-            await Clients.All.SendAsync("SetVideo", nextIndex, path, Model.Videos[nextIndex].Artist, Model.Videos[nextIndex].Title, clockTime);
-
-            lastIndex = nextIndex;
-
-            // To reduce the no of file operations save only when the video changes.
-            Model.SaveVideos();
-        }
-
-        /// <summary>
-        /// Gets the details of the video.
-        /// </summary>
-        /// <param name="id">The Id of the video.</param>
-        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public async Task GetVideoDetails(string id)
-        {
-            Video video = Model.Videos[Convert.ToInt32(id)];
-            string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
-            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, video.LastPlayed.ToString("d/M/yyyy"), video.Rating, video.Released.ToString("d/M/yyyy"));
         }
 
         /// <summary>
@@ -234,6 +154,10 @@
                 }
             }
         }
+
+        #endregion
+
+        #region Buttons
 
         /// <summary>
         /// Handles the previous button.
@@ -277,6 +201,10 @@
             await GetNextSongAsync();
         }
 
+        #endregion
+
+        #region Volume
+
         /// <summary>
         /// Handles volume messages.
         /// </summary>
@@ -285,6 +213,153 @@
         public async Task SetVolumeAsync(string value)
         {
             await Clients.All.SendAsync("SetVolume", value);
+        }
+
+        #endregion
+
+        #region Current Video
+
+        /// <summary>
+        /// Gets the next song to be played.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public async Task GetNextVideoAsync()
+        {
+            // Get the string to use for displaying the clock.
+            string clockTime = DateTime.Now.ToString("h:mm");
+
+            // Adjust rating of previous video first.
+            if (lastIndex > 0)
+            {
+                // Don't adjust rating of videos that have not been rated at all.
+                if (Model.Videos[lastIndex].Rating != 0)
+                {
+                    if (lastSongStart.AddMinutes(1) > DateTime.Now)
+                    {
+                        Model.Videos[lastIndex].Rating--;
+                        if (Model.Videos[lastIndex].Rating < 1)
+                        {
+                            Model.Videos[lastIndex].Rating = 1;
+                        }
+                    }
+                    else
+                    {
+                        Model.Videos[lastIndex].Rating++;
+                        if (Model.Videos[lastIndex].Rating > 100)
+                        {
+                            Model.Videos[lastIndex].Rating = 100;
+                        }
+                    }
+                }
+            }
+
+            // Check if the playlist is not playing previous videos first. Then check there are any videos in the queue. Finally if there are no videos queued then pick a random song from the filtered list.
+            int nextIndex;
+            if (previousIndex > IndexMinimum)
+            {
+                isRandom = false;
+                if (previousIndex > Model.PreviousVideoIds.Count)
+                {
+                    previousIndex = Model.PreviousVideoIds.Count;
+                }
+
+                nextIndex = Model.PreviousVideoIds[Model.PreviousVideoIds.Count - previousIndex--];
+            }
+            else if (Model.QueuedVideoIds.Count > IndexMinimum)
+            {
+                isRandom = false;
+                nextIndex = Model.QueuedVideoIds[IndexMinimum];
+                Model.QueuedVideoIds.RemoveAt(IndexMinimum);
+            }
+            else
+            {
+                isRandom = true;
+                var rand = new Random();
+                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + Increment];
+            }
+
+            // If the video is not in the previous videos then add to the previous videos.
+            if (previousIndex == IndexMinimum)
+            {
+                Model.PreviousVideoIds.Add(nextIndex);
+            }
+
+            // Adjust the properties of the next video to be played.
+            Model.Videos[nextIndex].LastPlayed = DateTime.Now;
+            Model.Videos[nextIndex].PlayCount++;
+            lastSongStart = DateTime.Now;
+
+            // Change the path from a physical path to a virtual one.
+            string path = Model.Videos[nextIndex].Path.Substring(Model.FilesPath.Length);
+            path = path.Replace(@"\", "/");
+            path = Model.VirtualPath + path;
+
+            // Send data to player to play the next video.
+            await Clients.All.SendAsync("SetVideo", nextIndex, path, Model.Videos[nextIndex].Artist, Model.Videos[nextIndex].Title, clockTime);
+
+            // Store the index for when the video stops playing.
+            lastIndex = nextIndex;
+
+            // To reduce the no of file operations save only when the video changes.
+            Model.SaveVideos();
+        }
+
+        /// <summary>
+        /// Updates the video properties.
+        /// </summary>
+        /// <param name="idString">The Id of the video.</param>
+        /// <param name="duration">The duration of the video.</param>
+        /// <param name="width">The width of the video in pixels.</param>
+        /// <param name="height">The height of the video in pixels.</param>
+        public void UpdateVideoProperties(string idString, string duration, string width, string height)
+        {
+            int id = Convert.ToInt32(idString);
+
+            if (duration is object)
+            {
+                if (duration.IndexOf('.') > 0)
+                {
+                    int seconds = Convert.ToInt32(duration.Substring(0, duration.IndexOf('.')));
+                    int milliseconds = 0;
+                    string milli = duration.Substring(duration.IndexOf('.') + 1);
+                    switch (milli.Length)
+                    {
+                        case 0:
+                            milliseconds = 0;
+                            break;
+                        case 1:
+                            milliseconds = Convert.ToInt32(milli) * 100;
+                            break;
+                        case 2:
+                            milliseconds = Convert.ToInt32(milli) * 10;
+                            break;
+                        case 3:
+                            milliseconds = Convert.ToInt32(milli);
+                            break;
+                        default:
+                            milli = milli.Substring(0, 3);
+                            milliseconds = Convert.ToInt32(milli);
+                            break;
+                    }
+
+                    Model.Videos[id].Duration = (seconds * 1000) + milliseconds;
+                }
+            }
+
+            Model.Videos[id].VideoWidth = Convert.ToInt32(width);
+            Model.Videos[id].VideoHeight = Convert.ToInt32(height);
+        }
+
+        /// <summary>
+        /// Gets the details of the video.
+        /// </summary>
+        /// <param name="id">The Id of the video.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public async Task GetVideoDetails(string id)
+        {
+            Video video = Model.Videos[Convert.ToInt32(id)];
+            string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
+            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, video.LastPlayed.ToString("d/M/yyyy"), video.Rating, video.Released.ToString("d/M/yyyy"));
         }
 
         /// <summary>
@@ -304,6 +379,20 @@
                 Model.Videos[Convert.ToInt32(id)].Genres.Remove((Genre)Convert.ToInt32(genreId));
             }
         }
+
+        /// <summary>
+        /// Sets the rating for the video.
+        /// </summary>
+        /// <param name="id">The Id of the video.</param>
+        /// <param name="rating">The new rating for the video.</param>
+        public void SetRating(string id, string rating)
+        {
+            Model.Videos[Convert.ToInt32(id)].Rating = Convert.ToInt32(rating);
+        }
+
+        #endregion
+
+        #region Filter
 
         /// <summary>
         /// Sets the filter genre for the playlist.
@@ -355,14 +444,6 @@
             filterRating = Convert.ToInt32(minRating);
         }
 
-        /// <summary>
-        /// Sets the rating for the video.
-        /// </summary>
-        /// <param name="id">The Id of the video.</param>
-        /// <param name="rating">The new rating for the video.</param>
-        public void SetRating(string id, string rating)
-        {
-            Model.Videos[Convert.ToInt32(id)].Rating = Convert.ToInt32(rating);
-        }
+        #endregion
     }
 }
