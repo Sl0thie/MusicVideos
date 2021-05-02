@@ -25,6 +25,44 @@
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
 
+        #region Debugging
+
+        /// <summary>
+        /// Logs javascript errors.
+        /// </summary>
+        /// <param name="docTitle">The Title of the page that raised the error.</param>
+        /// <param name="message">The error message.</param>
+        /// <param name="filename">The filename containing the error.</param>
+        /// <param name="lineNo">The line number of the error.</param>
+        /// <param name="colNo">The column number of the error.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public async Task LogErrorAsync(string docTitle, string message, string filename, string lineNo, string colNo)
+        {
+            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
+            Debug.WriteLine("   Message:" + message);
+            Debug.WriteLine("  Filename:" + filename);
+            Debug.WriteLine("      Line:" + lineNo);
+            Debug.WriteLine("    Column:" + colNo);
+
+            await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
+        }
+
+        /// <summary>
+        /// Log message from javascript.
+        /// </summary>
+        /// <param name="docTitle">The Title of the page that raised the message.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public async Task LogMessageAsync(string docTitle, string message)
+        {
+            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " " + docTitle + " " + message);
+            await Clients.All.SendAsync("PrintMessage", docTitle, message);
+        }
+
+        #endregion
+
+        #region Playlist
+
         /// <summary>
         /// Gets the playlist from the collection.
         /// </summary>
@@ -73,6 +111,11 @@
                 }
             }
         }
+
+        #endregion
+
+
+
 
         /// <summary>
         /// Gets the queuelist from the collection.

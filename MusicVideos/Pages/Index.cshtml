@@ -2,6 +2,10 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Debug";
+    @section Scripts
+    {
+        <script type="text/javascript" src="@Url.Content("/js/index.js")" defer></script>
+    }
 }
 <h1>Debug Options</h1>
 

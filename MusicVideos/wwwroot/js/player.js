@@ -49,16 +49,26 @@ window.addEventListener('load', function () {
     overlay.style.cursor = 'none';
     overlayShadow.style.cursor = 'none';
 });
+// Once connected to hub get the first video to play.
+function connectionStarted() {
+    window.addEventListener('error', logError);
+    connection.invoke('GetNextSongAsync');
+}
+//#endregion
+//#region Debug
+function logError(e) {
+    connection.invoke('LogErrorAsync', document.title, e.message, e.filename, e.lineno.toString(), e.colno.toString());
+}
+function log(message) {
+    connection.invoke('LogMessageAsync', document.URL, message);
+}
 //#endregion
 //#region Media
 // Get the next video from the hub.
 function nextVideo() {
     connection.invoke('GetNextSongAsync');
 }
-// Once connected to hub get the first video to play.
-function connectionStarted() {
-    connection.invoke('GetNextSongAsync');
-}
+
 // When the video has ended get another video to play from the hub.
 function playerended() {
     connection.invoke('GetNextSongAsync');
@@ -70,7 +80,9 @@ function playerError() {
 }
 // Whe the player is ready auto start the video.
 function playerReady() {
-    console.log('Video Duration : ' + player.duration);
+    log('Video Duration : ' + player.duration);
+    log('Video Width : ' + player.videoWidth);
+    log('Video Height : ' + player.videoHeight);
     player.play();
 }
 // Play the next video.
