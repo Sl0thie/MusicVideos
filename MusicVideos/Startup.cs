@@ -59,7 +59,6 @@ namespace MusicVideos
             {
                 endpoints.MapRazorPages();
                 endpoints.MapHub<MessageHub>("/messageHub");
-                endpoints.MapHub<DebugHub>("/debugHub");
             });
         }
     }

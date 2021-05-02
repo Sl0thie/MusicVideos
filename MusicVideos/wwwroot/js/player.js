@@ -70,6 +70,7 @@ function playerError() {
 }
 // Whe the player is ready auto start the video.
 function playerReady() {
+    console.log('Video Duration : ' + player.duration);
     player.play();
 }
 // Play the next video.
