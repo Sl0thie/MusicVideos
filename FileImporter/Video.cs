@@ -38,13 +38,12 @@ namespace FileImporter
         public string Path { get; set; }
 
         /// <summary>
-        /// Gets or sets the genres that this song falls into.
+        /// Gets the genres that this song falls into.
         /// </summary>
         /// 
         public Collection<Genre> Genres
         {
             get { return genres; }
-            //set { genres = value; }
         }
 
         //public List<Genre> Genres { get; set; }
