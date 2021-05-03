@@ -162,8 +162,9 @@ namespace FileImporter
                 string json = JsonConvert.SerializeObject(Videos, Formatting.None);
                 File.WriteAllText(BasePath + "index.json", json);
 
+                // Google restricts too many attempts so limit each run.
                 i++;
-                if (i > 100)
+                if (i >= 100)
                 {
                     break;
                 }
@@ -248,7 +249,7 @@ namespace FileImporter
 
             if(Released.Length == 4)
             {
-                nextVideo.Released = DateTime.Parse("1/1/" + Released);
+                nextVideo.Released = new DateTime(Convert.ToInt32(Released), 1, 1, 0, 0, 0, DateTimeKind.Local);
             }
 
             if (Genre.Length > 10)
@@ -272,9 +273,33 @@ namespace FileImporter
                     case "":
                         break;
                     case "alternative/indie":
+                    case "folk":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Alternative))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Alternative);
+                        }
+                        break;
+
+                    case "blues":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Blues))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Blues);
+                        }
+                        break;
+
+
+                    case "country":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Country))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Country);
+                        }
+                        break;
+
+                    case "dance":
+                    case "dance music":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Dance);
                         }
                         break;
 
@@ -291,6 +316,7 @@ namespace FileImporter
                         break;
 
                     case "disco":
+                    case "italo disco":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Pop);
@@ -323,8 +349,23 @@ namespace FileImporter
                         }
                         break;
 
+                    case "electropop":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                        }
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Electronic);
+                        }
+                        break;
+
+
                     case "hip-hop/rap":
                     case "hip hop music":
+                    case "urban adult contemporary":
+                    case "trap":
+                    case "latin trap":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.HipHop))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.HipHop);
@@ -334,14 +375,25 @@ namespace FileImporter
                     case "house":
                     case "house music":
                     case "deep house":
+                    case "big room house":
+                    case "uk garage":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.House))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.House);
                         }
                         break;
 
+                    case "jazz":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Jazz))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Jazz);
+                        }
+                        break;
+
+
                     case "metal":
                     case "alt metal":
+                    case "hair metal":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Metal))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Metal);
@@ -351,16 +403,46 @@ namespace FileImporter
                     case "pop":
                     case "pop music":
                     case "dream pop":
+                    case "christian/gospel":
+                    case "adult contemporary":
+                    case "folk-pop":
+                    case "a-cappela":
+                    case "percussion":
+                    case "teen pop":
+                    case "new wave":
+                    case "new wave/post-punk":
+                    case "singer-songwriter":
+                    case "acoustic":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Pop);
                         }
                         break;
 
+                    case "punk":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Punk))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Punk);
+                        }
+                        break;
+
+
+
+                    case "reggae":
+                    case "dance hall":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Reggae))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Reggae);
+                        }
+                        break;
+
+
+
                     case "rhythm and blues":
                     case "r&b/soul":
                     case "contemporary r&b":
                     case "contemporary soul":
+                    case "classic soul":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.RhythmAndBlues))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.RhythmAndBlues);

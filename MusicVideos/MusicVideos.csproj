@@ -6,6 +6,7 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <UserSecretsId>1c994b58-3ec5-4506-bef9-2f352ab21167</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
