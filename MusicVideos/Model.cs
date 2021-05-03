@@ -56,7 +56,6 @@ namespace MusicVideos
 
             foreach (Video next in videos.Values)
             {
-                next.SearchArtist = next.Artist.Replace("The ", string.Empty);
                 FilteredVideoIds.Add(next.Id);
             }
         }

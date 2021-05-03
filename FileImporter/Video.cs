@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FileImporter
 {
@@ -8,7 +9,7 @@ namespace FileImporter
     /// </summary>
     public class Video
     {
-        private List<Genre> genres = new List<Genre>();
+        private Collection<Genre> genres = new Collection<Genre>();
 
         /// <summary>
         /// Gets or sets the Index.
@@ -40,10 +41,10 @@ namespace FileImporter
         /// Gets or sets the genres that this song falls into.
         /// </summary>
         /// 
-        public List<Genre> Genres
+        public Collection<Genre> Genres
         {
             get { return genres; }
-            set { genres = value; }
+            //set { genres = value; }
         }
 
         //public List<Genre> Genres { get; set; }

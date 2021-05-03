@@ -44,8 +44,8 @@ window.addEventListener('load', function () {
     connection.on('ClearPlaylist', function () {
         clearPlaylist();
     });
-    connection.on('SetPlaylistItem', function (id, artist, title) {
-        addPlaylistItem(id, artist, title);
+    connection.on('SetPlaylistItem', function (id, artist, title, rating) {
+        addPlaylistItem(id, artist, title, rating);
     });
     connection.on('ClearQueuelist', function () {
         clearQueuelist();
@@ -86,7 +86,7 @@ function clearPlaylist() {
     songlist.innerHTML = '';
 }
 
-function addPlaylistItem(id, artist, title) {
+function addPlaylistItem(id, artist, title, rating) {
     let newOuter = document.createElement('div');
     let newArtist = document.createElement('div');
     let newTitle = document.createElement('div');
@@ -135,6 +135,33 @@ function mouseUpItem(id) {
 
 function addToQueue(id) {
     connection.invoke('AddToQueueAsync', id.toString());
+    connection.invoke("GetQueuelistAsync");
+}
+
+//#endregion
+//#region Queuelist
+
+function addQueuelistItem(id, artist, title) {
+    let newOuter = document.createElement('div');
+    let newArtist = document.createElement('div');
+    let newTitle = document.createElement('div');
+    newArtist.innerHTML = artist;
+    newArtist.className = 'itemartist';
+    newTitle.innerHTML = title;
+    newTitle.className = 'itemtitle';
+    newOuter.appendChild(newArtist);
+    newOuter.appendChild(newTitle);
+    newOuter.onmousedown = function () { mouseDownItem(id); };
+    newOuter.onmouseup = function () { mouseUpItem(id); };
+    newOuter.id = id;
+    newOuter.className = 'item';
+    queuelist.appendChild(newOuter);
+    doEvents();
+}
+
+function clearQueuelist() {
+    console.log('Clear Log');
+    queuelist.innerHTML = '';
 }
 
 //#endregion
@@ -272,6 +299,8 @@ function setVideoDetails(duration, extension, genreslist, lastplayed, rating, re
     }
     var genres = JSON.parse(genreslist);
     genres.forEach(updateGenre);
+
+    connection.invoke("GetQueuelistAsync");
 }
 
 function updateGenre(item, index) {

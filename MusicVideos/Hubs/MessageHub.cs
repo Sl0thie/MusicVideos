@@ -21,8 +21,8 @@
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
         private static int filterRating;
-        private static bool showUnrated = true;
-        private static bool showAll;
+        private static bool showUnrated;
+        private static bool showAll = true;
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
@@ -80,7 +80,7 @@
             {
                 foreach (var next in Model.Videos)
                 {
-                    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
+                    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
                     Model.FilteredVideoIds.Add(next.Value.Id);
                 }
             }
@@ -90,7 +90,7 @@
                 {
                     if (next.Value.Rating == UnratedValue)
                     {
-                        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
+                        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
                         Model.FilteredVideoIds.Add(next.Value.Id);
                         continue;
                     }
@@ -106,7 +106,7 @@
                         {
                             if (filter.Contains(genre))
                             {
-                                await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title);
+                                await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
                                 Model.FilteredVideoIds.Add(next.Value.Id);
                                 break;
                             }
@@ -126,6 +126,8 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task GetQueuelistAsync()
         {
+            Debug.WriteLine("Get Queue " + Model.QueuedVideoIds.Count);
+
             await Clients.All.SendAsync("ClearQueuelist");
 
             foreach (var next in Model.QueuedVideoIds)
@@ -150,7 +152,7 @@
                 Model.Videos[id].LastQueued = DateTime.Now;
                 if (isRandom)
                 {
-                    await GetNextSongAsync();
+                    await GetNextVideoAsync();
                 }
             }
         }
@@ -171,7 +173,7 @@
             }
 
             previousIndex++;
-            await GetNextSongAsync();
+            await GetNextVideoAsync();
         }
 
         /// <summary>
@@ -198,7 +200,7 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task ButtonNextAsync()
         {
-            await GetNextSongAsync();
+            await GetNextVideoAsync();
         }
 
         #endregion
@@ -270,6 +272,8 @@
                 isRandom = false;
                 nextIndex = Model.QueuedVideoIds[IndexMinimum];
                 Model.QueuedVideoIds.RemoveAt(IndexMinimum);
+
+                Debug.WriteLine("Queue Count " + Model.QueuedVideoIds.Count);
             }
             else
             {
