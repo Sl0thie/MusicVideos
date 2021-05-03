@@ -9,7 +9,7 @@ namespace FileImporter
     /// </summary>
     public class Video
     {
-        private Collection<Genre> genres = new Collection<Genre>();
+        private readonly Collection<Genre> genres = new Collection<Genre>();
 
         /// <summary>
         /// Gets or sets the Index.

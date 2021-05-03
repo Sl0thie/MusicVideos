@@ -324,7 +324,7 @@
                 if (duration.IndexOf('.') > 0)
                 {
                     int seconds = Convert.ToInt32(duration.Substring(0, duration.IndexOf('.')));
-                    int milliseconds = 0;
+                    int milliseconds;
                     string milli = duration.Substring(duration.IndexOf('.') + 1);
                     switch (milli.Length)
                     {
