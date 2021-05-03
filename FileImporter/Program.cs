@@ -168,6 +168,8 @@ namespace FileImporter
                 {
                     break;
                 }
+
+                System.Threading.Thread.Sleep(10000);
             }
         }
 
@@ -175,7 +177,8 @@ namespace FileImporter
         {
             //https://www.bing.com/search?q=acdc+-+back+in+black&form=ANNTH1&refig=d640f4cdf1b74a6b9328c9bdb3c6ad1a
             WebClient client = new WebClient();
-            client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.51");
+            //client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.51");
+            client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.50");
             string searchterm = "https://www.google.com.au/search?q=" + artist.Replace(" ", "+") + "+-+" + title.Replace(" ", "+");
             string htmlString = client.DownloadString(searchterm);
 
@@ -281,6 +284,7 @@ namespace FileImporter
                         break;
 
                     case "blues":
+                    case "blues rock":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Blues))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Blues);
@@ -305,6 +309,7 @@ namespace FileImporter
 
                     case "dance/electronic":
                     case "electronic dance music":
+                    case "hard trance":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Dance);
@@ -452,11 +457,28 @@ namespace FileImporter
                     case "rock":
                     case "classic rock":
                     case "hard rock":
+                    case "pop rock":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Rock))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Rock);
                         }
                         break;
+
+                    case "ska":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Ska))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Ska);
+                        }
+                        break;
+
+                    case "techno":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Techno))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Techno);
+                        }
+                        break;
+
+
 
                     default:
                         Debug.WriteLine("Unknown Genre: " + next);

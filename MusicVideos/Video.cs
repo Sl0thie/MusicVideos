@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace MusicVideos
+﻿namespace MusicVideos
 {
+    using System;
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// Video object to store properties related to the video file.
     /// </summary>
@@ -31,6 +30,11 @@ namespace MusicVideos
         /// Gets or sets the song's title.
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the song's album.
+        /// </summary>
+        public string Album { get; set; }
 
         /// <summary>
         /// Gets or sets the UNC path to the file.

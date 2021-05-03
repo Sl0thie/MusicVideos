@@ -363,7 +363,7 @@
         {
             Video video = Model.Videos[Convert.ToInt32(id)];
             string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
-            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, video.LastPlayed.ToString("d/M/yyyy"), video.Rating, video.Released.ToString("d/M/yyyy"));
+            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, video.LastPlayed.ToString("d/M/yyyy"), video.Rating, video.Released.ToString("yyyy"));
         }
 
         /// <summary>
