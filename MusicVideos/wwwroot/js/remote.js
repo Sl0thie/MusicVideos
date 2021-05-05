@@ -356,7 +356,7 @@ function switchShowAll() {
     }
 }
 
-function switchShowUnrated() {
+function switchShowNoGenre() {
     let source = toggleShowUnrated.src;
     let i = source.lastIndexOf('/');
     source = source.substring(i);

@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
+    using System.Linq;
 
     /// <summary>
     /// MessageHub provides functions via SignalR.
@@ -16,12 +17,12 @@
 
         private const int IndexMinimum = 0;
         private const int RepeatDelay = -10;
-        private const int UnratedValue = 0;
+        //private const int UnratedValue = 0;
         private const int Increment = 1;
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
         private static int filterRating;
-        private static bool showUnrated;
+        private static bool noGenre;
         private static bool showAll = true;
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
@@ -78,42 +79,85 @@
 
             if (showAll)
             {
-                foreach (var next in Model.Videos)
+                //List<Video> videos = (List<Video>)Model.Videos.Values.ToList().OrderBy(x => x.SearchArtist);
+
+                //foreach (var next in videos)
+                //{
+                //    await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
+                //    Model.FilteredVideoIds.Add(next.Id);
+                //}
+
+                //foreach (var next in Model.Videos)
+                //{
+                //    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
+                //    Model.FilteredVideoIds.Add(next.Value.Id);
+                //}
+
+                List<Video> videos = Model.Videos.Values.ToList();
+
+                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
-                    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-                    Model.FilteredVideoIds.Add(next.Value.Id);
+                    await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
+                    Model.FilteredVideoIds.Add(next.Id);
                 }
             }
-            else if (showUnrated)
+            else if (noGenre)
             {
-                foreach (var next in Model.Videos)
+                List<Video> videos = Model.Videos.Values.ToList();
+
+                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
-                    if (next.Value.Rating == UnratedValue)
+                    if (next.Genres.Count == 0)
                     {
-                        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-                        Model.FilteredVideoIds.Add(next.Value.Id);
-                        continue;
+                        await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
+                        Model.FilteredVideoIds.Add(next.Id);
                     }
                 }
+
+                //foreach (var next in Model.Videos)
+                //{
+                //    if (next.Value.Rating == UnratedValue)
+                //    {
+                //        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
+                //        Model.FilteredVideoIds.Add(next.Value.Id);
+                //        continue;
+                //    }
+                //}
             }
             else
             {
-                foreach (var next in Model.Videos)
+                List<Video> videos = Model.Videos.Values.ToList();
+
+                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
-                    if (next.Value.Rating >= filterRating)
+                    foreach (Genre genre in next.Genres)
                     {
-                        foreach (Genre genre in next.Value.Genres)
+                        if (filter.Contains(genre))
                         {
-                            if (filter.Contains(genre))
-                            {
-                                await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-                                Model.FilteredVideoIds.Add(next.Value.Id);
-                                break;
-                            }
+                            await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
+                            Model.FilteredVideoIds.Add(next.Id);
+                            break;
                         }
                     }
                 }
             }
+
+            //foreach (var next in Model.Videos)
+            //    {
+            //        if (next.Value.Rating >= filterRating)
+            //        {
+            //            foreach (Genre genre in next.Value.Genres)
+            //            {
+            //                if (filter.Contains(genre))
+            //                {
+            //                    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
+            //                    Model.FilteredVideoIds.Add(next.Value.Id);
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         #endregion
@@ -437,12 +481,12 @@
 
             if (showunrated == "true")
             {
-                showUnrated = true;
+                noGenre = true;
                 filter = new List<Genre>();
             }
             else
             {
-                showUnrated = false;
+                noGenre = false;
             }
 
             filterRating = Convert.ToInt32(minRating);

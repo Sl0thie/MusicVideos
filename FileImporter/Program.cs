@@ -119,18 +119,35 @@ namespace FileImporter
                 }
 
                 //If the file exists already then don't add it again.
-                if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension))
+                switch (extension)
                 {
-                    continue;
-                }
-                else
-                {
-                    //Copy the file to new folder.
-                    File.Copy(nextpath, BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                    case ".avi":
+                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + ".mp4"))
+                        {
+                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                            continue;
+                        }
+                        break;
+
+                    case ".mkv":
+                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + ".mp4"))
+                        {
+                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                            continue;
+                        }
+                        break;
+
+                    default:
+                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension))
+                        {
+                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                            continue;
+                        }
+                        break;
                 }
 
-                //Get details from the internet.
-                GetWebDetails(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension,artist, title, extension);
+                //Copy the file to new folder.
+                File.Copy(nextpath, BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
 
                 //Convert avi files.
                 if (extension == ".avi")
@@ -158,17 +175,22 @@ namespace FileImporter
                 ////Make the json file.
                 //GetDetails(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension, artist, title, extension);
 
+                //Get details from the internet.
+                GetWebDetails(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension, artist, title, extension);
+
                 //Write each time due to file errors.
                 string json = JsonConvert.SerializeObject(Videos, Formatting.None);
                 File.WriteAllText(BasePath + "index.json", json);
 
+
                 // Google restricts too many attempts so limit each run.
                 i++;
-                if (i >= 100)
+                if (i >= 1000)
                 {
                     break;
                 }
 
+                Debug.WriteLine(artist + " - " + title);
                 System.Threading.Thread.Sleep(10000);
             }
         }
@@ -275,6 +297,8 @@ namespace FileImporter
                 {
                     case "":
                         break;
+
+                    case "alternative":
                     case "alternative/indie":
                     case "folk":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Alternative))
@@ -291,8 +315,10 @@ namespace FileImporter
                         }
                         break;
 
-
                     case "country":
+                    case "country music":
+                    case "country rock":
+                    case "bluegrass":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Country))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Country);
@@ -310,6 +336,7 @@ namespace FileImporter
                     case "dance/electronic":
                     case "electronic dance music":
                     case "hard trance":
+                    case "trance music":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Dance);
@@ -320,6 +347,18 @@ namespace FileImporter
                         }
                         break;
 
+                    case "dance pop":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Dance);
+                        }
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                        }
+                        break;
+
+
                     case "disco":
                     case "italo disco":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
@@ -328,8 +367,16 @@ namespace FileImporter
                         }
                         break;
 
+                    case "dubstep":
+                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dubstep))
+                        {
+                            nextVideo.Genres.Add(FileImporter.Genre.Dubstep);
+                        }
+                        break;
+
                     case "easy listening":
                     case "ambient":
+                    case "new age":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.EasyListening))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.EasyListening);
@@ -337,6 +384,7 @@ namespace FileImporter
                         break;
 
                     case "electronica":
+                    case "electro":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Electronic);
@@ -365,12 +413,15 @@ namespace FileImporter
                         }
                         break;
 
-
                     case "hip-hop/rap":
                     case "hip hop music":
                     case "urban adult contemporary":
                     case "trap":
+                    case "trap music":
                     case "latin trap":
+                    case "instrumental hip-hop":
+                    case "old school hip-hop":
+                    case "rapper":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.HipHop))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.HipHop);
@@ -395,10 +446,12 @@ namespace FileImporter
                         }
                         break;
 
-
                     case "metal":
                     case "alt metal":
                     case "hair metal":
+                    case "goth/industrial":
+                    case "heavy metal":
+                    case "classic metal":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Metal))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Metal);
@@ -418,6 +471,7 @@ namespace FileImporter
                     case "new wave/post-punk":
                     case "singer-songwriter":
                     case "acoustic":
+                    case "synth-pop":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Pop);
@@ -425,13 +479,12 @@ namespace FileImporter
                         break;
 
                     case "punk":
+                    case "punk rock":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Punk))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Punk);
                         }
                         break;
-
-
 
                     case "reggae":
                     case "dance hall":
@@ -441,13 +494,14 @@ namespace FileImporter
                         }
                         break;
 
-
-
                     case "rhythm and blues":
+                    case "r&b":
                     case "r&b/soul":
                     case "contemporary r&b":
                     case "contemporary soul":
                     case "classic soul":
+                    case "funk":
+                    case "soul music":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.RhythmAndBlues))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.RhythmAndBlues);
@@ -458,6 +512,10 @@ namespace FileImporter
                     case "classic rock":
                     case "hard rock":
                     case "pop rock":
+                    case "psychedelic rock":
+                    case "alternative rock":
+                    case "rock and roll":
+                    case "soft rock":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Rock))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Rock);
@@ -465,6 +523,7 @@ namespace FileImporter
                         break;
 
                     case "ska":
+                    case "ska/rocksteady":
                         if (!nextVideo.Genres.Contains(FileImporter.Genre.Ska))
                         {
                             nextVideo.Genres.Add(FileImporter.Genre.Ska);
