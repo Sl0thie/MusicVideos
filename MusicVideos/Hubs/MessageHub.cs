@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
-    using System.Linq;
 
     /// <summary>
     /// MessageHub provides functions via SignalR.
@@ -17,7 +17,6 @@
 
         private const int IndexMinimum = 0;
         private const int RepeatDelay = -10;
-        //private const int UnratedValue = 0;
         private const int Increment = 1;
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
@@ -27,6 +26,7 @@
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
+        private static string previousLastPlayedString = "";
 
         #endregion
 
@@ -79,20 +79,6 @@
 
             if (showAll)
             {
-                //List<Video> videos = (List<Video>)Model.Videos.Values.ToList().OrderBy(x => x.SearchArtist);
-
-                //foreach (var next in videos)
-                //{
-                //    await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
-                //    Model.FilteredVideoIds.Add(next.Id);
-                //}
-
-                //foreach (var next in Model.Videos)
-                //{
-                //    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-                //    Model.FilteredVideoIds.Add(next.Value.Id);
-                //}
-
                 List<Video> videos = Model.Videos.Values.ToList();
 
                 foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
@@ -113,16 +99,6 @@
                         Model.FilteredVideoIds.Add(next.Id);
                     }
                 }
-
-                //foreach (var next in Model.Videos)
-                //{
-                //    if (next.Value.Rating == UnratedValue)
-                //    {
-                //        await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-                //        Model.FilteredVideoIds.Add(next.Value.Id);
-                //        continue;
-                //    }
-                //}
             }
             else
             {
@@ -142,22 +118,7 @@
                 }
             }
 
-            //foreach (var next in Model.Videos)
-            //    {
-            //        if (next.Value.Rating >= filterRating)
-            //        {
-            //            foreach (Genre genre in next.Value.Genres)
-            //            {
-            //                if (filter.Contains(genre))
-            //                {
-            //                    await Clients.All.SendAsync("SetPlaylistItem", next.Value.Id, next.Value.Artist, next.Value.Title, next.Value.Rating);
-            //                    Model.FilteredVideoIds.Add(next.Value.Id);
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+            // TODO Change orginal source collection to reduce operations.
         }
 
         #endregion
@@ -333,6 +294,31 @@
             }
 
             // Adjust the properties of the next video to be played.
+            DateTime lastPlayed = Model.Videos[nextIndex].LastPlayed;
+            if (lastPlayed == DateTime.MinValue)
+            {
+                previousLastPlayedString = "Never played before";
+            }
+            else
+            {
+                TimeSpan diff = DateTime.Now.Subtract(lastPlayed);
+                int days = (int)diff.TotalDays;
+                switch (days)
+                {
+                    case 0:
+                        previousLastPlayedString = lastPlayed.ToString("d/M/yyyy") + " today";
+                        break;
+
+                    case 1:
+                        previousLastPlayedString = lastPlayed.ToString("d/M/yyyy") + " yesterday";
+                        break;
+
+                    default:
+                        previousLastPlayedString = lastPlayed.ToString("d/M/yyyy") + " " + days + " days ago";
+                        break;
+                }
+            }
+
             Model.Videos[nextIndex].LastPlayed = DateTime.Now;
             Model.Videos[nextIndex].PlayCount++;
             lastSongStart = DateTime.Now;
@@ -407,7 +393,7 @@
         {
             Video video = Model.Videos[Convert.ToInt32(id)];
             string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
-            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, video.LastPlayed.ToString("d/M/yyyy"), video.Rating, video.Released.ToString("yyyy"));
+            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, previousLastPlayedString, video.Rating, video.Released.ToString("yyyy"));
         }
 
         /// <summary>
