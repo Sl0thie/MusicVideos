@@ -13,7 +13,7 @@ namespace MusicVideos
         /// <summary>
         /// Physical path to the directory holding the video files.
         /// </summary>
-        public const string FilesPath = @"E:\More Music Videos";
+        public const string FilesPath = @"E:\Music Videos";
 
         /// <summary>
         /// The virutal path of the directory holding the video files.

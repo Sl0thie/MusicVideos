@@ -13,12 +13,15 @@ namespace FileImporter
 {
     class Program
     {
-        private const string ImportPath = @"E:\New Music Videos\";                     //Path that the files are to be imported from.
-        private const string BasePath = @"E:\More Music Videos\";                      //Base path that the files are stored.
+        private const string ImportPath = @"E:\Music Videos for Import\";                     //Path that the files are to be imported from.
+        private const string BasePath = @"E:\Music Videos\";                      //Base path that the files are stored.
+        private const string ErrorPath = @"E:\Music Videos Errors\";                      //Path that the error files are stored.
         private const string ffmpegpath = "\"C:\\Program Files\\ffmpeg\\bin\"";        //Path to ffmpeg. Enclosed in quotation marks to suit shellex.
         private const string ffmpegpathEx = @"C:\Program Files\ffmpeg\bin";            //Path to ffmpeg. Not enclosed to suit shell.
         private static Dictionary<int, Video> Videos = new Dictionary<int, Video>();   //Dictionary of Video objects related to the files.
         private static int NoOfVideos { get; set; }                                    //No of Videos that are in the store.
+
+        private static DateTime LastWebSearch = DateTime.MinValue;
 
         /// <summary>
         /// FilImporter preforms several tasks related to the management of a file collection of music videos. Files are first converted to formats that can be played by HTML5 Video tag. Files are then stored in a "Artist\Title" format after several properties are obtained. Then the details of these operations are recorded in a json file in the base folder.
@@ -31,7 +34,32 @@ namespace FileImporter
         }
 
         /// <summary>
-        /// Processes files from the import path. The process is additive, it can fail on a file and be restarted again after the file is fixed.
+        /// Log messages to the console and debug.
+        /// </summary>
+        /// <param name="message"></param>
+        private static void Log(string message)
+        {
+            Console.WriteLine(DateTime.Now.ToString("h:mm:ss") + " " + message);
+            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss") + " " + message);
+        }
+
+        /// <summary>
+        /// Move all the files back to the import directory. </br>
+        /// This function is for testing.
+        /// </summary>
+        private static void MoveAllFiles()
+        {
+            foreach (var path in Directory.EnumerateFiles(BasePath, "*.*", SearchOption.AllDirectories))
+            {
+                string filename = path.Substring(path.LastIndexOf(@"\") + 1);
+                Log("Moving File : " + path);
+                File.Move(path, ImportPath + filename);
+            }
+        }
+
+        /// <summary>
+        /// Processes files from the import path.</summary>br>
+        /// The process is additive, it can fail on a file and be restarted again after the file is fixed.
         /// </summary>
         private static void ProcessNewVideos()
         {
@@ -41,187 +69,310 @@ namespace FileImporter
                 string fileContent3 = File.ReadAllText(BasePath + "index.json");
                 Videos = JsonConvert.DeserializeObject<Dictionary<int, Video>>(fileContent3);
                 NoOfVideos = Videos.Count;
-                Console.WriteLine("No of Videos : " + NoOfVideos);
+                Log("No of Videos : " + NoOfVideos);
             }
 
-            int i = 0; //temp. provides early exit from foreach for testing.
-
-            //Loop through the files in the import path.
-            foreach (var nextpath in Directory.EnumerateFiles(ImportPath, "*.*", SearchOption.TopDirectoryOnly))
+            // Convert all videos.
+            foreach (var path in Directory.EnumerateFiles(ImportPath, "*.*", SearchOption.TopDirectoryOnly))
             {
-                //Get file properties.
-                string filename = nextpath.Substring(nextpath.LastIndexOf(@"\") + 1);
+                // Check for the artist/title split pattern.
+                string filename = path.Substring(path.LastIndexOf(@"\") + 1);
                 string extension = filename.Substring(filename.LastIndexOf(".")).ToLower();
                 filename = filename.Substring(0, filename.LastIndexOf("."));
                 if (filename.IndexOf(" - ") < 0)
                 {
-                    Console.WriteLine("File Rejected (name pattern) : " + nextpath);
+                    Log("File Rejected (name pattern) : " + path);
                     continue;
                 }
                 string artist = filename.Substring(0, filename.IndexOf(" - ")).Trim();
                 string title = filename.Substring(filename.IndexOf(" - ") + 3).Trim();
 
-                // Check for youtube id.
-                if(title.Length > 12)
+                Video video = new Video();
+                video.Artist = artist;
+                video.Title = title;
+                video.Extension = extension;
+                video.Path = path;
+                video.LastPlayed = DateTime.MinValue;
+                video.LastQueued = DateTime.MinValue;
+                video.Released = DateTime.MinValue;
+                video.Rating = 50;
+                video.PlayCount = 0;
+                video.PlayTime = 0;
+                video.QueuedCount = 0;
+                if (artist.Length > 4)
                 {
-                    if (title.Substring(title.Length - 12, 1) == "-")
+                    if (artist.Substring(0, 4) == "The ")
                     {
-                        if (title.Substring(title.Length - 1, 1) != " ")
-                        {
-                            Console.WriteLine("Title before : " + title);
-                            title = title.Substring(0, title.Length - 12);
-                            Console.WriteLine("Title after  : " + title);
-                        }
+                        video.SearchArtist = artist.Substring(5);
+                    }
+                    else
+                    {
+                        video.SearchArtist = artist;
                     }
                 }
-
-                // Remove unwanted brackets.
-                title = title.Replace(" (AOL Sessions)", "");
-                title = title.Replace(" (Cover)", "");
-                title = title.Replace(" (Explicit)", "");
-                title = title.Replace(" (Japanese Edition)", "");
-                title = title.Replace(" (MTV Unplugged)", "");
-                title = title.Replace(" (Music Video)", "");
-                title = title.Replace(" [MUSIC VIDEO]", "");
-                title = title.Replace(" (NEW SONG 2017)", "");
-                title = title.Replace(" (New Song 2017)", "");
-                title = title.Replace(" (Official)", "");
-                title = title.Replace(" [Official]", "");
-                title = title.Replace(" [OFFICIAL MUSIC VIDEO]", "");
-                title = title.Replace(" Official Music Video", "");
-                title = title.Replace(" (Official Video)", "");
-                title = title.Replace(" (Official video)", "");
-                title = title.Replace(" [OFFICIAL VIDEO]", "");
-                title = title.Replace(" [Official Video]", "");
-                title = title.Replace(" (OFFICIAL VIDEO)", "");
-                title = title.Replace(" (Official Music Video)", "");
-                title = title.Replace(" [Official Music Video]", "");
-                title = title.Replace(" (OFFICIAL MUSIC VIDEO)", "");
-                title = title.Replace(" (Official Audio)", "");
-                title = title.Replace(" [Official Audio]", "");
-                title = title.Replace(" (Original Motion Picture Soundtrack)", "");
-                title = title.Replace(" [ORIGINAL VIDEO]", "");
-                title = title.Replace(" (Original Version)", "");
-                title = title.Replace(" (Remix)", "");
-                title = title.Replace(" (US Version)", "");
-                title = title.Replace(" (Video)", "");
-                title = title.Replace(" (Vídeo Oficial)", "");
-                title = title.Replace(" (Video Version)", "");
-
-                //Create new folder for file.
-                if (!Directory.Exists(BasePath + artist))
+                else
                 {
-                    Directory.CreateDirectory(BasePath + artist);
-                }
-                if (!Directory.Exists(BasePath + artist + @"\" + title))
-                {
-                    Directory.CreateDirectory(BasePath + artist + @"\" + title);
+                    video.SearchArtist = artist;
                 }
 
-                //If the file exists already then don't add it again.
+
+                //Convert file if needed.
                 switch (extension)
                 {
                     case ".avi":
-                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + ".mp4"))
-                        {
-                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
-                            continue;
-                        }
-                        break;
-
+                    case ".AVI":
+                        Log("File Rejected (needs conversion) : " + path);
+                        continue;
                     case ".mkv":
-                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + ".mp4"))
+                    case ".MKV":
+                        //Log("File Rejected (needs conversion) : " + path);
+                        if (!ConvertMKVtoMP4(video))
                         {
-                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                            Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
+                            MoveFileToErrorFolder(video);
                             continue;
                         }
                         break;
-
+                    case ".mp4":
+                    case ".MP4":
+                        break;
+                    case ".webm":
+                    case ".WEBM":
+                        break;
                     default:
-                        if (File.Exists(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension))
-                        {
-                            Debug.WriteLine("File already exists : " + BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
-                            continue;
-                        }
-                        break;
+                        Log("File Rejected (unknown extension) : " + path);
+                        continue;
                 }
 
-                //Copy the file to new folder.
-                File.Copy(nextpath, BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
-
-                //Convert avi files.
-                if (extension == ".avi")
+                if (!CheckVideoTitle(video))
                 {
-                    ConvertAVItoMP4(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
-                    extension = ".mp4";
+                    Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
+                    MoveFileToErrorFolder(video);
+                    continue;
                 }
 
-                //Convert mp4 files.
-                if (extension == ".mkv")
+                if (!CheckIfFileExistInCollection(video))
                 {
-                    ConvertMKVtoMP4(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
-                    extension = ".mp4";
+                    continue;
                 }
 
-                ////Make the thumbnail.
-                //MakeThumbnail(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                if (!GetDetailFromWeb(video))
+                {
+                    Log("GetDetailFromWeb failed : " + video.Artist + " - " + video.Title);
+                    MoveFileToErrorFolder(video);
+                    continue;
+                }
 
-                ////Make the first waveform.
-                //MakeWaveForm1(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                if (!MoveToFolder(video))
+                {
+                    Log("MoveToFolder failed : " + video.Artist + " - " + video.Title);
+                    MoveFileToErrorFolder(video);
+                    continue;
+                }
 
-                ////Make the second waveform.
-                //MakeWaveForm2(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension);
+                video.Id = ++NoOfVideos;
+                // Add new video to collection.
+                Videos.Add(video.Id, video);
 
-                ////Make the json file.
-                //GetDetails(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension, artist, title, extension);
-
-                //Get details from the internet.
-                GetWebDetails(BasePath + artist + @"\" + title + @"\" + artist + " - " + title + extension, artist, title, extension);
-
-                //Write each time due to file errors.
+                // Write each time due to file errors.
                 string json = JsonConvert.SerializeObject(Videos, Formatting.None);
                 File.WriteAllText(BasePath + "index.json", json);
 
-
-                // Google restricts too many attempts so limit each run.
-                i++;
-                if (i >= 1000)
-                {
-                    break;
-                }
-
-                Debug.WriteLine(artist + " - " + title);
-                System.Threading.Thread.Sleep(10000);
+                Log("Video Added : " + video.Artist + " - " + video.Title);
             }
         }
 
-        private static void GetWebDetails(string filepath, string artist, string title, string extension)
+        /// <summary>
+        /// Moves the file to the error directory.
+        /// </summary>
+        /// <param name="video"></param>
+        private static void MoveFileToErrorFolder(Video video)
         {
-            //https://www.bing.com/search?q=acdc+-+back+in+black&form=ANNTH1&refig=d640f4cdf1b74a6b9328c9bdb3c6ad1a
+            //Move the file to new folder.
+            if (File.Exists(ErrorPath + video.Artist + " - " + video.Title + video.Extension))
+            {
+                File.Delete(ImportPath + video.Artist + " - " + video.Title + video.Extension);
+            }
+            else
+            {
+                File.Move(ImportPath + video.Artist + " - " + video.Title + video.Extension, ErrorPath + video.Artist + " - " + video.Title + video.Extension);
+            }
+        }
+
+        /// <summary>
+        /// Removes unwanted text from the video title.
+        /// </summary>
+        /// <param name="video"></param>
+        /// <returns></returns>
+        private static bool CheckVideoTitle(Video video)
+        {
+            // Check for youtube id.
+            if (video.Title.Length > 12)
+            {
+                if (video.Title.Substring(video.Title.Length - 12, 1) == "-")
+                {
+                    if (video.Title.Substring(video.Title.Length - 1, 1) != " ")
+                    {
+                        //Log("Title before : " + video.Title);
+                        video.Title = video.Title.Substring(0, video.Title.Length - 12);
+                        //Log("Title after  : " + video.Title);
+                    }
+                }
+            }
+
+            // Remove unwanted brackets.
+            video.Title = video.Title.Replace(" (AOL Sessions)", "");
+            video.Title = video.Title.Replace(" (Cover)", "");
+            video.Title = video.Title.Replace(" (Explicit)", "");
+            video.Title = video.Title.Replace(" (Japanese Edition)", "");
+            video.Title = video.Title.Replace(" (MTV Unplugged)", "");
+            video.Title = video.Title.Replace(" (music video)", "");
+            video.Title = video.Title.Replace(" (Music Video)", "");
+            video.Title = video.Title.Replace(" [MUSIC VIDEO]", "");
+            video.Title = video.Title.Replace(" (NEW SONG 2017)", "");
+            video.Title = video.Title.Replace(" (New Song 2017)", "");
+            video.Title = video.Title.Replace(" (Official)", "");
+            video.Title = video.Title.Replace(" [Official]", "");
+            video.Title = video.Title.Replace(" (Official HD Video)", "");
+            video.Title = video.Title.Replace(" [OFFICIAL MUSIC VIDEO]", "");
+            video.Title = video.Title.Replace(" Official Music Video", "");
+            video.Title = video.Title.Replace(" (Official Music Video)", "");
+            video.Title = video.Title.Replace(" [Official Music Video]", "");
+            video.Title = video.Title.Replace(" (OFFICIAL MUSIC VIDEO)", "");
+            video.Title = video.Title.Replace(" (Official Audio)", "");
+            video.Title = video.Title.Replace(" [Official Audio]", "");
+            video.Title = video.Title.Replace(" (Official Video)", "");
+            video.Title = video.Title.Replace(" (Official video)", "");
+            video.Title = video.Title.Replace(" [OFFICIAL VIDEO]", "");
+            video.Title = video.Title.Replace(" [Official Video]", "");
+            video.Title = video.Title.Replace(" (OFFICIAL VIDEO)", "");
+            video.Title = video.Title.Replace(" (Original Motion Picture Soundtrack)", "");
+            video.Title = video.Title.Replace(" [ORIGINAL VIDEO]", "");
+            video.Title = video.Title.Replace(" (Original Version)", "");
+            video.Title = video.Title.Replace(" (Remix)", "");
+            video.Title = video.Title.Replace(" (US Version)", "");
+            video.Title = video.Title.Replace(" (Video)", "");
+            video.Title = video.Title.Replace(" [Video]", "");
+            video.Title = video.Title.Replace(" (Vídeo Oficial)", "");
+            video.Title = video.Title.Replace(" (Video Version)", "");
+            video.Title = video.Title.Trim();
+
+            string newPath = ImportPath + video.Artist + " - " + video.Title + video.Extension;
+
+            if (newPath != video.Path)
+            {
+                if (File.Exists(newPath))
+                {
+                    Log("Cannot move file, destination already exists:");
+                    Log("old path : " + video.Path);
+                    Log("new path : " + newPath);
+                    video.Path = newPath;
+                    return false;
+                }
+                else
+                {
+                    Log("Renaming File:");
+                    Log("Old Path : " + video.Path);
+                    Log("New Path : " + newPath);
+                    File.Move(video.Path, newPath);
+                    video.Path = newPath;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if the video file already exists.
+        /// </summary>
+        /// <param name="video"></param>
+        /// <returns></returns>
+        private static bool CheckIfFileExistInCollection(Video video)
+        {
+            // Check if the file exists.
+            if (File.Exists(BasePath + video.Artist + @"\" + video.Title + @"\" + video.Artist + " - " + video.Title + video.Extension))
+            {
+                Log("File already exists : " + BasePath + video.Artist + @"\" + video.Title + @"\" + video.Artist + " - " + video.Title + video.Extension);
+                File.Delete(video.Path);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Move the video file to the Artist\Title folder.
+        /// </summary>
+        /// <param name="video"></param>
+        /// <returns></returns>
+        private static bool MoveToFolder(Video video)
+        {
+            //Create new folder for file.
+            if (!Directory.Exists(BasePath + video.Artist))
+            {
+                Directory.CreateDirectory(BasePath + video.Artist);
+            }
+            if (!Directory.Exists(BasePath + video.Artist + @"\" + video.Title))
+            {
+                Directory.CreateDirectory(BasePath + video.Artist + @"\" + video.Title);
+            } 
+
+            //Move the file to new folder.
+            File.Move(ImportPath + video.Artist + " - " + video.Title + video.Extension, BasePath + video.Artist + @"\" + video.Title + @"\" + video.Artist + " - " + video.Title + video.Extension);
+            video.Path = BasePath + video.Artist + @"\" + video.Title + @"\" + video.Artist + " - " + video.Title + video.Extension;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Get the video details from the internet.
+        /// </summary>
+        /// <param name="video"></param>
+        /// <returns></returns>
+        private static bool GetDetailFromWeb(Video video)
+        {
+            while (LastWebSearch.AddSeconds(10) > DateTime.Now)
+            {
+                System.Threading.Thread.Sleep(1000);
+            }
+
+            LastWebSearch = DateTime.Now;
+
             WebClient client = new WebClient();
-            //client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.51");
             client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.50");
-            string searchterm = "https://www.google.com.au/search?q=" + artist.Replace(" ", "+") + "+-+" + title.Replace(" ", "+");
-            string htmlString = client.DownloadString(searchterm);
+            string searchterm = GetSearchEngineString(video.Artist + " - " + video.Title, SearchEngine.GoogleAU);
 
-            //Output file details.
-            Console.WriteLine("filepath = " + filepath);
-            Console.WriteLine("extension = " + extension);
-            Console.WriteLine("artist = " + artist);
-            Console.WriteLine("title = " + title);
-            Console.WriteLine("SearchTerm: " + searchterm);
-
+            string htmlString = "";
             string Artist = "";
+            string Album = "";
+            string Released = "";
+            string Genre = "";
+
+            try
+            {
+                htmlString = client.DownloadString(searchterm);
+            }
+            catch(Exception ex)
+            {
+                Log(ex.Message);
+                return false;
+            }
+
             if (htmlString.IndexOf(">Artist</") > 0)
             {
                 Artist = htmlString.Substring(htmlString.IndexOf(">Artist</"));
                 Artist = Artist.Substring(Artist.IndexOf("<a"));
                 Artist = Artist.Substring(Artist.IndexOf(">") + 1);
-                Artist = Artist.Substring(0,Artist.IndexOf("<"));
+                Artist = Artist.Substring(0, Artist.IndexOf("<"));
             }
-            Console.WriteLine("Artist : " + Artist);
+            int dist = GetDamerauLevenshteinDistance(Artist, video.Artist);
+            if(dist > 0)
+            {
+                Log("searchterm : " + searchterm);
+                Log("LevenshteinDistance fail " + dist + " video artist : " + video.Artist + " web artist : " + Artist);
+                return false;
+            }
 
-            string Album = "";
             if (htmlString.IndexOf(">Album</") > 0)
             {
                 Album = htmlString.Substring(htmlString.IndexOf(">Album</"));
@@ -229,9 +380,8 @@ namespace FileImporter
                 Album = Album.Substring(Album.IndexOf(">") + 1);
                 Album = Album.Substring(0, Album.IndexOf("<"));
             }
-            Console.WriteLine("Album : " + Album);
+            video.Album = Album;
 
-            string Released = "";
             if (htmlString.IndexOf(">Released</") > 0)
             {
                 Released = htmlString.Substring(htmlString.IndexOf(">Released</"));
@@ -239,42 +389,28 @@ namespace FileImporter
                 Released = Released.Substring(0, Released.IndexOf("</div>") - 6);
                 Released = Detag(Released);
             }
-            Console.WriteLine("Released : " + Released);
+            if (Released.Length == 4)
+            {
+                video.Released = new DateTime(Convert.ToInt32(Released), 1, 1, 0, 0, 0, DateTimeKind.Local);
+            }
+            else
+            {
+                try
+                {
+                    video.Released = DateTime.Parse(Released);
+                }
+                catch (Exception ex) 
+                {
+                    Log(ex.Message + " released : " + Released);
+                }
+            }
 
-            string Genre = "";
             if (htmlString.IndexOf(">Genre</") > 0)
             {
                 Genre = htmlString.Substring(htmlString.IndexOf(">Genre</"));
                 Genre = Genre.Substring(Genre.IndexOf(":"));
-                Genre = Genre.Substring(0,Genre.IndexOf("</div>"));
+                Genre = Genre.Substring(0, Genre.IndexOf("</div>"));
                 Genre = Detag(Genre);
-            }
-            Console.WriteLine("Genre : " + Genre );
-            //Debug.WriteLine("Genre : " + Genre);
-            Console.WriteLine("");
-
-            Video nextVideo = new Video
-            {
-                Id = ++NoOfVideos,
-                Artist = artist,
-                SearchArtist = artist.Replace("The ", string.Empty),
-                Extension = extension,
-                Duration = 0,
-                Path = filepath,
-                Title = title,
-                VideoBitRate = 0,
-                //Genres = GenreList,
-                VideoWidth = 0,
-                VideoHeight = 0,
-                VideoFPS = 0,
-                PlayCount = 0,
-                QueuedCount = 0,
-                Rating = 50
-            };
-
-            if(Released.Length == 4)
-            {
-                nextVideo.Released = new DateTime(Convert.ToInt32(Released), 1, 1, 0, 0, 0, DateTimeKind.Local);
             }
 
             if (Genre.Length > 10)
@@ -287,8 +423,7 @@ namespace FileImporter
 
             Genre = Genre.ToLower();
             Genre = Genre.Replace("&amp;", "&");
-            Genre = Genre.Replace(";",",");
-            Collection<Genre> GenreList = new Collection<Genre>();
+            Genre = Genre.Replace(";", ",");
             string[] GenreArray = Genre.Split(',');
             foreach (string gen in GenreArray)
             {
@@ -301,17 +436,17 @@ namespace FileImporter
                     case "alternative":
                     case "alternative/indie":
                     case "folk":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Alternative))
+                        if (!video.Genres.Contains(FileImporter.Genre.Alternative))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Alternative);
+                            video.Genres.Add(FileImporter.Genre.Alternative);
                         }
                         break;
 
                     case "blues":
                     case "blues rock":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Blues))
+                        if (!video.Genres.Contains(FileImporter.Genre.Blues))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Blues);
+                            video.Genres.Add(FileImporter.Genre.Blues);
                         }
                         break;
 
@@ -319,17 +454,17 @@ namespace FileImporter
                     case "country music":
                     case "country rock":
                     case "bluegrass":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Country))
+                        if (!video.Genres.Contains(FileImporter.Genre.Country))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Country);
+                            video.Genres.Add(FileImporter.Genre.Country);
                         }
                         break;
 
                     case "dance":
                     case "dance music":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
+                        if (!video.Genres.Contains(FileImporter.Genre.Dance))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Dance);
+                            video.Genres.Add(FileImporter.Genre.Dance);
                         }
                         break;
 
@@ -337,79 +472,78 @@ namespace FileImporter
                     case "electronic dance music":
                     case "hard trance":
                     case "trance music":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
+                        if (!video.Genres.Contains(FileImporter.Genre.Dance))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Dance);
+                            video.Genres.Add(FileImporter.Genre.Dance);
                         }
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
+                        if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Electronic);
+                            video.Genres.Add(FileImporter.Genre.Electronic);
                         }
                         break;
 
                     case "dance pop":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dance))
+                        if (!video.Genres.Contains(FileImporter.Genre.Dance))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Dance);
+                            video.Genres.Add(FileImporter.Genre.Dance);
                         }
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        if (!video.Genres.Contains(FileImporter.Genre.Pop))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                            video.Genres.Add(FileImporter.Genre.Pop);
                         }
                         break;
 
-
                     case "disco":
                     case "italo disco":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        if (!video.Genres.Contains(FileImporter.Genre.Pop))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                            video.Genres.Add(FileImporter.Genre.Pop);
                         }
                         break;
 
                     case "dubstep":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Dubstep))
+                        if (!video.Genres.Contains(FileImporter.Genre.Dubstep))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Dubstep);
+                            video.Genres.Add(FileImporter.Genre.Dubstep);
                         }
                         break;
 
                     case "easy listening":
                     case "ambient":
                     case "new age":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.EasyListening))
+                        if (!video.Genres.Contains(FileImporter.Genre.EasyListening))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.EasyListening);
+                            video.Genres.Add(FileImporter.Genre.EasyListening);
                         }
                         break;
 
                     case "electronica":
                     case "electro":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
+                        if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Electronic);
+                            video.Genres.Add(FileImporter.Genre.Electronic);
                         }
                         break;
 
                     case "electro house":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.House))
+                        if (!video.Genres.Contains(FileImporter.Genre.House))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.House);
+                            video.Genres.Add(FileImporter.Genre.House);
                         }
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
+                        if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Electronic);
+                            video.Genres.Add(FileImporter.Genre.Electronic);
                         }
                         break;
 
                     case "electropop":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        if (!video.Genres.Contains(FileImporter.Genre.Pop))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                            video.Genres.Add(FileImporter.Genre.Pop);
                         }
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Electronic))
+                        if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Electronic);
+                            video.Genres.Add(FileImporter.Genre.Electronic);
                         }
                         break;
 
@@ -422,9 +556,9 @@ namespace FileImporter
                     case "instrumental hip-hop":
                     case "old school hip-hop":
                     case "rapper":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.HipHop))
+                        if (!video.Genres.Contains(FileImporter.Genre.HipHop))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.HipHop);
+                            video.Genres.Add(FileImporter.Genre.HipHop);
                         }
                         break;
 
@@ -433,16 +567,16 @@ namespace FileImporter
                     case "deep house":
                     case "big room house":
                     case "uk garage":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.House))
+                        if (!video.Genres.Contains(FileImporter.Genre.House))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.House);
+                            video.Genres.Add(FileImporter.Genre.House);
                         }
                         break;
 
                     case "jazz":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Jazz))
+                        if (!video.Genres.Contains(FileImporter.Genre.Jazz))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Jazz);
+                            video.Genres.Add(FileImporter.Genre.Jazz);
                         }
                         break;
 
@@ -452,9 +586,9 @@ namespace FileImporter
                     case "goth/industrial":
                     case "heavy metal":
                     case "classic metal":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Metal))
+                        if (!video.Genres.Contains(FileImporter.Genre.Metal))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Metal);
+                            video.Genres.Add(FileImporter.Genre.Metal);
                         }
                         break;
 
@@ -472,25 +606,25 @@ namespace FileImporter
                     case "singer-songwriter":
                     case "acoustic":
                     case "synth-pop":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Pop))
+                        if (!video.Genres.Contains(FileImporter.Genre.Pop))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Pop);
+                            video.Genres.Add(FileImporter.Genre.Pop);
                         }
                         break;
 
                     case "punk":
                     case "punk rock":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Punk))
+                        if (!video.Genres.Contains(FileImporter.Genre.Punk))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Punk);
+                            video.Genres.Add(FileImporter.Genre.Punk);
                         }
                         break;
 
                     case "reggae":
                     case "dance hall":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Reggae))
+                        if (!video.Genres.Contains(FileImporter.Genre.Reggae))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Reggae);
+                            video.Genres.Add(FileImporter.Genre.Reggae);
                         }
                         break;
 
@@ -502,9 +636,9 @@ namespace FileImporter
                     case "classic soul":
                     case "funk":
                     case "soul music":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.RhythmAndBlues))
+                        if (!video.Genres.Contains(FileImporter.Genre.RhythmAndBlues))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.RhythmAndBlues);
+                            video.Genres.Add(FileImporter.Genre.RhythmAndBlues);
                         }
                         break;
 
@@ -516,38 +650,41 @@ namespace FileImporter
                     case "alternative rock":
                     case "rock and roll":
                     case "soft rock":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Rock))
+                        if (!video.Genres.Contains(FileImporter.Genre.Rock))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Rock);
+                            video.Genres.Add(FileImporter.Genre.Rock);
                         }
                         break;
 
                     case "ska":
                     case "ska/rocksteady":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Ska))
+                        if (!video.Genres.Contains(FileImporter.Genre.Ska))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Ska);
+                            video.Genres.Add(FileImporter.Genre.Ska);
                         }
                         break;
 
                     case "techno":
-                        if (!nextVideo.Genres.Contains(FileImporter.Genre.Techno))
+                        if (!video.Genres.Contains(FileImporter.Genre.Techno))
                         {
-                            nextVideo.Genres.Add(FileImporter.Genre.Techno);
+                            video.Genres.Add(FileImporter.Genre.Techno);
                         }
                         break;
 
-
-
                     default:
-                        Debug.WriteLine("Unknown Genre: " + next);
+                        Log("Unknown Genre: " + next);
                         break;
                 }
             }
-            
-            Videos.Add(nextVideo.Id, nextVideo);
+
+            return true;
         }
 
+        /// <summary>
+        /// Removes HTML tags for the input string.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private static string Detag(string input)
         {
             string output = "";
@@ -573,6 +710,44 @@ namespace FileImporter
             }
 
             return output.Trim();
+        }
+
+        /// <summary>
+        /// The Damerau–Levenshtein distance differs from the classical Levenshtein distance by including transpositions among its allowable operations. The classical Levenshtein distance only allows insertion, deletion, and substitution operations.Modifying this distance by including transpositions of adjacent symbols produces a different distance measure, known as the Damerau–Levenshtein distance.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static int GetDamerauLevenshteinDistance(string s, string t)
+        {
+            var bounds = new { Height = s.Length + 1, Width = t.Length + 1 };
+
+            int[,] matrix = new int[bounds.Height, bounds.Width];
+
+            for (int height = 0; height < bounds.Height; height++) { matrix[height, 0] = height; };
+            for (int width = 0; width < bounds.Width; width++) { matrix[0, width] = width; };
+
+            for (int height = 1; height < bounds.Height; height++)
+            {
+                for (int width = 1; width < bounds.Width; width++)
+                {
+                    int cost = (s[height - 1] == t[width - 1]) ? 0 : 1;
+                    int insertion = matrix[height, width - 1] + 1;
+                    int deletion = matrix[height - 1, width] + 1;
+                    int substitution = matrix[height - 1, width - 1] + cost;
+
+                    int distance = Math.Min(insertion, Math.Min(deletion, substitution));
+
+                    if (height > 1 && width > 1 && s[height - 1] == t[width - 2] && s[height - 2] == t[width - 1])
+                    {
+                        distance = Math.Min(distance, matrix[height - 2, width - 2] + cost);
+                    }
+
+                    matrix[height, width] = distance;
+                }
+            }
+
+            return matrix[bounds.Height - 1, bounds.Width - 1];
         }
 
         /// <summary>
@@ -604,7 +779,7 @@ namespace FileImporter
                 p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
-                    Console.WriteLine("MakeThumbnail Failed for " + filepath);
+                    Log("MakeThumbnail Failed for " + filepath);
                 }
             }
         }
@@ -637,7 +812,7 @@ namespace FileImporter
                 p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
-                    Console.WriteLine("MakeWaveForm1 Failed for " + filepath);
+                    Log("MakeWaveForm1 Failed for " + filepath);
                 }
             }
         }
@@ -670,7 +845,7 @@ namespace FileImporter
                 p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
-                    Console.WriteLine("MakeWaveForm2 Failed for " + filepath);
+                    Log("MakeWaveForm2 Failed for " + filepath);
                 }
             }
         }
@@ -679,23 +854,47 @@ namespace FileImporter
         /// Converts the file from MKV to MP4.
         /// </summary>
         /// <param name="filepath">Path to the file.</param>
-        private static void ConvertMKVtoMP4(string filepath)
+        private static bool ConvertMKVtoMP4(Video video)
         {
-            string closedpath = "\"" + filepath + "\"";
-            string newpath = filepath.Substring(0, filepath.LastIndexOf("."));
+            string closedpath = "\"" + video.Path + "\"";
+            string newpath = video.Path.Substring(0, video.Path.LastIndexOf("."));
+            string newpathStriped = newpath + ".mp4";
             newpath = "\"" + newpath + ".mp4\"";
             string arguments = "-i " + closedpath + " -vcodec copy -acodec aac " + newpath;
+
+            Log("Converting MKV");
+            Log("closedpath " + closedpath);
+            Log("newpath " + newpath);
+
             var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = false,
                 UseShellExecute = true,
                 RedirectStandardError = false,
                 RedirectStandardOutput = false,
-                WorkingDirectory = ffmpegpath
+                WorkingDirectory = ffmpegpathEx
             };
             Process p = Process.Start(processInfo);
             p.WaitForExit();
-            File.Delete(filepath);
+
+            if (File.Exists(newpathStriped))
+            {
+                FileInfo newFile = new FileInfo(newpathStriped);
+                if (newFile.Length > 1000)
+                {
+                    Log("Mkv Conversion successful : " + newpathStriped);
+                    File.Delete(video.Path);
+                    video.Path = newpathStriped;
+                    return true;
+                }
+            }
+            else
+            {
+                Log("File does not exist.");
+            }
+
+            Log("Mkv Conversion failed : " + newpath);
+            return false;
         }
 
         /// <summary>
@@ -708,6 +907,11 @@ namespace FileImporter
             string newpath = filepath.Substring(0, filepath.LastIndexOf("."));
             newpath = "\"" + newpath + ".mp4\"";
             string arguments = "-i " + closedpath + " -c:a aac -b:a 128k -c:v libx264 -crf 23 " + newpath;
+
+            Log("Converting AVI");
+            Log("closedpath " + closedpath);
+            Log("newpath " + newpath);
+
             var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = false,
@@ -720,5 +924,78 @@ namespace FileImporter
             p.WaitForExit();
             File.Delete(filepath);
         }
+
+        /// <summary>
+        /// Get a string to be used as to search a search engine.
+        /// </summary>
+        /// <param name="searchTerm">The term to search for.</param>
+        /// <param name="engine">The search engine to use.</param>
+        /// <returns></returns>
+        public static string GetSearchEngineString(string searchTerm, SearchEngine engine)
+        {
+            string returnValue = "";
+
+            //General replacement.
+            returnValue = searchTerm.Replace("+", "%2B"); // For query only otherwise use %20.
+            returnValue = searchTerm.Replace(" ", "+");
+            returnValue = searchTerm.Replace("%", "%25");
+            returnValue = searchTerm.Replace(",", "u%2C");
+            returnValue = searchTerm.Replace("&", "%26");
+            returnValue = searchTerm.Replace("!", "%21");
+            returnValue = searchTerm.Replace("@", "%40");
+            returnValue = searchTerm.Replace("#", "%23");
+            returnValue = searchTerm.Replace("$", "%24");
+            returnValue = searchTerm.Replace("^", "%5E");
+            returnValue = searchTerm.Replace("(", "%28");
+            returnValue = searchTerm.Replace(")", "%29");
+            returnValue = searchTerm.Replace("=", "%3D");
+            returnValue = searchTerm.Replace("`", "%60");
+            returnValue = searchTerm.Replace("{", "%7B");
+            returnValue = searchTerm.Replace("}", "%7D");
+            returnValue = searchTerm.Replace("[", "%5B");
+            returnValue = searchTerm.Replace("]", "%5D");
+            returnValue = searchTerm.Replace("|", "%7C");
+            returnValue = searchTerm.Replace("\\", "%5C");
+            returnValue = searchTerm.Replace(":", "%3A");
+            returnValue = searchTerm.Replace(";", "%3B");
+            returnValue = searchTerm.Replace("'", "%27");
+            returnValue = searchTerm.Replace("?", "%3F");
+            returnValue = searchTerm.Replace("/", "%2F");
+
+            //Engine spacific replacement.
+            switch (engine)
+            {
+                case SearchEngine.Bing:
+                    returnValue = "https://www.bing.com/search?q=" + returnValue;
+                    break;
+
+                case SearchEngine.DuckDuckGo:
+                    returnValue = "https://duckduckgo.com/?q=" + returnValue;
+                    break;
+
+                case SearchEngine.Google:
+                    returnValue = "https://www.google.com/search?q=" + returnValue;
+                    break;
+
+                case SearchEngine.GoogleAU:
+                    returnValue = "https://www.google.com.au/search?q=" + returnValue;
+                    break;
+
+                case SearchEngine.WikiPedia:
+                    returnValue = "https://en.wikipedia.org/w/index.php?search=" + returnValue;
+                    break;
+            }
+
+            return returnValue;
+        }
+    }
+
+    public enum SearchEngine
+    {
+        Bing,
+        DuckDuckGo,
+        Google,
+        GoogleAU,
+        WikiPedia,
     }
 }
