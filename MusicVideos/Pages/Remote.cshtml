@@ -55,23 +55,32 @@
     </div>
 
     <div id="buttonHolderBottom">
-        <div class="buttonFrameBottom" id="buttonFrameVolume">
-            <div id="buttonVolume" class="buttonBottom" onclick="buttonVolume()">
-                <img id="volumeImage" src="/images/volumeMute.png" height="32" style="margin-top:3px;" />
-            </div>
-        </div>
+
         <div class="buttonFrameBottom" id="buttonFramePlaylist">
             <div id="buttonPlaylist" class="buttonBottom" onclick="buttonPlaylist()">
                 <img src="/images/mediaDetails2.png" height="32" style="margin-top:3px;" />
             </div>
         </div>
+
+        <div class="buttonFrameBottom" id="buttonFrameVolume">
+            <div id="buttonVolume" class="buttonBottom" onclick="buttonVolume()">
+                <img id="volumeImage" src="/images/volumeMute.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+
+        <div class="buttonFrameBottom" id="buttonFrameSettings">
+            <div id="buttonVolume" class="buttonBottom" onclick="buttonSettings()">
+                <img id="volumeImage" src="/images/volumeMute.png" height="32" style="margin-top:3px;" />
+            </div>
+        </div>
+
         <div class="buttonFrameBottom" id="buttonFrameFilter">
             <div id="buttonFilter" class="buttonBottom" onclick="buttonFilter()">
                 <img src="/images/playlistFilter.png" height="32" style="margin-top:3px;" />
             </div>
         </div>
         <div class="buttonFrameBottom" id="buttonFrameQueue">
-            <div id="buttonQueue" class="buttonBottom"  onclick="buttonQueuelist()">
+            <div id="buttonQueue" class="buttonBottom" onclick="buttonQueuelist()">
                 <img src="/images/mediaDetails3.png" height="32" style="margin-top:3px;" />
             </div>
         </div>
@@ -86,6 +95,17 @@
                 <h1 id="volumeValue">100</h1>
             </div>
             <input id="sliderVolume" type="range" min="0" max="100" value="100" step="1" onchange="updateVolume(this.value)" orient="vertical" />
+        </div>
+    </div>
+
+    <div id="popupSettings">
+        <div id="popupSettingsFrame">
+        </div>
+        <div class="popup" id="formsettings">
+            <div>
+                <h1>Settings</h1>
+            </div>
+
         </div>
     </div>
 

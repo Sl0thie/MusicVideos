@@ -375,25 +375,31 @@ input[type=range][orient=horizontal] {
 #buttonFramePlaylist {
     left: 0px;
     top: 0px;
-    width: 124px;
+    width: 74px;
 }
 
 #buttonFrameVolume {
-    left: 135px;
+    left: 81px;
     top: 0px;
-    width:60px;
+    width:74px;
+}
+
+#buttonFrameVolume {
+    left: 162px;
+    top: 0px;
+    width: 74px;
 }
 
 #buttonFrameFilter {
-    left: 205px;
+    left: 243px;
     top: 0px;
-    width: 60px;
+    width: 74px;
 }
 
 #buttonFrameQueue {
-    left: 276px;
+    left: 324px;
     top: 0px;
-    width: 124px;
+    width: 74px;
 }
 
 /*#endregion */
@@ -425,6 +431,60 @@ input[type=range][orient=horizontal] {
     border-radius: 10px;
     padding-top: 26px;
     text-align: center;
+}
+
+/*#endregion */
+/*#region Popup Settings */
+
+#popupSettings {
+    position: fixed;
+    display: none;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#popupSettingsFrame {
+    position: absolute;
+    background-color: #222222;
+    z-index: 11;
+    left: 5px;
+    top: 115px;
+    width: 402px;
+    height: 702px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left-color: #555555;
+    border-top-color: #555555;
+    border-right-color: #999999;
+    border-bottom-color: #999999;
+    border-style: solid;
+    border-width: 10px;
+    border-radius: 12px;
+}
+
+#formSettings {
+    position: absolute;
+    background-color: #222222;
+    z-index: 12;
+    left: 6px;
+    top: 116px;
+    width: 400px;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: #646464;
+    border-left-color: #333333;
+    border-top-color: #333333;
+    border-right-color: #666666;
+    border-bottom-color: #666666;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 /*#endregion */

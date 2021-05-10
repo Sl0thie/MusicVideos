@@ -59,7 +59,7 @@ namespace MusicVideos
         public static void LoadVideos()
         {
             // Create RatingHistogram.
-            for (int i = 0; i < 100;i++)
+            for (int i = 0; i < 101; i++)
             {
                 ratingHistogram.Add(i, 0);
             }
@@ -71,11 +71,6 @@ namespace MusicVideos
             {
                 FilteredVideoIds.Add(next.Id);
                 ratingHistogram[next.Rating]++;
-            }
-
-            for (int i = 1; i < 101; i++)
-            {
-                Debug.WriteLine(i + " " + ratingHistogram[i]);
             }
         }
 
