@@ -103,7 +103,7 @@ namespace FileImporter
                 {
                     if (artist.Substring(0, 4) == "The ")
                     {
-                        video.SearchArtist = artist.Substring(5);
+                        video.SearchArtist = artist.Substring(4);
                     }
                     else
                     {

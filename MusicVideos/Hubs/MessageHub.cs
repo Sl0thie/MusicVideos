@@ -18,6 +18,8 @@
         private const int IndexMinimum = 0;
         private const int RepeatDelay = -10;
         private const int Increment = 1;
+        private const int RatingIncrementQueued = 10;
+
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
         private static int filterRating;
@@ -76,12 +78,12 @@
         {
             await Clients.All.SendAsync("ClearPlaylist");
             Model.FilteredVideoIds.Clear();
-
+            
             if (showAll)
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
                     Model.FilteredVideoIds.Add(next.Id);
@@ -91,7 +93,7 @@
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     if (next.Genres.Count == 0)
                     {
@@ -104,7 +106,7 @@
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     foreach (Genre genre in next.Genres)
                     {
@@ -154,6 +156,10 @@
             {
                 Model.QueuedVideoIds.Add(id);
                 Model.Videos[id].QueuedCount++;
+
+                Model.Videos[id].Rating = Model.Videos[id].Rating + RatingIncrementQueued;
+                if (Model.Videos[id].Rating >= 100) { Model.Videos[id].Rating = 100; }
+
                 Model.Videos[id].LastQueued = DateTime.Now;
                 if (isRandom)
                 {
