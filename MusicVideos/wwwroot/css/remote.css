@@ -324,11 +324,7 @@ input[type=range][orient=horizontal] {
     left: 6px;
     top: 771px;
     width: 400px;
-    /*min-width: 400px;
-    max-width: 400px;*/
     height: 48px;
-    /*min-height: 42px;
-    max-height: 42px;*/
 }
 
 .buttonFrameBottom {
@@ -347,8 +343,6 @@ input[type=range][orient=horizontal] {
 }
 
 .buttonFrameInnerBottom {
-    /*position: absolute;
-    display: inline;*/
     z-index: 2;
     background-color: #222222;
     border: solid;
