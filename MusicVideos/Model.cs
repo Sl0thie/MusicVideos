@@ -14,7 +14,7 @@ namespace MusicVideos
         /// <summary>
         /// Physical path to the directory holding the video files.
         /// </summary>
-        public const string FilesPath = @"E:\Music Videos";
+        public const string FilesPath = @"F:\Music Videos";
 
         /// <summary>
         /// The virutal path of the directory holding the video files.

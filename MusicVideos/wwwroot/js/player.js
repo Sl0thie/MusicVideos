@@ -133,3 +133,11 @@ function hide() {
     }
 }
 //#endregion
+// Rating Histogram
+function showHistogram() {
+     
+}
+function hideHistogram() {
+
+}
+//#endregion

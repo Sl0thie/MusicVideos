@@ -18,6 +18,8 @@ let popupVolume = document.getElementById('popupVolume');
 let formVolume = document.getElementById('formVolume');
 let volumeValue = document.getElementById('volumeValue');
 let volumeImage = document.getElementById('volumeImage');
+let popupSettings = document.getElementById('popupSettings');
+let formSettings = document.getElementById('formSettings');
 let popupDetails = document.getElementById('popupDetails');
 let formDetails = document.getElementById('formDetails');
 let detailsRating = document.getElementById('detailsRating');
@@ -33,6 +35,8 @@ let valueFilterRating = document.getElementById('valueFilterRating');
 window.addEventListener('load', function () {
     popupVolume.addEventListener('mousedown', closeVolume);
     formVolume.addEventListener('mousedown', cancelEvent);
+    popupSettings.addEventListener('mousedown', closeSettings);
+    formSettings.addEventListener('mousedown', cancelEvent);
     popupDetails.addEventListener('mousedown', closeDetails);
     formDetails.addEventListener('mousedown', cancelEvent);
     popupFilter.addEventListener('mousedown', closeFilter);
@@ -194,6 +198,10 @@ function buttonFilter() {
     popupFilter.style.display = 'block';
 }
 
+function buttonSettings() {
+    popupSettings.style.display = 'block';
+}
+
 function buttonPlaylist() {
     songlist.style.zIndex = overlayZIndex;
     queuelist.style.zIndex = -overlayZIndex;
@@ -308,6 +316,12 @@ function updateGenre(item, index) {
     check.src = '/images/checkon.png';
 }
 
+//#endregion
+//#region Settings
+function closeSettings() {
+    popupSettings.style.display = "none";
+    event.stopPropagation();
+}
 //#endregion
 //#region Filter
 function closeFilter() {
