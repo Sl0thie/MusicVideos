@@ -109,8 +109,6 @@ function addPlaylistItem(id, artist, title, rating) {
 }
 
 function doEvents() {
-    //return Promise.resolve();
-
     var promise = new Promise(
         function (resolve, reject) {
             requestAnimationFrame(function () {

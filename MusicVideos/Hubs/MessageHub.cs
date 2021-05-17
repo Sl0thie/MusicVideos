@@ -22,7 +22,7 @@
 
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
-        private static int filterRating;
+        private static int filterRating = 50;
         private static bool noGenre;
         private static bool showAll = true;
         private static int previousIndex;
@@ -36,6 +36,7 @@
 
         /// <summary>
         /// Logs javascript errors.
+        /// These errors are sent back to the debug page to centralise them from all the sources.
         /// </summary>
         /// <param name="docTitle">The Title of the page that raised the error.</param>
         /// <param name="message">The error message.</param>
@@ -78,7 +79,7 @@
         {
             await Clients.All.SendAsync("ClearPlaylist");
             Model.FilteredVideoIds.Clear();
-            
+
             if (showAll)
             {
                 List<Video> videos = Model.Videos.Values.ToList();

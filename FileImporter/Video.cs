@@ -50,9 +50,6 @@
             get { return genres; }
         }
 
-        //public List<Genre> Genres { get; set; }
-        //public Genre[] Genres { get; set; }
-
         /// <summary>
         /// Gets or sets the file extension.
         /// </summary>

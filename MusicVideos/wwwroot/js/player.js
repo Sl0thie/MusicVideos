@@ -81,9 +81,6 @@ function playerError() {
 }
 // Whe the player is ready auto start the video.
 function playerReady() {
-    //log('Video Duration : ' + player.duration);
-    //log('Video Width : ' + player.videoWidth);
-    //log('Video Height : ' + player.videoHeight);
     player.play();
     connection.invoke('UpdateVideoProperties', currentIndex.toString(), player.duration.toString(), player.videoWidth.toString(), player.videoHeight.toString());
 }

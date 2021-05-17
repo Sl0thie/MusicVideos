@@ -13,15 +13,14 @@ namespace FileImporter
 {
     class Program
     {
-        private const string ImportPath = @"E:\Music Videos for Import\";                     //Path that the files are to be imported from.
-        private const string BasePath = @"E:\Music Videos\";                      //Base path that the files are stored.
-        private const string ErrorPath = @"E:\Music Videos Errors\";                      //Path that the error files are stored.
-        private const string ffmpegpath = "\"C:\\Program Files\\ffmpeg\\bin\"";        //Path to ffmpeg. Enclosed in quotation marks to suit shellex.
-        private const string ffmpegpathEx = @"C:\Program Files\ffmpeg\bin";            //Path to ffmpeg. Not enclosed to suit shell.
-        private static Dictionary<int, Video> Videos = new Dictionary<int, Video>();   //Dictionary of Video objects related to the files.
-        private static int NoOfVideos { get; set; }                                    //No of Videos that are in the store.
-
-        private static DateTime LastWebSearch = DateTime.MinValue;
+        private const string ImportPath = @"E:\Music Videos for Import\";            // Path that the files are to be imported from.
+        private const string BasePath = @"E:\Music Videos\";                         // Base path that the files are stored.
+        private const string ErrorPath = @"E:\Music Videos Errors\";                 // Path that the error files are stored.
+        private const string ffmpegpath = "\"C:\\Program Files\\ffmpeg\\bin\"";      // Path to ffmpeg. Enclosed in quotation marks to suit shellex.
+        private const string ffmpegpathEx = @"C:\Program Files\ffmpeg\bin";          // Path to ffmpeg. Not enclosed to suit shell.
+        private static Dictionary<int, Video> Videos = new Dictionary<int, Video>(); // Dictionary of Video objects related to the files.
+        private static int NoOfVideos { get; set; }                                  // No of Videos that are in the store.
+        private static DateTime LastWebSearch = DateTime.MinValue;                   // Time of the last web search. Used to limit searches per hour.
 
         /// <summary>
         /// FilImporter preforms several tasks related to the management of a file collection of music videos. Files are first converted to formats that can be played by HTML5 Video tag. Files are then stored in a "Artist\Title" format after several properties are obtained. Then the details of these operations are recorded in a json file in the base folder.
