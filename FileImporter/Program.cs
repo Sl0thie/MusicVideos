@@ -13,9 +13,9 @@ namespace FileImporter
 {
     class Program
     {
-        private const string ImportPath = @"E:\Music Videos for Import\";            // Path that the files are to be imported from.
-        private const string BasePath = @"E:\Music Videos\";                         // Base path that the files are stored.
-        private const string ErrorPath = @"E:\Music Videos Errors\";                 // Path that the error files are stored.
+        private const string ImportPath = @"F:\Music Videos for Import\";            // Path that the files are to be imported from.
+        private const string BasePath = @"F:\Music Videos\";                         // Base path that the files are stored.
+        private const string ErrorPath = @"F:\Music Videos Errors\";                 // Path that the error files are stored.
         private const string ffmpegpath = "\"C:\\Program Files\\ffmpeg\\bin\"";      // Path to ffmpeg. Enclosed in quotation marks to suit shellex.
         private const string ffmpegpathEx = @"C:\Program Files\ffmpeg\bin";          // Path to ffmpeg. Not enclosed to suit shell.
         private static Dictionary<int, Video> Videos = new Dictionary<int, Video>(); // Dictionary of Video objects related to the files.
@@ -94,6 +94,7 @@ namespace FileImporter
                 video.LastPlayed = DateTime.MinValue;
                 video.LastQueued = DateTime.MinValue;
                 video.Released = DateTime.MinValue;
+                video.Added = DateTime.Now;
                 video.Rating = 50;
                 video.PlayCount = 0;
                 video.PlayTime = 0;
@@ -365,7 +366,7 @@ namespace FileImporter
                 Artist = Artist.Substring(0, Artist.IndexOf("<"));
             }
             int dist = GetDamerauLevenshteinDistance(Artist, video.Artist);
-            if(dist > 0)
+            if(dist > 3)
             {
                 Log("searchterm : " + searchterm);
                 Log("LevenshteinDistance fail " + dist + " video artist : " + video.Artist + " web artist : " + Artist);

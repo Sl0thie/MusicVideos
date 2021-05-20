@@ -113,5 +113,10 @@
         /// Gets or sets when the song was released.
         /// </summary>
         public DateTime Released { get; set; }
+
+        /// <summary>
+        /// Gets or sets when the song was added to the collection.
+        /// </summary>
+        public DateTime Added { get; set; }
     }
 }

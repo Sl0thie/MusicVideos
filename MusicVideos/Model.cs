@@ -72,6 +72,11 @@ namespace MusicVideos
                 FilteredVideoIds.Add(next.Id);
                 ratingHistogram[next.Rating]++;
             }
+
+            for (int i = 0; i < 101; i++)
+            {
+                Debug.WriteLine(i + " " + ratingHistogram[i]);
+            }
         }
 
         /// <summary>
