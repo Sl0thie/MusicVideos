@@ -265,7 +265,12 @@
                         }
                     }
                 }
+
+                Debug.WriteLine("Model.Videos[lastIndex].Rating " + Model.Videos[lastIndex].Rating);
             }
+
+            
+
 
             // Check if the playlist is not playing previous videos first. Then check there are any videos in the queue. Finally if there are no videos queued then pick a random song from the filtered list.
             int nextIndex;
@@ -343,6 +348,8 @@
 
             // To reduce the no of file operations save only when the video changes.
             Model.SaveVideos();
+
+            Debug.WriteLine("filterRating " + filterRating);
         }
 
         /// <summary>
