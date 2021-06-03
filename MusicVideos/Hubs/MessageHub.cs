@@ -17,7 +17,8 @@
 
         private const int IndexMinimum = 0;
         private const int RepeatDelay = -10;
-        private const int Increment = 1;
+        private const int RatingIncrementPlayed = 5;
+        private const int RatingIncrementSkipped = 1;
         private const int RatingIncrementQueued = 10;
 
         private static List<Genre> filter = new List<Genre>();
@@ -29,6 +30,8 @@
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
         private static string previousLastPlayedString = "";
+
+        private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
 
         #endregion
 
@@ -77,6 +80,41 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task GetPlaylistAsync()
         {
+            int totalvideos = 0;
+            ratingHistogram.Clear();
+
+            // Create RatingHistogram.
+            for (int i = 0; i < 101; i++)
+            {
+                ratingHistogram.Add(i, 0);
+            }
+
+            int top50 = 0;
+            int bot50 = 0;
+
+            foreach (Video next in Model.Videos.Values)
+            {
+                ratingHistogram[next.Rating]++;
+                if (next.Rating > 50)
+                {
+                    top50++;
+                }
+                else
+                {
+                    bot50++;
+                }
+            }
+
+            for (int i = 0; i < 101; i++)
+            {
+                if (ratingHistogram[i] > 0)
+                {
+                    await LogMessageAsync("MessageHub", i + " " + ratingHistogram[i]);
+                }
+            }
+
+            await LogMessageAsync("MessageHub", "Top = " + top50 + " Bottom = " + bot50);
+
             await Clients.All.SendAsync("ClearPlaylist");
             Model.FilteredVideoIds.Clear();
 
@@ -88,6 +126,7 @@
                 {
                     await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
                     Model.FilteredVideoIds.Add(next.Id);
+                    totalvideos++;
                 }
             }
             else if (noGenre)
@@ -100,6 +139,7 @@
                     {
                         await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
                         Model.FilteredVideoIds.Add(next.Id);
+                        totalvideos++;
                     }
                 }
             }
@@ -115,6 +155,7 @@
                         {
                             await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
                             Model.FilteredVideoIds.Add(next.Id);
+                            totalvideos++;
                             break;
                         }
                     }
@@ -122,6 +163,8 @@
             }
 
             // TODO Change orginal source collection to reduce operations.
+
+            await LogMessageAsync("MessageHub", "Total Videos " + totalvideos);
         }
 
         #endregion
@@ -159,7 +202,10 @@
                 Model.Videos[id].QueuedCount++;
 
                 Model.Videos[id].Rating = Model.Videos[id].Rating + RatingIncrementQueued;
-                if (Model.Videos[id].Rating >= 100) { Model.Videos[id].Rating = 100; }
+                if (Model.Videos[id].Rating > 100)
+                {
+                    Model.Videos[id].Rating = 100;
+                }
 
                 Model.Videos[id].LastQueued = DateTime.Now;
                 if (isRandom)
@@ -250,7 +296,7 @@
                 {
                     if (lastSongStart.AddMinutes(1) > DateTime.Now)
                     {
-                        Model.Videos[lastIndex].Rating--;
+                        Model.Videos[lastIndex].Rating = Model.Videos[lastIndex].Rating - RatingIncrementSkipped;
                         if (Model.Videos[lastIndex].Rating < 1)
                         {
                             Model.Videos[lastIndex].Rating = 1;
@@ -258,7 +304,7 @@
                     }
                     else
                     {
-                        Model.Videos[lastIndex].Rating++;
+                        Model.Videos[lastIndex].Rating = Model.Videos[lastIndex].Rating + RatingIncrementPlayed;
                         if (Model.Videos[lastIndex].Rating > 100)
                         {
                             Model.Videos[lastIndex].Rating = 100;
@@ -268,9 +314,6 @@
 
                 Debug.WriteLine("Model.Videos[lastIndex].Rating " + Model.Videos[lastIndex].Rating);
             }
-
-            
-
 
             // Check if the playlist is not playing previous videos first. Then check there are any videos in the queue. Finally if there are no videos queued then pick a random song from the filtered list.
             int nextIndex;
@@ -296,7 +339,7 @@
             {
                 isRandom = true;
                 var rand = new Random();
-                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + Increment];
+                nextIndex = Model.FilteredVideoIds[rand.Next(Model.FilteredVideoIds.Count) + RatingIncrementPlayed];
             }
 
             // If the video is not in the previous videos then add to the previous videos.

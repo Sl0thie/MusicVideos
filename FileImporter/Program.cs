@@ -27,6 +27,8 @@ namespace FileImporter
         /// </summary>
         static void Main()
         {
+            //MoveAllFiles();
+            //ConvertAllWebM();
             ProcessNewVideos();
             Console.Write("Press any key to close this window...");
             Console.ReadKey();
@@ -53,6 +55,16 @@ namespace FileImporter
                 string filename = path.Substring(path.LastIndexOf(@"\") + 1);
                 Log("Moving File : " + path);
                 File.Move(path, ImportPath + filename);
+            }
+        }
+
+        private static void ConvertAllWebM()
+        {
+            foreach (var path in Directory.EnumerateFiles(BasePath, "*.webm", SearchOption.AllDirectories))
+            {
+                Video video = new Video();
+                video.Path = path;
+                ConvertWebMtoMP4(video);
             }
         }
 
@@ -115,7 +127,6 @@ namespace FileImporter
                     video.SearchArtist = artist;
                 }
 
-
                 //Convert file if needed.
                 switch (extension)
                 {
@@ -125,7 +136,6 @@ namespace FileImporter
                         continue;
                     case ".mkv":
                     case ".MKV":
-                        //Log("File Rejected (needs conversion) : " + path);
                         if (!ConvertMKVtoMP4(video))
                         {
                             Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
@@ -138,6 +148,12 @@ namespace FileImporter
                         break;
                     case ".webm":
                     case ".WEBM":
+                        if (!ConvertWebMtoMP4(video))
+                        {
+                            Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
+                            MoveFileToErrorFolder(video);
+                            continue;
+                        }
                         break;
                     default:
                         Log("File Rejected (unknown extension) : " + path);
@@ -368,9 +384,16 @@ namespace FileImporter
             int dist = GetDamerauLevenshteinDistance(Artist, video.Artist);
             if(dist > 3)
             {
-                Log("searchterm : " + searchterm);
-                Log("LevenshteinDistance fail " + dist + " video artist : " + video.Artist + " web artist : " + Artist);
-                return false;
+                if(Artist.Trim().Length == 0)
+                {
+
+                }
+                else
+                {
+                    Log("searchterm : " + searchterm);
+                    Log("LevenshteinDistance fail " + dist + " video artist : " + video.Artist + " web artist : " + Artist);
+                    return false;
+                }
             }
 
             if (htmlString.IndexOf(">Album</") > 0)
@@ -848,6 +871,53 @@ namespace FileImporter
                     Log("MakeWaveForm2 Failed for " + filepath);
                 }
             }
+        }
+
+        /// <summary>
+        /// Converts the file from WebM to MP4.
+        /// </summary>
+        /// <param name="filepath">Path to the file.</param>
+        private static bool ConvertWebMtoMP4(Video video)
+        {
+            string closedpath = "\"" + video.Path + "\"";
+            string newpath = video.Path.Substring(0, video.Path.LastIndexOf("."));
+            string newpathStriped = newpath + ".mp4";
+            newpath = "\"" + newpath + ".mp4\"";
+            string arguments = "-i " + closedpath + " -vcodec copy -acodec aac " + newpath;
+
+            Log("Converting MKV");
+            Log("closedpath " + closedpath);
+            Log("newpath " + newpath);
+
+            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            {
+                CreateNoWindow = false,
+                UseShellExecute = true,
+                RedirectStandardError = false,
+                RedirectStandardOutput = false,
+                WorkingDirectory = ffmpegpathEx
+            };
+            Process p = Process.Start(processInfo);
+            p.WaitForExit();
+
+            if (File.Exists(newpathStriped))
+            {
+                FileInfo newFile = new FileInfo(newpathStriped);
+                if (newFile.Length > 1000)
+                {
+                    Log("Mkv Conversion successful : " + newpathStriped);
+                    File.Delete(video.Path);
+                    video.Path = newpathStriped;
+                    return true;
+                }
+            }
+            else
+            {
+                Log("File does not exist.");
+            }
+
+            Log("Mkv Conversion failed : " + newpath);
+            return false;
         }
 
         /// <summary>
