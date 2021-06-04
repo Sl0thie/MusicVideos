@@ -7,27 +7,29 @@
         <script type="text/javascript" src="@Url.Content("/js/index.js")" defer></script>
     }
 }
-<h1>Debug Options</h1>
 
-<table>
-    <tr>
-        <td>
-            <input id="Button1" type="button" value="Open Player" onclick="openPlayer()" />
-        </td>
-        <td>
-            <input id="Button2" type="button" value="Open Remote" onclick="openRemote()" />
-        </td>
+<div id="header">
+    <h1>Debug Options</h1>
 
-        <td>
-            <input id="Button3" type="button" value="Open Anonymous" onclick="openAnonymous()" />
-        </td>
-        <td>
-            <input id="Button4" type="button" value="Close All Windows" onclick="closeWindows()" />
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td>
+                <input id="Button1" type="button" value="Open Player" onclick="openPlayer()" />
+            </td>
+            <td>
+                <input id="Button2" type="button" value="Open Remote" onclick="openRemote()" />
+            </td>
+            <td>
+                <input id="Button3" type="button" value="Open Anonymous" onclick="openAnonymous()" />
+            </td>
+            <td>
+                <input id="Button4" type="button" value="Close All Windows" onclick="closeWindows()" />
+            </td>
+        </tr>
+    </table>
+</div>
 
-<ul id="debugOutput" style="color:#FFFFFF;overflow:scroll;">
+<ul id="debugOutput" style="color:#FFFFFF;">
 </ul>
 
 <script>

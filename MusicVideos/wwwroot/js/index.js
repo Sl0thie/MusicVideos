@@ -30,6 +30,7 @@ window.addEventListener('load', function () {
         let newItem = document.createElement('li');
         newItem.innerHTML = docTitle + ' Message : ' + message;
         debugOutput.appendChild(newItem);
+        newItem.scrollIntoView();
     });
     connection.start();
 });

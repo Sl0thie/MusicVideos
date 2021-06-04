@@ -450,7 +450,61 @@
         {
             Video video = Model.Videos[Convert.ToInt32(id)];
             string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
-            await Clients.All.SendAsync("SetVideoDetails", video.Duration, video.Extension, genres, previousLastPlayedString, video.Rating, video.Released.ToString("yyyy"));
+
+            DateTime released = video.LastPlayed;
+            string releasedString = string.Empty;
+            if (released == DateTime.MinValue)
+            {
+                previousLastPlayedString = "Unknown";
+            }
+            else
+            {
+                TimeSpan diff = DateTime.Now.Subtract(released);
+                int days = (int)diff.TotalDays;
+
+                if (days < 365)
+                {
+                    releasedString = released.ToString("yyyy") + " - this year";
+                }
+                else if (days < 730)
+                {
+                    releasedString = released.ToString("yyyy") + " - last year";
+                }
+                else
+                {
+                    int year = 365;
+                    int years = days / year;
+                    releasedString = released.ToString("yyyy") + " - " + years + " years ago";
+                }
+            }
+
+            string duration = string.Empty;
+            if (video.Duration == 0)
+            {
+                duration = "Unknown";
+            }
+            else
+            {
+                int remainder = video.Duration;
+                int minutes = 0;
+                int seconds = 0;
+
+                while (remainder > 60000)
+                {
+                    minutes++;
+                    remainder -= 60000;
+                }
+
+                while (remainder > 1000)
+                {
+                    seconds++;
+                    remainder -= 1000;
+                }
+
+                duration = minutes.ToString() + ":" + seconds.ToString("D2") + "." + remainder.ToString("D3");
+            }
+
+            await Clients.All.SendAsync("SetVideoDetails", duration, video.Extension, genres, previousLastPlayedString, video.Rating, releasedString);
         }
 
         /// <summary>

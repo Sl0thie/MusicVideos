@@ -22,3 +22,13 @@ img {
     mask-border-width: 0px;
     outline-style: none;
 }
+
+#header{
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100px;
+    z-index:1;
+    background-color:#000000;
+}
