@@ -451,11 +451,11 @@
             Video video = Model.Videos[Convert.ToInt32(id)];
             string genres = JsonConvert.SerializeObject(video.Genres, Formatting.None);
 
-            DateTime released = video.LastPlayed;
+            DateTime released = video.Released;
             string releasedString = string.Empty;
             if (released == DateTime.MinValue)
             {
-                previousLastPlayedString = "Unknown";
+                releasedString = "Unknown";
             }
             else
             {

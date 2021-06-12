@@ -563,6 +563,29 @@ input[type=range][orient=horizontal] {
     vertical-align: top;
 }
 
+#detailsKeys {
+    top:5px;
+    left:5px;
+    width:90px;
+    height:100px;
+    display: grid;
+    grid-gap: 5px;
+}
+
+#detailsValues {
+    top: 5px;
+    left: 105px;
+    width: 90px;
+    height: 100px;
+    display: grid;
+    grid-gap: 5px;
+}
+
+#detailsKeyDuration{
+    grid-row:1;
+    grid-column:1;
+}
+
 /*#endregion */
 /*#region Popup Filter */
 #popupFilter {

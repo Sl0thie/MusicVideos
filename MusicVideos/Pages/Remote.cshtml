@@ -112,6 +112,15 @@
         <div id="popupDetailsFrame">
         </div>
         <div class="popup" id="formDetails">
+            <div id="detailsKeys">
+                <div id="detailsKeyDuration">
+                    Duration
+                </div>
+            </div>
+            <div id="detailsValues">
+
+            </div>
+
             <h1>Details</h1>
             <table>
                 <tr>
@@ -239,71 +248,87 @@
                 <tr>
                     <td colspan="4"><input id="sliderFilterRating" type="range" min="1" max="100" value="50" step="1" onchange="updateFilterRating(this.value)" orient="horizontal" /></td>
                 </tr>
+            </table>
+            <table>
                 <tr>
-                    <td class="tdKey">Genres</td>
-                    <td class="tdValue" colspan="3"><span id="detailsGenres"></span></td>
+                    <td class="tdKey">Rating</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td class="tdGenre">Alternative</td>
-                    <td class="tdGenre">Blues</td>
-                    <td class="tdGenre">Classical</td>
-                    <td class="tdGenre">Country</td>
-                </tr>
-                <tr>
-                    <td><img id="filter1" src="/images/checkoff.png" onclick="setFilterGenre(1)" /></td>
-                    <td><img id="filter2" src="/images/checkoff.png" onclick="setFilterGenre(2)" /></td>
-                    <td><img id="filter3" src="/images/checkoff.png" onclick="setFilterGenre(3)" /></td>
-                    <td><img id="filter4" src="/images/checkoff.png" onclick="setFilterGenre(4)" /></td>
-                </tr>
-                <tr>
-                    <td class="tdGenre">Dance</td>
-                    <td class="tdGenre">Dubstep</td>
-                    <td class="tdGenre">EasyListening</td>
-                    <td class="tdGenre">Electronic</td>
-                </tr>
-                <tr>
-                    <td><img id="filter5" src="/images/checkoff.png" onclick="setFilterGenre(5)" /></td>
-                    <td><img id="filter6" src="/images/checkoff.png" onclick="setFilterGenre(6)" /></td>
-                    <td><img id="filter7" src="/images/checkoff.png" onclick="setFilterGenre(7)" /></td>
-                    <td><img id="filter8" src="/images/checkoff.png" onclick="setFilterGenre(8)" /></td>
-                </tr>
-                <tr>
-                    <td class="tdGenre">Grunge</td>
-                    <td class="tdGenre">HipHop</td>
-                    <td class="tdGenre">House</td>
-                    <td class="tdGenre">Jazz</td>
-                </tr>
-                <tr>
-                    <td><img id="filter9" src="/images/checkoff.png" onclick="setFilterGenre(9)" /></td>
-                    <td><img id="filter10" src="/images/checkoff.png" onclick="setFilterGenre(10)" /></td>
-                    <td><img id="filter11" src="/images/checkoff.png" onclick="setFilterGenre(11)" /></td>
-                    <td><img id="filter12" src="/images/checkoff.png" onclick="setFilterGenre(12)" /></td>
-                </tr>
-                <tr>
-                    <td class="tdGenre">Metal</td>
-                    <td class="tdGenre">Pop</td>
-                    <td class="tdGenre">Punk</td>
-                    <td class="tdGenre">Reggae</td>
-                </tr>
-                <tr>
-                    <td><img id="filter13" src="/images/checkoff.png" onclick="setFilterGenre(13)" /></td>
-                    <td><img id="filter14" src="/images/checkoff.png" onclick="setFilterGenre(14)" /></td>
-                    <td><img id="filter15" src="/images/checkoff.png" onclick="setFilterGenre(15)" /></td>
-                    <td><img id="filter16" src="/images/checkoff.png" onclick="setFilterGenre(16)" /></td>
-                </tr>
-                <tr>
-                    <td class="tdGenre">R & B</td>
-                    <td class="tdGenre">Rock</td>
-                    <td class="tdGenre">Ska</td>
-                    <td class="tdGenre">Techno</td>
-                </tr>
-                <tr>
-                    <td><img id="filter17" src="/images/checkoff.png" onclick="setFilterGenre(17)" /></td>
-                    <td><img id="filter18" src="/images/checkoff.png" onclick="setFilterGenre(18)" /></td>
-                    <td><img id="filter19" src="/images/checkoff.png" onclick="setFilterGenre(19)" /></td>
-                    <td><img id="filter20" src="/images/checkoff.png" onclick="setFilterGenre(20)" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
+                <table>
+                    <tr>
+                        <td class="tdKey">Genres</td>
+                        <td class="tdValue" colspan="3"><span id="detailsGenres"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tdGenre">Alternative</td>
+                        <td class="tdGenre">Blues</td>
+                        <td class="tdGenre">Classical</td>
+                        <td class="tdGenre">Country</td>
+                    </tr>
+                    <tr>
+                        <td><img id="filter1" src="/images/checkoff.png" onclick="setFilterGenre(1)" /></td>
+                        <td><img id="filter2" src="/images/checkoff.png" onclick="setFilterGenre(2)" /></td>
+                        <td><img id="filter3" src="/images/checkoff.png" onclick="setFilterGenre(3)" /></td>
+                        <td><img id="filter4" src="/images/checkoff.png" onclick="setFilterGenre(4)" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tdGenre">Dance</td>
+                        <td class="tdGenre">Dubstep</td>
+                        <td class="tdGenre">EasyListening</td>
+                        <td class="tdGenre">Electronic</td>
+                    </tr>
+                    <tr>
+                        <td><img id="filter5" src="/images/checkoff.png" onclick="setFilterGenre(5)" /></td>
+                        <td><img id="filter6" src="/images/checkoff.png" onclick="setFilterGenre(6)" /></td>
+                        <td><img id="filter7" src="/images/checkoff.png" onclick="setFilterGenre(7)" /></td>
+                        <td><img id="filter8" src="/images/checkoff.png" onclick="setFilterGenre(8)" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tdGenre">Grunge</td>
+                        <td class="tdGenre">HipHop</td>
+                        <td class="tdGenre">House</td>
+                        <td class="tdGenre">Jazz</td>
+                    </tr>
+                    <tr>
+                        <td><img id="filter9" src="/images/checkoff.png" onclick="setFilterGenre(9)" /></td>
+                        <td><img id="filter10" src="/images/checkoff.png" onclick="setFilterGenre(10)" /></td>
+                        <td><img id="filter11" src="/images/checkoff.png" onclick="setFilterGenre(11)" /></td>
+                        <td><img id="filter12" src="/images/checkoff.png" onclick="setFilterGenre(12)" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tdGenre">Metal</td>
+                        <td class="tdGenre">Pop</td>
+                        <td class="tdGenre">Punk</td>
+                        <td class="tdGenre">Reggae</td>
+                    </tr>
+                    <tr>
+                        <td><img id="filter13" src="/images/checkoff.png" onclick="setFilterGenre(13)" /></td>
+                        <td><img id="filter14" src="/images/checkoff.png" onclick="setFilterGenre(14)" /></td>
+                        <td><img id="filter15" src="/images/checkoff.png" onclick="setFilterGenre(15)" /></td>
+                        <td><img id="filter16" src="/images/checkoff.png" onclick="setFilterGenre(16)" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tdGenre">R & B</td>
+                        <td class="tdGenre">Rock</td>
+                        <td class="tdGenre">Ska</td>
+                        <td class="tdGenre">Techno</td>
+                    </tr>
+                    <tr>
+                        <td><img id="filter17" src="/images/checkoff.png" onclick="setFilterGenre(17)" /></td>
+                        <td><img id="filter18" src="/images/checkoff.png" onclick="setFilterGenre(18)" /></td>
+                        <td><img id="filter19" src="/images/checkoff.png" onclick="setFilterGenre(19)" /></td>
+                        <td><img id="filter20" src="/images/checkoff.png" onclick="setFilterGenre(20)" /></td>
+                    </tr>
+                </table>
         </div>
     </div>
 </div>
