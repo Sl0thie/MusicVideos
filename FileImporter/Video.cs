@@ -61,7 +61,7 @@
         public int Duration { get; set; }
 
         /// <summary>
-        /// Gets or sets the bitrate of the video.
+        /// Gets or sets the bit-rate of the video.
         /// </summary>
         public int VideoBitRate { get; set; }
 

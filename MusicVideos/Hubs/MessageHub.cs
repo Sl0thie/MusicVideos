@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
@@ -23,7 +24,7 @@
 
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
-        private static int filterRating = 50;
+        //private static int filterRating = 50;
         private static bool noGenre;
         private static bool showAll = true;
         private static int previousIndex;
@@ -35,11 +36,19 @@
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageHub"/> class.
+        /// </summary>
+        public MessageHub()
+        {
+            
+        }
+
         #region Debugging
 
         /// <summary>
         /// Logs javascript errors.
-        /// These errors are sent back to the debug page to centralise them from all the sources.
+        /// These errors are sent back to the debug page to centralize them from all the sources.
         /// </summary>
         /// <param name="docTitle">The Title of the page that raised the error.</param>
         /// <param name="message">The error message.</param>
@@ -122,7 +131,7 @@
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     await Clients.All.SendAsync("SetPlaylistItem", next.Id, next.Artist, next.Title, next.Rating);
                     Model.FilteredVideoIds.Add(next.Id);
@@ -133,7 +142,7 @@
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     if (next.Genres.Count == 0)
                     {
@@ -147,7 +156,7 @@
             {
                 List<Video> videos = Model.Videos.Values.ToList();
 
-                foreach (var next in videos.Where(x => x.Rating >= filterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                foreach (var next in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
                 {
                     foreach (Genre genre in next.Genres)
                     {
@@ -162,9 +171,11 @@
                 }
             }
 
-            // TODO Change orginal source collection to reduce operations.
+            // TODO Change original source collection to reduce operations.
 
-            await LogMessageAsync("MessageHub", "Total Videos " + totalvideos);
+            await LogMessageAsync("MessageHub", "Total Videos: " + totalvideos);
+
+            await LogMessageAsync("MessageHub", "Filter Rating: " + Model.Settings.FilterRating);
         }
 
         #endregion
@@ -172,7 +183,7 @@
         #region Queue
 
         /// <summary>
-        /// Gets the queuelist from the collection.
+        /// Gets the queue list from the collection.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task GetQueuelistAsync()
@@ -272,6 +283,7 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task SetVolumeAsync(string value)
         {
+            Model.Settings.Volume = Convert.ToInt32(value);
             await Clients.All.SendAsync("SetVolume", value);
         }
 
@@ -392,7 +404,7 @@
             // To reduce the no of file operations save only when the video changes.
             Model.SaveVideos();
 
-            Debug.WriteLine("filterRating " + filterRating);
+            Debug.WriteLine("filterRating " + Model.Settings.FilterRating);
         }
 
         /// <summary>
@@ -586,7 +598,7 @@
                 noGenre = false;
             }
 
-            filterRating = Convert.ToInt32(minRating);
+            Model.Settings.FilterRating = Convert.ToInt32(minRating);
         }
 
         #endregion

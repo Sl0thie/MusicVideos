@@ -11,18 +11,20 @@ namespace MusicVideos
     /// </summary>
     public static class Model
     {
+        private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
+        private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
+        private static Settings settings = new Settings();
+
         /// <summary>
         /// Physical path to the directory holding the video files.
         /// </summary>
         public const string FilesPath = @"F:\Music Videos";
 
         /// <summary>
-        /// The virutal path of the directory holding the video files.
+        /// The virtual path of the directory holding the video files.
         /// </summary>
         public const string VirtualPath = @"/Virtual/Music Videos";
-
-        private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
-        private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
+        
         /// <summary>
         /// Gets the data related to the video files in the collection.
         /// </summary>
@@ -32,10 +34,23 @@ namespace MusicVideos
             private set { videos = value; }
         }
 
-        public static Dictionary<int,int> RatingHistogram
+        /// <summary>
+        /// Gets or sets the settings.
+        /// </summary>
+        public static Settings Settings
+        {
+            get { return settings; }
+            set { settings = value; }
+        }
+
+        /// <summary>
+        /// Gets a Histogram for spread of video ratings.
+        /// </summary>
+        public static Dictionary<int, int> RatingHistogram
         {
             get { return ratingHistogram; }
-            set { ratingHistogram = value; }
+
+            // set { ratingHistogram = value; }
         }
 
         /// <summary>
@@ -80,11 +95,32 @@ namespace MusicVideos
         }
 
         /// <summary>
+        /// Loads the settings from file.
+        /// </summary>
+        public static void LoadSettings()
+        {
+            if (File.Exists("settings.json"))
+            {
+                string json = File.ReadAllText("settings.json");
+                settings = JsonConvert.DeserializeObject<Settings>(json);
+            }
+        }
+
+        /// <summary>
+        /// Save the settings to file.
+        /// </summary>
+        public static void SaveSettings()
+        {
+            string json = JsonConvert.SerializeObject(settings, Formatting.None);
+            File.WriteAllText("settings.json", json);
+        }
+
+        /// <summary>
         /// Saves the video file data to disk.
         /// </summary>
         public static void SaveVideos()
         {
-            string json = JsonConvert.SerializeObject(Videos, Formatting.None);
+            string json = JsonConvert.SerializeObject(videos, Formatting.None);
             File.WriteAllText(FilesPath + "\\index.json", json);
         }
     }

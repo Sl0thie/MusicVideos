@@ -14,6 +14,7 @@
         /// <param name="args">Arguments to pass to the host builder.</param>
         public static void Main(string[] args)
         {
+            Model.LoadSettings();
             Model.LoadVideos();
             CreateHostBuilder(args).Build().Run();
         }

@@ -148,12 +148,12 @@ namespace FileImporter
                         break;
                     case ".webm":
                     case ".WEBM":
-                        if (!ConvertWebMtoMP4(video))
-                        {
-                            Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
-                            MoveFileToErrorFolder(video);
-                            continue;
-                        }
+                        //if (!ConvertWebMtoMP4(video))
+                        //{
+                        //    Log("CheckVideoTitle failed : " + video.Artist + " - " + video.Title);
+                        //    MoveFileToErrorFolder(video);
+                        //    continue;
+                        //}
                         break;
                     default:
                         Log("File Rejected (unknown extension) : " + path);

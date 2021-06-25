@@ -37,7 +37,7 @@ namespace MusicVideos
         }
 
         /// <summary>
-        /// Configures tha ASP.net application.
+        /// Configures the ASP.net application.
         /// </summary>
         /// <param name="app">Defines a class that provides the mechanisms to configure an application's request pipeline.</param>
         /// <param name="env">Provides information about the web hosting environment an application is running in.</param>

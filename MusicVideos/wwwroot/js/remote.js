@@ -31,7 +31,7 @@ let sliderFilterRating = document.getElementById('sliderFilterRating');
 let valueFilterRating = document.getElementById('valueFilterRating');
 
 //#endregion
-//#region Initialisation
+//#region Initialization
 window.addEventListener('load', function () {
     popupVolume.addEventListener('mousedown', closeVolume);
     formVolume.addEventListener('mousedown', cancelEvent);
