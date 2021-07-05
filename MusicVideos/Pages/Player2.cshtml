@@ -1,0 +1,47 @@
+﻿@page
+@model MusicVideos.Pages.Player2Model
+@{
+    ViewData["Title"] = "Player";
+    @section Styles {
+        <link href="@Url.Content("/css/player2.css")" rel="stylesheet" type="text/css" />
+    }
+    @section Scripts
+    {
+        <script type="text/javascript" src="@Url.Content("/js/player2.js")" defer></script>
+    }
+}
+<div id="videoplayer">
+    <video id="player" onended="playerended();" onloadeddata="playerReady();" onerror="playerError();" tabindex="1" runat="server">
+    </video>
+</div>
+<div id="overlay" class="overlay">
+    <div class="topline">
+        <div class="toplineleft">
+            <span class="songartist"></span>
+        </div>
+        <div class="toplineright">
+            <span class="clock"></span>
+        </div>
+    </div>
+    <div class="secondline">
+        <span class="songtitle"></span>
+    </div>
+</div>
+<div id="overlayShadow" class="overlay">
+    <div class="topline">
+        <div class="toplineleft">
+            <span class="songartist"></span>
+        </div>
+        <div class="toplineright">
+            <span class="clock"></span>
+        </div>
+    </div>
+    <div class="secondline">
+        <span class="songtitle"></span>
+    </div>
+</div>
+<div id="overlayRatingHistogram">
+    <ul id="ulRatingHistogram">
+
+    </ul>
+</div>

@@ -4,7 +4,7 @@ const maxVolume = 100;         // The volume is based between 0 and 1 but 100 is
 const startupPause = 1000;     // Delay between the start of SignalR and sending the first message.
 const minOpacity = 0;          // Minimum opacity for the elements.
 const maxOpacity = 1;          // Maximum opacity for the elements.
-const incrementOpacity = 0.01; // Ammount to decrease the opacity each loop.
+const incrementOpacity = 0.01; // Amount to decrease the opacity each loop.
 const intervalDisplay = 10000; // Time interval to display the artist, title and time.
 const intervalFade = 50;       // 50 milliseconds is 3 frames. 33 is 2 frames. 17 is 1 frame.
 let fadeoutStartId;            // Fadeout interval Id.
@@ -21,13 +21,13 @@ let songartist = document.getElementsByClassName('songartist');
 let songtitle = document.getElementsByClassName('songtitle');
 let clock = document.getElementsByClassName('clock');
 //#endregion
-//#region Initialisation
+//#region Initialization
 window.addEventListener('load', function () {
     player.addEventListener('mousedown', nextVideo, true);
     overlay.addEventListener('mousedown', nextVideo, true);
     // Create the SignalR object.
     connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
-    // Define the methods that will be recieved from the hub.
+    // Define the methods that will be received from the hub.
     connection.on('SetVideo', function (index, songPath, songArtist, songTitle, clockTime) {
         setVideo(index, songPath, songArtist, songTitle, clockTime);
     });

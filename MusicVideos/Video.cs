@@ -80,12 +80,12 @@
         public float VideoFPS { get; set; }
 
         /// <summary>
-        /// Gets or sets the total number or times the video has beem played.
+        /// Gets or sets the total number or times the video has been played.
         /// </summary>
         public int PlayCount { get; set; }
 
         /// <summary>
-        /// Gets or sets the total number or times the video has beem queued.
+        /// Gets or sets the total number or times the video has been queued.
         /// </summary>
         public int QueuedCount { get; set; }
 

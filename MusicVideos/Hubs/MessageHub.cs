@@ -41,8 +41,24 @@
         /// </summary>
         public MessageHub()
         {
-            
         }
+
+        #region Xamarin Remote
+
+
+
+
+        public async Task GetVideosAsync()
+        {
+            List<Video> videos = Model.Videos.Values.ToList();
+
+            foreach (var item in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+            {
+                await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
+            }
+        }
+
+        #endregion
 
         #region Debugging
 
@@ -397,6 +413,8 @@
 
             // Send data to player to play the next video.
             await Clients.All.SendAsync("SetVideo", nextIndex, path, Model.Videos[nextIndex].Artist, Model.Videos[nextIndex].Title, clockTime);
+
+            await Clients.All.SendAsync("NextVideo", JsonConvert.SerializeObject(Model.Videos[nextIndex], Formatting.None));
 
             // Store the index for when the video stops playing.
             lastIndex = nextIndex;
