@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileImporter", "FileImporte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1CC1266A-CE9F-4379-AF4D-B9960888259B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicVideosRemote", "MusicVideosRemote\MusicVideosRemote\MusicVideosRemote\MusicVideosRemote.csproj", "{ED1772F9-C7EE-4DB1-A952-7C65B8DC9872}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVideosRemote.Android", "MusicVideosRemote\MusicVideosRemote\MusicVideosRemote.Android\MusicVideosRemote.Android.csproj", "{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,16 @@ Global
 		{67D5A0D8-69AF-481A-BE22-B97778FFB85C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67D5A0D8-69AF-481A-BE22-B97778FFB85C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67D5A0D8-69AF-481A-BE22-B97778FFB85C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED1772F9-C7EE-4DB1-A952-7C65B8DC9872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED1772F9-C7EE-4DB1-A952-7C65B8DC9872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED1772F9-C7EE-4DB1-A952-7C65B8DC9872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED1772F9-C7EE-4DB1-A952-7C65B8DC9872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
