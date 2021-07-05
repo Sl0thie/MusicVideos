@@ -24,15 +24,16 @@
 
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
-        //private static int filterRating = 50;
         private static bool noGenre;
         private static bool showAll = true;
         private static int previousIndex;
         private static DateTime lastSongStart = DateTime.Now;
         private static int lastIndex = -1;
-        private static string previousLastPlayedString = "";
+        private static string previousLastPlayedString = string.Empty;
 
         private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
+
+        private string hostname = System.Net.Dns.GetHostName();
 
         #endregion
 
@@ -45,9 +46,10 @@
 
         #region Xamarin Remote
 
-
-
-
+        /// <summary>
+        /// Gets the Video objects from the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetVideosAsync()
         {
             List<Video> videos = Model.Videos.Values.ToList();
@@ -56,6 +58,15 @@
             {
                 await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
             }
+        }
+
+        /// <summary>
+        /// Gets the time from the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetTimeAsync()
+        {
+            await Clients.All.SendAsync("SetTime", "Server", hostname, JsonConvert.SerializeObject(DateTime.Now, Formatting.None));
         }
 
         #endregion
