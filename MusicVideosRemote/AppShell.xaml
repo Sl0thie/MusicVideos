@@ -80,6 +80,10 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
+    <FlyoutItem Title="Time" Icon="icon_about.png">
+        <ShellContent Route="TimePage" ContentTemplate="{DataTemplate local:TimePage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Videos" Icon="icon_feed.png">
         <ShellContent Route="VideoListPage" ContentTemplate="{DataTemplate local:VideoListPage}" />
     </FlyoutItem>

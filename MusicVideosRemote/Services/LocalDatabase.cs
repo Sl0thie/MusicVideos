@@ -48,6 +48,7 @@
                 dataHub.On<string>("SetRegistration", (id) =>
                 {
                     hubId = id;
+                    Debug.WriteLine("Hub Registration Id: " + id);
                 });
 
                 dataHub.On<string,string>("SendMessage", (id,message) =>
