@@ -1,16 +1,29 @@
 namespace MusicVideos
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using Newtonsoft.Json;
+    using SQLite;
 
     /// <summary>
     /// Model object to hold the data.
     /// </summary>
     public static class Model
     {
+        private static SQLiteAsyncConnection Database;
+        public const string DatabaseFilename = "SQLite.db3";
+        public const SQLiteOpenFlags Flags =
+            // open the database in read/write mode
+            SQLiteOpenFlags.ReadWrite |
+            // create the database if it doesn't exist
+            SQLiteOpenFlags.Create |
+            // enable multi-threaded database access
+            SQLiteOpenFlags.SharedCache;
+
         private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
         private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
         private static Settings settings = new Settings();
@@ -24,7 +37,7 @@ namespace MusicVideos
         /// The virtual path of the directory holding the video files.
         /// </summary>
         public const string VirtualPath = @"/Virtual/Music Videos";
-        
+
         /// <summary>
         /// Gets the data related to the video files in the collection.
         /// </summary>
@@ -69,10 +82,44 @@ namespace MusicVideos
         public static Collection<int> FilteredVideoIds { get; } = new Collection<int>();
 
         /// <summary>
+        /// Saves the Video to the database.
+        /// </summary>
+        /// <param name="video">The video to save.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public static Task<int> SaveVideoAsync(Video video)
+        {
+            Debug.WriteLine("LocalDatabase.SaveVideoAsync");
+
+            try
+            {
+                Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
+                List<Video> videos = rv.Result;
+
+                if (videos.Count == 1)
+                {
+                    return Database.UpdateAsync(video);
+                }
+                else
+                {
+                    return Database.InsertAsync(video);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Loads the video file data from a json file.
         /// </summary>
         public static void LoadVideos()
         {
+            // Create database.
+            Database = new SQLiteAsyncConnection(Path.Combine(FilesPath, DatabaseFilename), Flags);
+            _ = Database.CreateTableAsync<Video>();
+
             // Create RatingHistogram.
             for (int i = 0; i < 101; i++)
             {
@@ -84,6 +131,7 @@ namespace MusicVideos
 
             foreach (Video next in videos.Values)
             {
+                // SaveVideoAsync(next);
                 FilteredVideoIds.Add(next.Id);
                 ratingHistogram[next.Rating]++;
             }

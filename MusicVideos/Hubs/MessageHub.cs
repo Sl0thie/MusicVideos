@@ -33,7 +33,17 @@
 
         private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
 
-        private string hostname = System.Net.Dns.GetHostName();
+        //private string hostname = System.Net.Dns.GetHostName();
+
+        private Random rnd = new Random();
+
+        private int nextRemote;
+        private int nextPlayer;
+
+        private List<string> RemoteIds = new List<string>();
+        private List<string> PlayerIds = new List<string>();
+
+        private string testkey = "123456";
 
         #endregion
 
@@ -44,29 +54,172 @@
         {
         }
 
-        #region Xamarin Remote
+        #region Version 2
+
+        /// <summary>
+        /// Sends a message to all clients.
+        /// </summary>
+        /// <param name="id">The id of the sending client.</param>
+        /// <param name="message">The message to send.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SendMessageAsync(string id, string message)
+        {
+            try
+            {
+                await Clients.All.SendAsync("SendMessage", id, message);
+            }
+            catch(Exception ex)
+            {
+                Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Sends error details to other clients.
+        /// </summary>
+        /// <param name="id">The id of the sending client.</param>
+        /// <param name="error">Serialized string of the exception.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SendErrorAsync(string id, string error)
+        {
+            try
+            {
+                await Clients.All.SendAsync("SendError", id, error);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
+        }
+
+        private void Error(Exception ex)
+        {
+            Debug.WriteLine("ERROR: " + ex.Message);
+            SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
+        }
+
+        public async Task RegisterRemoteAsync(string key)
+        {
+            try
+            {
+                if (key == testkey)
+                {
+                    string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+                    RemoteIds.Add(registration);
+                    await Clients.Caller.SendAsync("SetRegistration", registration);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
+        }
+
+        public async Task RegisterPlayerAsync(string key)
+        {
+            try
+            {
+                if (key == testkey)
+                {
+                    string registration = "P" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+                    PlayerIds.Add(registration);
+                    await Clients.Caller.SendAsync("SetRegistration", registration);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
+        }
 
         /// <summary>
         /// Gets the Video objects from the server.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetVideosAsync()
+        public async Task GetVideosAsync(string id)
         {
-            List<Video> videos = Model.Videos.Values.ToList();
-
-            foreach (var item in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+            try
             {
-                await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
+                if (RemoteIds.Contains(id))
+                {
+                    List<Video> videos = Model.Videos.Values.ToList();
+
+                    foreach (var item in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
+                    {
+                        await Clients.Caller.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
+                    }
+                }
+                else
+                {
+                    await Clients.Caller.SendAsync("SendMessage", "Registration not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
             }
         }
 
         /// <summary>
-        /// Gets the time from the server.
+        /// Gets the time from the server and clients.
         /// </summary>
+        /// <param name="id">A valid registration id.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetTimeAsync()
+        public async Task GetTimeAsync(string id)
         {
-            await Clients.All.SendAsync("SetTime", "Server", hostname, JsonConvert.SerializeObject(DateTime.Now, Formatting.None));
+            try
+            {
+                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                {
+                    await Clients.Others.SendAsync("GetTime");
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Sends the time to all clients.
+        /// </summary>
+        /// <param name="id">The client id.</param>
+        /// <param name="time">The time on the client.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SendTimeAsync(string id, string time)
+        {
+            try
+            {
+                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                {
+                    await Clients.All.SendAsync("SendTime", id, time);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Sets the time offset for the client.
+        /// </summary>
+        /// <param name="id">The id of the client to send to.</param>
+        /// <param name="offset">The time offset to apply to the client.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SetTimeOffsetAsync(string id, string offset)
+        {
+            try
+            {
+                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                {
+                    await Clients.All.SendAsync("SetTimeOffset", id, offset);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+            }
         }
 
         #endregion
@@ -199,9 +352,7 @@
             }
 
             // TODO Change original source collection to reduce operations.
-
             await LogMessageAsync("MessageHub", "Total Videos: " + totalvideos);
-
             await LogMessageAsync("MessageHub", "Filter Rating: " + Model.Settings.FilterRating);
         }
 

@@ -886,8 +886,8 @@ namespace FileImporter
             string arguments = "-i " + closedpath + " -vcodec copy -acodec aac " + newpath;
 
             Log("Converting MKV");
-            Log("closedpath " + closedpath);
-            Log("newpath " + newpath);
+            Log("closed path " + closedpath);
+            Log("new path " + newpath);
 
             var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
@@ -979,8 +979,8 @@ namespace FileImporter
             string arguments = "-i " + closedpath + " -c:a aac -b:a 128k -c:v libx264 -crf 23 " + newpath;
 
             Log("Converting AVI");
-            Log("closedpath " + closedpath);
-            Log("newpath " + newpath);
+            Log("closed path " + closedpath);
+            Log("new path " + newpath);
 
             var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
@@ -1032,7 +1032,7 @@ namespace FileImporter
             returnValue = searchTerm.Replace("?", "%3F");
             returnValue = searchTerm.Replace("/", "%2F");
 
-            //Engine spacific replacement.
+            //Engine specific replacement.
             switch (engine)
             {
                 case SearchEngine.Bing:

@@ -11,12 +11,15 @@
 
     class LocalDatabase
     {
-        static SQLiteAsyncConnection Database;
+        private static SQLiteAsyncConnection Database;
         private HubConnection dataHub;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        private string hubId = string.Empty;
+
+        private List<Tuple<string, Exception>> Errors = new List<Tuple<string, Exception>>();
+        private List<Tuple<string, string>> Messages = new List<Tuple<string, string>>();
+
+
         public static readonly AsyncLazy<LocalDatabase> Instance = new AsyncLazy<LocalDatabase>(async () =>
         {
             var instance = new LocalDatabase();
@@ -24,9 +27,6 @@
             return instance;
         });
 
-        /// <summary>
-        /// 
-        /// </summary>
         public LocalDatabase()
         {
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
@@ -45,6 +45,21 @@
                     .WithUrl("http://192.168.0.6:888/messageHub")
                     .Build();
 
+                dataHub.On<string>("SetRegistration", (id) =>
+                {
+                    hubId = id;
+                });
+
+                dataHub.On<string,string>("SendMessage", (id,message) =>
+                {
+                    Messages.Add(new Tuple<string, string>(id,message));
+                });
+
+                dataHub.On<string, string>("SendError", (id, json) =>
+                {
+                    Errors.Add(new Tuple<string, Exception>(id, JsonConvert.DeserializeObject<Exception>(json)));
+                });
+
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
@@ -53,7 +68,9 @@
 
                 await dataHub.StartAsync();
 
-                CallForVideos();
+                await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
+
+                // CallForVideos();
             }
             catch (Exception ex)
             {
@@ -63,6 +80,14 @@
 
         #endregion
 
+        #region Debugging
+
+        public async void Error(Exception ex)
+        {
+            await dataHub.InvokeAsync("SendErrorAsync", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
+        }
+
+        #endregion
 
         public Task<List<Video>> GetVideosAsync()
         {
@@ -93,11 +118,6 @@
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objective"></param>
-        /// <returns></returns>
         public Task<int> SaveVideoAsync(Video video)
         {
 
@@ -123,10 +143,5 @@
                 return null;
             }
         }
-
-
-
-
-
     }
 }
