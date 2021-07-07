@@ -80,6 +80,14 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
+    <FlyoutItem Title="Messages" Icon="icon_about.png">
+        <ShellContent Route="MessagesPage" ContentTemplate="{DataTemplate local:MessagesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Errors" Icon="icon_about.png">
+        <ShellContent Route="ErrorsPage" ContentTemplate="{DataTemplate local:ErrorsPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Time" Icon="icon_about.png">
         <ShellContent Route="TimePage" ContentTemplate="{DataTemplate local:TimePage}" />
     </FlyoutItem>

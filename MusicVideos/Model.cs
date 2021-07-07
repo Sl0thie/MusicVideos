@@ -14,16 +14,13 @@ namespace MusicVideos
     /// </summary>
     public static class Model
     {
-        private static SQLiteAsyncConnection Database;
         public const string DatabaseFilename = "SQLite.db3";
         public const SQLiteOpenFlags Flags =
-            // open the database in read/write mode
             SQLiteOpenFlags.ReadWrite |
-            // create the database if it doesn't exist
             SQLiteOpenFlags.Create |
-            // enable multi-threaded database access
             SQLiteOpenFlags.SharedCache;
 
+        private static SQLiteAsyncConnection database;
         private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
         private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
         private static Settings settings = new Settings();
@@ -92,16 +89,16 @@ namespace MusicVideos
 
             try
             {
-                Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
+                Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
                 List<Video> videos = rv.Result;
 
                 if (videos.Count == 1)
                 {
-                    return Database.UpdateAsync(video);
+                    return database.UpdateAsync(video);
                 }
                 else
                 {
-                    return Database.InsertAsync(video);
+                    return database.InsertAsync(video);
                 }
             }
             catch (Exception ex)
@@ -117,8 +114,8 @@ namespace MusicVideos
         public static void LoadVideos()
         {
             // Create database.
-            Database = new SQLiteAsyncConnection(Path.Combine(FilesPath, DatabaseFilename), Flags);
-            _ = Database.CreateTableAsync<Video>();
+            database = new SQLiteAsyncConnection(Path.Combine(FilesPath, DatabaseFilename), Flags);
+            _ = database.CreateTableAsync<Video>();
 
             // Create RatingHistogram.
             for (int i = 0; i < 101; i++)

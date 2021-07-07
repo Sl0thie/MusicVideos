@@ -8,26 +8,36 @@
     using System;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
+    using System.Collections.ObjectModel;
 
-    class LocalDatabase
+    class DataStore
     {
         private static SQLiteAsyncConnection Database;
         private HubConnection dataHub;
-
         private string hubId = string.Empty;
-
-        private List<Tuple<string, Exception>> Errors = new List<Tuple<string, Exception>>();
-        private List<Tuple<string, string>> Messages = new List<Tuple<string, string>>();
-
-
-        public static readonly AsyncLazy<LocalDatabase> Instance = new AsyncLazy<LocalDatabase>(async () =>
+        private List<MessageItem> messages = new List<MessageItem>();
+        private List<ErrorItem> errors;
+        
+        public List<MessageItem> Messages
         {
-            var instance = new LocalDatabase();
+            get { return messages; }
+            set { messages = value; }
+        }
+
+        public List<ErrorItem> Errors
+        {
+            get { return errors; }
+            set { errors = value; }
+        }
+
+        public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
+        {
+            var instance = new DataStore();
             CreateTableResult result = await Database.CreateTableAsync<Video>();
             return instance;
         });
 
-        public LocalDatabase()
+        public DataStore()
         {
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
             IinitializeSignalR();
@@ -51,27 +61,44 @@
                     Debug.WriteLine("Hub Registration Id: " + id);
                 });
 
-                dataHub.On<string,string>("SendMessage", (id,message) =>
+                dataHub.On<string,string>("SendMessage", (id, message) =>
                 {
-                    Messages.Add(new Tuple<string, string>(id,message));
+                    Debug.WriteLine("SendMessage: " + id + " " + message);
+                    MessageItem nextMessage = new MessageItem
+                    {
+                        HubId = id,
+                        Message = message,
+                        Timestamp = DateTime.Now
+                    };
+                    Messages.Add(nextMessage);
                 });
 
                 dataHub.On<string, string>("SendError", (id, json) =>
                 {
-                    Errors.Add(new Tuple<string, Exception>(id, JsonConvert.DeserializeObject<Exception>(json)));
+                    ErrorItem nextError = new ErrorItem
+                    {
+                        HubId = id,
+                        Ex = JsonConvert.DeserializeObject<Exception>(json),
+                        Timestamp = DateTime.Now
+                    };
+
+                    Debug.WriteLine(id + " " + json);
+
+                    Errors.Add(nextError);
                 });
 
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
+                    //Debug.WriteLine("SaveVideo: " + json);
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
                     await SaveVideoAsync(newVideo);
                 });
 
                 await dataHub.StartAsync();
-
                 await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
-
-                // CallForVideos();
+                //await dataHub.InvokeAsync("SendMessageAsync", hubId, "Test Message");
+                //await dataHub.InvokeAsync("SendMessageAsync", hubId, "CallForVideos");
+                await dataHub.InvokeAsync("GetVideosAsync");
             }
             catch (Exception ex)
             {
@@ -96,26 +123,20 @@
 
             try
             {
+                ////Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Artist] LIKE 'A%'");
+                //Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video]");
+                //List<Video> videos = rv.Result;
+
+                //Debug.WriteLine("rv count " + rv.Result.Count);
+
+                //return rv;
+
                 return Database.Table<Video>().ToListAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex.Message);
                 return null;
-            }
-        }
-
-        public void CallForVideos()
-        {
-            Debug.WriteLine("LocalDatabase.CallForVideos");
-
-            try
-            {
-                dataHub.InvokeAsync("GetVideosAsync");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error: " + ex.Message);
             }
         }
 

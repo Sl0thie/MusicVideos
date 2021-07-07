@@ -22,6 +22,8 @@
         private const int RatingIncrementSkipped = 1;
         private const int RatingIncrementQueued = 10;
 
+        private static readonly Dictionary<int, int> RatingHistogram = new Dictionary<int, int>();
+
         private static List<Genre> filter = new List<Genre>();
         private static bool isRandom = true;
         private static bool noGenre;
@@ -31,19 +33,14 @@
         private static int lastIndex = -1;
         private static string previousLastPlayedString = string.Empty;
 
-        private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
+        private readonly Random rnd = new Random();
+        private readonly List<string> remoteIds = new List<string>();
+        private readonly List<string> playerIds = new List<string>();
 
-        //private string hostname = System.Net.Dns.GetHostName();
-
-        private Random rnd = new Random();
+        private readonly string testkey = "123456";
 
         private int nextRemote;
         private int nextPlayer;
-
-        private List<string> RemoteIds = new List<string>();
-        private List<string> PlayerIds = new List<string>();
-
-        private string testkey = "123456";
 
         #endregion
 
@@ -68,9 +65,9 @@
             {
                 await Clients.All.SendAsync("SendMessage", id, message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
@@ -88,16 +85,15 @@
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
-        private void Error(Exception ex)
-        {
-            Debug.WriteLine("ERROR: " + ex.Message);
-            SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
-        }
-
+        /// <summary>
+        /// Registers a new Remote with the hub.
+        /// </summary>
+        /// <param name="key">The key needed to access the hub.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task RegisterRemoteAsync(string key)
         {
             try
@@ -105,58 +101,59 @@
                 if (key == testkey)
                 {
                     string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-                    RemoteIds.Add(registration);
+                    remoteIds.Add(registration);
                     await Clients.Caller.SendAsync("SetRegistration", registration);
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
+        /// <summary>
+        /// Registers a new Player with the hub.
+        /// </summary>
+        /// <param name="key">The key needed to access the hub.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task RegisterPlayerAsync(string key)
         {
             try
             {
                 if (key == testkey)
                 {
-                    string registration = "P" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-                    PlayerIds.Add(registration);
+                    string registration = "P" + (nextPlayer++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+                    playerIds.Add(registration);
                     await Clients.Caller.SendAsync("SetRegistration", registration);
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
         /// <summary>
         /// Gets the Video objects from the server.
         /// </summary>
+        /// <param name="id">The id of the remote.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetVideosAsync(string id)
+        public async Task GetVideosAsync()
         {
             try
             {
-                if (RemoteIds.Contains(id))
-                {
-                    List<Video> videos = Model.Videos.Values.ToList();
+                List<Video> videos = Model.Videos.Values.ToList();
 
-                    foreach (var item in videos.Where(x => x.Rating >= Model.Settings.FilterRating).OrderBy(x => x.SearchArtist).ThenBy(x => x.Title))
-                    {
-                        await Clients.Caller.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
-                    }
-                }
-                else
+                await Clients.All.SendAsync("SendMessage", videos.Count + "Videos found.");
+
+                foreach (var item in videos)
                 {
-                    await Clients.Caller.SendAsync("SendMessage", "Registration not found.");
+                    await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
@@ -169,14 +166,14 @@
         {
             try
             {
-                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                if (remoteIds.Contains(id) || playerIds.Contains(id))
                 {
                     await Clients.Others.SendAsync("GetTime");
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
@@ -190,14 +187,14 @@
         {
             try
             {
-                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                if (remoteIds.Contains(id) || playerIds.Contains(id))
                 {
                     await Clients.All.SendAsync("SendTime", id, time);
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
         }
 
@@ -211,15 +208,21 @@
         {
             try
             {
-                if (RemoteIds.Contains(id) || PlayerIds.Contains(id))
+                if (remoteIds.Contains(id) || playerIds.Contains(id))
                 {
                     await Clients.All.SendAsync("SetTimeOffset", id, offset);
                 }
             }
             catch (Exception ex)
             {
-                Error(ex);
+                await ErrorAsync(ex);
             }
+        }
+
+        private async Task ErrorAsync(Exception ex)
+        {
+            Debug.WriteLine("ERROR: " + ex.Message);
+            await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
         #endregion
@@ -270,12 +273,12 @@
         public async Task GetPlaylistAsync()
         {
             int totalvideos = 0;
-            ratingHistogram.Clear();
+            RatingHistogram.Clear();
 
             // Create RatingHistogram.
             for (int i = 0; i < 101; i++)
             {
-                ratingHistogram.Add(i, 0);
+                RatingHistogram.Add(i, 0);
             }
 
             int top50 = 0;
@@ -283,7 +286,7 @@
 
             foreach (Video next in Model.Videos.Values)
             {
-                ratingHistogram[next.Rating]++;
+                RatingHistogram[next.Rating]++;
                 if (next.Rating > 50)
                 {
                     top50++;
@@ -296,9 +299,9 @@
 
             for (int i = 0; i < 101; i++)
             {
-                if (ratingHistogram[i] > 0)
+                if (RatingHistogram[i] > 0)
                 {
-                    await LogMessageAsync("MessageHub", i + " " + ratingHistogram[i]);
+                    await LogMessageAsync("MessageHub", i + " " + RatingHistogram[i]);
                 }
             }
 

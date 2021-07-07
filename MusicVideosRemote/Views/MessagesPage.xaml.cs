@@ -5,23 +5,34 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using MusicVideosRemote.Services;
+
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
+    using MusicVideosRemote.ViewModels;
+    using System.Diagnostics;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VideoListPage : ContentPage
+    public partial class MessagesPage : ContentPage
     {
-        public VideoListPage()
+
+        MessagesViewModel _viewModel;
+
+        public MessagesPage()
         {
+            Debug.WriteLine("MessagesPage.MessagesPage");
+
+
             InitializeComponent();
+
+            BindingContext = _viewModel = new MessagesViewModel();
+
+
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            DataStore database = await DataStore.Instance;
-            listView.ItemsSource = await database.GetVideosAsync();
+            _viewModel.OnAppearing();
         }
 
     }
