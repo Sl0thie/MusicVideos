@@ -6,9 +6,9 @@
 
     public class Filter
     {
-        public int RatingMinimum { get; set; }
+        public int RatingMinimum { get; set; } = 1;
 
-        public int RatingMaximum { get; set; }
+        public int RatingMaximum { get; set; } = 100;
 
         public DateTime DateTimeMinimum { get; set; }
 

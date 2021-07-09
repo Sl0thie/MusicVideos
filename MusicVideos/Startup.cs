@@ -58,6 +58,7 @@ namespace MusicVideos
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapHub<VideoHub>("/videoHub");
                 endpoints.MapHub<MessageHub>("/messageHub");
             });
         }

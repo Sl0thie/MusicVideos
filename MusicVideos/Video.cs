@@ -14,7 +14,6 @@
         /// <summary>
         /// Gets or sets the Index.
         /// </summary>
-        [PrimaryKey]
         public int Id { get; set; }
 
         /// <summary>
@@ -41,11 +40,13 @@
         /// <summary>
         /// Gets or sets the UNC path to the file.
         /// </summary>
+        [Obsolete("Use Physical and Virtual Path instead.")]
         public string Path { get; set; }
 
         /// <summary>
         /// Gets the genres that this song falls into.
         /// </summary>
+        /// 
         public Collection<Genre> Genres
         {
             get { return genres; }
@@ -62,7 +63,7 @@
         public int Duration { get; set; }
 
         /// <summary>
-        /// Gets or sets the bitrate of the video.
+        /// Gets or sets the bit-rate of the video.
         /// </summary>
         public int VideoBitRate { get; set; }
 
@@ -120,5 +121,20 @@
         /// Gets or sets when the song was added to the collection.
         /// </summary>
         public DateTime Added { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of errors.
+        /// </summary>
+        public int Errors { get; set; }
+
+        /// <summary>
+        /// Gets or sets the physical path of the video.
+        /// </summary>
+        public string PhysicalPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the virtual path of the video.
+        /// </summary>
+        public string VirtualPath { get; set; }
     }
 }

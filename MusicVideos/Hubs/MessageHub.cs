@@ -33,23 +33,7 @@
         private static int lastIndex = -1;
         private static string previousLastPlayedString = string.Empty;
 
-        private readonly Random rnd = new Random();
-        private readonly List<string> remoteIds = new List<string>();
-        private readonly List<string> playerIds = new List<string>();
-
-        private readonly string testkey = "123456";
-
-        private int nextRemote;
-        private int nextPlayer;
-
         #endregion
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MessageHub"/> class.
-        /// </summary>
-        public MessageHub()
-        {
-        }
 
         #region Version 2
 
@@ -90,50 +74,6 @@
         }
 
         /// <summary>
-        /// Registers a new Remote with the hub.
-        /// </summary>
-        /// <param name="key">The key needed to access the hub.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task RegisterRemoteAsync(string key)
-        {
-            try
-            {
-                if (key == testkey)
-                {
-                    string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-                    remoteIds.Add(registration);
-                    await Clients.Caller.SendAsync("SetRegistration", registration);
-                }
-            }
-            catch (Exception ex)
-            {
-                await ErrorAsync(ex);
-            }
-        }
-
-        /// <summary>
-        /// Registers a new Player with the hub.
-        /// </summary>
-        /// <param name="key">The key needed to access the hub.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task RegisterPlayerAsync(string key)
-        {
-            try
-            {
-                if (key == testkey)
-                {
-                    string registration = "P" + (nextPlayer++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-                    playerIds.Add(registration);
-                    await Clients.Caller.SendAsync("SetRegistration", registration);
-                }
-            }
-            catch (Exception ex)
-            {
-                await ErrorAsync(ex);
-            }
-        }
-
-        /// <summary>
         /// Gets the Video objects from the server.
         /// </summary>
         /// <param name="id">The id of the remote.</param>
@@ -149,68 +89,6 @@
                 foreach (var item in videos)
                 {
                     await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
-                }
-            }
-            catch (Exception ex)
-            {
-                await ErrorAsync(ex);
-            }
-        }
-
-        /// <summary>
-        /// Gets the time from the server and clients.
-        /// </summary>
-        /// <param name="id">A valid registration id.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetTimeAsync(string id)
-        {
-            try
-            {
-                if (remoteIds.Contains(id) || playerIds.Contains(id))
-                {
-                    await Clients.Others.SendAsync("GetTime");
-                }
-            }
-            catch (Exception ex)
-            {
-                await ErrorAsync(ex);
-            }
-        }
-
-        /// <summary>
-        /// Sends the time to all clients.
-        /// </summary>
-        /// <param name="id">The client id.</param>
-        /// <param name="time">The time on the client.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task SendTimeAsync(string id, string time)
-        {
-            try
-            {
-                if (remoteIds.Contains(id) || playerIds.Contains(id))
-                {
-                    await Clients.All.SendAsync("SendTime", id, time);
-                }
-            }
-            catch (Exception ex)
-            {
-                await ErrorAsync(ex);
-            }
-        }
-
-        /// <summary>
-        /// Sets the time offset for the client.
-        /// </summary>
-        /// <param name="id">The id of the client to send to.</param>
-        /// <param name="offset">The time offset to apply to the client.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task SetTimeOffsetAsync(string id, string offset)
-        {
-            try
-            {
-                if (remoteIds.Contains(id) || playerIds.Contains(id))
-                {
-                    await Clients.All.SendAsync("SetTimeOffset", id, offset);
                 }
             }
             catch (Exception ex)

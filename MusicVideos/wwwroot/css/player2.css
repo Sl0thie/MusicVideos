@@ -1,4 +1,8 @@
-﻿#videoplayer {
+﻿video {
+    object-fit: fill;
+}
+
+#videoplayer0 {
     z-index: 0;
     position: absolute;
     left: 0px;
@@ -7,7 +11,26 @@
     height: 100%;
 }
 
-#player {
+#player0 {
+    margin: 0;
+    padding: 0;
+    cursor: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+}
+
+#videoplayer1 {
+    z-index: 1;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#player1 {
     margin: 0;
     padding: 0;
     cursor: none;

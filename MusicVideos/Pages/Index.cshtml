@@ -34,6 +34,7 @@
 
 <script>
     var playerWindow;
+    var player2Window;
     var remoteWindow;
     var anonymousWindow;
 
@@ -41,19 +42,25 @@
     window.addEventListener('beforeunload', closeWindows);
 
     function openWindows() {
-        playerWindow = window.open("Player", "Player", "left=1960,top=45,width=1440,height=900");
+        //playerWindow = window.open("Player", "Player", "left=1960,top=45,width=1440,height=900");
+        player2Window = window.open("Player2", "Player2", "left=1960,top=45,width=1440,height=900");
         remoteWindow = window.open("Remote", "Remote", "left=3650,top=45,width=412,height=846");
         //anonymousWindow = window.open("Anonymous", "Anonymous", "left=1540,top=45,width=412,height=846");
     }
 
     function closeWindows() {
         playerWindow.close();
+        player2Window.close();
         remoteWindow.close();
         //anonymousWindow.close();
     }
 
     function openPlayer() {
         playerWindow = window.open("Player", "Player", "left=1960,top=45,width=1440,height=900");
+    }
+
+    function openPlayer2() {
+        player2Window = window.open("Player2", "Player2", "left=1960,top=1045,width=1440,height=900");
     }
 
     function openRemote() {

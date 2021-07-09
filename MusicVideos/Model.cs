@@ -14,7 +14,14 @@ namespace MusicVideos
     /// </summary>
     public static class Model
     {
+        /// <summary>
+        /// File name for the database.
+        /// </summary>
         public const string DatabaseFilename = "SQLite.db3";
+
+        /// <summary>
+        /// Flags for the database.
+        /// </summary>
         public const SQLiteOpenFlags Flags =
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
@@ -22,7 +29,7 @@ namespace MusicVideos
 
         private static SQLiteAsyncConnection database;
         private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
-        private static Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
+        private static readonly Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
         private static Settings settings = new Settings();
 
         /// <summary>
@@ -78,35 +85,35 @@ namespace MusicVideos
         /// </summary>
         public static Collection<int> FilteredVideoIds { get; } = new Collection<int>();
 
-        /// <summary>
-        /// Saves the Video to the database.
-        /// </summary>
-        /// <param name="video">The video to save.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static Task<int> SaveVideoAsync(Video video)
-        {
-            Debug.WriteLine("LocalDatabase.SaveVideoAsync");
+        ///// <summary>
+        ///// Saves the Video to the database.
+        ///// </summary>
+        ///// <param name="video">The video to save.</param>
+        ///// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        //public static Task<int> SaveVideoAsync(Video video)
+        //{
+        //    Debug.WriteLine("LocalDatabase.SaveVideoAsync");
 
-            try
-            {
-                Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
-                List<Video> videos = rv.Result;
+        //    try
+        //    {
+        //        Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
+        //        List<Video> videos = rv.Result;
 
-                if (videos.Count == 1)
-                {
-                    return database.UpdateAsync(video);
-                }
-                else
-                {
-                    return database.InsertAsync(video);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error: " + ex.Message);
-                return null;
-            }
-        }
+        //        if (videos.Count == 1)
+        //        {
+        //            return database.UpdateAsync(video);
+        //        }
+        //        else
+        //        {
+        //            return database.InsertAsync(video);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine("Error: " + ex.Message);
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// Loads the video file data from a json file.
@@ -133,10 +140,10 @@ namespace MusicVideos
                 ratingHistogram[next.Rating]++;
             }
 
-            for (int i = 0; i < 101; i++)
-            {
-                Debug.WriteLine(i + " " + ratingHistogram[i]);
-            }
+            //for (int i = 0; i < 101; i++)
+            //{
+            //    Debug.WriteLine(i + " " + ratingHistogram[i]);
+            //}
         }
 
         /// <summary>

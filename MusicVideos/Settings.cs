@@ -10,25 +10,9 @@
     /// </summary>
     public class Settings
     {
-        private int filterRating;
         private int volume;
-
-        /// <summary>
-        /// Gets or sets the FilterRating, the minimum rating a video has before it is excluded from the list.
-        /// </summary>
-        public int FilterRating
-        {
-            get
-            {
-                return filterRating;
-            }
-
-            set
-            {
-                filterRating = value;
-                Model.SaveSettings();
-            }
-        }
+        private int filterRating;
+        private Filter filter;
 
         /// <summary>
         ///  Gets or sets the Volume.
@@ -45,6 +29,38 @@
                 volume = value;
                 Model.SaveSettings();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter rating.
+        /// </summary>
+        [Obsolete("Moving to Filter class")]
+        public int FilterRating
+        {
+            get
+            {
+                return filterRating;
+            }
+
+            set
+            {
+                filterRating = value;
+                Model.SaveSettings();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter for the video playlist.
+        /// </summary>
+        public Filter Filter
+        {
+            get { return filter; }
+            set { filter = value; }
+        }
+
+        public Settings()
+        {
+
         }
     }
 }

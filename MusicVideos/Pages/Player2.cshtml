@@ -1,7 +1,7 @@
 ﻿@page
 @model MusicVideos.Pages.Player2Model
 @{
-    ViewData["Title"] = "Player";
+    ViewData["Title"] = "Player2";
     @section Styles {
         <link href="@Url.Content("/css/player2.css")" rel="stylesheet" type="text/css" />
     }
@@ -10,10 +10,15 @@
         <script type="text/javascript" src="@Url.Content("/js/player2.js")" defer></script>
     }
 }
-<div id="videoplayer">
-    <video id="player" onended="playerended();" onloadeddata="playerReady();" onerror="playerError();" tabindex="1" runat="server">
+<div id="videoplayer0">
+    <video id="player0" onplaying="player0play();" onended="player0ended();" onloadeddata="player0ready();" onerror="player0error();" tabindex="1" runat="server">
     </video>
 </div>
+<div id="videoplayer1">
+    <video id="player1" onplaying="player1play();" onended="player1ended();" onloadeddata="player1ready();" onerror="player1error();" tabindex="1" runat="server">
+    </video>
+</div>
+
 <div id="overlay" class="overlay">
     <div class="topline">
         <div class="toplineleft">
@@ -42,6 +47,5 @@
 </div>
 <div id="overlayRatingHistogram">
     <ul id="ulRatingHistogram">
-
     </ul>
 </div>

@@ -13,128 +13,186 @@ let opacity;                   // Overlay opacity value.
 let connection;                // SignalR connection object.
 let volume = 1;                // Volume for the video element.
 let currentIndex;              // Index of the current Video.
+let hubId = '';
 
 // Element objects.
-let player = document.getElementById('player'); 
+let player0 = document.getElementById('player0');
+let player1 = document.getElementById('player1');
 let overlay = document.getElementById('overlay');
 let songartist = document.getElementsByClassName('songartist');
 let songtitle = document.getElementsByClassName('songtitle');
 let clock = document.getElementsByClassName('clock');
+let nextPlayer = 0;
+let player0playing = false;
+let player1playing = false;
+
 //#endregion
 //#region Initialization
 window.addEventListener('load', function () {
-    player.addEventListener('mousedown', nextVideo, true);
-    overlay.addEventListener('mousedown', nextVideo, true);
+    player0.addEventListener('mousedown', screenClick, true);
+    player1.addEventListener('mousedown', screenClick, true);
+    overlay.addEventListener('mousedown', screenClick, true);
+
     // Create the SignalR object.
-    connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
+    connection = new signalR.HubConnectionBuilder().withUrl('/videoHub').build();
+
     // Define the methods that will be received from the hub.
-    connection.on('SetVideo', function (index, songPath, songArtist, songTitle, clockTime) {
-        setVideo(index, songPath, songArtist, songTitle, clockTime);
+    connection.on('setRegistration', function (id) {
+        hubId = id;
+        console.log('Hub Id: ' + hubId);
     });
-    connection.on('MediaPlay', function () {
-        player.play();
+
+    // Define the methods that will be received from the hub.
+    connection.on('loadVideo', function (video) {
+        loadVideo(video);
     });
-    connection.on('MediaPause', function () {
-        player.pause();
+
+    connection.on('playVideo', function (video, time) {
+        playVideo(video, time);
     });
-    connection.on('SetVolume', function (value) {
-        console.log('SetVolume() ' + value)
-        player.volume = value / maxVolume;
-    });
+
     // Start the SignalR connection to the server hub.
     connection.start().then(function () {
         setTimeout(connectionStarted, startupPause);
     });
     // Hide the mouse cursor.
-    player.style.cursor = 'none';
+    player0.style.cursor = 'none';
+    player1.style.cursor = 'none';
     overlay.style.cursor = 'none';
     overlayShadow.style.cursor = 'none';
 });
 // Once connected to hub get the first video to play.
 function connectionStarted() {
     window.addEventListener('error', logError);
-    connection.invoke('GetNextVideoAsync');
+    connection.invoke('RegisterPlayerAsync','123456');
 }
 //#endregion
 //#region Debug
 function logError(e) {
+    console.log('ERROR: ' + e.message);
     connection.invoke('LogErrorAsync', document.title, e.message, e.filename, e.lineno.toString(), e.colno.toString());
 }
 function log(message) {
     connection.invoke('LogMessageAsync', document.URL, message);
 }
 //#endregion
-//#region Media
-// Get the next video from the hub.
-function nextVideo() {
-    connection.invoke('GetNextVideoAsync');
-}
 
-// When the video has ended get another video to play from the hub.
-function playerended() {
-    connection.invoke('GetNextVideoAsync');
-}
-// If there is an error with a video then get the next video.
-// TODO Add logging to this function to log the video that has raised the error on the hub.
-function playerError() {
-    connection.invoke('GetNextVideoAsync');
-}
-// When the player is ready auto start the video.
-function playerReady() {
-    player.play();
-    connection.invoke('UpdateVideoProperties', currentIndex.toString(), player.duration.toString(), player.videoWidth.toString(), player.videoHeight.toString());
-}
-// Play the next video.
-function setVideo(index, songPath, songArtist, songTitle, clockTime) {
-    currentIndex = index;
-    // Update display elements.
-    for (const element of songartist) { element.innerHTML = songArtist; }
-    for (const element of songtitle) { element.innerHTML = songTitle; }
-    for (const element of clock) { element.innerHTML = clockTime; }
-    // Update the player's source. (video element auto plays)
-    player.src = songPath;
-    // hide the mouse cursor again. Some browsers don't seem to keep the cursor hidden (Samsung)
-    player.style.cursor = 'none';
-    overlay.style.cursor = 'none';
-    overlayShadow.style.cursor = 'none';
-    // Start the display fadeout process.
-    fadeoutStart();
-}
+function loadVideo(video) {
 
-//#endregion
-//#region Overlay
-// Start title display process by making the elements visible and starting the timer.
-function fadeoutStart() {
-    overlay.style.opacity = maxOpacity;
-    overlayShadow.style.opacity = maxOpacity;
-    clearTimeout(fadeoutStartId);
-    clearInterval(fadeoutId);
-    fadeoutStartId = setTimeout(fadeout, intervalDisplay);
-}
-// Begin the fading loop to slowly fade the display.
-function fadeout() {
-    clearInterval(fadeoutStartId);
-    clearInterval(fadeoutId);
-    fadeoutId = setInterval(hide, intervalFade);
-}
-// Reduce the visibility of the display and check if it is completely faded. Stop the loop if true.
-function hide() {
-    opacity = Number(window.getComputedStyle(overlay).getPropertyValue("opacity"))
-    if (opacity > minOpacity) {
-        opacity = opacity - incrementOpacity;
-        overlay.style.opacity = opacity
-        overlayShadow.style.opacity = opacity
+    console.log('loadVideo');
+
+    try {
+        var videoObj = JSON.parse(video);
+
+        console.log('Id: ' + videoObj.Id);
+        console.log('Artist: ' + videoObj.Artist);
+        console.log('Title: ' + videoObj.Title);
+        console.log('VirtualPath: ' + videoObj.VirtualPath);
+
+        if (nextPlayer == 0) {
+            player0.src = videoObj.VirtualPath;
+        }
+        else {
+            player1.src = videoObj.VirtualPath;
+        }
     }
-    else {
-        clearInterval(fadeoutId);
+    catch (error) {
+        logError(error);
     }
 }
-//#endregion
-// Rating Histogram
-function showHistogram() {
-     
+
+function playVideo(video, time) {
+
+    console.log('playVideo');
+
+    try {
+        const obj = JSON.parse(video);
+
+        if (nextPlayer == 0) {
+            if (player1playing == true) {
+                player1.pause();
+            }
+            player1.style.display = 'none';
+            player0.style.display = 'initial';
+            player0.play();
+            nextPlayer = 1;
+        }
+        else {
+            if (player0playing == true) {
+                player0.pause();
+            }
+            player0.style.display = 'none';
+            player1.style.display = 'initial';
+            player1.play();
+            nextPlayer = 0;
+        }
+    }
+    catch (error) {
+        logError(error);
+    }
+
+    //console.log('Id: ' + obj.Id);
+    //console.log('Artist: ' + obj.Artist);
+    //console.log('SearchArtist: ' + obj.SearchArtist);
+    //console.log('Title: ' + obj.Title);
+    //console.log('Album: ' + obj.Album);
+    //console.log('Path: ' + obj.Path);
+    //console.log('Genres: ' + obj.Genres);
+    //console.log('Extension: ' + obj.Extension);
+    //console.log('Duration: ' + obj.Duration);
+    //console.log('VideoBitRate: ' + obj.VideoBitRate);
+    //console.log('VideoWidth: ' + obj.VideoWidth);
+    //console.log('VideoHeight: ' + obj.VideoHeight);
+    //console.log('VideoFPS: ' + obj.VideoFPS);
+    //console.log('PlayCount: ' + obj.PlayCount);
+    //console.log('QueuedCount: ' + obj.QueuedCount);
+    //console.log('PlayTime: ' + obj.PlayTime);
+    //console.log('Rating: ' + obj.Rating);
+    //console.log('LastPlayed: ' + obj.LastPlayed);
+    //console.log('LastQueued: ' + obj.LastQueued);
+    //console.log('Released: ' + obj.Released);
+    //console.log('Added: ' + obj.Added);
+    //console.log('Errors: ' + obj.Errors);
+    //console.log('PhysicalPath: ' + obj.PhysicalPath);
+    //console.log('VirtualPath: ' + obj.VirtualPath);
+
+    //const timeObj = JSON.parse(time);
+    //console.log('TimeObj: ' + timeObj);
+    //console.log('Time: ' + time);
 }
-function hideHistogram() {
+
+function screenClick() {
+    connection.invoke('ScreenClickAsync', hubId);
+}
+
+function player0play() {
+    player0playing = true;
+}
+
+function player0ended() {
+    player0playing = false;
+}
+
+function player1play() {
+    player1playing = true;
+}
+
+function player1ended() {
+    player1playing = false;
+}
+
+function player0ready() {
 
 }
-//#endregion
+
+function player0error() {
+
+}
+
+function player1ready() {
+
+}
+
+function player1error() {
+
+}

@@ -2,12 +2,17 @@
 //#region Variables
 'use strict';
 let connection;
+let connection2;
 let debugOutput;
 //#endregion
-//#region Initialisation
+//#region Initialization
 window.addEventListener('load', function () {
     debugOutput = document.getElementById('debugOutput');
     connection = new signalR.HubConnectionBuilder().withUrl('/messageHub').build();
+
+    connection2 = new signalR.HubConnectionBuilder().withUrl('/videoHub').build();
+
+
     connection.on('PrintError', function (docTitle, message, filename, lineNo, colNo) {
         let line1 = document.createElement('li');
         line1.innerHTML = 'ERROR ' + docTitle;
@@ -33,5 +38,8 @@ window.addEventListener('load', function () {
         newItem.scrollIntoView();
     });
     connection.start();
+
+    connection2.start();
+
 });
 //#endregion
