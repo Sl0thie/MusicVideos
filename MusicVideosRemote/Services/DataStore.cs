@@ -9,15 +9,42 @@
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
-    class DataStore
+    class DataStore : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private static SQLiteAsyncConnection Database;
         private HubConnection dataHub;
         private string hubId = string.Empty;
         private List<MessageItem> messages = new List<MessageItem>();
         private List<ErrorItem> errors;
-        
+
+
+        private Video currentVideo;
+
+        [Bindable(true)]
+        public Video CurrentVideo
+        {
+            get { return currentVideo; }
+            set
+            {
+                currentVideo = value;
+                Debug.WriteLine($"DS Artist: {currentVideo.Artist}");
+                Debug.WriteLine($"DS Title: {currentVideo.Title}");
+            }
+        }
+
         public List<MessageItem> Messages
         {
             get { return messages; }
@@ -33,6 +60,7 @@
         public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
         {
             var instance = new DataStore();
+            //_ = Database.DropTableAsync<Video>();
             CreateTableResult result = await Database.CreateTableAsync<Video>();
             return instance;
         });
@@ -40,6 +68,8 @@
         public DataStore()
         {
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+
+            
             IinitializeSignalR();
         }
 
@@ -52,7 +82,7 @@
             try
             {
                 dataHub = new HubConnectionBuilder()
-                    .WithUrl("http://192.168.0.6:888/messageHub")
+                    .WithUrl("http://192.168.0.6:888/videoHub")
                     .Build();
 
                 dataHub.On<string>("SetRegistration", (id) =>
@@ -87,18 +117,23 @@
                     Errors.Add(nextError);
                 });
 
+                dataHub.On<string, string>("PlayVideo", (json, time) =>
+                {
+                    Video newVideo = JsonConvert.DeserializeObject<Video>(json);
+                    Globals.CurrentVideo = newVideo;
+                    CurrentVideo = newVideo;
+                    Debug.WriteLine("PlayVideo: " + newVideo.Artist);
+                });
+
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
-                    //Debug.WriteLine("SaveVideo: " + json);
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
                     await SaveVideoAsync(newVideo);
                 });
 
                 await dataHub.StartAsync();
                 await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
-                //await dataHub.InvokeAsync("SendMessageAsync", hubId, "Test Message");
-                //await dataHub.InvokeAsync("SendMessageAsync", hubId, "CallForVideos");
-                await dataHub.InvokeAsync("GetVideosAsync");
+                //await dataHub.InvokeAsync("GetVideosAsync", hubId);
             }
             catch (Exception ex)
             {

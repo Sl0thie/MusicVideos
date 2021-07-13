@@ -2,28 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicVideosRemote.Views.VideoListPage" BackgroundColor="#000000">
-    <ListView x:Name="listView"
-              Margin="20" CachingStrategy="RecycleElement" >
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="24"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
 
-                        <Label Text="{Binding Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
-                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
-                    </Grid>
-                </ViewCell>
+
+    <CollectionView x:Name="CV" ItemsSource="{Binding videos}" SelectionMode="Single">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{Binding Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
+                    <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
+                </Grid>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>
 
 

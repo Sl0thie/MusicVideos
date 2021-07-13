@@ -42,11 +42,12 @@ window.addEventListener('load', function () {
         console.log('Hub Id: ' + hubId);
     });
 
-    // Define the methods that will be received from the hub.
+    // Calls loadVideo when received.
     connection.on('loadVideo', function (video) {
         loadVideo(video);
     });
 
+    // Calls playVideo when received.
     connection.on('playVideo', function (video, time) {
         playVideo(video, time);
     });
@@ -106,7 +107,14 @@ function playVideo(video, time) {
     console.log('playVideo');
 
     try {
-        const obj = JSON.parse(video);
+        var obj = JSON.parse(video);
+        var timeObj = JSON.parse(time);
+        timeObj = new Date(timeObj);
+        var date2_ms = timeObj.getTime();
+        var date3_ms = new Date().getTime();
+        var diff2 = date2_ms - date3_ms;
+
+        console.log('Diff2: ' + diff2);
 
         if (nextPlayer == 0) {
             if (player1playing == true) {
@@ -131,10 +139,10 @@ function playVideo(video, time) {
         logError(error);
     }
 
-    //console.log('Id: ' + obj.Id);
-    //console.log('Artist: ' + obj.Artist);
+    console.log('Id: ' + obj.Id);
+    console.log('Artist: ' + obj.Artist);
     //console.log('SearchArtist: ' + obj.SearchArtist);
-    //console.log('Title: ' + obj.Title);
+    console.log('Title: ' + obj.Title);
     //console.log('Album: ' + obj.Album);
     //console.log('Path: ' + obj.Path);
     //console.log('Genres: ' + obj.Genres);

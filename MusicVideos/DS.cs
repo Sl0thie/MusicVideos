@@ -79,7 +79,7 @@
             nextItem.Timestamp = DateTime.Now.AddSeconds(5);
             nextItem.ActionItem = () =>
             {
-                _ = comms.CheckConnectionAsync();
+                comms.CheckConnectionAsync();
             };
 
             TimeLineItems.Enqueue(nextItem);

@@ -36,7 +36,7 @@
         Dance = 5,
 
         /// <summary>
-        /// Dubstep is a genre of electronic dance music that originated in South London in the late 1990s. It is generally characterised by sparse, syncopated rhythmic patterns with prominent sub-bass frequencies. The style emerged as an offshoot of UK garage, drawing on a lineage of related styles such as 2-step and dub reggae, as well as jungle, broken beat, and grime. In the United Kingdom, the origins of the genre can be traced back to the growth of the Jamaican sound system party scene in the early 1980s.
+        /// Dubstep is a genre of electronic dance music that originated in South London in the late 1990s. It is generally characterized by sparse, syncopated rhythmic patterns with prominent sub-bass frequencies. The style emerged as an offshoot of UK garage, drawing on a lineage of related styles such as 2-step and dub reggae, as well as jungle, broken beat, and grime. In the United Kingdom, the origins of the genre can be traced back to the growth of the Jamaican sound system party scene in the early 1980s.
         /// </summary>
         Dubstep = 6,
 
@@ -46,7 +46,7 @@
         EasyListening = 7,
 
         /// <summary>
-        /// In its early development, electronic music was associated almost exclusively with Western art music, but from the late 1960s, the availability of affordable music technology—particularly of synthesizers—meant that music produced using electronic means became increasingly common in the popular domains of rock and pop music and classical music, resulting in major electronically based subgenres.
+        /// In its early development, electronic music was associated almost exclusively with Western art music, but from the late 1960s, the availability of affordable music technology—particularly of synthesizers—meant that music produced using electronic means became increasingly common in the popular domains of rock and pop music and classical music, resulting in major electronically based sub genres.
         /// </summary>
         Electronic = 8,
 
@@ -61,12 +61,12 @@
         HipHop = 10,
 
         /// <summary>
-        /// House is a genre of electronic dance music characterized by a repetitive four-on-the-floor beat and a tempo of 120 to 130 beats per minute. It was created by DJs and music producers from Chicago 's underground club culture in the 1980s, as DJs from the subculture began altering disco songs to give them a more mechanical beat and deeper basslines.
+        /// House is a genre of electronic dance music characterized by a repetitive four-on-the-floor beat and a tempo of 120 to 130 beats per minute. It was created by DJs and music producers from Chicago 's underground club culture in the 1980s, as DJs from the subculture began altering disco songs to give them a more mechanical beat and deeper bass lines.
         /// </summary>
         House = 11,
 
         /// <summary>
-        /// Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, United States, in the late 19th and early 20th centuries, with its roots in blues and ragtime. Since the 1920s Jazz Age, it has been recognized as a major form of musical expression in traditional and popular music, linked by the common bonds of African-American and European-American musical parentage. Jazz is characterized by swing and blue notes, complex chords, call and response vocals, polyrhythms and improvisation. Jazz has roots in West African cultural and musical expression, and in African-American music traditions.
+        /// Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, United States, in the late 19th and early 20th centuries, with its roots in blues and ragtime. Since the 1920s Jazz Age, it has been recognized as a major form of musical expression in traditional and popular music, linked by the common bonds of African-American and European-American musical parentage. Jazz is characterized by swing and blue notes, complex chords, call and response vocals, poly rhythms and improvisation. Jazz has roots in West African cultural and musical expression, and in African-American music traditions.
         /// </summary>
         Jazz = 12,
 

@@ -16,5 +16,15 @@
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            DataStore database = await DataStore.Instance;
+
+            BindingContext = database.CurrentVideo;
+
+            //BindingContext = Globals.CurrentVideo;
+        }
     }
 }

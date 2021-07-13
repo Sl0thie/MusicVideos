@@ -27,6 +27,7 @@
         {
             try
             {
+                Debug.WriteLine($"SendErrorAsync:  {id}  {error}");
                 await Clients.All.SendAsync("SendError", id, error);
             }
             catch (Exception ex)
@@ -35,9 +36,14 @@
             }
         }
 
+        /// <summary>
+        /// Logs local errors.
+        /// </summary>
+        /// <param name="ex">The exception to be logged.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
-            Debug.WriteLine("ERROR: " + ex.Message);
+            Debug.WriteLine("ErrorAsync: " + ex.Message);
             await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
@@ -53,13 +59,21 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task LogErrorAsync(string docTitle, string message, string filename, string lineNo, string colNo)
         {
-            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
-            Debug.WriteLine("   Message:" + message);
-            Debug.WriteLine("  Filename:" + filename);
-            Debug.WriteLine("      Line:" + lineNo);
-            Debug.WriteLine("    Column:" + colNo);
+            try
+            {
+                Debug.WriteLine("LogErrorAsync");
+                Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
+                Debug.WriteLine("   Message:" + message);
+                Debug.WriteLine("  Filename:" + filename);
+                Debug.WriteLine("      Line:" + lineNo);
+                Debug.WriteLine("    Column:" + colNo);
 
-            await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
+                await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
+            }
+            catch (Exception ex)
+            {
+                await ErrorAsync(ex);
+            }
         }
 
         #endregion
@@ -190,9 +204,7 @@
                 if (DS.Comms.CheckId(id))
                 {
                     List<Video> videos = Model.Videos.Values.ToList();
-
                     await Clients.All.SendAsync("SendMessage", videos.Count + "Videos found.");
-
                     foreach (var item in videos)
                     {
                         await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));
@@ -205,6 +217,33 @@
             }
         }
 
+        /// <summary>
+        /// Calls clients to save the video to their database.
+        /// </summary>
+        /// <param name="id">The id for confirmation.</param>
+        /// <param name="video">The video to save.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SaveVideoAsync(string id, Video video)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(video, Formatting.None));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Calls the clients (players) to load the video so its ready to play.
+        /// </summary>
+        /// <param name="id">The Id for confirmation.</param>
+        /// <param name="video">The video to load.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideoAsync(string id, string video)
         {
             try
@@ -220,6 +259,13 @@
             }
         }
 
+        /// <summary>
+        /// Calls for clients to play a video.
+        /// </summary>
+        /// <param name="id">The Id for confirmation.</param>
+        /// <param name="video">The video to play.</param>
+        /// <param name="time">The time to play the file.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(string id, string video, string time)
         {
             try
@@ -229,12 +275,17 @@
                     await Clients.All.SendAsync("PlayVideo", video, time);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
             }
         }
 
+        /// <summary>
+        /// Responds to client screen click.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ScreenClickAsync(string id)
         {
             try

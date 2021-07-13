@@ -14,37 +14,60 @@
     /// </summary>
     public class Comms
     {
+        /// <summary>
+        /// The Id for conformation.
+        /// </summary>
+        public string HubId;
+
         private static HubConnection videoHub;
         private readonly Random rnd = new Random();
-        private readonly Collection<string> Ids = new Collection<string>();
+        private readonly Collection<string> ids = new Collection<string>();
         private int nextRemote;
         private int nextPlayer;
-
-        public string HubId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Comms"/> class.
         /// </summary>
         public Comms()
         {
-            Debug.WriteLine("VideoConnection constructor");
-
+            // Create new id for the hub.
             HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-            Ids.Add(HubId);
+            ids.Add(HubId);
+
+            //videoHub = new HubConnectionBuilder()
+            //            .WithUrl("http://localhost:8888/videoHub")
+            //            .Build();
 
             videoHub = new HubConnectionBuilder()
-                        .WithUrl("http://127.0.0.1:8888/videoHub")
+                        .WithUrl("http://192.168.0.6:888/videoHub")
                         .Build();
 
-            Debug.WriteLine("VideoConnection constructor finished");
+            videoHub.On<string, string>("SendMessage", (id, message) =>
+            {
+                Debug.WriteLine($"SendMessage: {id} - {message}");
+            });
+
+            videoHub.On<string, string>("SendError", (id, json) =>
+            {
+                Debug.WriteLine($"ERROR: {id} - {json}");
+            });
+
+            videoHub.On<string, string>("SaveVideo", (id, video) =>
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
+                }
+            });
+
+            // Initialize SignalR.
+            _ = InitializeSignalRAsync();
         }
 
-        public async Task StartConnectionAsync()
-        {
-            await videoHub.StartAsync();
-        }
-
-        public async Task CheckConnectionAsync()
+        /// <summary>
+        /// Checks the SignalR connection.
+        /// </summary>
+        public void CheckConnectionAsync()
         {
             switch (videoHub.State)
             {
@@ -69,21 +92,7 @@
                 case HubConnectionState.Disconnected:
                     Debug.WriteLine("VideoHub.Disconnected");
 
-                    videoHub = new HubConnectionBuilder()
-                        .WithUrl("http://localhost:8888/videoHub")
-                        .Build();
-
-                    videoHub.On<string, string>("SendMessage", (id, message) =>
-                    {
-                        Debug.WriteLine($"SendMessage: {id} - {message}");
-                    });
-
-                    videoHub.On<string, string>("SendError", (id, json) =>
-                    {
-                        Debug.WriteLine($"ERROR: {id} - {json}");
-                    });
-
-                    await videoHub.StartAsync();
+                    _ = InitializeSignalRAsync();
 
                     TimelineItem nextItem2 = new TimelineItem();
                     nextItem2.Timestamp = DateTime.Now.AddSeconds(5);
@@ -136,7 +145,7 @@
         public string GetRemoteId()
         {
             string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-            Ids.Add(registration);
+            ids.Add(registration);
             return registration;
         }
 
@@ -147,7 +156,7 @@
         public string GetPlayerId()
         {
             string registration = "P" + (nextPlayer++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-            Ids.Add(registration);
+            ids.Add(registration);
             return registration;
         }
 
@@ -158,7 +167,7 @@
         /// <returns>True if the id is correct.</returns>
         public bool CheckId(string id)
         {
-            if (Ids.Contains(id))
+            if (ids.Contains(id))
             {
                 return true;
             }
@@ -170,6 +179,28 @@
 
         #endregion
 
+        /// <summary>
+        /// Calls to save a video.
+        /// </summary>
+        /// <param name="video">The video to save.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SaveVideoAsync(Video video)
+        {
+            try
+            {
+                await videoHub.InvokeAsync("SaveVideoAsync", HubId, video);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR Comms.LoadVideoAsync: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Calls to load a video.
+        /// </summary>
+        /// <param name="video">The video to load.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideoAsync(Video video)
         {
             try
@@ -182,6 +213,12 @@
             }
         }
 
+        /// <summary>
+        /// Calls to play a video.
+        /// </summary>
+        /// <param name="video">The video to play.</param>
+        /// <param name="start">The time to start the video.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(Video video, DateTime start)
         {
             try
@@ -191,6 +228,21 @@
             catch (Exception ex)
             {
                 Debug.WriteLine($"ERROR Comms.PlayVideoAsync: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Initializes SignalR.
+        /// </summary>
+        private async Task InitializeSignalRAsync()
+        {
+            try
+            {
+                await videoHub.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR Comms.InitializeSignalRAsync: {ex.Message}");
             }
         }
     }

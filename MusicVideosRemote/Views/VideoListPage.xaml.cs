@@ -1,17 +1,18 @@
 ﻿namespace MusicVideosRemote.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
+    using System.Collections.Generic;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VideoListPage : ContentPage
     {
+
+        List<Video> videos = new List<Video>();
+
+
         public VideoListPage()
         {
             InitializeComponent();
@@ -21,8 +22,12 @@
         {
             base.OnAppearing();
             DataStore database = await DataStore.Instance;
-            listView.ItemsSource = await database.GetVideosAsync();
-        }
 
+            videos = await database.GetVideosAsync();
+
+            //listView.ItemsSource = videos;
+
+            CV.ItemsSource = videos;
+        }
     }
 }
