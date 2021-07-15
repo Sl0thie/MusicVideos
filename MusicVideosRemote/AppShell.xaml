@@ -80,6 +80,10 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
+    <FlyoutItem Title="Now Playing" Icon="icon_about.png">
+        <ShellContent Route="NowPlayingPage" ContentTemplate="{DataTemplate local:NowPlayingPage}" />
+    </FlyoutItem>
+    
     <FlyoutItem Title="Messages" Icon="icon_about.png">
         <ShellContent Route="MessagesPage" ContentTemplate="{DataTemplate local:MessagesPage}" />
     </FlyoutItem>
@@ -95,10 +99,5 @@
     <FlyoutItem Title="Videos" Icon="icon_feed.png">
         <ShellContent Route="VideoListPage" ContentTemplate="{DataTemplate local:VideoListPage}" />
     </FlyoutItem>
-
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="NowPlayingPage" ContentTemplate="{DataTemplate local:NowPlayingPage}" />
-    </FlyoutItem>
-    
 
 </Shell>

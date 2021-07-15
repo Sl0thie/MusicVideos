@@ -48,7 +48,7 @@
         public int Id
         {
             get { return id; }
-            set { id = value; NotifyPropertyChanged(); }
+            set { id = value; NotifyPropertyChanged("Id"); }
         }
 
         [PrimaryKey]
@@ -61,13 +61,11 @@
         /// <summary>
         /// Gets or sets the song's artist name.
         /// </summary>
-        [Bindable(true)]
         public string Artist
         {
             get { return artist; }
-            set { artist = value; NotifyPropertyChanged(); }
+            set { artist = value; NotifyPropertyChanged("Artist"); }
         }
-        //    get => artist; set => artist = value;  }
 
         /// <summary>
         /// Gets or sets the song's artist search name.
@@ -78,11 +76,10 @@
         /// <summary>
         /// Gets or sets the song's title.
         /// </summary
-        [Bindable(true)]
         public string Title
         {
             get { return title; }
-            set { title = value; NotifyPropertyChanged(); }
+            set { title = value; NotifyPropertyChanged("Title"); }
         }
 
         /// <summary>

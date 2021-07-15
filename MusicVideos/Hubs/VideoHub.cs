@@ -140,7 +140,6 @@
             catch (Exception ex)
             {
                 Debug.WriteLine($"ERROR SendMessageAsync: {ex.Message}");
-                //await ErrorAsync(ex);
             }
         }
 

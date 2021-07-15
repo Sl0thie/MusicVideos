@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:models="clr-namespace:MusicVideosRemote.Models" x:DataType="models:Video"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicVideosRemote.Views.NowPlayingPage" BackgroundColor="#000000" Title="Now Playing">
 
 
@@ -17,11 +17,11 @@
 
         <Label Text="Artist" TextColor="#FFFFFF" Grid.Column="0" Grid.Row="0"/>
 
-        <Label x:Name="Artist" Text="{Binding Artist}" TextColor="#FFFFFF" Grid.Column="1" Grid.Row="0"/>
+        <Label x:Name="Artist" Text="{Binding CurrentVideo.Artist}" TextColor="#FFFFFF" Grid.Column="1" Grid.Row="0"/>
 
         <Label Text="Title" TextColor="#FFFFFF" Grid.Column="0" Grid.Row="1"/>
 
-        <Label x:Name="Title" Text="{Binding Title}" TextColor="#FFFFFF" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="Title" Text="{Binding CurrentVideo.Title}" TextColor="#FFFFFF" Grid.Column="1" Grid.Row="1"/>
         
     </Grid>
 </ContentPage>

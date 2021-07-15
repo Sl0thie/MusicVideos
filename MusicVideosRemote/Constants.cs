@@ -6,12 +6,12 @@
     public static class Constants
     {
         /// <summary>
-        /// 
+        /// The name of the database file.
         /// </summary>
         public const string DatabaseFilename = "SQLite.db3";
 
         /// <summary>
-        /// 
+        /// Flags used by Sqlite.
         /// </summary>
         public const SQLite.SQLiteOpenFlags Flags =
             // open the database in read/write mode
@@ -22,7 +22,7 @@
             SQLite.SQLiteOpenFlags.SharedCache;
 
         /// <summary>
-        /// 
+        /// The path to the database. Varies by product.
         /// </summary>
         public static string DatabasePath
         {

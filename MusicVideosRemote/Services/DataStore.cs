@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using SQLite;
     using MusicVideosRemote.Models;
+    using MusicVideosRemote.ViewModels;
     using System.Diagnostics;
     using System;
     using Microsoft.AspNetCore.SignalR.Client;
@@ -11,8 +12,9 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using MusicVideosRemote.Views;
 
-    class DataStore : INotifyPropertyChanged
+    public class DataStore : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,7 +35,6 @@
 
         private Video currentVideo;
 
-        [Bindable(true)]
         public Video CurrentVideo
         {
             get { return currentVideo; }
@@ -42,6 +43,7 @@
                 currentVideo = value;
                 Debug.WriteLine($"DS Artist: {currentVideo.Artist}");
                 Debug.WriteLine($"DS Title: {currentVideo.Title}");
+                NotifyPropertyChanged("CurrentVideo");
             }
         }
 
@@ -120,8 +122,15 @@
                 dataHub.On<string, string>("PlayVideo", (json, time) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-                    Globals.CurrentVideo = newVideo;
+
+                    NowplayingModel.Current.CurrentVideo = newVideo;
+
+                    //NowPlayingPage.Current.CurrentVideo = newVideo;
+
+                    //Globals.Current.CurrentVideo = newVideo;
                     CurrentVideo = newVideo;
+                    //NowPlayingPage.CurrentVideo = newVideo;
+
                     Debug.WriteLine("PlayVideo: " + newVideo.Artist);
                 });
 

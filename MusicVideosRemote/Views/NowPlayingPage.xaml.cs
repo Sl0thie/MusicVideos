@@ -8,6 +8,11 @@
     using MusicVideosRemote.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
+    using MusicVideosRemote.Models;
+    using MusicVideosRemote.ViewModels;
+    using System.Diagnostics;
+    using System.ComponentModel;
+
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NowPlayingPage : ContentPage
@@ -17,14 +22,10 @@
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            DataStore database = await DataStore.Instance;
-
-            BindingContext = database.CurrentVideo;
-
-            //BindingContext = Globals.CurrentVideo;
+            BindingContext = NowplayingModel.Current;
         }
     }
 }
