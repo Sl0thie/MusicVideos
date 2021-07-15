@@ -9,9 +9,6 @@
 
     public class TimeViewModel : INotifyPropertyChanged
     {
-
-
-
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)

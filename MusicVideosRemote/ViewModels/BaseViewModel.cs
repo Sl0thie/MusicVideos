@@ -10,11 +10,6 @@
 
     public class BaseViewModel : INotifyPropertyChanged
     {
-        //private static readonly AsyncLazy<DataStore> Data = DataStore.Instance;
-        //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        //DataStore data;
-        
-
         bool isBusy = false;
         public bool IsBusy
         {
@@ -31,9 +26,7 @@
 
         public BaseViewModel()
         {
-            //instance = DataStore.Instance;
-            //DataStore database = DataStore.Instance;
-            //DataStore database = await DataStore.Instance;
+            
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

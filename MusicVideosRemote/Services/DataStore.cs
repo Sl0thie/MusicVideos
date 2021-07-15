@@ -14,38 +14,24 @@
     using System.Runtime.CompilerServices;
     using MusicVideosRemote.Views;
 
-    public class DataStore : INotifyPropertyChanged
+    public class DataStore
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private static SQLiteAsyncConnection Database;
         private HubConnection dataHub;
         private string hubId = string.Empty;
         private List<MessageItem> messages = new List<MessageItem>();
         private List<ErrorItem> errors;
 
+        //private Video currentVideo;
 
-        private Video currentVideo;
-
-        public Video CurrentVideo
-        {
-            get { return currentVideo; }
-            set
-            {
-                currentVideo = value;
-                Debug.WriteLine($"DS Artist: {currentVideo.Artist}");
-                Debug.WriteLine($"DS Title: {currentVideo.Title}");
-                NotifyPropertyChanged("CurrentVideo");
-            }
-        }
+        //public Video CurrentVideo
+        //{
+        //    get { return currentVideo; }
+        //    set
+        //    {
+        //        currentVideo = value;
+        //    }
+        //}
 
         public List<MessageItem> Messages
         {
@@ -62,7 +48,7 @@
         public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
         {
             var instance = new DataStore();
-            //_ = Database.DropTableAsync<Video>();
+            _ = Database.DropTableAsync<Video>();
             CreateTableResult result = await Database.CreateTableAsync<Video>();
             return instance;
         });
@@ -122,15 +108,7 @@
                 dataHub.On<string, string>("PlayVideo", (json, time) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-
                     NowplayingModel.Current.CurrentVideo = newVideo;
-
-                    //NowPlayingPage.Current.CurrentVideo = newVideo;
-
-                    //Globals.Current.CurrentVideo = newVideo;
-                    CurrentVideo = newVideo;
-                    //NowPlayingPage.CurrentVideo = newVideo;
-
                     Debug.WriteLine("PlayVideo: " + newVideo.Artist);
                 });
 
@@ -142,7 +120,7 @@
 
                 await dataHub.StartAsync();
                 await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
-                //await dataHub.InvokeAsync("GetVideosAsync", hubId);
+                await dataHub.InvokeAsync("GetVideosAsync", hubId);
             }
             catch (Exception ex)
             {

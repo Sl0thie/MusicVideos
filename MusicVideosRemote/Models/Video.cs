@@ -11,15 +11,17 @@
     /// </summary>
     public class Video : INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var changed = PropertyChanged;
+            if (changed == null)
+                return;
+
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
 
         private int id;
         private string artist;
@@ -45,18 +47,19 @@
         private string physicalPath;
         private string virtualPath;
 
+        [PrimaryKey]
         public int Id
         {
             get { return id; }
-            set { id = value; NotifyPropertyChanged("Id"); }
+            set { id = value; OnPropertyChanged("Id"); }
         }
 
-        [PrimaryKey]
-        public int _id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        //[PrimaryKey]
+        //public int _id
+        //{
+        //    get { return id; }
+        //    set { id = value; }
+        //}
 
         /// <summary>
         /// Gets or sets the song's artist name.
@@ -64,7 +67,7 @@
         public string Artist
         {
             get { return artist; }
-            set { artist = value; NotifyPropertyChanged("Artist"); }
+            set { artist = value; OnPropertyChanged("Artist"); }
         }
 
         /// <summary>
@@ -79,7 +82,7 @@
         public string Title
         {
             get { return title; }
-            set { title = value; NotifyPropertyChanged("Title"); }
+            set { title = value; OnPropertyChanged("Title"); }
         }
 
         /// <summary>
