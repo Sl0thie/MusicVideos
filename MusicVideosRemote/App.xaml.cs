@@ -13,7 +13,8 @@ namespace MusicVideosRemote
         {
             InitializeComponent();
 
-            //DependencyService.Register<MockDataStore>();
+            SignalRClient.Current.RegisterAsync();
+
             MainPage = new AppShell();
         }
 

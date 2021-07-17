@@ -38,15 +38,13 @@
         public string Album { get; set; }
 
         /// <summary>
-        /// Gets or sets the UNC path to the file.
+        /// Gets or sets the UNC path to the file. (to be obsolete soon).
         /// </summary>
-        [Obsolete("Use Physical and Virtual Path instead.")]
         public string Path { get; set; }
 
         /// <summary>
         /// Gets the genres that this song falls into.
         /// </summary>
-        /// 
         public Collection<Genre> Genres
         {
             get { return genres; }

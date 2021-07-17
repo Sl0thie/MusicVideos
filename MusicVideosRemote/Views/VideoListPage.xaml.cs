@@ -23,7 +23,7 @@
             base.OnAppearing();
             DataStore database = await DataStore.Instance;
 
-            videos = await database.GetVideosAsync();
+            videos = await database.GetAllVideosAsync();
 
             //listView.ItemsSource = videos;
 

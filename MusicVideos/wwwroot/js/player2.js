@@ -25,6 +25,8 @@ let clock = document.getElementsByClassName('clock');
 let nextPlayer = 0;
 let player0playing = false;
 let player1playing = false;
+let player0VideoId;
+let player1VideoId;
 
 //#endregion
 //#region Initialization
@@ -48,8 +50,8 @@ window.addEventListener('load', function () {
     });
 
     // Calls playVideo when received.
-    connection.on('playVideo', function (video, time) {
-        playVideo(video, time);
+    connection.on('playVideo', function (video, timeStr) {
+        playVideo(video, timeStr);
     });
 
     // Start the SignalR connection to the server hub.
@@ -102,13 +104,13 @@ function loadVideo(video) {
     }
 }
 
-function playVideo(video, time) {
+function playVideo(video, timeStr) {
 
     console.log('playVideo');
 
     try {
         var obj = JSON.parse(video);
-        var timeObj = JSON.parse(time);
+        var timeObj = JSON.parse(timeStr);
         timeObj = new Date(timeObj);
         var date2_ms = timeObj.getTime();
         var date3_ms = new Date().getTime();
@@ -122,6 +124,7 @@ function playVideo(video, time) {
             }
             player1.style.display = 'none';
             player0.style.display = 'initial';
+            player0VideoId = obj.Id.toString();
             player0.play();
             nextPlayer = 1;
         }
@@ -131,9 +134,35 @@ function playVideo(video, time) {
             }
             player0.style.display = 'none';
             player1.style.display = 'initial';
+            player1VideoId = obj.Id.toString();
             player1.play();
             nextPlayer = 0;
         }
+
+        var current = new Date();
+        var hour = current.getHours();
+        var minute = current.getMinutes();
+        if (hour > 12) {
+            hour = hour - 12;
+        }
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        let cTime = hour + ":" + minute;
+
+        // Update display elements.
+        for (const element of songartist) { element.innerHTML = obj.Artist; }
+        for (const element of songtitle) { element.innerHTML = obj.Title; }
+        for (const element of clock) { element.innerHTML = cTime; }
+
+        // hide the mouse cursor again. Some browsers don't seem to keep the cursor hidden (Samsung)
+        player0.style.cursor = 'none';
+        player1.style.cursor = 'none';
+        overlay.style.cursor = 'none';
+        overlayShadow.style.cursor = 'none';
+        // Start the display fadeout process.
+        fadeoutStart();
+
     }
     catch (error) {
         logError(error);
@@ -190,7 +219,7 @@ function player1ended() {
 }
 
 function player0ready() {
-
+    connection.invoke('UpdateVideoPropertiesAsync', hubId, player0VideoId, player0.duration.toString(), player0.videoWidth.toString(), player0.videoHeight.toString());
 }
 
 function player0error() {
@@ -198,9 +227,38 @@ function player0error() {
 }
 
 function player1ready() {
-
+    connection.invoke('UpdateVideoPropertiesAsync', hubId, player1VideoId, player1.duration.toString(), player1.videoWidth.toString(), player1.videoHeight.toString());
 }
 
 function player1error() {
 
 }
+
+//#region Overlay
+// Start title display process by making the elements visible and starting the timer.
+function fadeoutStart() {
+    overlay.style.opacity = maxOpacity;
+    overlayShadow.style.opacity = maxOpacity;
+    clearTimeout(fadeoutStartId);
+    clearInterval(fadeoutId);
+    fadeoutStartId = setTimeout(fadeout, intervalDisplay);
+}
+// Begin the fading loop to slowly fade the display.
+function fadeout() {
+    clearInterval(fadeoutStartId);
+    clearInterval(fadeoutId);
+    fadeoutId = setInterval(hide, intervalFade);
+}
+// Reduce the visibility of the display and check if it is completely faded. Stop the loop if true.
+function hide() {
+    opacity = Number(window.getComputedStyle(overlay).getPropertyValue("opacity"))
+    if (opacity > minOpacity) {
+        opacity = opacity - incrementOpacity;
+        overlay.style.opacity = opacity
+        overlayShadow.style.opacity = opacity
+    }
+    else {
+        clearInterval(fadeoutId);
+    }
+}
+//#endregion

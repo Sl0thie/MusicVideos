@@ -1,14 +1,11 @@
 ﻿namespace MusicVideosRemote.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Threading.Tasks;
     using MusicVideosRemote.Models;
-    using MusicVideosRemote.Services;
+
 
     public class NowplayingModel : INotifyPropertyChanged
     {
@@ -24,7 +21,6 @@
         }
         #endregion
 
-        //internal static NowplayingModel Current;
         private static NowplayingModel current;
 
         internal static NowplayingModel Current
@@ -49,6 +45,107 @@
                 currentVideo = value;
                 Debug.WriteLine($"NPM Artist: {currentVideo.Artist}");
                 Debug.WriteLine($"NPM Title: {currentVideo.Title}");
+                OnPropertyChanged("CurrentVideo");
+                OnPropertyChanged("LastPlayed");
+                OnPropertyChanged("Duration");
+                OnPropertyChanged("Released");
+            }
+        }
+
+        public string LastPlayed
+        {
+            get
+            {
+                if (currentVideo.LastPlayed == DateTime.MinValue)
+                {
+                    return "Never";
+                }
+                else
+                {
+                    string rv = currentVideo.LastPlayed.ToString("d/M/yyyy");
+                    int days = DateTime.Now.Subtract(currentVideo.LastPlayed).Days;
+                    switch (days)
+                    {
+                        case 0:
+                            rv += " - Today";
+                            break;
+
+                        case 1:
+                            rv += " - Yesterday";
+                            break;
+
+                        default:
+                            rv += " - " + days + " days ago";
+                            break;
+                    }
+                    return rv;
+                }
+            }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public string Duration
+        {
+            get
+            {
+                Debug.WriteLine($"NPM Duration: {currentVideo.Duration}");
+
+                if (currentVideo.Duration > 0)
+                {
+                    string rv = currentVideo.Duration.ToString();
+
+                    return rv;
+                }
+                else
+                {
+                    return "Unknown";
+                }
+            }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public string Released
+        {
+            get
+            {
+                if(currentVideo.Released == DateTime.MinValue)
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    try
+                    {
+                        int days = DateTime.Now.Subtract(currentVideo.Released).Days;
+                        int years = days / 365;
+
+                        switch (years)
+                        {
+                            case 0:
+                                return currentVideo.Released.ToString("yyyy") + " - This Year";
+
+                            case 1:
+                                return currentVideo.Released.ToString("yyyy") + " - Last Year";
+
+                            default:
+                                return currentVideo.Released.ToString("yyyy") + " - " + years + " Years ago";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"NPM Released Error: {ex.Message}");
+                        return "Error";
+                    }
+                }
+            }
+            set
+            {
                 OnPropertyChanged();
             }
         }

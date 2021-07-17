@@ -39,9 +39,8 @@
             //            .Build();
 
             videoHub = new HubConnectionBuilder()
-                        .WithUrl("http://192.168.0.6:888/videoHub")
-                        .Build();
-
+                       .WithUrl("http://192.168.0.6:888/videoHub")
+                       .Build();
             videoHub.On<string, string>("SendMessage", (id, message) =>
             {
                 Debug.WriteLine($"SendMessage: {id} - {message}");
@@ -234,7 +233,7 @@
         /// <summary>
         /// Initializes SignalR.
         /// </summary>
-        private async Task InitializeSignalRAsync()
+        private static async Task InitializeSignalRAsync()
         {
             try
             {

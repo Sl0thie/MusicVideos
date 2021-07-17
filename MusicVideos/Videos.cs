@@ -45,12 +45,19 @@
         /// Connection to the sqlite database.
         /// Could probably use a better name.
         /// </summary>
-        private SQLiteAsyncConnection videosDatabase;
+        private readonly SQLiteAsyncConnection videosDatabase;
 
         /// <summary>
         /// The current list of videos that could be played.
         /// </summary>
-        private List<int> filteredVideos = new List<int>();
+        private readonly List<int> filteredVideos = new List<int>();
+
+        private bool setTimer;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
+        /// </summary>
+        public bool SetTimer { get => setTimer; set => setTimer = value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Videos"/> class.
@@ -61,7 +68,7 @@
             videosDatabase = new SQLiteAsyncConnection(Path.Combine(FilesPath, VideoDatabaseFilename), Flags);
 
             // Delete the Video table. Uncomment this to remove all the video objects. This will force them to be uploaded again.
-            _ = videosDatabase.DropTableAsync<Video>();
+            // _ = videosDatabase.DropTableAsync<Video>();
 
             // Create the Video table if it is not already created.
             _ = videosDatabase.CreateTableAsync<Video>();
@@ -89,19 +96,29 @@
             List<Video> videos = rv.Result;
 
             // Filter the videos based on the genre's.
-            foreach (var next in videos)
+            if (DS.Settings.Filter.Genres.Count > 0)
             {
-                filteredVideos.Add(next.Id);
-
-                //foreach (Genre genre in next.Genres)
-                //{
-                //    if (DS.Settings.Filter.Genres.Contains(genre))
-                //    {
-                //        filteredVideos.Add(next.Id);
-                //        break;
-                //    }
-                //}
+                foreach (var next in videos)
+                {
+                    foreach (Genre genre in next.Genres)
+                    {
+                        if (DS.Settings.Filter.Genres.Contains(genre))
+                        {
+                            filteredVideos.Add(next.Id);
+                            break;
+                        }
+                    }
+                }
             }
+            else
+            {
+                foreach (var next in videos)
+                {
+                    filteredVideos.Add(next.Id);
+                }
+            }
+
+            Debug.WriteLine($"Total Filtered Videos: {filteredVideos.Count}");
         }
 
         /// <summary>
@@ -123,16 +140,23 @@
 
             // Call for the video to be played.
             await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
-            DS.MainTimer.Interval = nextVideo.Duration;
-            DS.MainTimer.Start();
+            if (nextVideo.Duration > 0)
+            {
+                SetTimer = false;
+                DS.MainTimer.Interval = nextVideo.Duration;
+                DS.MainTimer.Start();
+            }
+            else
+            {
+                SetTimer = true;
+            }
 
-            // Update video values.
-            nextVideo.LastPlayed = DateTime.Now;
-            nextVideo.PlayCount++;
+            //// Update video values.
+            // nextVideo.LastPlayed = DateTime.Now;
+            // nextVideo.PlayCount++;
 
-            // Call to update the video object on all clients and server.
-            await DS.Comms.SaveVideoAsync(nextVideo);
-
+            //// Call to update the video object on all clients and server.
+            // await DS.Comms.SaveVideoAsync(nextVideo);
             Debug.WriteLine($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
@@ -147,7 +171,7 @@
             {
                 // TODO Move this to the initial file import.
                 video.PhysicalPath = video.Path;
-                string path = video.Path.Substring(FilesPath.Length);
+                string path = video.Path[FilesPath.Length..];
                 path = path.Replace(@"\", "/");
                 path = VirtualPath + path;
                 video.VirtualPath = path;
@@ -174,12 +198,36 @@
         }
 
         /// <summary>
+        /// Updates details of the video.
+        /// </summary>
+        /// <param name="id">The id of the video.</param>
+        /// <param name="duration">The duration of the video.</param>
+        /// <param name="width">The width of the video.</param>
+        /// <param name="height">The height of the video.</param>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        public async Task UpdateVideoDetailsAsync(int id, int duration, int width, int height)
+        {
+            // Get video from the database.
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{id}'");
+            List<Video> videos = rv.Result;
+            if (videos.Count == 1)
+            {
+                videos[0].Duration = duration;
+                videos[0].VideoWidth = width;
+                videos[0].VideoHeight = height;
+                videos[0].LastPlayed = DateTime.Now;
+                videos[0].PlayCount++;
+                await DS.Comms.SaveVideoAsync(videos[0]);
+            }
+        }
+
+        /// <summary>
         /// Loads the video file data from a json file.
         /// </summary>
         private void LoadVideos()
         {
             // Get all videos from the JSON file.
-            Dictionary<int, Video> videos = new Dictionary<int, Video>();
+            Dictionary<int, Video> videos;
             string json = File.ReadAllText(FilesPath + "\\index.json");
             videos = JsonConvert.DeserializeObject<Dictionary<int, Video>>(json);
 

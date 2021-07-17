@@ -27,10 +27,7 @@ namespace MusicVideos
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
 
-        private static SQLiteAsyncConnection database;
-        private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
-        private static readonly Dictionary<int, int> ratingHistogram = new Dictionary<int, int>();
-        private static Settings settings = new Settings();
+        private static readonly Dictionary<int, int> RatingHistogramValue = new Dictionary<int, int>();
 
         /// <summary>
         /// Physical path to the directory holding the video files.
@@ -65,7 +62,7 @@ namespace MusicVideos
         /// </summary>
         public static Dictionary<int, int> RatingHistogram
         {
-            get { return ratingHistogram; }
+            get { return RatingHistogramValue; }
 
             // set { ratingHistogram = value; }
         }
@@ -85,35 +82,9 @@ namespace MusicVideos
         /// </summary>
         public static Collection<int> FilteredVideoIds { get; } = new Collection<int>();
 
-        ///// <summary>
-        ///// Saves the Video to the database.
-        ///// </summary>
-        ///// <param name="video">The video to save.</param>
-        ///// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        //public static Task<int> SaveVideoAsync(Video video)
-        //{
-        //    Debug.WriteLine("LocalDatabase.SaveVideoAsync");
-
-        //    try
-        //    {
-        //        Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
-        //        List<Video> videos = rv.Result;
-
-        //        if (videos.Count == 1)
-        //        {
-        //            return database.UpdateAsync(video);
-        //        }
-        //        else
-        //        {
-        //            return database.InsertAsync(video);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine("Error: " + ex.Message);
-        //        return null;
-        //    }
-        //}
+        private static SQLiteAsyncConnection database;
+        private static Dictionary<int, Video> videos = new Dictionary<int, Video>();
+        private static Settings settings = new Settings();
 
         /// <summary>
         /// Loads the video file data from a json file.
@@ -127,7 +98,7 @@ namespace MusicVideos
             // Create RatingHistogram.
             for (int i = 0; i < 101; i++)
             {
-                ratingHistogram.Add(i, 0);
+                RatingHistogramValue.Add(i, 0);
             }
 
             string json = File.ReadAllText(FilesPath + "\\index.json");
@@ -137,13 +108,9 @@ namespace MusicVideos
             {
                 // SaveVideoAsync(next);
                 FilteredVideoIds.Add(next.Id);
-                ratingHistogram[next.Rating]++;
+                RatingHistogramValue[next.Rating]++;
             }
 
-            //for (int i = 0; i < 101; i++)
-            //{
-            //    Debug.WriteLine(i + " " + ratingHistogram[i]);
-            //}
         }
 
         /// <summary>

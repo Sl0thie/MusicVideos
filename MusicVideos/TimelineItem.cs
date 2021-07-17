@@ -20,7 +20,6 @@
         /// </summary>
         public string ActionType { get; set; }
 
-
         public Action ActionItem { get; set; }
     }
 }

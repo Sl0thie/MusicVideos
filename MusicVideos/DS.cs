@@ -14,13 +14,11 @@
     /// </summary>
     public static class DS
     {
+        private static readonly Queue<TimelineItem> TimeLineItems = new Queue<TimelineItem>();
         private static Videos videos;
         private static Settings settings;
         private static Comms comms;
-
-        private static Queue<TimelineItem> TimeLineItems = new Queue<TimelineItem>();
-
-        public static System.Timers.Timer MainTimer;
+        private static Timer mainTimer;
 
         /// <summary>
         /// Gets the videos object.
@@ -47,6 +45,11 @@
         }
 
         /// <summary>
+        /// Gets or sets the Primary timer. Used to change the video at the end.
+        /// </summary>
+        public static Timer MainTimer { get => mainTimer; set => mainTimer = value; }
+
+        /// <summary>
         /// Initializes the data store.
         /// </summary>
         public static void Initialize()
@@ -57,13 +60,16 @@
                 settings = JsonConvert.DeserializeObject<Settings>(json);
 
                 // TODO Remove these temp values.
-                settings.Filter = new Filter();
+                // settings.Filter = new Filter();
                 SaveSettings();
             }
             else
             {
-                settings = new Settings();
-                settings.Filter = new Filter();
+                settings = new Settings
+                {
+                    Filter = new Filter(),
+                };
+                SaveSettings();
             }
 
             comms = new Comms();
@@ -75,16 +81,22 @@
             MainTimer.Interval = 5000;
             MainTimer.Start();
 
-            TimelineItem nextItem = new TimelineItem();
-            nextItem.Timestamp = DateTime.Now.AddSeconds(5);
-            nextItem.ActionItem = () =>
+            TimelineItem nextItem = new TimelineItem
             {
-                comms.CheckConnectionAsync();
+                Timestamp = DateTime.Now.AddSeconds(5),
+                ActionItem = () =>
+                {
+                    comms.CheckConnectionAsync();
+                },
             };
 
             TimeLineItems.Enqueue(nextItem);
         }
 
+        /// <summary>
+        /// To be replaced.
+        /// </summary>
+        /// <param name="newItem">N/A.</param>
         public static void AddTimelineItem(TimelineItem newItem)
         {
             if (TimeLineItems.Count > 0)

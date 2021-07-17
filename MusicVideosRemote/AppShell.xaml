@@ -3,7 +3,9 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MusicVideosRemote.Views"
        Title="MusicVideosRemote"
-       x:Class="MusicVideosRemote.AppShell">
+       x:Class="MusicVideosRemote.AppShell"
+       FlyoutBackgroundColor="#121212"
+       >
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -14,16 +16,17 @@
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.BackgroundColor" Value="#000000" />
+                <Setter Property="Shell.ForegroundColor" Value="#FFFFFF" />
+                <Setter Property="Shell.TitleColor" Value="#AAAAAA" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#121212" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
-
+                <Setter Property="Shell.FlyoutBackgroundColor" Value="#121212"/>
+                
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -32,6 +35,7 @@
             Default Styles for all Flyout Items
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
+            
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
@@ -41,13 +45,13 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="#242424" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#FFFFFF" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="#6666FF" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -64,7 +68,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#FFFFFF" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -80,11 +84,15 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem Title="Now Playing" Icon="icon_about.png">
+    <FlyoutItem Title="Now Playing" Icon="icon_about.png" >
         <ShellContent Route="NowPlayingPage" ContentTemplate="{DataTemplate local:NowPlayingPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="Messages" Icon="icon_about.png">
+
+    <FlyoutItem Title="Filter" Icon="icon_about.png">
+        <ShellContent Route="FilterPage" ContentTemplate="{DataTemplate local:FilterPage}" />
+    </FlyoutItem>
+
+    <!--<FlyoutItem Title="Messages" Icon="icon_about.png">
         <ShellContent Route="MessagesPage" ContentTemplate="{DataTemplate local:MessagesPage}" />
     </FlyoutItem>
 
@@ -94,7 +102,7 @@
 
     <FlyoutItem Title="Time" Icon="icon_about.png">
         <ShellContent Route="TimePage" ContentTemplate="{DataTemplate local:TimePage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <FlyoutItem Title="Videos" Icon="icon_feed.png">
         <ShellContent Route="VideoListPage" ContentTemplate="{DataTemplate local:VideoListPage}" />

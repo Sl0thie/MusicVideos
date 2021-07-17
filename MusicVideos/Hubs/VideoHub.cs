@@ -43,7 +43,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
-            Debug.WriteLine("ErrorAsync: " + ex.Message);
+            Debug.WriteLine($"ErrorAsync: {ex.Message}");
             await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
@@ -191,6 +191,30 @@
 
         #endregion
 
+        #region UI Events
+
+        /// <summary>
+        /// Responds to client screen click.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ScreenClickAsync(string id)
+        {
+            try
+            {
+                Debug.WriteLine("Screen Click." + id);
+                await DS.Videos.PickRandomVideoAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+            }
+        }
+
+        #endregion
+
+        #region Video
+
         /// <summary>
         /// Gets the Video objects from the server.
         /// </summary>
@@ -254,7 +278,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Debug.WriteLine($"ERROR LoadVideoAsync: {ex.Message}");
             }
         }
 
@@ -263,15 +287,17 @@
         /// </summary>
         /// <param name="id">The Id for confirmation.</param>
         /// <param name="video">The video to play.</param>
-        /// <param name="time">The time to play the file.</param>
+        /// <param name="timeStr">The time to play the file.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task PlayVideoAsync(string id, string video, string time)
+        public async Task PlayVideoAsync(string id, string video, string timeStr)
         {
             try
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    await Clients.All.SendAsync("PlayVideo", video, time);
+                    // Debug.WriteLine($"Video: {video}");
+                    // Debug.WriteLine($"TimeStr: {timeStr}");
+                    await Clients.All.SendAsync("PlayVideo", video, timeStr);
                 }
             }
             catch (Exception ex)
@@ -281,21 +307,115 @@
         }
 
         /// <summary>
-        /// Responds to client screen click.
+        /// Updates the video from the player.
         /// </summary>
-        /// <param name="id">The Id for conformation.</param>
+        /// <param name="id">The id to be validated.</param>
+        /// <param name="videoId">The id of the video.</param>
+        /// <param name="duration">The duration of the video.</param>
+        /// <param name="videoWidth">The width of the video.</param>
+        /// <param name="videoHeight">The height of the video.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task ScreenClickAsync(string id)
+        public async Task UpdateVideoPropertiesAsync(string id, string videoId, string duration, string videoWidth, string videoHeight)
         {
             try
             {
-                Debug.WriteLine("Screen Click." + id);
-                await DS.Videos.PickRandomVideoAsync();
+                if (DS.Comms.CheckId(id))
+                {
+                    if (DS.Videos.SetTimer)
+                    {
+                        DS.MainTimer.Interval = Convert.ToInt32(duration);
+                        DS.MainTimer.Stop();
+                        DS.MainTimer.Start();
+                        DS.Videos.SetTimer = false;
+                    }
+
+                    // Convert duration to milliseconds.
+                    int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
+
+                    Debug.WriteLine($"videoId: {videoId}");
+                    Debug.WriteLine($"duration: {duration}");
+                    Debug.WriteLine($"durationFixed: {durationFixed}");
+                    Debug.WriteLine($"videoWidth: {videoWidth}");
+                    Debug.WriteLine($"videoHeight: {videoHeight}");
+
+                    await DS.Videos.UpdateVideoDetailsAsync(Convert.ToInt32(videoId), durationFixed, Convert.ToInt32(videoWidth), Convert.ToInt32(videoHeight));
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Debug.WriteLine($"ERROR UpdateVideoPropertiesAsync: {ex.Message}");
             }
         }
+
+        #endregion
+
+        #region Filter
+
+        /// <summary>
+        /// Gets the filter from the server.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetFilterAsync(string id)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    await Clients.All.SendAsync("SaveFilter", JsonConvert.SerializeObject(DS.Settings.Filter, Formatting.None));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Calls clients to save the filter to their database.
+        /// </summary>
+        /// <param name="id">The id for confirmation.</param>
+        /// <param name="filter">The filter to save.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SaveFilterAsync(string id, Filter filter)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    await Clients.All.SendAsync("SaveFilter", JsonConvert.SerializeObject(filter, Formatting.None));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Send the filter to be saved centrally.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="json">Serialized filter object.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SendFilterAsync(string id, string json)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+                    DS.Settings.Filter = newFilter;
+                    await SaveFilterAsync(DS.Comms.HubId, DS.Settings.Filter);
+                    DS.Videos.FilterVideos();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
+            }
+        }
+
+        #endregion
     }
 }
