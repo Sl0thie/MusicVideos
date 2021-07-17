@@ -120,32 +120,45 @@
 
             MainTimer.Stop();
 
-            if (TimeLineItems.Count > 0)
+            if (DS.Comms.IsConnected())
             {
-                TimelineItem item = TimeLineItems.Dequeue();
-
-                item.ActionItem();
-
-                if (TimeLineItems.Count > 0)
-                {
-                    TimelineItem nextItem = TimeLineItems.Peek();
-                    TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
-                    MainTimer.Interval = time.TotalMilliseconds;
-                    MainTimer.Start();
-                }
-                else
-                {
-                    _ = Videos.PickRandomVideoAsync();
-                    return;
-                }
+                DS.Videos.PlayNextVideoAsync();
             }
             else
             {
-                _ = Videos.PickRandomVideoAsync();
-                return;
+                MainTimer.Interval = 5000;
+                MainTimer.Start();
+                comms.CheckConnectionAsync();
             }
 
-            MainTimer.Start();
+            //MainTimer.Stop();
+
+            //if (TimeLineItems.Count > 0)
+            //{
+            //    TimelineItem item = TimeLineItems.Dequeue();
+
+            //    item.ActionItem();
+
+            //    if (TimeLineItems.Count > 0)
+            //    {
+            //        TimelineItem nextItem = TimeLineItems.Peek();
+            //        TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
+            //        MainTimer.Interval = time.TotalMilliseconds;
+            //        MainTimer.Start();
+            //    }
+            //    else
+            //    {
+            //        _ = Videos.PickRandomVideoAsync();
+            //        return;
+            //    }
+            //}
+            //else
+            //{
+            //    _ = Videos.PickRandomVideoAsync();
+            //    return;
+            //}
+
+            //MainTimer.Start();
         }
 
         /// <summary>

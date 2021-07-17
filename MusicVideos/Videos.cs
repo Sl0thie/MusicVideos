@@ -36,6 +36,10 @@
         /// </summary>
         private const string VirtualPath = @"/Virtual/Music Videos";
 
+        private const int IncrementClickedThough = -1;
+        private const int IncrementPlayedThough = 5;
+
+
         /// <summary>
         /// Used to generate random numbers.
         /// </summary>
@@ -54,10 +58,42 @@
 
         private bool setTimer;
 
+        private List<int> videoQueue = new List<int>();
+
+        private DateTime lastStart;
+        private Video lastVideo;
+
         /// <summary>
         /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
         /// </summary>
         public bool SetTimer { get => setTimer; set => setTimer = value; }
+
+        /// <summary>
+        /// Gets or sets the VideoQueue.
+        /// </summary>
+        public List<int> VideoQueue
+        {
+            get { return videoQueue; }
+            set { videoQueue = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the LastStart. The time the last video started.
+        /// </summary>
+        public DateTime LastStart
+        {
+            get { return lastStart; }
+            set { lastStart = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the last video. The last video to be played.
+        /// </summary>
+        public Video LastVideo
+        {
+            get { return lastVideo; }
+            set { lastVideo = value; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Videos"/> class.
@@ -122,18 +158,51 @@
         }
 
         /// <summary>
-        /// Picks a random video to play.
+        /// Plays the next video.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task PickRandomVideoAsync()
+        public async Task PlayNextVideoAsync()
         {
-            // Pick a random index from the filtered videos.
-            int index = rnd.Next(0, filteredVideos.Count + 1);
+            // Handle the last played video. If clicked though then lower the rating of the video.
+            if (lastVideo is object)
+            {
+                if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 20)
+                {
+                    lastVideo.Rating = lastVideo.Rating + IncrementClickedThough;
+                    if (lastVideo.Rating < 0)
+                    {
+                        lastVideo.Rating = 0;
+                    }
+                }
+                else
+                {
+                    lastVideo.Rating = lastVideo.Rating + IncrementPlayedThough;
+                    if (lastVideo.Rating > 100)
+                    {
+                        lastVideo.Rating = 100;
+                    }
+                }
 
+                await DS.Comms.SaveVideoAsync(lastVideo);
+            }
+
+            if (videoQueue.Count > 0)
+            {
+                await PlayVideoAsync(videoQueue[0]);
+                videoQueue.RemoveAt(0);
+            }
+            else
+            {
+                await PickRandomVideoAsync();
+            }
+        }
+
+        public async Task PlayVideoAsync(int id)
+        {
             // Get the video object from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {id}");
             List<Video> videos = rv.Result;
-            Video nextVideo = videos[0];
+            Video nextVideo = FixVideoVirtualPath(videos[0]);
 
             // Call for the video to be loaded.
             await DS.Comms.LoadVideoAsync(nextVideo);
@@ -151,13 +220,49 @@
                 SetTimer = true;
             }
 
-            //// Update video values.
-            // nextVideo.LastPlayed = DateTime.Now;
-            // nextVideo.PlayCount++;
+            Debug.WriteLine($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
+        }
 
-            //// Call to update the video object on all clients and server.
-            // await DS.Comms.SaveVideoAsync(nextVideo);
+        /// <summary>
+        /// Picks a random video to play.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task PickRandomVideoAsync()
+        {
+            // Pick a random index from the filtered videos.
+            int index = rnd.Next(0, filteredVideos.Count + 1);
+
+            // Get the video object from the database.
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
+            List<Video> videos = rv.Result;
+            Video nextVideo = FixVideoVirtualPath(videos[0]);
+
+
+
+            // Call for the video to be loaded.
+            await DS.Comms.LoadVideoAsync(nextVideo);
+
+            // Call for the video to be played.
+            await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+            if (nextVideo.Duration > 0)
+            {
+                SetTimer = false;
+                DS.MainTimer.Interval = nextVideo.Duration;
+                DS.MainTimer.Start();
+            }
+            else
+            {
+                SetTimer = true;
+            }
+
             Debug.WriteLine($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
+        }
+
+        private Video FixVideoVirtualPath(Video video)
+        {
+            //video.VirtualPath = video.VirtualPath.Replace(" ", "&nbsp;");
+            video.VirtualPath = video.VirtualPath.Replace("+", "&plus;");
+            return video;
         }
 
         /// <summary>
@@ -207,17 +312,25 @@
         /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         public async Task UpdateVideoDetailsAsync(int id, int duration, int width, int height)
         {
-            // Get video from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{id}'");
-            List<Video> videos = rv.Result;
-            if (videos.Count == 1)
+            try
             {
-                videos[0].Duration = duration;
-                videos[0].VideoWidth = width;
-                videos[0].VideoHeight = height;
-                videos[0].LastPlayed = DateTime.Now;
-                videos[0].PlayCount++;
-                await DS.Comms.SaveVideoAsync(videos[0]);
+                // Get video from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{id}'");
+                List<Video> videos = rv.Result;
+                if (videos.Count == 1)
+                {
+                    lastVideo = videos[0];
+                    videos[0].Duration = duration;
+                    videos[0].VideoWidth = width;
+                    videos[0].VideoHeight = height;
+                    videos[0].LastPlayed = DateTime.Now;
+                    videos[0].PlayCount++;
+                    await DS.Comms.SaveVideoAsync(videos[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
             }
         }
 

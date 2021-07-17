@@ -202,12 +202,12 @@
         {
             try
             {
-                Debug.WriteLine("Screen Click." + id);
-                await DS.Videos.PickRandomVideoAsync();
+                Debug.WriteLine("Screen Click. " + id);
+                await DS.Videos.PlayNextVideoAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Debug.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
             }
         }
 
@@ -295,8 +295,8 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // Debug.WriteLine($"Video: {video}");
-                    // Debug.WriteLine($"TimeStr: {timeStr}");
+                    Debug.WriteLine($"Video: {video}");
+                    Debug.WriteLine($"TimeStr: {timeStr}");
                     await Clients.All.SendAsync("PlayVideo", video, timeStr);
                 }
             }
@@ -321,14 +321,6 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    if (DS.Videos.SetTimer)
-                    {
-                        DS.MainTimer.Interval = Convert.ToInt32(duration);
-                        DS.MainTimer.Stop();
-                        DS.MainTimer.Start();
-                        DS.Videos.SetTimer = false;
-                    }
-
                     // Convert duration to milliseconds.
                     int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
 
@@ -338,12 +330,22 @@
                     Debug.WriteLine($"videoWidth: {videoWidth}");
                     Debug.WriteLine($"videoHeight: {videoHeight}");
 
+                    if (DS.Videos.SetTimer)
+                    {
+                        DS.MainTimer.Interval = durationFixed;
+                        DS.MainTimer.Stop();
+                        DS.MainTimer.Start();
+                        DS.Videos.SetTimer = false;
+                    }
+
                     await DS.Videos.UpdateVideoDetailsAsync(Convert.ToInt32(videoId), durationFixed, Convert.ToInt32(videoWidth), Convert.ToInt32(videoHeight));
+
+
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR UpdateVideoPropertiesAsync: {ex.Message}");
+                Debug.WriteLine($"ERROR UpdateVideoPropertiesAsync2: {ex.Message}");
             }
         }
 

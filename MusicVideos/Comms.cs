@@ -34,13 +34,19 @@
             HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(HubId);
 
-            //videoHub = new HubConnectionBuilder()
-            //            .WithUrl("http://localhost:8888/videoHub")
-            //            .Build();
-
-            videoHub = new HubConnectionBuilder()
+            if (Debugger.IsAttached)
+            {
+                videoHub = new HubConnectionBuilder()
+                            .WithUrl("http://localhost:8888/videoHub")
+                            .Build();
+            }
+            else
+            {
+                videoHub = new HubConnectionBuilder()
                        .WithUrl("http://192.168.0.6:888/videoHub")
                        .Build();
+            }
+
             videoHub.On<string, string>("SendMessage", (id, message) =>
             {
                 Debug.WriteLine($"SendMessage: {id} - {message}");
@@ -61,6 +67,22 @@
 
             // Initialize SignalR.
             _ = InitializeSignalRAsync();
+        }
+
+        /// <summary>
+        /// Checks if SignalR is connected.
+        /// </summary>
+        /// <returns>True if connected.</returns>
+        public bool IsConnected()
+        {
+            if (videoHub.State == HubConnectionState.Connected)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
