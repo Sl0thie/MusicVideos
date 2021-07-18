@@ -49,6 +49,7 @@
                 OnPropertyChanged("LastPlayed");
                 OnPropertyChanged("Duration");
                 OnPropertyChanged("Released");
+                OnPropertyChanged("Size");
             }
         }
 
@@ -95,7 +96,12 @@
 
                 if (currentVideo.Duration > 0)
                 {
-                    string rv = currentVideo.Duration.ToString();
+                    TimeSpan ts = TimeSpan.FromMilliseconds(currentVideo.Duration);
+
+                    string rv = ts.ToString();
+
+                    Debug.WriteLine($"NPM Duration String: {rv}");
+
 
                     return rv;
                 }
@@ -147,6 +153,21 @@
             set
             {
                 OnPropertyChanged();
+            }
+        }
+
+        public string Size
+        {
+            get
+            {
+                if(currentVideo.VideoWidth == 0)
+                {
+                    return "Unknown";
+                }
+                else
+                {
+                    return currentVideo.VideoWidth + " x " + currentVideo.VideoHeight;
+                }
             }
         }
 

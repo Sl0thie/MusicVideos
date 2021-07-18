@@ -349,6 +349,21 @@
             }
         }
 
+        public async Task QueueVideoAsync(string id, string videoId)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    DS.Videos.VideoQueue.Add(Convert.ToInt32(videoId));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+            }
+        }
+
         #endregion
 
         #region Filter
@@ -414,7 +429,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
+                Debug.WriteLine($"ERROR SendFilterAsync: {ex.Message}");
             }
         }
 

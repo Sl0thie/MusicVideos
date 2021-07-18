@@ -6,7 +6,6 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
-
     public class FilterModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -35,54 +34,132 @@
                 }
                 return current;
             }
-            set 
-            { 
-                current = value; 
+            set
+            {
+                current = value;
             }
         }
 
+        private Filter lastFilter;
         private Filter filter;
 
         public Filter Filter
         {
             get
             {
-                if(filter is null)
+                if (filter is null)
                 {
+                    Debug.WriteLine($"Filter Get: Filter is null.");
                     SignalRClient.Current.GetFilterAsync();
                 }
                 else
                 {
-                    Debug.WriteLine($"Filter Get: Min {filter.RatingMinimum} Max {filter.RatingMaximum}");
-                }               
+                    if (IsFilterEqual(filter, lastFilter))
+                    {
+                        Debug.WriteLine($"Filter Get: Equal so not calling to change server filter.");
+                    }
+                    else
+                    {
+                        //OnPropertyChanged("Filter");
+                        //SignalRClient.Current.GetFilterAsync();
+                        //SignalRClient.Current.SendFilterAsync(filter);
+                    }
+
+                    // Debug.WriteLine($"Filter Get: Min {filter.RatingMinimum} Max {filter.RatingMaximum}");
+                }
                 return filter;
             }
             set
             {
-                Filter lastFilter = filter;
+                lastFilter = filter;
                 filter = value;
-                if(filter != null)
+                if (filter != null)
                 {
-                    Debug.WriteLine($"Filter Set: Min {filter.RatingMinimum} Max {filter.RatingMaximum}");
-
-                    bool diff = false;
-                    if(filter.DateTimeMaximum != lastFilter.DateTimeMaximum) diff = true;
-                    if (filter.DateTimeMinimum != lastFilter.DateTimeMinimum) diff = true;
-                    //if (filter.Genres != lastFilter.Genres) diff = true;
-                    if (filter.RatingMaximum != lastFilter.RatingMaximum) diff = true;
-                    if (filter.RatingMinimum != lastFilter.RatingMinimum) diff = true;
-
-                    if (diff)
+                    if (IsFilterEqual(filter, lastFilter))
+                    {
+                        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
+                    }
+                    else
                     {
                         SignalRClient.Current.SendFilterAsync(filter);
+                        OnPropertyChanged("Filter");
                     }
+
+                    //OnPropertyChanged("Filter");
+                }
+                else
+                {
+                    Debug.WriteLine($"Filter Set: Filter is null.");
                 }
             }
+        }
+
+        private bool IsFilterEqual(Filter first, Filter second)
+        {
+            bool diff = false;
+            if (first.DateTimeMaximum != second.DateTimeMaximum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.DateTimeMaximum: first {first.DateTimeMaximum} second {filter.DateTimeMaximum}");
+            }
+
+            if (first.DateTimeMinimum != second.DateTimeMinimum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.DateTimeMinimum: first {first.DateTimeMinimum} second {filter.DateTimeMinimum}");
+            }
+
+            if (first.RatingMaximum != second.RatingMaximum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.RatingMaximum: first {first.RatingMaximum} second {filter.RatingMaximum}");
+            }
+
+            if (first.RatingMinimum != second.RatingMinimum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {filter.RatingMinimum}");
+            }
+
+            if ((first.Genres.Count != 0) & (second.Genres.Count != 0))
+            {
+                if (first.Genres.Count == second.Genres.Count)
+                {
+                    for (int i = 0; i < 19; i++)
+                    {
+                        if (first.Genres.Contains((Genre)i))
+                        {
+                            if (second.Genres.Contains((Genre)i))
+                            {
+                                // Debug.WriteLine($"IsFilterEqual.Genre {i}: equal");
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"IsFilterEqual.Genre {i}: different");
+                                diff = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    diff = true;
+                }
+            }
+
+            if (diff)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public FilterModel()
         {
             Current = this;
+            SignalRClient.Current.GetFilterAsync();
         }
     }
 }

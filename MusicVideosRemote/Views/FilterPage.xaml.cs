@@ -1,5 +1,6 @@
 ﻿namespace MusicVideosRemote.Views
 {
+    using MusicVideosRemote.Services;
     using MusicVideosRemote.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

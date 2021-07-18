@@ -4,7 +4,7 @@
              x:Class="MusicVideosRemote.Views.VideoListPage" BackgroundColor="#000000">
 
 
-    <CollectionView x:Name="CV" ItemsSource="{Binding videos}" SelectionMode="Single">
+    <CollectionView x:Name="CV" ItemsSource="{Binding videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="10">

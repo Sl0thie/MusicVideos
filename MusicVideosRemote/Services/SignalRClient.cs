@@ -64,6 +64,7 @@
 
                 dataHub.On<string>("SaveFilter", (json) =>
                 {
+                    Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     FilterModel.Current.Filter = newFilter;
                 });
@@ -111,5 +112,10 @@
         }
 
         #endregion
+
+        public async void QueueVideoAsync(int id)
+        {
+            await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
+        }
     }
 }
