@@ -1,6 +1,7 @@
 ﻿namespace MusicVideos
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Settings class to hold settings for MusicVideo.
@@ -16,7 +17,7 @@
         /// </summary>
         public Settings()
         {
-            // CheckFilter();
+            CheckFilter();
         }
 
         /// <summary>
@@ -67,7 +68,8 @@
             set
             {
                 filter = value;
-                CheckFilter();
+                DS.Videos.FilterVideos();
+                //CheckFilter();
             }
         }
 
@@ -113,6 +115,17 @@
                 filter.DateTimeMaximum = DateTime.Now.AddDays(1);
                 filter.DateTimeMinimum = DateTime.Parse("1/1/1940");
             }
+
+            //Debug.WriteLine("Settings Details:");
+            //Debug.WriteLine($"Rating Min: {filter.RatingMinimum}");
+            //Debug.WriteLine($"Rating Max: {filter.RatingMaximum}");
+            //Debug.WriteLine($"Date Min: {filter.DateTimeMinimum}");
+            //Debug.WriteLine($"Date Max: {filter.DateTimeMaximum}");
+
+            //foreach (Genre gen in filter.Genres)
+            //{
+            //    Debug.WriteLine($"Genre: {gen.ToString()}");
+            //}
         }
     }
 }

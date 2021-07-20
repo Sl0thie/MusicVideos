@@ -14,6 +14,7 @@
         /// <summary>
         /// Gets or sets the Index.
         /// </summary>
+        [PrimaryKey]
         public int Id { get; set; }
 
         /// <summary>

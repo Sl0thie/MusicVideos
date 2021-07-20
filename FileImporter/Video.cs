@@ -39,7 +39,6 @@
         /// <summary>
         /// Gets or sets the UNC path to the file.
         /// </summary>
-        [Obsolete("Use Physical and Virtual Path instead.")]
         public string Path { get; set; }
 
         /// <summary>

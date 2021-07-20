@@ -1,12 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicVideosRemote.Views.ListAllVideosPage">
+             x:Class="MusicVideosRemote.Views.ListAllVideosPage" BackgroundColor="#000000" Title="All Videos">
+    <ContentPage.ToolbarItems>
+        
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <CollectionView x:Name="CV" ItemsSource="{Binding Videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
+                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

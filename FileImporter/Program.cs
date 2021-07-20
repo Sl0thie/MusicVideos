@@ -7,7 +7,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-
+using SQLite;
+using System.Threading.Tasks;
 
 [assembly: CLSCompliant(true)]
 namespace FileImporter
@@ -20,8 +21,35 @@ namespace FileImporter
         private const string ffmpegpath = "\"C:\\Program Files\\ffmpeg\\bin\"";      // Path to ffmpeg. Enclosed in quotation marks to suit shellex.
         private const string ffmpegpathEx = @"C:\Program Files\ffmpeg\bin";          // Path to ffmpeg. Not enclosed to suit shell.
         private static Dictionary<int, Video> Videos = new Dictionary<int, Video>(); // Dictionary of Video objects related to the files.
+        private const string VideoDatabaseFilename = "VideoDatabase.db3";
+
+
+        /// <summary>
+        /// Physical path to the directory holding the video files.
+        /// </summary>
+        private const string FilesPath = @"F:\Music Videos";
+        /// <summary>
+        /// The virtual path of the directory holding the video files.
+        /// </summary>
+        private const string VirtualPath = @"/Virtual/Music Videos";
+
+        /// <summary>
+        /// Flags for the database.
+        /// </summary>
+        private const SQLiteOpenFlags Flags =
+            SQLiteOpenFlags.ReadWrite |
+            SQLiteOpenFlags.Create |
+            SQLiteOpenFlags.SharedCache;
+
         private static int NoOfVideos { get; set; }                                  // No of Videos that are in the store.
         private static DateTime LastWebSearch = DateTime.MinValue;                   // Time of the last web search. Used to limit searches per hour.
+
+        /// <summary>
+        /// Connection to the sqlite database.
+        /// Could probably use a better name.
+        /// </summary>
+        private static SQLiteAsyncConnection videosDatabase;
+
 
         /// <summary>
         /// FilImporter preforms several tasks related to the management of a file collection of music videos. Files are first converted to formats that can be played by HTML5 Video tag. Files are then stored in a "Artist\Title" format after several properties are obtained. Then the details of these operations are recorded in a json file in the base folder.
@@ -75,6 +103,15 @@ namespace FileImporter
         /// </summary>
         private static void ProcessNewVideos()
         {
+            // Connect to the database.
+            videosDatabase = new SQLiteAsyncConnection(Path.Combine(BasePath, VideoDatabaseFilename), Flags);
+
+            // Delete the Video table. Uncomment this to remove all the video objects. This will force them to be uploaded again.
+            // _ = videosDatabase.DropTableAsync<Video>();
+
+            // Create the Video table if it is not already created.
+            _ = videosDatabase.CreateTableAsync<Video>();
+
             //Get the existing Video data from the index file.
             if (File.Exists(BasePath + "index.json"))
             {
@@ -195,9 +232,44 @@ namespace FileImporter
                 string json = JsonConvert.SerializeObject(Videos, Formatting.None);
                 File.WriteAllText(BasePath + "index.json", json);
 
+                SaveVideoAsync(video);
+
+
                 Log("Video Added : " + video.Artist + " - " + video.Title);
             }
         }
+
+        private static void SaveVideoAsync(Video video)
+        {
+            try
+            {
+                // TODO Move this to the initial file import.
+                video.PhysicalPath = video.Path;
+                string path = video.Path.Substring(FilesPath.Length);
+                path = path.Replace(@"\", "/");
+                path = VirtualPath + path;
+                video.VirtualPath = path;
+
+                // Get video from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
+                List<Video> videos = rv.Result;
+
+                // Update the video or add it if it is not already there.
+                if (videos.Count == 1)
+                {
+                    videosDatabase.UpdateAsync(video);
+                }
+                else
+                {
+                    videosDatabase.InsertAsync(video);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Moves the file to the error directory.
@@ -223,7 +295,7 @@ namespace FileImporter
         /// <returns></returns>
         private static bool CheckVideoTitle(Video video)
         {
-            // Check for youtube id.
+            // Check for you-tube id.
             if (video.Title.Length > 12)
             {
                 if (video.Title.Substring(video.Title.Length - 12, 1) == "-")
@@ -956,6 +1028,7 @@ namespace FileImporter
                     Log("Mkv Conversion successful : " + newpathStriped);
                     File.Delete(video.Path);
                     video.Path = newpathStriped;
+                    video.Extension = ".mp4";
                     return true;
                 }
             }

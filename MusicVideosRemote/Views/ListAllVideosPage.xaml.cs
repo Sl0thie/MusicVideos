@@ -1,5 +1,6 @@
 ﻿namespace MusicVideosRemote.Views
 {
+    using MusicVideosRemote.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,6 +16,17 @@
         public ListAllVideosPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            BindingContext = ListAllVideosViewModel.Current.Videos;
+        }
+
+        private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

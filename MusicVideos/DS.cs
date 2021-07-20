@@ -58,10 +58,6 @@
             {
                 string json = File.ReadAllText("settings.json");
                 settings = JsonConvert.DeserializeObject<Settings>(json);
-
-                // TODO Remove these temp values.
-                // settings.Filter = new Filter();
-                SaveSettings();
             }
             else
             {
@@ -80,17 +76,6 @@
             MainTimer.Elapsed += MainTimer_Elapsed;
             MainTimer.Interval = 5000;
             MainTimer.Start();
-
-            TimelineItem nextItem = new TimelineItem
-            {
-                Timestamp = DateTime.Now.AddSeconds(5),
-                ActionItem = () =>
-                {
-                    comms.CheckConnectionAsync();
-                },
-            };
-
-            TimeLineItems.Enqueue(nextItem);
         }
 
         /// <summary>
@@ -127,44 +112,16 @@
             else
             {
                 MainTimer.Interval = 5000;
-                MainTimer.Start();
+                //MainTimer.Start();
                 comms.CheckConnectionAsync();
+                MainTimer.Start();
             }
-
-            //MainTimer.Stop();
-
-            //if (TimeLineItems.Count > 0)
-            //{
-            //    TimelineItem item = TimeLineItems.Dequeue();
-
-            //    item.ActionItem();
-
-            //    if (TimeLineItems.Count > 0)
-            //    {
-            //        TimelineItem nextItem = TimeLineItems.Peek();
-            //        TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
-            //        MainTimer.Interval = time.TotalMilliseconds;
-            //        MainTimer.Start();
-            //    }
-            //    else
-            //    {
-            //        _ = Videos.PickRandomVideoAsync();
-            //        return;
-            //    }
-            //}
-            //else
-            //{
-            //    _ = Videos.PickRandomVideoAsync();
-            //    return;
-            //}
-
-            //MainTimer.Start();
         }
 
         /// <summary>
         /// Save the settings to file.
         /// </summary>
-        private static void SaveSettings()
+        public static void SaveSettings()
         {
             string json = JsonConvert.SerializeObject(settings, Formatting.None);
             File.WriteAllText("settings.json", json);

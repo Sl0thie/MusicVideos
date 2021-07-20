@@ -94,19 +94,11 @@
             {
                 case HubConnectionState.Connected:
                     Debug.WriteLine("VideoHub.Connected");
-                    DS.MainTimer.Start();
+
                     break;
 
                 case HubConnectionState.Connecting:
                     Debug.WriteLine("VideoHub.Connecting");
-
-                    TimelineItem nextItem = new TimelineItem();
-                    nextItem.Timestamp = DateTime.Now.AddSeconds(5);
-                    nextItem.ActionItem = () =>
-                    {
-                        DS.Comms.CheckConnectionAsync();
-                    };
-                    DS.AddTimelineItem(nextItem);
 
                     break;
 
@@ -115,26 +107,10 @@
 
                     _ = InitializeSignalRAsync();
 
-                    TimelineItem nextItem2 = new TimelineItem();
-                    nextItem2.Timestamp = DateTime.Now.AddSeconds(5);
-                    nextItem2.ActionItem = () =>
-                    {
-                        DS.Comms.CheckConnectionAsync();
-                    };
-                    DS.AddTimelineItem(nextItem2);
-
                     break;
 
                 case HubConnectionState.Reconnecting:
                     Debug.WriteLine("VideoHub.Reconnecting");
-
-                    TimelineItem nextItem3 = new TimelineItem();
-                    nextItem3.Timestamp = DateTime.Now.AddSeconds(5);
-                    nextItem3.ActionItem = () =>
-                    {
-                        DS.Comms.CheckConnectionAsync();
-                    };
-                    DS.AddTimelineItem(nextItem3);
 
                     break;
             }

@@ -211,6 +211,24 @@
             }
         }
 
+        /// <summary>
+        /// Responds to button next video.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ButtonNextVideoAsync(string id)
+        {
+            try
+            {
+                Debug.WriteLine("Screen Click. " + id);
+                await DS.Videos.PlayNextVideoAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
+            }
+        }
+
         #endregion
 
         #region Video
@@ -324,12 +342,11 @@
                     // Convert duration to milliseconds.
                     int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
 
-                    Debug.WriteLine($"videoId: {videoId}");
-                    Debug.WriteLine($"duration: {duration}");
-                    Debug.WriteLine($"durationFixed: {durationFixed}");
-                    Debug.WriteLine($"videoWidth: {videoWidth}");
-                    Debug.WriteLine($"videoHeight: {videoHeight}");
-
+                    // Debug.WriteLine($"videoId: {videoId}");
+                    // Debug.WriteLine($"duration: {duration}");
+                    // Debug.WriteLine($"durationFixed: {durationFixed}");
+                    // Debug.WriteLine($"videoWidth: {videoWidth}");
+                    // Debug.WriteLine($"videoHeight: {videoHeight}");
                     if (DS.Videos.SetTimer)
                     {
                         DS.MainTimer.Interval = durationFixed;
@@ -349,7 +366,12 @@
             }
         }
 
-        public async Task QueueVideoAsync(string id, string videoId)
+        /// <summary>
+        /// Queues a video to the Videos.Queue.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="videoId">The video id to add to the queue.</param>
+        public void QueueVideo(string id, string videoId)
         {
             try
             {
@@ -423,6 +445,7 @@
                 {
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     DS.Settings.Filter = newFilter;
+                    DS.SaveSettings();
                     await SaveFilterAsync(DS.Comms.HubId, DS.Settings.Filter);
                     DS.Videos.FilterVideos();
                 }

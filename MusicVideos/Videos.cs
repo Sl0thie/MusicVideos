@@ -124,26 +124,49 @@
         /// </summary>
         public void FilterVideos()
         {
+
+            Debug.WriteLine("FilterVideos Settings Details:");
+            Debug.WriteLine($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
+            Debug.WriteLine($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
+            Debug.WriteLine($"Date Min: {DS.Settings.Filter.DateTimeMinimum}");
+            Debug.WriteLine($"Date Max: {DS.Settings.Filter.DateTimeMaximum}");
+
+            foreach (Genre gen in DS.Settings.Filter.Genres)
+            {
+                Debug.WriteLine($"Genre: {gen.ToString()}");
+            }
+
             // Clear the list first.
             filteredVideos.Clear();
 
             // Get the videos from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Rating] <= " + DS.Settings.Filter.RatingMaximum + " AND [Rating] >= " + DS.Settings.Filter.RatingMinimum);
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Rating] BETWEEN " + DS.Settings.Filter.RatingMinimum + " AND " + DS.Settings.Filter.RatingMaximum);
             List<Video> videos = rv.Result;
+
+            Debug.WriteLine($"FilterVideos Videos: {videos.Count}");
 
             // Filter the videos based on the genre's.
             if (DS.Settings.Filter.Genres.Count > 0)
             {
+                //foreach (Video next in videos)
+                //{
+                //    Debug.WriteLine($"Video: {next.Artist} - {next.Title}");
+
+                //    foreach (Genre genre in next.Genres)
+                //    {
+                //        Debug.WriteLine($"Genre: {genre}");
+
+                //        if (DS.Settings.Filter.Genres.Contains(genre))
+                //        {
+                //            filteredVideos.Add(next.Id);
+                //            break;
+                //        }
+                //    }
+                //}
+
                 foreach (var next in videos)
                 {
-                    foreach (Genre genre in next.Genres)
-                    {
-                        if (DS.Settings.Filter.Genres.Contains(genre))
-                        {
-                            filteredVideos.Add(next.Id);
-                            break;
-                        }
-                    }
+                    filteredVideos.Add(next.Id);
                 }
             }
             else
@@ -163,27 +186,40 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayNextVideoAsync()
         {
-            // Handle the last played video. If clicked though then lower the rating of the video.
-            if (lastVideo is object)
-            {
-                if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 20)
-                {
-                    lastVideo.Rating = lastVideo.Rating + IncrementClickedThough;
-                    if (lastVideo.Rating < 0)
-                    {
-                        lastVideo.Rating = 0;
-                    }
-                }
-                else
-                {
-                    lastVideo.Rating = lastVideo.Rating + IncrementPlayedThough;
-                    if (lastVideo.Rating > 100)
-                    {
-                        lastVideo.Rating = 100;
-                    }
-                }
+            Debug.WriteLine($"PlayNextVideoAsync");
 
-                await DS.Comms.SaveVideoAsync(lastVideo);
+            try
+            {
+                // Handle the last played video. If clicked though then lower the rating of the video.
+                if (lastVideo is object)
+                {
+                    Debug.WriteLine($"Video: {lastVideo.Artist} - {lastVideo.Title} {lastVideo.Id}");
+
+
+                    if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 20)
+                    {
+                        lastVideo.Rating = lastVideo.Rating + IncrementClickedThough;
+                        if (lastVideo.Rating < 0)
+                        {
+                            lastVideo.Rating = 0;
+                        }
+                    }
+                    else
+                    {
+                        lastVideo.Rating = lastVideo.Rating + IncrementPlayedThough;
+                        if (lastVideo.Rating > 100)
+                        {
+                            lastVideo.Rating = 100;
+                        }
+                    }
+
+                    await SaveVideoAsync(lastVideo);
+                    await DS.Comms.SaveVideoAsync(lastVideo);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR PlayNextVideoAsync: {ex.Message}");
             }
 
             if (videoQueue.Count > 0)
@@ -195,6 +231,7 @@
             {
                 await PickRandomVideoAsync();
             }
+
         }
 
         public async Task PlayVideoAsync(int id)
@@ -220,6 +257,9 @@
                 SetTimer = true;
             }
 
+            lastVideo = nextVideo;
+            lastStart = DateTime.Now;
+
             Debug.WriteLine($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
@@ -235,8 +275,8 @@
             // Get the video object from the database.
             Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
             List<Video> videos = rv.Result;
-            Video nextVideo = FixVideoVirtualPath(videos[0]);
-
+            // Video nextVideo = FixVideoVirtualPath(videos[0]);
+            Video nextVideo = videos[0];
 
 
             // Call for the video to be loaded.
@@ -255,13 +295,16 @@
                 SetTimer = true;
             }
 
+            lastVideo = nextVideo;
+            lastStart = DateTime.Now;
+
             Debug.WriteLine($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
         private Video FixVideoVirtualPath(Video video)
         {
             //video.VirtualPath = video.VirtualPath.Replace(" ", "&nbsp;");
-            video.VirtualPath = video.VirtualPath.Replace("+", "&plus;");
+            //video.VirtualPath = video.VirtualPath.Replace("+", "&plus;");
             return video;
         }
 
