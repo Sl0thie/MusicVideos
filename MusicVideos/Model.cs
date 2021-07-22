@@ -110,7 +110,6 @@ namespace MusicVideos
                 FilteredVideoIds.Add(next.Id);
                 RatingHistogramValue[next.Rating]++;
             }
-
         }
 
         /// <summary>

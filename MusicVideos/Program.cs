@@ -1,5 +1,7 @@
 ﻿namespace MusicVideos
 {
+    using System;
+    using LogCore3;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
 
@@ -14,6 +16,7 @@
         /// <param name="args">Arguments to pass to the host builder.</param>
         public static void Main(string[] args)
         {
+            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
             DS.Initialize();
             Model.LoadSettings();
             Model.LoadVideos();

@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
+    using LogCore3;
 
     /// <summary>
     /// MessageHub provides functions via SignalR.
@@ -99,17 +100,17 @@
 
         private async Task ErrorAsync(Exception ex)
         {
-            Debug.WriteLine("ERROR: " + ex.Message);
+            Log.Info("ERROR: " + ex.Message);
             await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
         #endregion
 
-        #region Debugging
+        #region Log.Infoging
 
         /// <summary>
         /// Logs javascript errors.
-        /// These errors are sent back to the debug page to centralize them from all the sources.
+        /// These errors are sent back to the Log.Info page to centralize them from all the sources.
         /// </summary>
         /// <param name="docTitle">The Title of the page that raised the error.</param>
         /// <param name="message">The error message.</param>
@@ -119,11 +120,11 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task LogErrorAsync(string docTitle, string message, string filename, string lineNo, string colNo)
         {
-            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
-            Debug.WriteLine("   Message:" + message);
-            Debug.WriteLine("  Filename:" + filename);
-            Debug.WriteLine("      Line:" + lineNo);
-            Debug.WriteLine("    Column:" + colNo);
+            Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
+            Log.Info("   Message:" + message);
+            Log.Info("  Filename:" + filename);
+            Log.Info("      Line:" + lineNo);
+            Log.Info("    Column:" + colNo);
 
             await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
         }
@@ -136,7 +137,7 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task LogMessageAsync(string docTitle, string message)
         {
-            Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " " + docTitle + " " + message);
+            Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " " + docTitle + " " + message);
             await Clients.All.SendAsync("PrintMessage", docTitle, message);
         }
 
@@ -247,7 +248,7 @@
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task GetQueuelistAsync()
         {
-            Debug.WriteLine("Get Queue " + Model.QueuedVideoIds.Count);
+            Log.Info("Get Queue " + Model.QueuedVideoIds.Count);
 
             await Clients.All.SendAsync("ClearQueuelist");
 
@@ -383,7 +384,7 @@
                     }
                 }
 
-                Debug.WriteLine("Model.Videos[lastIndex].Rating " + Model.Videos[lastIndex].Rating);
+                Log.Info("Model.Videos[lastIndex].Rating " + Model.Videos[lastIndex].Rating);
             }
 
             // Check if the playlist is not playing previous videos first. Then check there are any videos in the queue. Finally if there are no videos queued then pick a random song from the filtered list.
@@ -404,7 +405,7 @@
                 nextIndex = Model.QueuedVideoIds[IndexMinimum];
                 Model.QueuedVideoIds.RemoveAt(IndexMinimum);
 
-                Debug.WriteLine("Queue Count " + Model.QueuedVideoIds.Count);
+                Log.Info("Queue Count " + Model.QueuedVideoIds.Count);
             }
             else
             {
@@ -465,7 +466,7 @@
             // To reduce the no of file operations save only when the video changes.
             Model.SaveVideos();
 
-            Debug.WriteLine("filterRating " + Model.Settings.FilterRating);
+            Log.Info("filterRating " + Model.Settings.FilterRating);
         }
 
         /// <summary>
@@ -619,7 +620,7 @@
         /// <param name="state">The state to change to.</param>
         public void SetFilterGenre(string id, string state)
         {
-            Debug.WriteLine("SetFilter() " + id + " " + state);
+            Log.Info("SetFilter() " + id + " " + state);
 
             if (state == "add")
             {

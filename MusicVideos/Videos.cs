@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Threading.Tasks;
+    using LogCore3;
     using Newtonsoft.Json;
     using SQLite;
 
@@ -36,9 +37,15 @@
         /// </summary>
         private const string VirtualPath = @"/Virtual/Music Videos";
 
+        /// <summary>
+        /// The increment to use when a video is canceled before it ends.
+        /// </summary>
         private const int IncrementClickedThough = -1;
-        private const int IncrementPlayedThough = 5;
 
+        /// <summary>
+        /// The increment to use when the video is completed.
+        /// </summary>
+        private const int IncrementPlayedThough = 5;
 
         /// <summary>
         /// Used to generate random numbers.
@@ -56,10 +63,8 @@
         /// </summary>
         private readonly List<int> filteredVideos = new List<int>();
 
+        private readonly Collection<int> videoQueue = new Collection<int>();
         private bool setTimer;
-
-        private List<int> videoQueue = new List<int>();
-
         private DateTime lastStart;
         private Video lastVideo;
 
@@ -69,12 +74,11 @@
         public bool SetTimer { get => setTimer; set => setTimer = value; }
 
         /// <summary>
-        /// Gets or sets the VideoQueue.
+        /// Gets the VideoQueue.
         /// </summary>
-        public List<int> VideoQueue
+        public Collection<int> VideoQueue
         {
             get { return videoQueue; }
-            set { videoQueue = value; }
         }
 
         /// <summary>
@@ -124,16 +128,15 @@
         /// </summary>
         public void FilterVideos()
         {
-
-            Debug.WriteLine("FilterVideos Settings Details:");
-            Debug.WriteLine($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
-            Debug.WriteLine($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
-            Debug.WriteLine($"Date Min: {DS.Settings.Filter.DateTimeMinimum}");
-            Debug.WriteLine($"Date Max: {DS.Settings.Filter.DateTimeMaximum}");
+            Log.Info("FilterVideos Settings Details:");
+            Log.Info($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
+            Log.Info($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
+            Log.Info($"Date Min: {DS.Settings.Filter.DateTimeMinimum}");
+            Log.Info($"Date Max: {DS.Settings.Filter.DateTimeMaximum}");
 
             foreach (Genre gen in DS.Settings.Filter.Genres)
             {
-                Debug.WriteLine($"Genre: {gen.ToString()}");
+                Log.Info($"Genre: {gen}");
             }
 
             // Clear the list first.
@@ -143,27 +146,24 @@
             Task<List<Video>> rv = videosDatabase.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Rating] BETWEEN " + DS.Settings.Filter.RatingMinimum + " AND " + DS.Settings.Filter.RatingMaximum);
             List<Video> videos = rv.Result;
 
-            Debug.WriteLine($"FilterVideos Videos: {videos.Count}");
+            Log.Info($"FilterVideos Videos: {videos.Count}");
 
             // Filter the videos based on the genre's.
             if (DS.Settings.Filter.Genres.Count > 0)
             {
-                //foreach (Video next in videos)
-                //{
-                //    Debug.WriteLine($"Video: {next.Artist} - {next.Title}");
-
+                // foreach (Video next in videos)
+                // {
+                //    Log.Info.WriteLine($"Video: {next.Artist} - {next.Title}");
                 //    foreach (Genre genre in next.Genres)
                 //    {
-                //        Debug.WriteLine($"Genre: {genre}");
-
+                //        Log.Info.WriteLine($"Genre: {genre}");
                 //        if (DS.Settings.Filter.Genres.Contains(genre))
                 //        {
                 //            filteredVideos.Add(next.Id);
                 //            break;
                 //        }
                 //    }
-                //}
-
+                // }
                 foreach (var next in videos)
                 {
                     filteredVideos.Add(next.Id);
@@ -177,7 +177,31 @@
                 }
             }
 
-            Debug.WriteLine($"Total Filtered Videos: {filteredVideos.Count}");
+            AddUnplayedToQueue();
+
+            Log.Info($"Total Filtered Videos: {filteredVideos.Count}");
+        }
+
+        /// <summary>
+        /// Add all videos that have not been played to the queue.
+        /// </summary>
+        private void AddUnplayedToQueue()
+        {
+            try
+            {
+                // Get video from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [LastPlayed] = 0");
+                List<Video> videos = rv.Result;
+
+                foreach (Video next in videos)
+                {
+                    videoQueue.Add(next.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Info("Error: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -186,15 +210,14 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayNextVideoAsync()
         {
-            Debug.WriteLine($"PlayNextVideoAsync");
+            Log.Info($"PlayNextVideoAsync");
 
             try
             {
                 // Handle the last played video. If clicked though then lower the rating of the video.
                 if (lastVideo is object)
                 {
-                    Debug.WriteLine($"Video: {lastVideo.Artist} - {lastVideo.Title} {lastVideo.Id}");
-
+                    Log.Info($"Video: {lastVideo.Artist} - {lastVideo.Title} {lastVideo.Id}");
 
                     if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 20)
                     {
@@ -219,7 +242,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayNextVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
 
             if (videoQueue.Count > 0)
@@ -231,15 +254,19 @@
             {
                 await PickRandomVideoAsync();
             }
-
         }
 
+        /// <summary>
+        /// Play a video.
+        /// </summary>
+        /// <param name="id">The id of the video to play.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(int id)
         {
             // Get the video object from the database.
             Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {id}");
             List<Video> videos = rv.Result;
-            Video nextVideo = FixVideoVirtualPath(videos[0]);
+            Video nextVideo = videos[0];
 
             // Call for the video to be loaded.
             await DS.Comms.LoadVideoAsync(nextVideo);
@@ -260,7 +287,7 @@
             lastVideo = nextVideo;
             lastStart = DateTime.Now;
 
-            Debug.WriteLine($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
+            Log.Info($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
         /// <summary>
@@ -275,9 +302,9 @@
             // Get the video object from the database.
             Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
             List<Video> videos = rv.Result;
+
             // Video nextVideo = FixVideoVirtualPath(videos[0]);
             Video nextVideo = videos[0];
-
 
             // Call for the video to be loaded.
             await DS.Comms.LoadVideoAsync(nextVideo);
@@ -298,14 +325,7 @@
             lastVideo = nextVideo;
             lastStart = DateTime.Now;
 
-            Debug.WriteLine($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
-        }
-
-        private Video FixVideoVirtualPath(Video video)
-        {
-            //video.VirtualPath = video.VirtualPath.Replace(" ", "&nbsp;");
-            //video.VirtualPath = video.VirtualPath.Replace("+", "&plus;");
-            return video;
+            Log.Info($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
         /// <summary>
@@ -340,7 +360,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error: " + ex.Message);
+                Log.Error(ex);
                 return null;
             }
         }
@@ -373,7 +393,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error: " + ex.Message);
+                Log.Error(ex);
             }
         }
 

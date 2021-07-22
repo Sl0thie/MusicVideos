@@ -1,11 +1,10 @@
 ﻿namespace MusicVideos
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Linq;
     using System.Threading.Tasks;
+    using LogCore3;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
 
@@ -14,16 +13,17 @@
     /// </summary>
     public class Comms
     {
-        /// <summary>
-        /// The Id for conformation.
-        /// </summary>
-        public string HubId;
-
         private static HubConnection videoHub;
         private readonly Random rnd = new Random();
         private readonly Collection<string> ids = new Collection<string>();
         private int nextRemote;
         private int nextPlayer;
+        private string hubId;
+
+        /// <summary>
+        /// Gets or sets the validation id.
+        /// </summary>
+        public string HubId { get => hubId; set => hubId = value; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Comms"/> class.
@@ -34,6 +34,7 @@
             HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(HubId);
 
+            // Switch between IIS (Publish) and IIS Express. (Log.Info)
             if (Debugger.IsAttached)
             {
                 videoHub = new HubConnectionBuilder()
@@ -49,12 +50,12 @@
 
             videoHub.On<string, string>("SendMessage", (id, message) =>
             {
-                Debug.WriteLine($"SendMessage: {id} - {message}");
+                Log.Info($"SendMessage: {id} - {message}");
             });
 
             videoHub.On<string, string>("SendError", (id, json) =>
             {
-                Debug.WriteLine($"ERROR: {id} - {json}");
+                Log.Info($"ERROR: {id} - {json}");
             });
 
             videoHub.On<string, string>("SaveVideo", (id, video) =>
@@ -93,24 +94,24 @@
             switch (videoHub.State)
             {
                 case HubConnectionState.Connected:
-                    Debug.WriteLine("VideoHub.Connected");
+                    Log.Info("VideoHub.Connected");
 
                     break;
 
                 case HubConnectionState.Connecting:
-                    Debug.WriteLine("VideoHub.Connecting");
+                    Log.Info("VideoHub.Connecting");
 
                     break;
 
                 case HubConnectionState.Disconnected:
-                    Debug.WriteLine("VideoHub.Disconnected");
+                    Log.Info("VideoHub.Disconnected");
 
                     _ = InitializeSignalRAsync();
 
                     break;
 
                 case HubConnectionState.Reconnecting:
-                    Debug.WriteLine("VideoHub.Reconnecting");
+                    Log.Info("VideoHub.Reconnecting");
 
                     break;
             }
@@ -189,8 +190,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR Comms.LoadVideoAsync: {ex.Message}");
-            }
+                Log.Error(ex);
+    }
         }
 
         /// <summary>
@@ -206,7 +207,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR Comms.LoadVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -224,7 +225,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR Comms.PlayVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -239,7 +240,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR Comms.InitializeSignalRAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
     }

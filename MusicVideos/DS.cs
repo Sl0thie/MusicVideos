@@ -4,9 +4,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
     using System.Timers;
+    using LogCore3;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -14,7 +13,7 @@
     /// </summary>
     public static class DS
     {
-        private static readonly Queue<TimelineItem> TimeLineItems = new Queue<TimelineItem>();
+        // private static readonly Queue<TimelineItem> TimeLineItems = new Queue<TimelineItem>();
         private static Videos videos;
         private static Settings settings;
         private static Comms comms;
@@ -79,52 +78,51 @@
         }
 
         /// <summary>
-        /// To be replaced.
-        /// </summary>
-        /// <param name="newItem">N/A.</param>
-        public static void AddTimelineItem(TimelineItem newItem)
-        {
-            if (TimeLineItems.Count > 0)
-            {
-                TimeLineItems.Enqueue(newItem);
-            }
-            else
-            {
-                MainTimer.Enabled = false;
-                TimeLineItems.Enqueue(newItem);
-                TimelineItem nextItem = TimeLineItems.Peek();
-                TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
-                MainTimer.Interval = time.TotalMilliseconds;
-                MainTimer.Enabled = true;
-            }
-        }
-
-        private static void MainTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            Debug.WriteLine("Timer Tick");
-
-            MainTimer.Stop();
-
-            if (DS.Comms.IsConnected())
-            {
-                DS.Videos.PlayNextVideoAsync();
-            }
-            else
-            {
-                MainTimer.Interval = 5000;
-                //MainTimer.Start();
-                comms.CheckConnectionAsync();
-                MainTimer.Start();
-            }
-        }
-
-        /// <summary>
         /// Save the settings to file.
         /// </summary>
         public static void SaveSettings()
         {
             string json = JsonConvert.SerializeObject(settings, Formatting.None);
             File.WriteAllText("settings.json", json);
+        }
+
+        ///// <summary>
+        ///// To be replaced.
+        ///// </summary>
+        ///// <param name="newItem">N/A.</param>
+        //public static void AddTimelineItem(TimelineItem newItem)
+        //{
+        //    if (TimeLineItems.Count > 0)
+        //    {
+        //        TimeLineItems.Enqueue(newItem);
+        //    }
+        //    else
+        //    {
+        //        MainTimer.Enabled = false;
+        //        TimeLineItems.Enqueue(newItem);
+        //        TimelineItem nextItem = TimeLineItems.Peek();
+        //        TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
+        //        MainTimer.Interval = time.TotalMilliseconds;
+        //        MainTimer.Enabled = true;
+        //    }
+        //}
+
+        private static void MainTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Log.Info("Timer Tick");
+
+            MainTimer.Stop();
+
+            if (DS.Comms.IsConnected())
+            {
+                _ = DS.Videos.PlayNextVideoAsync();
+            }
+            else
+            {
+                MainTimer.Interval = 5000;
+                comms.CheckConnectionAsync();
+                MainTimer.Start();
+            }
         }
     }
 }

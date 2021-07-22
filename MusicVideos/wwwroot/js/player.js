@@ -56,7 +56,7 @@ function connectionStarted() {
     connection.invoke('GetNextVideoAsync');
 }
 //#endregion
-//#region Debug
+//#region Log.Info
 function logError(e) {
     connection.invoke('LogErrorAsync', document.title, e.message, e.filename, e.lineno.toString(), e.colno.toString());
 }

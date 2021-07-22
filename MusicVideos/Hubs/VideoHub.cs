@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using LogCore3;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
 
@@ -15,7 +16,7 @@
     /// </summary>
     public class VideoHub : Hub
     {
-        #region Debugging
+        #region Log.Infoging
 
         /// <summary>
         /// Sends error details to other clients.
@@ -27,12 +28,13 @@
         {
             try
             {
-                Debug.WriteLine($"SendErrorAsync:  {id}  {error}");
+                Log.Info($"SendErrorAsync:  {id}  {error}");
                 await Clients.All.SendAsync("SendError", id, error);
             }
             catch (Exception ex)
             {
-                await ErrorAsync(ex);
+                // await ErrorAsync(ex);
+                Log.Error(ex);
             }
         }
 
@@ -43,13 +45,13 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
-            Debug.WriteLine($"ErrorAsync: {ex.Message}");
+            Log.Info($"ErrorAsync: {ex.Message}");
             await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
         /// <summary>
         /// Logs javascript errors.
-        /// These errors are sent back to the debug page to centralize them from all the sources.
+        /// These errors are sent back to the Log.Info page to centralize them from all the sources.
         /// </summary>
         /// <param name="docTitle">The Title of the page that raised the error.</param>
         /// <param name="message">The error message.</param>
@@ -61,18 +63,19 @@
         {
             try
             {
-                Debug.WriteLine("LogErrorAsync");
-                Debug.WriteLine(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
-                Debug.WriteLine("   Message:" + message);
-                Debug.WriteLine("  Filename:" + filename);
-                Debug.WriteLine("      Line:" + lineNo);
-                Debug.WriteLine("    Column:" + colNo);
+                Log.Info("LogErrorAsync");
+                Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
+                Log.Info("   Message:" + message);
+                Log.Info("  Filename:" + filename);
+                Log.Info("      Line:" + lineNo);
+                Log.Info("    Column:" + colNo);
 
                 await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
             }
             catch (Exception ex)
             {
-                await ErrorAsync(ex);
+                // await ErrorAsync(ex);
+                Log.Error(ex);
             }
         }
 
@@ -96,7 +99,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR RegisterRemoteAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR RegisterRemoteAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -116,7 +120,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR RegisterPlayerAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR RegisterPlayerAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -134,12 +139,13 @@
         {
             try
             {
-                Debug.WriteLine($"SendMessage: {id} - {message}");
+                Log.Info($"SendMessage: {id} - {message}");
                 await Clients.All.SendAsync("SendMessage", id, message);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR SendMessageAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR SendMessageAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -202,12 +208,13 @@
         {
             try
             {
-                Debug.WriteLine("Screen Click. " + id);
+                Log.Info("Screen Click. " + id);
                 await DS.Videos.PlayNextVideoAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -220,12 +227,13 @@
         {
             try
             {
-                Debug.WriteLine("Screen Click. " + id);
+                Log.Info("Screen Click. " + id);
                 await DS.Videos.PlayNextVideoAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -254,7 +262,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -275,7 +284,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -296,7 +306,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR LoadVideoAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR LoadVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -313,14 +324,15 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    Debug.WriteLine($"Video: {video}");
-                    Debug.WriteLine($"TimeStr: {timeStr}");
+                    Log.Info($"Video: {video}");
+                    Log.Info($"TimeStr: {timeStr}");
                     await Clients.All.SendAsync("PlayVideo", video, timeStr);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -342,11 +354,11 @@
                     // Convert duration to milliseconds.
                     int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
 
-                    // Debug.WriteLine($"videoId: {videoId}");
-                    // Debug.WriteLine($"duration: {duration}");
-                    // Debug.WriteLine($"durationFixed: {durationFixed}");
-                    // Debug.WriteLine($"videoWidth: {videoWidth}");
-                    // Debug.WriteLine($"videoHeight: {videoHeight}");
+                    // Log.Info.WriteLine($"videoId: {videoId}");
+                    // Log.Info.WriteLine($"duration: {duration}");
+                    // Log.Info.WriteLine($"durationFixed: {durationFixed}");
+                    // Log.Info.WriteLine($"videoWidth: {videoWidth}");
+                    // Log.Info.WriteLine($"videoHeight: {videoHeight}");
                     if (DS.Videos.SetTimer)
                     {
                         DS.MainTimer.Interval = durationFixed;
@@ -356,13 +368,12 @@
                     }
 
                     await DS.Videos.UpdateVideoDetailsAsync(Convert.ToInt32(videoId), durationFixed, Convert.ToInt32(videoWidth), Convert.ToInt32(videoHeight));
-
-
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR UpdateVideoPropertiesAsync2: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR UpdateVideoPropertiesAsync2: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -382,7 +393,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -406,7 +418,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -427,7 +440,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 
@@ -452,7 +466,8 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ERROR SendFilterAsync: {ex.Message}");
+                // Log.Info.WriteLine($"ERROR SendFilterAsync: {ex.Message}");
+                Log.Error(ex);
             }
         }
 

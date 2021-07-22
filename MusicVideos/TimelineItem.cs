@@ -8,6 +8,7 @@
     /// <summary>
     /// TimelineItem class for items on the time line.
     /// </summary>
+    [Obsolete]
     public class TimelineItem
     {
         /// <summary>

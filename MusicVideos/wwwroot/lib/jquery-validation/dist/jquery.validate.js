@@ -20,7 +20,7 @@
         validate: function (options) {
             // If nothing is selected, return nothing; can't chain anyway
             if (!this.length) {
-                if (options && options.debug && window.console) {
+                if (options && options.Log.Info && window.console) {
                     console.warn("Nothing selected, can't validate, returning nothing.");
                 }
                 return;
@@ -57,7 +57,7 @@
 
                 // Validate the form on submit
                 this.on("submit.validate", function (event) {
-                    if (validator.settings.debug) {
+                    if (validator.settings.Log.Info) {
                         // Prevent form submit to be able to see console output
                         event.preventDefault();
                     }
@@ -623,7 +623,7 @@
                     .not(this.settings.ignore)
                     .filter(function () {
                         var name = this.name || $(this).attr("name"); // For contenteditable
-                        if (!name && validator.settings.debug && window.console) {
+                        if (!name && validator.settings.Log.Info && window.console) {
                             console.error("%o has no name assigned", this);
                         }
 
@@ -777,7 +777,7 @@
                             return false;
                         }
                     } catch (e) {
-                        if (this.settings.debug && window.console) {
+                        if (this.settings.Log.Info && window.console) {
                             console.log("Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e);
                         }
                         if (e instanceof TypeError) {
