@@ -190,7 +190,7 @@
             try
             {
                 // Get video from the database.
-                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [LastPlayed] = 0");
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [PlayCount] = 0");
                 List<Video> videos = rv.Result;
 
                 foreach (Video next in videos)
@@ -219,7 +219,7 @@
                 {
                     Log.Info($"Video: {lastVideo.Artist} - {lastVideo.Title} {lastVideo.Id}");
 
-                    if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 20)
+                    if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 30)
                     {
                         lastVideo.Rating = lastVideo.Rating + IncrementClickedThough;
                         if (lastVideo.Rating < 0)

@@ -21,7 +21,8 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BindingContext = ListAllVideosViewModel.Current.Videos;
+            // BindingContext = ListAllVideosViewModel.Current.Videos;
+            CV.ItemsSource = ListAllVideosViewModel.Current.Videos;
         }
 
         private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -16,7 +16,7 @@
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            BindingContext = FilterModel.Current;
+            BindingContext = FilterViewModel.Current;
         }
     }
 }

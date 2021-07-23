@@ -17,7 +17,7 @@
     public class DataStore
     {
         private static SQLiteAsyncConnection Database;
-        private HubConnection dataHub;
+        //private HubConnection dataHub;
         private string hubId = string.Empty;
         private List<MessageItem> messages = new List<MessageItem>();
         private List<ErrorItem> errors;
@@ -45,7 +45,6 @@
         public DataStore()
         {
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-            //IinitializeSignalR();
         }
 
         #region Video

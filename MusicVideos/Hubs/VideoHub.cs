@@ -16,7 +16,7 @@
     /// </summary>
     public class VideoHub : Hub
     {
-        #region Log.Infoging
+        #region Debugging
 
         /// <summary>
         /// Sends error details to other clients.
@@ -144,7 +144,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR SendMessageAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -213,7 +212,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -232,7 +230,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR ScreenClickAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -262,7 +259,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -284,7 +280,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -306,7 +301,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR LoadVideoAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -331,7 +325,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -372,7 +365,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR UpdateVideoPropertiesAsync2: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -393,7 +385,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR PlayVideoAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -418,7 +409,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR GetVideosAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -440,7 +430,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR SaveFilterAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -466,7 +455,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR SendFilterAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }

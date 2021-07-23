@@ -29,23 +29,32 @@
         {
             get
             {
+                Debug.WriteLine("ListAllVideosViewModel.Current Get");
                 if (current is null)
                 {
                     current = new ListAllVideosViewModel();
                 }
                 return current;
             }
-            set { current = value; }
+            set 
+            {
+                Debug.WriteLine("ListAllVideosViewModel.Current Set");
+                current = value;
+            }
         }
 
-        //List<Video> videos = new List<Video>();
         private List<Video> videos = new List<Video>();
 
         public List<Video> Videos
         {
-            get { return videos; }
+            get 
+            {
+                Debug.WriteLine("ListAllVideosViewModel.Videos Get");
+                return videos; 
+            }
             set 
-            { 
+            {
+                Debug.WriteLine("ListAllVideosViewModel.Videos Set");
                 videos = value;
                 OnPropertyChanged("Videos");
             }
@@ -53,15 +62,33 @@
 
         public ListAllVideosViewModel()
         {
-            Current = this;
-            _ = LoadVideosAsync();
+            Debug.WriteLine("ListAllVideosViewModel.Constructor");
+
+            try
+            {
+                Current = this;
+                _ = LoadVideosAsync();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private async Task LoadVideosAsync()
         {
-            Debug.WriteLine("LoadVideosAsync");
-            DataStore database = await DataStore.Instance;
-            videos = await database.GetAllVideosAsync();
+            Debug.WriteLine("ListAllVideosViewModel.LoadVideosAsync");
+            try
+            {
+                DataStore database = await DataStore.Instance;
+                videos = await database.GetAllVideosAsync();
+
+                Debug.WriteLine($"Videos found : { videos.Count}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }

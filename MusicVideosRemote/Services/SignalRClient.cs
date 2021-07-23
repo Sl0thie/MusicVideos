@@ -66,7 +66,7 @@
                 {
                     Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    FilterModel.Current.Filter = newFilter;
+                    FilterViewModel.Current.Filter = newFilter;
                 });
 
                 await dataHub.StartAsync();
@@ -83,6 +83,8 @@
         public async void RegisterAsync()
         {
             await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
+
+            await dataHub.InvokeAsync("GetFilterAsync", hubId);
         }
 
         public async void GetAllVideosAsync()

@@ -6,7 +6,7 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
-    public class FilterModel : INotifyPropertyChanged
+    public class FilterViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -22,15 +22,15 @@
 
         #endregion
 
-        private static FilterModel current;
+        private static FilterViewModel current;
 
-        internal static FilterModel Current
+        internal static FilterViewModel Current
         {
             get
             {
                 if (current is null)
                 {
-                    current = new FilterModel();
+                    current = new FilterViewModel();
                 }
                 return current;
             }
@@ -156,7 +156,7 @@
             return true;
         }
 
-        public FilterModel()
+        public FilterViewModel()
         {
             Current = this;
             SignalRClient.Current.GetFilterAsync();

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MusicVideosRemote.Views.ListAllVideosPage" BackgroundColor="#000000" Title="All Videos">
     <ContentPage.ToolbarItems>
         
@@ -19,8 +19,8 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="{Binding Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
-                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
+                        <Label Text="{Binding Path=Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
+                        <Label Text="{Binding Path=Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

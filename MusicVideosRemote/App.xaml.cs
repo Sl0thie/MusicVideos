@@ -12,7 +12,7 @@ namespace MusicVideosRemote
         public App()
         {
             InitializeComponent();
-
+            // Startup the SignalR Client.
             SignalRClient.Current.RegisterAsync();
 
             MainPage = new AppShell();
