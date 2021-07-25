@@ -8,6 +8,9 @@
     using MusicVideosRemote.Services;
     using Xamarin.Forms;
 
+    /// <summary>
+    /// NowplayingModel class.
+    /// </summary>
     public class NowplayingModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Interface
@@ -34,8 +37,9 @@
 
         #endregion
 
-        private static NowplayingModel current;
-
+        /// <summary>
+        /// Gets or sets the current NowplayingModel.
+        /// </summary>
         internal static NowplayingModel Current
         {
             get
@@ -54,8 +58,9 @@
             }
         }
 
-        private Video currentVideo;
-
+        /// <summary>
+        /// Gets or sets the CurrentVideo.
+        /// </summary>
         public Video CurrentVideo
         {
             get
@@ -76,6 +81,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the LastPlayed.
+        /// </summary>
         public string LastPlayed
         {
             get
@@ -113,6 +121,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the Duration.
+        /// </summary>
         public string Duration
         {
             get
@@ -141,6 +152,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the Released.
+        /// </summary>
         public string Released
         {
             get
@@ -182,6 +196,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the Size.
+        /// </summary>
         public string Size
         {
             get
@@ -197,21 +214,47 @@
             }
         }
 
+        /// <summary>
+        /// Gets the Previous Video command.
+        /// </summary>
         public Command PreviousVideoCommand { get; }
 
+        /// <summary>
+        /// Gets the Play Video command.
+        /// </summary>
         public Command PlayVideoCommand { get; }
 
+        /// <summary>
+        /// Gets the Pause Video command.
+        /// </summary>
         public Command PauseVideoCommand { get; }
 
+        /// <summary>
+        /// Gets the Next Video command.
+        /// </summary>
         public Command NextVideoVideoCommand { get; }
 
+        /// <summary>
+        /// Gets the Volume command.
+        /// </summary>
         public Command VolumeCommand { get; }
 
+        private static NowplayingModel current;
+        private Video currentVideo;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NowplayingModel"/> class.
+        /// </summary>
         public NowplayingModel()
         {
             Current = this;
 
-            NextVideoVideoCommand = new Command(SignalRClient.Current.CommandNextVideo);
+            NextVideoVideoCommand = new Command(CallCommandNextVideo);
+        }
+
+        private void CallCommandNextVideo()
+        {
+            _ = SignalRClient.Current.CommandNextVideo();
         }
     }
 }

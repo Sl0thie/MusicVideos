@@ -6,6 +6,9 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
+    /// <summary>
+    /// FilterViewModel class.
+    /// </summary>
     public class FilterViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Interface
@@ -32,8 +35,9 @@
 
         #endregion
 
-        private static FilterViewModel current;
-
+        /// <summary>
+        /// Gets or sets the current FilterViewModel.
+        /// </summary>
         internal static FilterViewModel Current
         {
             get
@@ -52,9 +56,9 @@
             }
         }
 
-        private Filter lastFilter;
-        private Filter filter;
-
+        /// <summary>
+        /// Gets or sets Filter.
+        /// </summary>
         public Filter Filter
         {
             get
@@ -62,7 +66,7 @@
                 if (filter is null)
                 {
                     Debug.WriteLine($"Filter Get: Filter is null.");
-                    SignalRClient.Current.GetFilterAsync();
+                    _ = SignalRClient.Current.GetFilterAsync();
                 }
 
                 return filter;
@@ -81,7 +85,7 @@
                     else
                     {
                         Debug.WriteLine($"Filter Set: Filter changed.");
-                        SignalRClient.Current.SendFilterAsync(filter);
+                        _ = SignalRClient.Current.SendFilterAsync(filter);
                         OnPropertyChanged("Filter");
                         _ = FilteredVideosViewModel.Current.LoadVideosAsync();
                     }
@@ -93,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the RatingMaximum.
+        /// </summary>
         public int RatingMaximum
         {
             get
@@ -110,6 +117,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the RatingMinimum.
+        /// </summary>
         public int RatingMinimum
         {
             get
@@ -125,6 +135,19 @@
                     OnPropertyChanged("RatingMinimum");
                 }
             }
+        }
+
+        private static FilterViewModel current;
+        private Filter lastFilter;
+        private Filter filter;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilterViewModel"/> class.
+        /// </summary>
+        public FilterViewModel()
+        {
+            Current = this;
+            _ = SignalRClient.Current.GetFilterAsync();
         }
 
         private bool IsFilterEqual(Filter first, Filter second)
@@ -187,12 +210,6 @@
             }
 
             return true;
-        }
-
-        public FilterViewModel()
-        {
-            Current = this;
-            SignalRClient.Current.GetFilterAsync();
         }
     }
 }

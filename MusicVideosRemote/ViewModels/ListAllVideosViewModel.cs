@@ -9,6 +9,9 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
+    /// <summary>
+    /// ListAllVideosViewModel class.
+    /// </summary>
     public class ListAllVideosViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Interface
@@ -35,8 +38,9 @@
 
         #endregion
 
-        private static ListAllVideosViewModel current;
-
+        /// <summary>
+        /// Gets or sets the current ListAllVideosViewModel.
+        /// </summary>
         internal static ListAllVideosViewModel Current
         {
             get
@@ -57,8 +61,9 @@
             }
         }
 
-        private List<Video> videos = new List<Video>();
-
+        /// <summary>
+        /// Gets or sets the Videos.
+        /// </summary>
         public List<Video> Videos
         {
             get
@@ -75,6 +80,12 @@
             }
         }
 
+        private static ListAllVideosViewModel current;
+        private List<Video> videos = new List<Video>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListAllVideosViewModel"/> class.
+        /// </summary>
         public ListAllVideosViewModel()
         {
             Debug.WriteLine("ListAllVideosViewModel.Constructor");
@@ -90,6 +101,10 @@
             }
         }
 
+        /// <summary>
+        /// Loads the Videos list with video objects.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         private async Task LoadVideosAsync()
         {
             Debug.WriteLine("ListAllVideosViewModel.LoadVideosAsync");

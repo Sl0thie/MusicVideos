@@ -45,8 +45,11 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
-            Log.Info($"ErrorAsync: {ex.Message}");
-            await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
+            if (ex is object)
+            {
+                Log.Info($"ErrorAsync: {ex.Message}");
+                await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
+            }
         }
 
         /// <summary>

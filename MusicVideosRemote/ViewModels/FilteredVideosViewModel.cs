@@ -9,6 +9,9 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
+    /// <summary>
+    /// FilteredVideosViewModel class.
+    /// </summary>
     public class FilteredVideosViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Interface
@@ -35,8 +38,9 @@
 
         #endregion
 
-        private static FilteredVideosViewModel current;
-
+        /// <summary>
+        /// Gets or sets the current FilteredVideosViewModel.
+        /// </summary>
         internal static FilteredVideosViewModel Current
         {
             get
@@ -55,8 +59,9 @@
             }
         }
 
-        private List<Video> videos = new List<Video>();
-
+        /// <summary>
+        /// Gets or sets the Videos.
+        /// </summary>
         public List<Video> Videos
         {
             get
@@ -71,6 +76,12 @@
             }
         }
 
+        private static FilteredVideosViewModel current;
+        private List<Video> videos = new List<Video>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FilteredVideosViewModel"/> class.
+        /// </summary>
         public FilteredVideosViewModel()
         {
             try
@@ -84,6 +95,10 @@
             }
         }
 
+        /// <summary>
+        /// Loads the Videos list with video objects.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideosAsync()
         {
             try

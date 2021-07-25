@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.SignalR.Client;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.ViewModels;
@@ -85,6 +86,8 @@
                 });
 
                 await dataHub.StartAsync();
+
+                await RegisterAsync();
             }
             catch (Exception ex)
             {
@@ -92,28 +95,43 @@
             }
         }
 
-        public async void RegisterAsync()
+        /// <summary>
+        /// Invokes Registration with the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task RegisterAsync()
         {
             await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
-
-            await dataHub.InvokeAsync("GetFilterAsync", hubId);
 
             // await dataHub.InvokeAsync("GetVideosAsync", hubId); // Uncomment to update all videos from server.
         }
 
-        public async void GetAllVideosAsync()
+        /// <summary>
+        /// Invokes Get All Videos command on server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetAllVideosAsync()
         {
             await dataHub.InvokeAsync("GetVideosAsync", hubId);
         }
 
-        public async void GetFilterAsync()
+        /// <summary>
+        /// Invokes Get Filter command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetFilterAsync()
         {
             await dataHub.InvokeAsync("GetFilterAsync", hubId);
         }
 
         #region Debugging
 
-        public async void ErrorAsync(Exception ex)
+        /// <summary>
+        /// Passes an exception to the server.
+        /// </summary>
+        /// <param name="ex">The exception to pass.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ErrorAsync(Exception ex)
         {
             await dataHub.InvokeAsync("SendErrorAsync", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
         }
@@ -122,21 +140,35 @@
 
         #region Filter
 
-        public async void SendFilterAsync(Filter filter)
+        /// <summary>
+        /// Passes a filter to the server.
+        /// </summary>
+        /// <param name="filter">The filter to pass.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SendFilterAsync(Filter filter)
         {
             await dataHub.InvokeAsync("SendFilterAsync", hubId, JsonConvert.SerializeObject(filter, Formatting.None));
         }
 
         #endregion
 
-        public async void QueueVideoAsync(int id)
+        /// <summary>
+        /// Queues a video on the server.
+        /// </summary>
+        /// <param name="id">The id of the video to queue.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task QueueVideoAsync(int id)
         {
             await dataHub.InvokeAsync("QueueVideo", hubId, id.ToString());
         }
 
         #region Commands
 
-        public async void CommandNextVideo()
+        /// <summary>
+        /// Invokes the Next Video command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task CommandNextVideo()
         {
             await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
         }
