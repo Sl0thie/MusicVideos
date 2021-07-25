@@ -57,6 +57,7 @@
 
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
+                    Debug.WriteLine($"SaveVideo:  {json}");
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
                     DataStore data = await DataStore.Instance;
                     await data.SaveVideoAsync(newVideo);
@@ -70,9 +71,6 @@
                 });
 
                 await dataHub.StartAsync();
-
-                //await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
-                //await dataHub.InvokeAsync("GetVideosAsync", hubId);
             }
             catch (Exception ex)
             {
@@ -85,6 +83,8 @@
             await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
 
             await dataHub.InvokeAsync("GetFilterAsync", hubId);
+
+            await dataHub.InvokeAsync("GetVideosAsync", hubId);
         }
 
         public async void GetAllVideosAsync()
@@ -117,7 +117,19 @@
 
         public async void QueueVideoAsync(int id)
         {
-            await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
+            await dataHub.InvokeAsync("QueueVideo", hubId, id.ToString());
         }
+
+        #region Commands
+
+        public async void CommandNextVideo()
+        {
+            await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+        }
+
+        #endregion
+
+
+
     }
 }

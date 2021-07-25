@@ -9,7 +9,7 @@
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
-    public class ListAllVideosViewModel : INotifyPropertyChanged
+    public class FilteredVideosViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -23,22 +23,20 @@
         }
         #endregion
 
-        private static ListAllVideosViewModel current;
+        private static FilteredVideosViewModel current;
 
-        internal static ListAllVideosViewModel Current
+        internal static FilteredVideosViewModel Current
         {
             get
             {
-                Debug.WriteLine("ListAllVideosViewModel.Current Get");
                 if (current is null)
                 {
-                    current = new ListAllVideosViewModel();
+                    current = new FilteredVideosViewModel();
                 }
                 return current;
             }
             set
             {
-                Debug.WriteLine("ListAllVideosViewModel.Current Set");
                 current = value;
             }
         }
@@ -47,43 +45,48 @@
 
         public List<Video> Videos
         {
-            get 
+            get
             {
-                Debug.WriteLine("ListAllVideosViewModel.Videos Get");
                 return videos;
             }
-            set 
+            set
             {
-                Debug.WriteLine("ListAllVideosViewModel.Videos Set");
                 videos = value;
                 OnPropertyChanged("Videos");
             }
         }
 
-        public ListAllVideosViewModel()
+        public FilteredVideosViewModel()
         {
-            Debug.WriteLine("ListAllVideosViewModel.Constructor");
-
             try
             {
                 Current = this;
                 _ = LoadVideosAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
         }
 
-        private async Task LoadVideosAsync()
+        public async Task LoadVideosAsync()
         {
-            Debug.WriteLine("ListAllVideosViewModel.LoadVideosAsync");
             try
             {
                 DataStore database = await DataStore.Instance;
-                videos = await database.GetAllVideosAsync();
+                List<Video> allVideos = await database.GetAllVideosAsync();
+                videos = new List<Video>();
 
-                Debug.WriteLine($"Videos found : { videos.Count}");
+                foreach (Video next in allVideos)
+                {
+                    if (next.Rating < FilterViewModel.Current.Filter.RatingMaximum)
+                    {
+                        if (next.Rating > FilterViewModel.Current.Filter.RatingMinimum)
+                        {
+                            videos.Add(next);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

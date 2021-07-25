@@ -52,21 +52,13 @@
                     Debug.WriteLine($"Filter Get: Filter is null.");
                     SignalRClient.Current.GetFilterAsync();
                 }
-                else
-                {
-                    if (IsFilterEqual(filter, lastFilter))
-                    {
-                        Debug.WriteLine($"Filter Get: Equal so not calling to change server filter.");
-                    }
-                    else
-                    {
-                        //OnPropertyChanged("Filter");
-                        //SignalRClient.Current.GetFilterAsync();
-                        //SignalRClient.Current.SendFilterAsync(filter);
-                    }
-
-                    // Debug.WriteLine($"Filter Get: Min {filter.RatingMinimum} Max {filter.RatingMaximum}");
-                }
+                //else
+                //{
+                //    if (IsFilterEqual(filter, lastFilter))
+                //    {
+                //        Debug.WriteLine($"Filter Get: Equal so not calling to change server filter.");
+                //    }
+                //}
                 return filter;
             }
             set
@@ -81,15 +73,41 @@
                     }
                     else
                     {
+                        Debug.WriteLine($"Filter Set: Filter changed.");
                         SignalRClient.Current.SendFilterAsync(filter);
                         OnPropertyChanged("Filter");
+                        _ = FilteredVideosViewModel.Current.LoadVideosAsync();
                     }
-
-                    //OnPropertyChanged("Filter");
                 }
                 else
                 {
                     Debug.WriteLine($"Filter Set: Filter is null.");
+                }
+            }
+        }
+
+        public int RatingMaximum
+        {
+            get { return filter.RatingMaximum; }
+            set
+            {
+                if (filter.RatingMaximum != value)
+                {
+                    filter.RatingMaximum = value;
+                    OnPropertyChanged("RatingMaximum");
+                }
+            }
+        }
+
+        public int RatingMinimum
+        {
+            get { return filter.RatingMinimum; }
+            set
+            {
+                if (filter.RatingMinimum != value)
+                {
+                    filter.RatingMinimum = value;
+                    OnPropertyChanged("RatingMinimum");
                 }
             }
         }

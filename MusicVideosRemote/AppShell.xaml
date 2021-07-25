@@ -26,7 +26,7 @@
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
                 <Setter Property="Shell.FlyoutBackgroundColor" Value="#121212"/>
-                
+
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -35,7 +35,7 @@
             Default Styles for all Flyout Items
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
             -->
-            
+
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
@@ -84,20 +84,20 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem Title="All Videos" Icon="icon_about.png">
-        <ShellContent Route="ListAllVideosPage" ContentTemplate="{DataTemplate local:ListAllVideosPage}" />
-    </FlyoutItem>
-    
     <FlyoutItem Title="Now Playing" Icon="icon_about.png" >
         <ShellContent Route="NowPlayingPage" ContentTemplate="{DataTemplate local:NowPlayingPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Filter" Icon="icon_about.png">
-        <ShellContent Route="FilterPage" ContentTemplate="{DataTemplate local:FilterPage}" />
+    <FlyoutItem Title="Filtered Videos" Icon="icon_about.png">
+        <ShellContent Route="FilteredVideosPage" ContentTemplate="{DataTemplate local:FilteredVideosPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Videos" Icon="icon_feed.png">
-        <ShellContent Route="VideoListPage" ContentTemplate="{DataTemplate local:VideoListPage}" />
+    <FlyoutItem Title="All Videos" Icon="icon_about.png">
+        <ShellContent Route="ListAllVideosPage" ContentTemplate="{DataTemplate local:ListAllVideosPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Filter" Icon="icon_about.png">
+        <ShellContent Route="FilterPage" ContentTemplate="{DataTemplate local:FilterPage}" />
     </FlyoutItem>
 
 </Shell>

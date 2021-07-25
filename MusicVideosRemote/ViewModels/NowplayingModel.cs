@@ -5,7 +5,8 @@
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using MusicVideosRemote.Models;
-
+    using MusicVideosRemote.Services;
+    using Xamarin.Forms;
 
     public class NowplayingModel : INotifyPropertyChanged
     {
@@ -98,7 +99,7 @@
                 {
                     TimeSpan ts = TimeSpan.FromMilliseconds(currentVideo.Duration);
 
-                    string rv = ts.ToString();
+                    string rv = ts.ToString(@"m\:ss");
 
                     Debug.WriteLine($"NPM Duration String: {rv}");
 
@@ -171,9 +172,20 @@
             }
         }
 
+        public Command PreviousVideoCommand { get; }
+        public Command PlayVideoCommand { get; }
+
+        public Command PauseVideoCommand { get; }
+
+        public Command NextVideoVideoCommand { get; }
+
+        public Command VolumeCommand { get; }
+
         public NowplayingModel()
         {
             Current = this;
+
+            NextVideoVideoCommand = new Command(SignalRClient.Current.CommandNextVideo);
         }
     }
 }

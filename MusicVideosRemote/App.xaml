@@ -50,7 +50,7 @@
                 <Setter Property="TextColor" Value="#1080FF" />
                 <Setter Property="Font" Value="Digital7.ttf#Digital-7 Italic" />
                 <Setter Property="FontFamily" Value="Digital7.ttf#Digital-7 Italic"/>
-                <Setter Property="FontSize"  Value="38" />
+                <Setter Property="FontSize" Value="28" />
             </Style>
 
         </ResourceDictionary>
