@@ -1,31 +1,43 @@
-﻿using MusicVideosRemote.Services;
-using MusicVideosRemote.Views;
-using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace MusicVideosRemote
+﻿namespace MusicVideosRemote
 {
+    using MusicVideosRemote.Services;
+    using Xamarin.Forms;
+
+    /// <summary>
+    /// App class.
+    /// </summary>
     public partial class App : Application
     {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
             InitializeComponent();
+
             // Startup the SignalR Client.
             SignalRClient.Current.RegisterAsync();
 
             MainPage = new AppShell();
         }
 
+        /// <summary>
+        /// OnStart override. Currently unused.
+        /// </summary>
         protected override void OnStart()
         {
         }
 
+        /// <summary>
+        /// OnSleep override. Currently unused.
+        /// </summary>
         protected override void OnSleep()
         {
         }
 
+        /// <summary>
+        /// OnResume override. Currently unused.
+        /// </summary>
         protected override void OnResume()
         {
         }

@@ -8,14 +8,24 @@
 
     public class FilterViewModel : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged Interface
 
+        /// <summary>
+        /// Occurs when a property is changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke event when properties change.
+        /// </summary>
+        /// <param name="propertyName">The property name that changed.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -32,8 +42,10 @@
                 {
                     current = new FilterViewModel();
                 }
+
                 return current;
             }
+
             set
             {
                 current = value;
@@ -52,15 +64,10 @@
                     Debug.WriteLine($"Filter Get: Filter is null.");
                     SignalRClient.Current.GetFilterAsync();
                 }
-                //else
-                //{
-                //    if (IsFilterEqual(filter, lastFilter))
-                //    {
-                //        Debug.WriteLine($"Filter Get: Equal so not calling to change server filter.");
-                //    }
-                //}
+
                 return filter;
             }
+
             set
             {
                 lastFilter = filter;
@@ -88,7 +95,11 @@
 
         public int RatingMaximum
         {
-            get { return filter.RatingMaximum; }
+            get
+            {
+                return filter.RatingMaximum;
+            }
+
             set
             {
                 if (filter.RatingMaximum != value)
@@ -101,7 +112,11 @@
 
         public int RatingMinimum
         {
-            get { return filter.RatingMinimum; }
+            get
+            {
+                return filter.RatingMinimum;
+            }
+
             set
             {
                 if (filter.RatingMinimum != value)

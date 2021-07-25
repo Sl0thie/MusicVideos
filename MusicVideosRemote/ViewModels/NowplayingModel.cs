@@ -10,16 +10,28 @@
 
     public class NowplayingModel : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged Interface
+
+        /// <summary>
+        /// Occurs when a property is changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke event when properties change.
+        /// </summary>
+        /// <param name="propertyName">The property name that changed.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
         private static NowplayingModel current;
@@ -32,15 +44,25 @@
                 {
                     current = new NowplayingModel();
                 }
+
                 return current;
             }
-            set { current = value; }
+
+            set
+            {
+                current = value;
+            }
         }
 
         private Video currentVideo;
+
         public Video CurrentVideo
         {
-            get { return currentVideo; }
+            get
+            {
+                return currentVideo;
+            }
+
             set
             {
                 currentVideo = value;
@@ -80,9 +102,11 @@
                             rv += " - " + days + " days ago";
                             break;
                     }
+
                     return rv;
                 }
             }
+
             set
             {
                 OnPropertyChanged();
@@ -103,7 +127,6 @@
 
                     Debug.WriteLine($"NPM Duration String: {rv}");
 
-
                     return rv;
                 }
                 else
@@ -111,6 +134,7 @@
                     return "Unknown";
                 }
             }
+
             set
             {
                 OnPropertyChanged();
@@ -121,7 +145,7 @@
         {
             get
             {
-                if(currentVideo.Released == DateTime.MinValue)
+                if (currentVideo.Released == DateTime.MinValue)
                 {
                     return "Unknown";
                 }
@@ -151,6 +175,7 @@
                     }
                 }
             }
+
             set
             {
                 OnPropertyChanged();
@@ -161,7 +186,7 @@
         {
             get
             {
-                if(currentVideo.VideoWidth == 0)
+                if (currentVideo.VideoWidth == 0)
                 {
                     return "Unknown";
                 }
@@ -173,6 +198,7 @@
         }
 
         public Command PreviousVideoCommand { get; }
+
         public Command PlayVideoCommand { get; }
 
         public Command PauseVideoCommand { get; }

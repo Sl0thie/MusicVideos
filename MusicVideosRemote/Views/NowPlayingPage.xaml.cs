@@ -1,27 +1,26 @@
 ﻿namespace MusicVideosRemote.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using MusicVideosRemote.Services;
+    using MusicVideosRemote.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-    using MusicVideosRemote.Models;
-    using MusicVideosRemote.ViewModels;
-    using System.Diagnostics;
-    using System.ComponentModel;
 
-
+    /// <summary>
+    /// NowPlayingPage class.
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NowPlayingPage : ContentPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NowPlayingPage"/> class.
+        /// </summary>
         public NowPlayingPage()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// OnAppearing override to implement binding.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();

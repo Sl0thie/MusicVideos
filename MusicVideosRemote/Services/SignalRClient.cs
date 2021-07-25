@@ -7,10 +7,16 @@
     using MusicVideosRemote.ViewModels;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// SignalRClient class manages communications to the SignalR server.
+    /// </summary>
     public class SignalRClient
     {
         private static SignalRClient current;
 
+        /// <summary>
+        /// Gets or sets the current SignalRClient.
+        /// </summary>
         internal static SignalRClient Current
         {
             get
@@ -19,14 +25,22 @@
                 {
                     current = new SignalRClient();
                 }
+
                 return current;
             }
-            set { current = value; }
+
+            set
+            {
+                current = value;
+            }
         }
 
         private HubConnection dataHub;
         private string hubId = string.Empty;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignalRClient"/> class.
+        /// </summary>
         public SignalRClient()
         {
             IinitializeSignalR();
@@ -84,7 +98,7 @@
 
             await dataHub.InvokeAsync("GetFilterAsync", hubId);
 
-            await dataHub.InvokeAsync("GetVideosAsync", hubId);
+            // await dataHub.InvokeAsync("GetVideosAsync", hubId); // Uncomment to update all videos from server.
         }
 
         public async void GetAllVideosAsync()
@@ -128,8 +142,5 @@
         }
 
         #endregion
-
-
-
     }
 }

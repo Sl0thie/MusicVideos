@@ -38,6 +38,7 @@
                 <Setter Property="TextColor" Value="#888888" />
                 <Setter Property="Font" Value="Calibri" />
                 <Setter Property="FontSize"  Value="10" />
+                <Setter Property="VerticalTextAlignment"  Value="Center"/>
             </Style>
             
             <Style x:Key="LabelTitle" TargetType="Label">

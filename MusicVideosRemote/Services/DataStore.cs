@@ -1,45 +1,38 @@
 ﻿namespace MusicVideosRemote.Services
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using SQLite;
-    using MusicVideosRemote.Models;
-    using System.Diagnostics;
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using MusicVideosRemote.Models;
+    using SQLite;
 
+    /// <summary>
+    /// DataStore class manages database access.
+    /// </summary>
     public class DataStore
     {
-        private static SQLiteAsyncConnection Database;
-        // private string hubId = string.Empty;
-        // private List<MessageItem> messages = new List<MessageItem>();
-        // private List<ErrorItem> errors;
+        private static SQLiteAsyncConnection database;
 
-        //public List<MessageItem> Messages
-        //{
-        //    get { return messages; }
-        //    set { messages = value; }
-        //}
-
-        //public List<ErrorItem> Errors
-        //{
-        //    get { return errors; }
-        //    set { errors = value; }
-        //}
-
+        /// <summary>
+        /// Singleton access.
+        /// </summary>
         public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
         {
             var instance = new DataStore();
-            // _ = Database.DropTableAsync<Video>();
-            CreateTableResult result = await Database.CreateTableAsync<Video>();
+
+            // _ = Database.DropTableAsync<Video>(); // Uncomment to drop the table. (for testing)
+            CreateTableResult result = await database.CreateTableAsync<Video>();
             return instance;
         });
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataStore"/> class.
+        /// </summary>
         public DataStore()
         {
-            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+            database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         }
-
-        #region Video
 
         public Task<List<Video>> GetAllVideosAsync()
         {
@@ -47,12 +40,7 @@
 
             try
             {
-                ////Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Artist] LIKE 'A%'");
-                //Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video]");
-                //List<Video> videos = rv.Result;
-                //Debug.WriteLine("rv count " + rv.Result.Count);
-                //return rv;
-                return Database.Table<Video>().ToListAsync();
+                return database.Table<Video>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -67,12 +55,7 @@
 
             try
             {
-                ////Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Artist] LIKE 'A%'");
-                //Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video]");
-                //List<Video> videos = rv.Result;
-                //Debug.WriteLine("rv count " + rv.Result.Count);
-                //return rv;
-                return Database.Table<Video>().ToListAsync();
+                return database.Table<Video>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -83,21 +66,20 @@
 
         public Task<int> SaveVideoAsync(Video video)
         {
-
             Debug.WriteLine("LocalDatabase.SaveVideoAsync");
 
             try
             {
-                Task<List<Video>> rv = Database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
+                Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
                 List<Video> videos = rv.Result;
 
                 if (videos.Count == 1)
                 {
-                    return Database.UpdateAsync(video);
+                    return database.UpdateAsync(video);
                 }
                 else
                 {
-                    return Database.InsertAsync(video);
+                    return database.InsertAsync(video);
                 }
             }
             catch (Exception ex)
@@ -106,7 +88,5 @@
                 return null;
             }
         }
-
-        #endregion
     }
 }

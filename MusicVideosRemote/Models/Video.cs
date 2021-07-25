@@ -11,78 +11,98 @@
     /// </summary>
     public class Video : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged Interface
+
+        /// <summary>
+        /// Occurs when a property is changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke event when properties change.
+        /// </summary>
+        /// <param name="propertyName">The property name that changed.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
-        private int id;
-        private string artist;
-        private string searchArtist;
-        private string title;
-        private string album;
-        private string path;
-        private string extension;
-        private int duration;
-        private int videoBitRate;
-        private int videoWidth;
-        private int videoHeight;
-        private float videoFPS;
-        private int playCount;
-        private int queuedCount;
-        private double playTime;
-        private int rating;
-        private DateTime lastPlayed;
-        private DateTime lastQueued;
-        private DateTime released;
-        private DateTime added;
-        private int errors;
-        private string physicalPath;
-        private string virtualPath;
-
+        /// <summary>
+        /// Gets or sets the id of the video.
+        /// </summary>
         [PrimaryKey]
         public int Id
         {
-            get { return id; }
-            set { id = value; OnPropertyChanged("Id"); }
-        }
+            get
+            {
+                return id;
+            }
 
-        //[PrimaryKey]
-        //public int _id
-        //{
-        //    get { return id; }
-        //    set { id = value; }
-        //}
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
         /// <summary>
         /// Gets or sets the song's artist name.
         /// </summary>
         public string Artist
         {
-            get { return artist; }
-            set { artist = value; OnPropertyChanged("Artist"); }
+            get
+            {
+                return artist;
+            }
+
+            set
+            {
+                artist = value;
+                OnPropertyChanged("Artist");
+            }
         }
 
         /// <summary>
         /// Gets or sets the song's artist search name.
         /// Artist's name with prefixes such as 'the' removed.
         /// </summary>
-        public string SearchArtist { get => searchArtist; set => searchArtist = value; }
+        public string SearchArtist
+        {
+            get
+            {
+                return searchArtist;
+            }
+
+            set
+            {
+                searchArtist = value;
+                OnPropertyChanged("SearchArtist");
+            }
+        }
 
         /// <summary>
         /// Gets or sets the song's title.
         /// </summary
         public string Title
         {
-            get { return title; }
-            set { title = value; OnPropertyChanged("Title"); }
+            get
+            {
+                return title;
+            }
+
+            set
+            {
+                title = value;
+                OnPropertyChanged("Title");
+            }
         }
 
         /// <summary>
@@ -99,7 +119,6 @@
         /// <summary>
         /// Gets the genres that this song falls into.
         /// </summary>
-        /// 
         public Collection<Genre> Genres { get; } = new Collection<Genre>();
 
         /// <summary>
@@ -187,5 +206,28 @@
         /// </summary>
         public string VirtualPath { get => virtualPath; set => virtualPath = value; }
 
+        private int id;
+        private string artist;
+        private string searchArtist;
+        private string title;
+        private string album;
+        private string path;
+        private string extension;
+        private int duration;
+        private int videoBitRate;
+        private int videoWidth;
+        private int videoHeight;
+        private float videoFPS;
+        private int playCount;
+        private int queuedCount;
+        private double playTime;
+        private int rating;
+        private DateTime lastPlayed;
+        private DateTime lastQueued;
+        private DateTime released;
+        private DateTime added;
+        private int errors;
+        private string physicalPath;
+        private string virtualPath;
     }
 }

@@ -86,36 +86,15 @@
             File.WriteAllText("settings.json", json);
         }
 
-        ///// <summary>
-        ///// To be replaced.
-        ///// </summary>
-        ///// <param name="newItem">N/A.</param>
-        //public static void AddTimelineItem(TimelineItem newItem)
-        //{
-        //    if (TimeLineItems.Count > 0)
-        //    {
-        //        TimeLineItems.Enqueue(newItem);
-        //    }
-        //    else
-        //    {
-        //        MainTimer.Enabled = false;
-        //        TimeLineItems.Enqueue(newItem);
-        //        TimelineItem nextItem = TimeLineItems.Peek();
-        //        TimeSpan time = nextItem.Timestamp.Subtract(DateTime.Now);
-        //        MainTimer.Interval = time.TotalMilliseconds;
-        //        MainTimer.Enabled = true;
-        //    }
-        //}
-
         private static void MainTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Log.Info("Timer Tick");
 
             MainTimer.Stop();
 
-            if (DS.Comms.IsConnected())
+            if (Comms.IsConnected())
             {
-                _ = DS.Videos.PlayNextVideoAsync();
+                _ = Videos.PlayNextVideoAsync();
             }
             else
             {

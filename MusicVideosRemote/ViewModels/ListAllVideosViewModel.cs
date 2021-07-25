@@ -11,16 +11,28 @@
 
     public class ListAllVideosViewModel : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged
+        #region INotifyPropertyChanged Interface
+
+        /// <summary>
+        /// Occurs when a property is changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke event when properties change.
+        /// </summary>
+        /// <param name="propertyName">The property name that changed.</param>
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
         private static ListAllVideosViewModel current;
@@ -34,8 +46,10 @@
                 {
                     current = new ListAllVideosViewModel();
                 }
+
                 return current;
             }
+
             set
             {
                 Debug.WriteLine("ListAllVideosViewModel.Current Set");
@@ -47,12 +61,13 @@
 
         public List<Video> Videos
         {
-            get 
+            get
             {
                 Debug.WriteLine("ListAllVideosViewModel.Videos Get");
                 return videos;
             }
-            set 
+
+            set
             {
                 Debug.WriteLine("ListAllVideosViewModel.Videos Set");
                 videos = value;
@@ -69,7 +84,7 @@
                 Current = this;
                 _ = LoadVideosAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
@@ -83,7 +98,7 @@
                 DataStore database = await DataStore.Instance;
                 videos = await database.GetAllVideosAsync();
 
-                Debug.WriteLine($"Videos found : { videos.Count}");
+                Debug.WriteLine($"Videos found : {videos.Count}");
             }
             catch (Exception ex)
             {

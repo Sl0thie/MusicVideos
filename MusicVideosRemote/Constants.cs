@@ -3,6 +3,10 @@
     using System;
     using System.IO;
 
+    /// <summary>
+    /// Constants class.
+    /// </summary>
+    [Obsolete("move to data store.")]
     public static class Constants
     {
         /// <summary>
@@ -14,15 +18,12 @@
         /// Flags used by Sqlite.
         /// </summary>
         public const SQLite.SQLiteOpenFlags Flags =
-            // open the database in read/write mode
             SQLite.SQLiteOpenFlags.ReadWrite |
-            // create the database if it doesn't exist
             SQLite.SQLiteOpenFlags.Create |
-            // enable multi-threaded database access
             SQLite.SQLiteOpenFlags.SharedCache;
 
         /// <summary>
-        /// The path to the database. Varies by product.
+        /// Gets the path to the database. Varies by product.
         /// </summary>
         public static string DatabasePath
         {

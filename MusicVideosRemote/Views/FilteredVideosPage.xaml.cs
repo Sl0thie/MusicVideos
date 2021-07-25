@@ -1,10 +1,10 @@
 ﻿namespace MusicVideosRemote.Views
 {
+    using System;
+    using System.Diagnostics;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
     using MusicVideosRemote.ViewModels;
-    using System;
-    using System.Diagnostics;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 

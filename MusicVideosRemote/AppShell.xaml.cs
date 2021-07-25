@@ -1,25 +1,18 @@
-﻿
-
-namespace MusicVideosRemote
+﻿namespace MusicVideosRemote
 {
-    //using MusicVideosRemote.ViewModels;
-    using MusicVideosRemote.Views;
     using System;
-    using System.Collections.Generic;
-    using Xamarin.Forms;
 
+    /// <summary>
+    /// AppShell class.
+    /// </summary>
     public partial class AppShell : Xamarin.Forms.Shell
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppShell"/> class.
+        /// </summary>
         public AppShell()
         {
             InitializeComponent();
-            //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-        }
-
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }
