@@ -20,6 +20,8 @@
         /// </summary>
         public FilteredVideosPage()
         {
+            Debug.WriteLine("FilteredVideosPage.FilteredVideosPage");
+
             InitializeComponent();
         }
 
@@ -28,6 +30,8 @@
         /// </summary>
         protected override void OnAppearing()
         {
+            Debug.WriteLine("FilteredVideosPage.OnAppearing");
+
             base.OnAppearing();
             BindingContext = FilteredVideosViewModel.Current;
             CV.ItemsSource = FilteredVideosViewModel.Current.Videos;
@@ -37,19 +41,31 @@
         /// Manages the selection changed event for the CV list.
         /// </summary>
         /// <param name="sender">Unused.</param>
-        /// <param name="e">Unused value.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        private async Task CV_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
+        /// <param name="e">Event arguments from the CV List.</param>
+        private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
+                Debug.WriteLine("ListAllVideosPage.CV_SelectionChangedAsync");
+
                 Video selected = (Video)e.CurrentSelection[0];
-                await SignalRClient.Current.QueueVideoAsync(selected.Id);
+                _ = ProcessselectedAsync(selected.Id);
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error CV_SelectionChanged: {ex.Message}");
             }
+        }
+
+        /// <summary>
+        /// Processes the item.
+        /// </summary>
+        /// <param name="id">The id of the video to process.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        private async Task ProcessselectedAsync(int id)
+        {
+            await SignalRClient.Current.QueueVideoAsync(id);
         }
     }
 }

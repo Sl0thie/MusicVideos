@@ -1,6 +1,6 @@
 ﻿namespace MusicVideosRemote
 {
-    using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// AppShell class.
@@ -12,6 +12,8 @@
         /// </summary>
         public AppShell()
         {
+            Debug.WriteLine("AppShell.AppShell");
+
             InitializeComponent();
         }
     }

@@ -44,6 +44,8 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.Current.Get");
+
                 if (current is null)
                 {
                     current = new NowplayingModel();
@@ -54,6 +56,8 @@
 
             set
             {
+                Debug.WriteLine("NowplayingModel.Current.Set");
+
                 current = value;
             }
         }
@@ -65,11 +69,15 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.CurrentVideo.Get");
+
                 return currentVideo;
             }
 
             set
             {
+                Debug.WriteLine("NowplayingModel.CurrentVideo.Set");
+
                 currentVideo = value;
                 Debug.WriteLine($"NPM Artist: {currentVideo.Artist}");
                 Debug.WriteLine($"NPM Title: {currentVideo.Title}");
@@ -88,6 +96,8 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.LastPlayed.Get");
+
                 if (currentVideo.LastPlayed == DateTime.MinValue)
                 {
                     return "Never";
@@ -117,6 +127,8 @@
 
             set
             {
+                Debug.WriteLine("NowplayingModel.LastPlayed.Set");
+
                 OnPropertyChanged();
             }
         }
@@ -128,6 +140,8 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.Duration.Get");
+
                 Debug.WriteLine($"NPM Duration: {currentVideo.Duration}");
 
                 if (currentVideo.Duration > 0)
@@ -148,6 +162,8 @@
 
             set
             {
+                Debug.WriteLine("NowplayingModel.Duration.Set");
+
                 OnPropertyChanged();
             }
         }
@@ -159,6 +175,8 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.Released.Get");
+
                 if (currentVideo.Released == DateTime.MinValue)
                 {
                     return "Unknown";
@@ -192,6 +210,8 @@
 
             set
             {
+                Debug.WriteLine("NowplayingModel.Released.Set");
+
                 OnPropertyChanged();
             }
         }
@@ -203,6 +223,8 @@
         {
             get
             {
+                Debug.WriteLine("NowplayingModel.Size.Get");
+
                 if (currentVideo.VideoWidth == 0)
                 {
                     return "Unknown";
@@ -247,6 +269,8 @@
         /// </summary>
         public NowplayingModel()
         {
+            Debug.WriteLine("NowplayingModel.NowplayingModel");
+
             Current = this;
 
             NextVideoVideoCommand = new Command(CallCommandNextVideo);
@@ -254,6 +278,8 @@
 
         private void CallCommandNextVideo()
         {
+            Debug.WriteLine("NowplayingModel.CallCommandNextVideo");
+
             _ = SignalRClient.Current.CommandNextVideo();
         }
     }

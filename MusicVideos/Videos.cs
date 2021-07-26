@@ -217,7 +217,7 @@
                 // Handle the last played video. If clicked though then lower the rating of the video.
                 if (lastVideo is object)
                 {
-                    Log.Info($"Video: {lastVideo.Artist} - {lastVideo.Title} {lastVideo.Id}");
+                    Log.Info($"Last Video: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
 
                     if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 30)
                     {
@@ -236,7 +236,7 @@
                         }
                     }
 
-                    await SaveVideoAsync(lastVideo);
+                    // await SaveVideoAsync(lastVideo);
                     await DS.Comms.SaveVideoAsync(lastVideo);
                 }
             }
@@ -332,17 +332,19 @@
         /// Save a video to the database.
         /// </summary>
         /// <param name="video">The video to be saved.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        public Task<int> SaveVideoAsync(Video video)
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SaveVideoAsync(Video video)
         {
             try
             {
-                // TODO Move this to the initial file import.
-                video.PhysicalPath = video.Path;
-                string path = video.Path[FilesPath.Length..];
-                path = path.Replace(@"\", "/");
-                path = VirtualPath + path;
-                video.VirtualPath = path;
+                Log.Info($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
+
+                //// TODO Move this to the initial file import.
+                //video.PhysicalPath = video.Path;
+                //string path = video.Path[FilesPath.Length..];
+                //path = path.Replace(@"\", "/");
+                //path = VirtualPath + path;
+                //video.VirtualPath = path;
 
                 // Get video from the database.
                 Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
@@ -351,17 +353,18 @@
                 // Update the video or add it if it is not already there.
                 if (videos.Count == 1)
                 {
-                    return videosDatabase.UpdateAsync(video);
+                    Log.Info("Updating");
+                    await videosDatabase.UpdateAsync(video);
                 }
                 else
                 {
-                    return videosDatabase.InsertAsync(video);
+                    Log.Info("Inserting");
+                    await videosDatabase.InsertAsync(video);
                 }
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                return null;
             }
         }
 
@@ -372,7 +375,7 @@
         /// <param name="duration">The duration of the video.</param>
         /// <param name="width">The width of the video.</param>
         /// <param name="height">The height of the video.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task UpdateVideoDetailsAsync(int id, int duration, int width, int height)
         {
             try
@@ -390,6 +393,18 @@
                     videos[0].PlayCount++;
                     await DS.Comms.SaveVideoAsync(videos[0]);
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public async Task GetDatabaseChecksumAsync()
+        {
+            try
+            {
+                await DS.Comms.SendServerChecksumAsync(GetTotalVideos());
             }
             catch (Exception ex)
             {

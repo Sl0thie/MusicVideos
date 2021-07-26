@@ -1,5 +1,6 @@
 ﻿namespace MusicVideosRemote.Views
 {
+    using System.Diagnostics;
     using MusicVideosRemote.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -15,6 +16,8 @@
         /// </summary>
         public NowPlayingPage()
         {
+            Debug.WriteLine("NowPlayingPage.NowPlayingPage");
+
             InitializeComponent();
         }
 
@@ -23,6 +26,8 @@
         /// </summary>
         protected override void OnAppearing()
         {
+            Debug.WriteLine("ListAllVideosPage.OnAppearing");
+
             base.OnAppearing();
             BindingContext = NowplayingModel.Current;
         }

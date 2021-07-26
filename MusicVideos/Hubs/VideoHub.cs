@@ -278,7 +278,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(video, Formatting.None));
+                    await Clients.All.SendAsync("SaveVideo", id, JsonConvert.SerializeObject(video, Formatting.None));
                 }
             }
             catch (Exception ex)
@@ -463,5 +463,20 @@
         }
 
         #endregion
+
+        public async Task ServerChecksumAsync(string id, int totalVideos)
+        {
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    await Clients.All.SendAsync("ServerChecksum", totalVideos.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
     }
 }

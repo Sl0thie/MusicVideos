@@ -1,6 +1,7 @@
 ﻿namespace MusicVideosRemote
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@
         /// <param name="factory">The task.</param>
         public AsyncLazy(Func<T> factory)
         {
+            Debug.WriteLine("AsyncLazy.AsyncLazy");
+
             instance = new Lazy<Task<T>>(() => Task.Run(factory));
         }
 
@@ -27,6 +30,8 @@
         /// <param name="factory">The task.</param>
         public AsyncLazy(Func<Task<T>> factory)
         {
+            Debug.WriteLine("AsyncLazy.AsyncLazy");
+
             instance = new Lazy<Task<T>>(() => Task.Run(factory));
         }
 
@@ -36,6 +41,8 @@
         /// <returns>The get Awaiter for the instance.</returns>
         public TaskAwaiter<T> GetAwaiter()
         {
+            Debug.WriteLine("AsyncLazy.GetAwaiter");
+
             return instance.Value.GetAwaiter();
         }
 
@@ -44,6 +51,8 @@
         /// </summary>
         public void Start()
         {
+            Debug.WriteLine("AsyncLazy.Start");
+
             var unused = instance.Value;
         }
     }

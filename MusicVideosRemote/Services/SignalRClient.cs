@@ -22,6 +22,8 @@
         {
             get
             {
+                Debug.WriteLine("SignalRClient.Current.Get");
+
                 if (current is null)
                 {
                     current = new SignalRClient();
@@ -32,6 +34,8 @@
 
             set
             {
+                Debug.WriteLine("SignalRClient.Current.Set");
+
                 current = value;
             }
         }
@@ -44,6 +48,8 @@
         /// </summary>
         public SignalRClient()
         {
+            Debug.WriteLine("SignalRClient.SignalRClient");
+
             IinitializeSignalR();
         }
 
@@ -74,8 +80,8 @@
                 {
                     Debug.WriteLine($"SaveVideo:  {json}");
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-                    DataStore data = await DataStore.Instance;
-                    await data.SaveVideoAsync(newVideo);
+                    DataStore database = await DataStore.Instance;
+                    await database.SaveVideoAsync(newVideo);
                 });
 
                 dataHub.On<string>("SaveFilter", (json) =>
@@ -84,10 +90,6 @@
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     FilterViewModel.Current.Filter = newFilter;
                 });
-
-                await dataHub.StartAsync();
-
-                await RegisterAsync();
             }
             catch (Exception ex)
             {
@@ -96,14 +98,49 @@
         }
 
         /// <summary>
+        /// Invokes Registration and other process needed to connect with the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ConnectAsync()
+        {
+            Debug.WriteLine("SignalRClient.ConnectAsync");
+
+            await dataHub.StartAsync();
+
+            await RegisterAsync();
+
+            await GetFilterAsync();
+
+            await GetAllVideosAsync(); // Uncomment to update all videos from server.
+
+            await DatabaseChecksumAsync();
+        }
+
+        /// <summary>
         /// Invokes Registration with the server.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task RegisterAsync()
         {
-            await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
+            Debug.WriteLine("SignalRClient.RegisterAsync");
 
-            // await dataHub.InvokeAsync("GetVideosAsync", hubId); // Uncomment to update all videos from server.
+            await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
+        }
+
+        /// <summary>
+        /// Invokes DatabaseChecksumAsync with the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task DatabaseChecksumAsync()
+        {
+            Debug.WriteLine("SignalRClient.DatabaseChecksumAsync");
+
+            DataStore database = await DataStore.Instance;
+            int totalVideos = await database.TotalVideosAsync();
+
+            Debug.WriteLine($"totalVideos: {totalVideos}");
+
+            //await dataHub.InvokeAsync("DatabaseChecksum", "");
         }
 
         /// <summary>
@@ -112,6 +149,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetAllVideosAsync()
         {
+            Debug.WriteLine("SignalRClient.GetAllVideosAsync");
+
             await dataHub.InvokeAsync("GetVideosAsync", hubId);
         }
 
@@ -121,6 +160,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetFilterAsync()
         {
+            Debug.WriteLine("SignalRClient.GetFilterAsync");
+
             await dataHub.InvokeAsync("GetFilterAsync", hubId);
         }
 
@@ -133,6 +174,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
+            Debug.WriteLine("SignalRClient.ErrorAsync");
+
             await dataHub.InvokeAsync("SendErrorAsync", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
@@ -147,6 +190,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SendFilterAsync(Filter filter)
         {
+            Debug.WriteLine("SignalRClient.SendFilterAsync");
+
             await dataHub.InvokeAsync("SendFilterAsync", hubId, JsonConvert.SerializeObject(filter, Formatting.None));
         }
 
@@ -159,6 +204,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task QueueVideoAsync(int id)
         {
+            Debug.WriteLine("SignalRClient.QueueVideoAsync");
+
             await dataHub.InvokeAsync("QueueVideo", hubId, id.ToString());
         }
 
@@ -170,6 +217,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandNextVideo()
         {
+            Debug.WriteLine("SignalRClient.CommandNextVideo");
+
             await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
         }
 

@@ -58,13 +58,23 @@
                 Log.Info($"ERROR: {id} - {json}");
             });
 
-            videoHub.On<string, string>("SaveVideo", (id, video) =>
+            videoHub.On<string>("GetDatabaseChecksum", (id) =>
             {
-                if (DS.Comms.CheckId(id))
-                {
-                    DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
-                }
+                DS.Videos.GetDatabaseChecksumAsync();
             });
+
+            _ = videoHub.On<string, string>("SaveVideo", (id, video) =>
+              {
+                  Log.Info($"SaveVideo: {id} - {video}");
+                  if (DS.Comms.CheckId(id))
+                  {
+                      _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
+                  }
+                  else
+                  {
+                      Log.Info("Id check failed.");
+                  }
+              });
 
             // Initialize SignalR.
             _ = InitializeSignalRAsync();
@@ -191,7 +201,7 @@
             catch (Exception ex)
             {
                 Log.Error(ex);
-    }
+            }
         }
 
         /// <summary>
@@ -222,6 +232,18 @@
             try
             {
                 await videoHub.InvokeAsync("PlayVideoAsync", HubId, JsonConvert.SerializeObject(video, Formatting.None), JsonConvert.SerializeObject(start, Formatting.None));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public async Task SendServerChecksumAsync(int totalVideos)
+        {
+            try
+            {
+                await videoHub.InvokeAsync("ServerChecksumAsync", HubId, totalVideos);
             }
             catch (Exception ex)
             {

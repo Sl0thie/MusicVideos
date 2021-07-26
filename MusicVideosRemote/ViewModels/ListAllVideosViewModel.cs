@@ -46,6 +46,7 @@
             get
             {
                 Debug.WriteLine("ListAllVideosViewModel.Current Get");
+
                 if (current is null)
                 {
                     current = new ListAllVideosViewModel();
@@ -57,6 +58,7 @@
             set
             {
                 Debug.WriteLine("ListAllVideosViewModel.Current Set");
+
                 current = value;
             }
         }
@@ -69,12 +71,14 @@
             get
             {
                 Debug.WriteLine("ListAllVideosViewModel.Videos Get");
+
                 return videos;
             }
 
             set
             {
                 Debug.WriteLine("ListAllVideosViewModel.Videos Set");
+
                 videos = value;
                 OnPropertyChanged("Videos");
             }
@@ -108,8 +112,12 @@
         private async Task LoadVideosAsync()
         {
             Debug.WriteLine("ListAllVideosViewModel.LoadVideosAsync");
+
             try
             {
+                // DataStore database = await DataStore.Instance;
+                //videos = await DataStore.GetAllVideosAsync();
+
                 DataStore database = await DataStore.Instance;
                 videos = await database.GetAllVideosAsync();
 

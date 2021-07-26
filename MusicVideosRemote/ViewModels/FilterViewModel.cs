@@ -42,8 +42,12 @@
         {
             get
             {
+                Debug.WriteLine("FilterViewModel.Current.Get");
+
                 if (current is null)
                 {
+                    Debug.WriteLine($"Current Get: Current is null.");
+
                     current = new FilterViewModel();
                 }
 
@@ -52,6 +56,8 @@
 
             set
             {
+                Debug.WriteLine("FilterViewModel.Current.Set");
+
                 current = value;
             }
         }
@@ -63,6 +69,8 @@
         {
             get
             {
+                Debug.WriteLine("FilterViewModel.Filter.Get");
+
                 if (filter is null)
                 {
                     Debug.WriteLine($"Filter Get: Filter is null.");
@@ -74,6 +82,8 @@
 
             set
             {
+                Debug.WriteLine("FilterViewModel.Filter.Set");
+
                 lastFilter = filter;
                 filter = value;
                 if (filter != null)
@@ -104,11 +114,15 @@
         {
             get
             {
+                Debug.WriteLine("FilterViewModel.RatingMaximum.Get");
+
                 return filter.RatingMaximum;
             }
 
             set
             {
+                Debug.WriteLine("FilterViewModel.RatingMaximum.Set");
+
                 if (filter.RatingMaximum != value)
                 {
                     filter.RatingMaximum = value;
@@ -124,11 +138,15 @@
         {
             get
             {
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Get");
+
                 return filter.RatingMinimum;
             }
 
             set
             {
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Set");
+
                 if (filter.RatingMinimum != value)
                 {
                     filter.RatingMinimum = value;
@@ -146,12 +164,16 @@
         /// </summary>
         public FilterViewModel()
         {
+            Debug.WriteLine("FilterViewModel.FilterViewModel");
+
             Current = this;
             _ = SignalRClient.Current.GetFilterAsync();
         }
 
         private bool IsFilterEqual(Filter first, Filter second)
         {
+            Debug.WriteLine("FilterViewModel.IsFilterEqual");
+
             bool diff = false;
             if (first.DateTimeMaximum != second.DateTimeMaximum)
             {

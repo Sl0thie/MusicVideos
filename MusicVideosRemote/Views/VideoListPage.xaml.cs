@@ -21,6 +21,8 @@
         /// </summary>
         public VideoListPage()
         {
+            Debug.WriteLine("VideoListPage.VideoListPage");
+
             InitializeComponent();
         }
 
@@ -29,6 +31,8 @@
         /// </summary>
         protected override async void OnAppearing()
         {
+            Debug.WriteLine("VideoListPage.OnAppearing");
+
             base.OnAppearing();
             DataStore database = await DataStore.Instance;
             videos = await database.GetAllVideosAsync();
@@ -39,8 +43,10 @@
         {
             try
             {
+                Debug.WriteLine("VideoListPage.CV_SelectionChanged");
+
                 Video selected = (Video)e.CurrentSelection[0];
-                SignalRClient.Current.QueueVideoAsync(selected.Id);
+                _ = SignalRClient.Current.QueueVideoAsync(selected.Id);
             }
             catch (Exception ex)
             {

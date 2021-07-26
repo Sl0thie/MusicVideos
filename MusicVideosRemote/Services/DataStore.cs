@@ -28,6 +28,8 @@
         /// </summary>
         public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
         {
+            Debug.WriteLine("DataStore.Instance");
+
             var instance = new DataStore();
 
             // _ = Database.DropTableAsync<Video>(); // Uncomment to drop the table. (for testing)
@@ -40,6 +42,8 @@
         /// </summary>
         public DataStore()
         {
+            Debug.WriteLine("DataStore.DataStore");
+
             database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SQLite.db3"), Flags);
         }
 
@@ -49,7 +53,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public Task<List<Video>> GetAllVideosAsync()
         {
-            Debug.WriteLine("LocalDatabase.GetVideosAsync");
+            Debug.WriteLine("DataStore.GetVideosAsync");
 
             try
             {
@@ -70,7 +74,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public Task<int> SaveVideoAsync(Video video)
         {
-            Debug.WriteLine("LocalDatabase.SaveVideoAsync");
+            Debug.WriteLine("DataStore.SaveVideoAsync");
 
             try
             {
@@ -90,6 +94,22 @@
             {
                 Debug.WriteLine("Error: " + ex.Message);
                 return null;
+            }
+        }
+
+        public async Task<int> TotalVideosAsync()
+        {
+            Debug.WriteLine("DataStore.TotalVideosAsync");
+
+            try
+            {
+                int rv = await database.ExecuteScalarAsync<int>("SELECT COUNT(Id) from Video;");
+                return rv;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return 0;
             }
         }
     }

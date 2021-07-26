@@ -45,6 +45,8 @@
         {
             get
             {
+                Debug.WriteLine("FilteredVideosViewModel.Current.Get");
+
                 if (current is null)
                 {
                     current = new FilteredVideosViewModel();
@@ -55,6 +57,8 @@
 
             set
             {
+                Debug.WriteLine("FilteredVideosViewModel.Current.Set");
+
                 current = value;
             }
         }
@@ -66,11 +70,15 @@
         {
             get
             {
+                Debug.WriteLine("FilteredVideosViewModel.Videos.Get");
+
                 return videos;
             }
 
             set
             {
+                Debug.WriteLine("FilteredVideosViewModel.Videos.Set");
+
                 videos = value;
                 OnPropertyChanged("Videos");
             }
@@ -86,6 +94,8 @@
         {
             try
             {
+                Debug.WriteLine("FilteredVideosViewModel.FilteredVideosViewModel");
+
                 Current = this;
                 _ = LoadVideosAsync();
             }
@@ -103,22 +113,34 @@
         {
             try
             {
+                Debug.WriteLine("FilteredVideosViewModel.LoadVideosAsync");
+
                 DataStore database = await DataStore.Instance;
                 List<Video> allVideos = await database.GetAllVideosAsync();
 
-                Debug.WriteLine($"Videos found : {videos.Count}");
+                Debug.WriteLine($"allVideos count : {allVideos.Count}");
 
                 videos = new List<Video>();
 
+                Filter filter = FilterViewModel.Current.Filter;
+
                 foreach (Video next in allVideos)
                 {
-                    if (next.Rating < FilterViewModel.Current.Filter.RatingMaximum)
+                    if (next.Rating < filter.RatingMaximum)
                     {
-                        if (next.Rating > FilterViewModel.Current.Filter.RatingMinimum)
+                        if (next.Rating > filter.RatingMinimum)
                         {
-                            Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync adding {next.Artist} - {next.Title}");
+                            Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync adding {next.Artist} - {next.Title} - {next.Rating}");
                             videos.Add(next);
                         }
+                        else
+                        {
+                            // Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync skipping {next.Artist} - {next.Title} - {next.Rating}");
+                        }
+                    }
+                    else
+                    {
+                        // Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync skipping {next.Artist} - {next.Title} - {next.Rating}");
                     }
                 }
             }

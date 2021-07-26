@@ -1,5 +1,6 @@
 ﻿namespace MusicVideosRemote
 {
+    using System.Diagnostics;
     using MusicVideosRemote.Services;
     using Xamarin.Forms;
 
@@ -13,10 +14,12 @@
         /// </summary>
         public App()
         {
+            Debug.WriteLine("App.App");
+
             InitializeComponent();
 
             // Startup the SignalR Client.
-            SignalRClient.Current.RegisterAsync();
+            _ = SignalRClient.Current.ConnectAsync();
 
             MainPage = new AppShell();
         }
