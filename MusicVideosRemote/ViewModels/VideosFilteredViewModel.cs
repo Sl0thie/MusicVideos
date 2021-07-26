@@ -2,54 +2,29 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
 
     /// <summary>
-    /// FilteredVideosViewModel class.
+    /// VideosFilteredViewModel class.
     /// </summary>
-    public class FilteredVideosViewModel : INotifyPropertyChanged
+    public class VideosFilteredViewModel : BaseViewModel
     {
-        #region INotifyPropertyChanged Interface
-
-        /// <summary>
-        /// Occurs when a property is changed.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Invoke event when properties change.
-        /// </summary>
-        /// <param name="propertyName">The property name that changed.</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-            {
-                return;
-            }
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
         /// <summary>
         /// Gets or sets the current FilteredVideosViewModel.
         /// </summary>
-        internal static FilteredVideosViewModel Current
+        internal static VideosFilteredViewModel Current
         {
             get
             {
-                Debug.WriteLine("FilteredVideosViewModel.Current.Get");
+                Debug.WriteLine("VideosFilteredViewModel.Current.Get");
 
                 if (current is null)
                 {
-                    current = new FilteredVideosViewModel();
+                    current = new VideosFilteredViewModel();
                 }
 
                 return current;
@@ -57,52 +32,41 @@
 
             set
             {
-                Debug.WriteLine("FilteredVideosViewModel.Current.Set");
+                Debug.WriteLine("VideosFilteredViewModel.Current.Set");
 
                 current = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the Videos.
+        /// Gets or sets the Videos collection.
         /// </summary>
-        public List<Video> Videos
+        public ObservableCollection<Video> Videos
         {
             get
             {
-                Debug.WriteLine("FilteredVideosViewModel.Videos.Get");
+                Debug.WriteLine("VideosFilteredViewModel.Videos.Get");
 
                 return videos;
             }
 
             set
             {
-                Debug.WriteLine("FilteredVideosViewModel.Videos.Set");
+                Debug.WriteLine("VideosFilteredViewModel.Videos.Set");
 
                 videos = value;
                 OnPropertyChanged("Videos");
             }
         }
 
-        private static FilteredVideosViewModel current;
-        private List<Video> videos = new List<Video>();
+        private static VideosFilteredViewModel current;
+        private ObservableCollection<Video> videos;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FilteredVideosViewModel"/> class.
-        /// </summary>
-        public FilteredVideosViewModel()
+        private VideosFilteredViewModel()
         {
-            try
-            {
-                Debug.WriteLine("FilteredVideosViewModel.FilteredVideosViewModel");
+            Debug.WriteLine("VideosFilteredViewModel.VideosFilteredViewModel");
 
-                Current = this;
-                _ = LoadVideosAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            Current = this;
         }
 
         /// <summary>
@@ -116,11 +80,11 @@
                 Debug.WriteLine("FilteredVideosViewModel.LoadVideosAsync");
 
                 DataStore database = await DataStore.Instance;
-                List<Video> allVideos = await database.GetAllVideosAsync();
+                List<Video> allVideos = await database.GetFilteredVideosAsync(FilterViewModel.Current.Filter);
 
                 Debug.WriteLine($"allVideos count : {allVideos.Count}");
 
-                videos = new List<Video>();
+                videos = new ObservableCollection<Video>();
 
                 Filter filter = FilterViewModel.Current.Filter;
 
@@ -145,7 +109,7 @@
                 }
 
                 OnPropertyChanged("Videos");
-                OnPropertyChanged("");
+                OnPropertyChanged(string.Empty);
             }
             catch (Exception ex)
             {

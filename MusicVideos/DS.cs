@@ -24,7 +24,12 @@
         /// </summary>
         public static Videos Videos
         {
-            get { return videos; }
+            get
+            {
+                Log.Info("DS.Videos.Get");
+
+                return videos;
+            }
         }
 
         /// <summary>
@@ -32,7 +37,12 @@
         /// </summary>
         public static Settings Settings
         {
-            get { return settings; }
+            get
+            {
+                Log.Info("DS.Settings.Get");
+
+                return settings;
+            }
         }
 
         /// <summary>
@@ -40,19 +50,41 @@
         /// </summary>
         public static Comms Comms
         {
-            get { return comms; }
+            get
+            {
+                Log.Info("DS.Comms.Get");
+
+                return comms;
+            }
         }
 
         /// <summary>
         /// Gets or sets the Primary timer. Used to change the video at the end.
         /// </summary>
-        public static Timer MainTimer { get => mainTimer; set => mainTimer = value; }
+        public static Timer MainTimer
+        {
+            get
+            {
+                Log.Info("DS.MainTimer.Get");
+
+                return mainTimer;
+            }
+
+            set
+            {
+                Log.Info("DS.MainTimer.Set");
+
+                mainTimer = value;
+            }
+        }
 
         /// <summary>
         /// Initializes the data store.
         /// </summary>
         public static void Initialize()
         {
+            Log.Info("DS.Initialize");
+
             if (File.Exists("settings.json"))
             {
                 string json = File.ReadAllText("settings.json");
@@ -82,13 +114,15 @@
         /// </summary>
         public static void SaveSettings()
         {
+            Log.Info("DS.SaveSettings");
+
             string json = JsonConvert.SerializeObject(settings, Formatting.None);
             File.WriteAllText("settings.json", json);
         }
 
         private static void MainTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Log.Info("Timer Tick");
+            Log.Info("DS.MainTimer_Elapsed");
 
             MainTimer.Stop();
 

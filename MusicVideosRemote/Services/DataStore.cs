@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
     using System.Threading.Tasks;
@@ -67,6 +68,29 @@
         }
 
         /// <summary>
+        /// Get a filtered list of videos.
+        /// </summary>
+        /// <param name="filter">The filter to apply to the list.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task<List<Video>> GetFilteredVideosAsync(Filter filter)
+        {
+            Debug.WriteLine("DataStore.GetFilteredVideosAsync");
+
+            try
+            {
+                string sql = "SELECT * FROM[Video] WHERE ";
+                sql += $"([Rating] BETWEEN {filter.RatingMinimum} AND {filter.RatingMaximum});";
+                Task<List<Video>> videos = database.QueryAsync<Video>(sql);
+                return videos;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Saves a video object to the database.
         /// If the video object already exists then it is updated instead.
         /// </summary>
@@ -97,6 +121,10 @@
             }
         }
 
+        /// <summary>
+        /// Returns the total number of videos in the database.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task<int> TotalVideosAsync()
         {
             Debug.WriteLine("DataStore.TotalVideosAsync");

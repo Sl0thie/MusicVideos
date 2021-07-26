@@ -18,8 +18,9 @@
         {
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
             DS.Initialize();
-            Model.LoadSettings();
-            Model.LoadVideos();
+
+            // Model.LoadSettings();
+            // Model.LoadVideos();
             CreateHostBuilder(args).Build().Run();
         }
 

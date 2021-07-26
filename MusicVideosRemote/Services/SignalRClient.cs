@@ -111,7 +111,7 @@
 
             await GetFilterAsync();
 
-            await GetAllVideosAsync(); // Uncomment to update all videos from server.
+            // await GetAllVideosAsync(); // Uncomment to update all videos from server.
 
             await DatabaseChecksumAsync();
         }

@@ -30,6 +30,8 @@
         /// </summary>
         public Comms()
         {
+            Log.Info("Comms.Comms");
+
             // Create new id for the hub.
             HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(HubId);
@@ -59,11 +61,11 @@
             });
 
             videoHub.On<string>("GetDatabaseChecksum", (id) =>
-            {
-                DS.Videos.GetDatabaseChecksumAsync();
-            });
+              {
+                  _ = DS.Videos.GetDatabaseChecksumAsync();
+              });
 
-            _ = videoHub.On<string, string>("SaveVideo", (id, video) =>
+            videoHub.On<string, string>("SaveVideo", (id, video) =>
               {
                   Log.Info($"SaveVideo: {id} - {video}");
                   if (DS.Comms.CheckId(id))
@@ -86,6 +88,8 @@
         /// <returns>True if connected.</returns>
         public bool IsConnected()
         {
+            Log.Info("Comms.IsConnected");
+
             if (videoHub.State == HubConnectionState.Connected)
             {
                 return true;
@@ -101,6 +105,8 @@
         /// </summary>
         public void CheckConnectionAsync()
         {
+            Log.Info("Comms.CheckConnectionAsync");
+
             switch (videoHub.State)
             {
                 case HubConnectionState.Connected:
@@ -136,6 +142,8 @@
         /// <returns>True if the key is valid.</returns>
         public bool CheckKey(string key)
         {
+            Log.Info("Comms.CheckKey");
+
             if (key == "123456")
             {
                 return true;
@@ -152,6 +160,8 @@
         /// <returns>A remote id string.</returns>
         public string GetRemoteId()
         {
+            Log.Info("Comms.GetRemoteId");
+
             string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(registration);
             return registration;
@@ -163,6 +173,8 @@
         /// <returns>a player id.</returns>
         public string GetPlayerId()
         {
+            Log.Info("Comms.GetPlayerId");
+
             string registration = "P" + (nextPlayer++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(registration);
             return registration;
@@ -175,6 +187,8 @@
         /// <returns>True if the id is correct.</returns>
         public bool CheckId(string id)
         {
+            Log.Info("Comms.CheckId");
+
             if (ids.Contains(id))
             {
                 return true;
@@ -194,6 +208,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SaveVideoAsync(Video video)
         {
+            Log.Info("Comms.SaveVideoAsync");
+
             try
             {
                 await videoHub.InvokeAsync("SaveVideoAsync", HubId, video);
@@ -211,6 +227,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideoAsync(Video video)
         {
+            Log.Info("Comms.LoadVideoAsync");
+
             try
             {
                 await videoHub.InvokeAsync("LoadVideoAsync", HubId, JsonConvert.SerializeObject(video, Formatting.None));
@@ -229,6 +247,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(Video video, DateTime start)
         {
+            Log.Info("Comms.PlayVideoAsync");
+
             try
             {
                 await videoHub.InvokeAsync("PlayVideoAsync", HubId, JsonConvert.SerializeObject(video, Formatting.None), JsonConvert.SerializeObject(start, Formatting.None));
@@ -239,8 +259,15 @@
             }
         }
 
+        /// <summary>
+        /// Passes the total number of videos for a simple checksum.
+        /// </summary>
+        /// <param name="totalVideos">The number of video in the database.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SendServerChecksumAsync(int totalVideos)
         {
+            Log.Info("Comms.SendServerChecksumAsync");
+
             try
             {
                 await videoHub.InvokeAsync("ServerChecksumAsync", HubId, totalVideos);
@@ -256,6 +283,8 @@
         /// </summary>
         private static async Task InitializeSignalRAsync()
         {
+            Log.Info("Comms.InitializeSignalRAsync");
+
             try
             {
                 await videoHub.StartAsync();

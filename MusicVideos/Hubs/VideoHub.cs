@@ -28,7 +28,8 @@
         {
             try
             {
-                Log.Info($"SendErrorAsync:  {id}  {error}");
+                Log.Info($"VideoHub.SendErrorAsync:  {id}  {error}");
+
                 await Clients.All.SendAsync("SendError", id, error);
             }
             catch (Exception ex)
@@ -47,7 +48,8 @@
         {
             if (ex is object)
             {
-                Log.Info($"ErrorAsync: {ex.Message}");
+                Log.Info($"VideoHub.ErrorAsync: {ex.Message}");
+
                 await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
             }
         }
@@ -66,7 +68,8 @@
         {
             try
             {
-                Log.Info("LogErrorAsync");
+                Log.Info("VideoHub.LogErrorAsync");
+
                 Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
                 Log.Info("   Message:" + message);
                 Log.Info("  Filename:" + filename);
@@ -77,7 +80,6 @@
             }
             catch (Exception ex)
             {
-                // await ErrorAsync(ex);
                 Log.Error(ex);
             }
         }
@@ -95,6 +97,8 @@
         {
             try
             {
+                Log.Info("VideoHub.RegisterRemoteAsync");
+
                 if (DS.Comms.CheckKey(key))
                 {
                     await Clients.Caller.SendAsync("SetRegistration", DS.Comms.GetRemoteId());
@@ -102,7 +106,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR RegisterRemoteAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -116,6 +119,8 @@
         {
             try
             {
+                Log.Info("VideoHub.RegisterPlayerAsync");
+
                 if (DS.Comms.CheckKey(key))
                 {
                     await Clients.Caller.SendAsync("SetRegistration", DS.Comms.GetPlayerId());
@@ -123,7 +128,6 @@
             }
             catch (Exception ex)
             {
-                // Log.Info.WriteLine($"ERROR RegisterPlayerAsync: {ex.Message}");
                 Log.Error(ex);
             }
         }
@@ -142,6 +146,8 @@
         {
             try
             {
+                Log.Info("VideoHub.SendMessageAsync");
+
                 Log.Info($"SendMessage: {id} - {message}");
                 await Clients.All.SendAsync("SendMessage", id, message);
             }
@@ -162,6 +168,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetTimeAsync(string id)
         {
+            Log.Info("VideoHub.GetTimeAsync");
+
             if (DS.Comms.CheckId(id))
             {
                 await Clients.Others.SendAsync("GetTime");
@@ -177,6 +185,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SendTimeAsync(string id, string time, string offset)
         {
+            Log.Info("VideoHub.SendTimeAsync");
+
             if (DS.Comms.CheckId(id))
             {
                 await Clients.All.SendAsync("SendTime", id, time, offset);
@@ -191,6 +201,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetTimeOffsetAsync(string id, string offset)
         {
+            Log.Info("VideoHub.SetTimeOffsetAsync");
+
             if (DS.Comms.CheckId(id))
             {
                 await Clients.All.SendAsync("SetTimeOffset", id, offset);
@@ -208,6 +220,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ScreenClickAsync(string id)
         {
+            Log.Info("VideoHub.ScreenClickAsync");
+
             try
             {
                 Log.Info("Screen Click. " + id);
@@ -226,6 +240,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ButtonNextVideoAsync(string id)
         {
+            Log.Info("VideoHub.ButtonNextVideoAsync");
+
             try
             {
                 Log.Info("Screen Click. " + id);
@@ -248,11 +264,16 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetVideosAsync(string id)
         {
+            Log.Info("VideoHub.GetVideosAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    List<Video> videos = Model.Videos.Values.ToList();
+                    // List<Video> videos = Model.Videos.Values.ToList();
+                    Task<List<Video>> rv = DS.Videos.GetAllVideosAsync();
+                    List<Video> videos = rv.Result;
+
                     await Clients.All.SendAsync("SendMessage", videos.Count + "Videos found.");
                     foreach (var item in videos)
                     {
@@ -274,11 +295,13 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SaveVideoAsync(string id, Video video)
         {
+            Log.Info("VideoHub.SaveVideoAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    await Clients.All.SendAsync("SaveVideo", id, JsonConvert.SerializeObject(video, Formatting.None));
+                    await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(video, Formatting.None));
                 }
             }
             catch (Exception ex)
@@ -295,6 +318,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideoAsync(string id, string video)
         {
+            Log.Info("VideoHub.LoadVideoAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -317,6 +342,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(string id, string video, string timeStr)
         {
+            Log.Info("VideoHub.PlayVideoAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -343,6 +370,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task UpdateVideoPropertiesAsync(string id, string videoId, string duration, string videoWidth, string videoHeight)
         {
+            Log.Info("VideoHub.UpdateVideoPropertiesAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -379,6 +408,8 @@
         /// <param name="videoId">The video id to add to the queue.</param>
         public void QueueVideo(string id, string videoId)
         {
+            Log.Info("VideoHub.QueueVideo");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -403,6 +434,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetFilterAsync(string id)
         {
+            Log.Info("VideoHub.GetFilterAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -424,6 +457,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SaveFilterAsync(string id, Filter filter)
         {
+            Log.Info("VideoHub.SaveFilterAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -445,6 +480,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SendFilterAsync(string id, string json)
         {
+            Log.Info("VideoHub.SendFilterAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))
@@ -464,8 +501,16 @@
 
         #endregion
 
+        /// <summary>
+        /// Returns the total number of videos as a simple checksum to start with.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="totalVideos">The total number of videos in the collection.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ServerChecksumAsync(string id, int totalVideos)
         {
+            Log.Info("VideoHub.ServerChecksumAsync");
+
             try
             {
                 if (DS.Comms.CheckId(id))

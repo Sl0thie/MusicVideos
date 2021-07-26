@@ -8,7 +8,7 @@
     /// <summary>
     /// TimelineItem class for items on the time line.
     /// </summary>
-    [Obsolete]
+    [Obsolete("No longer in use.")]
     public class TimelineItem
     {
         /// <summary>
@@ -21,6 +21,9 @@
         /// </summary>
         public string ActionType { get; set; }
 
+        /// <summary>
+        /// Gets or sets Unused.
+        /// </summary>
         public Action ActionItem { get; set; }
     }
 }

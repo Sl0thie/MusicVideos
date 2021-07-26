@@ -78,7 +78,12 @@
         /// </summary>
         public Collection<int> VideoQueue
         {
-            get { return videoQueue; }
+            get
+            {
+                Log.Info("Videos.VideoQueue.Get");
+
+                return videoQueue;
+            }
         }
 
         /// <summary>
@@ -86,8 +91,19 @@
         /// </summary>
         public DateTime LastStart
         {
-            get { return lastStart; }
-            set { lastStart = value; }
+            get
+            {
+                Log.Info("Videos.LastStart.Get");
+
+                return lastStart;
+            }
+
+            set
+            {
+                Log.Info("Videos.LastStart.Set");
+
+                lastStart = value;
+            }
         }
 
         /// <summary>
@@ -95,8 +111,19 @@
         /// </summary>
         public Video LastVideo
         {
-            get { return lastVideo; }
-            set { lastVideo = value; }
+            get
+            {
+                Log.Info("Videos.LastVideo.Get");
+
+                return lastVideo;
+            }
+
+            set
+            {
+                Log.Info("Videos.LastVideo.Set");
+
+                lastVideo = value;
+            }
         }
 
         /// <summary>
@@ -104,6 +131,8 @@
         /// </summary>
         public Videos()
         {
+            Log.Info("Videos.Videos");
+
             // Connect to the database.
             videosDatabase = new SQLiteAsyncConnection(Path.Combine(FilesPath, VideoDatabaseFilename), Flags);
 
@@ -128,6 +157,8 @@
         /// </summary>
         public void FilterVideos()
         {
+            Log.Info("Videos.FilterVideos");
+
             Log.Info("FilterVideos Settings Details:");
             Log.Info($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
             Log.Info($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
@@ -187,6 +218,8 @@
         /// </summary>
         private void AddUnplayedToQueue()
         {
+            Log.Info("Videos.AddUnplayedToQueue");
+
             try
             {
                 // Get video from the database.
@@ -210,7 +243,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayNextVideoAsync()
         {
-            Log.Info($"PlayNextVideoAsync");
+            Log.Info("Videos.PlayNextVideoAsync");
 
             try
             {
@@ -263,6 +296,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PlayVideoAsync(int id)
         {
+            Log.Info("Videos.PlayVideoAsync");
+
             // Get the video object from the database.
             Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {id}");
             List<Video> videos = rv.Result;
@@ -296,6 +331,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PickRandomVideoAsync()
         {
+            Log.Info("Videos.PickRandomVideoAsync");
+
             // Pick a random index from the filtered videos.
             int index = rnd.Next(0, filteredVideos.Count + 1);
 
@@ -335,16 +372,18 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SaveVideoAsync(Video video)
         {
+            Log.Info("Videos.SaveVideoAsync");
+
             try
             {
                 Log.Info($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
 
                 //// TODO Move this to the initial file import.
-                //video.PhysicalPath = video.Path;
-                //string path = video.Path[FilesPath.Length..];
-                //path = path.Replace(@"\", "/");
-                //path = VirtualPath + path;
-                //video.VirtualPath = path;
+                // video.PhysicalPath = video.Path;
+                // string path = video.Path[FilesPath.Length..];
+                // path = path.Replace(@"\", "/");
+                // path = VirtualPath + path;
+                // video.VirtualPath = path;
 
                 // Get video from the database.
                 Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
@@ -378,6 +417,8 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task UpdateVideoDetailsAsync(int id, int duration, int width, int height)
         {
+            Log.Info("Videos.UpdateVideoDetailsAsync");
+
             try
             {
                 // Get video from the database.
@@ -400,8 +441,15 @@
             }
         }
 
+        /// <summary>
+        /// Gets the total number of videos as a simple checksum.
+        /// Will be expanded at a later date.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetDatabaseChecksumAsync()
         {
+            Log.Info("Videos.GetDatabaseChecksumAsync");
+
             try
             {
                 await DS.Comms.SendServerChecksumAsync(GetTotalVideos());
@@ -417,6 +465,8 @@
         /// </summary>
         private void LoadVideos()
         {
+            Log.Info("Videos.LoadVideos");
+
             // Get all videos from the JSON file.
             Dictionary<int, Video> videos;
             string json = File.ReadAllText(FilesPath + "\\index.json");
@@ -425,7 +475,26 @@
             // Loop though each to add to the videos table.
             foreach (Video next in videos.Values)
             {
-                SaveVideoAsync(next);
+                _ = SaveVideoAsync(next);
+            }
+        }
+
+        /// <summary>
+        /// Gets all videos from the database.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task<List<Video>> GetAllVideosAsync()
+        {
+            Log.Info("Videos.GetAllVideosAsync");
+
+            try
+            {
+                return videosDatabase.Table<Video>().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return null;
             }
         }
 
@@ -435,6 +504,8 @@
         /// <returns>A <see cref="int"/> of the total number of videos.</returns>
         private int GetTotalVideos()
         {
+            Log.Info("Videos.GetTotalVideos");
+
             Task<int> rv = videosDatabase.Table<Video>().CountAsync();
             return rv.Result;
         }
