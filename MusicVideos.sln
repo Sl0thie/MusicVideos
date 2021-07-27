@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicVideosRemote", "MusicV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVideosRemote.Android", "MusicVideosRemote.Android\MusicVideosRemote.Android.csproj", "{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoImporter", "VideoImporter\VideoImporter.csproj", "{40E70D05-C8B0-4F21-AD4C-6DF3330999F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{116EDC74-6C12-47A7-99C8-1E9C5FDEC5C2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{40E70D05-C8B0-4F21-AD4C-6DF3330999F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E70D05-C8B0-4F21-AD4C-6DF3330999F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E70D05-C8B0-4F21-AD4C-6DF3330999F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E70D05-C8B0-4F21-AD4C-6DF3330999F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
