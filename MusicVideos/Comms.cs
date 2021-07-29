@@ -202,6 +202,24 @@
         #endregion
 
         /// <summary>
+        /// Tell players to pause the video.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task PauseVideoAsync(DateTime start)
+        {
+            Log.Info("Comms.PauseVideoAsync");
+
+            try
+            {
+                await videoHub.InvokeAsync("PauseVideoAsync", HubId);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
         /// Calls to save a video.
         /// </summary>
         /// <param name="video">The video to save.</param>

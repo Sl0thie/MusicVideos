@@ -224,8 +224,10 @@
 
             try
             {
-                Log.Info("Screen Click. " + id);
-                await DS.Videos.PlayNextVideoAsync();
+                if (DS.Comms.CheckId(id))
+                {
+                    await DS.Videos.PlayNextVideoAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -244,8 +246,76 @@
 
             try
             {
-                Log.Info("Screen Click. " + id);
-                await DS.Videos.PlayNextVideoAsync();
+                if (DS.Comms.CheckId(id))
+                {
+                    await DS.Videos.PlayNextVideoAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Responds to button previous video.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ButtonPreviousVideoAsync(string id)
+        {
+            Log.Info("VideoHub.ButtonPreviousVideoAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // await DS.Videos.PlayNextVideoAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Responds to button play video.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ButtonPlayVideoAsync(string id)
+        {
+            Log.Info("VideoHub.ButtonPlayVideoAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // await DS.Videos.PlayNextVideoAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Responds to button pause video.
+        /// </summary>
+        /// <param name="id">The Id for conformation.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task ButtonPauseVideoAsync(string id)
+        {
+            Log.Info("VideoHub.ButtonPauseVideoAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // await DS.Videos.PlayNextVideoAsync();
+                }
             }
             catch (Exception ex)
             {

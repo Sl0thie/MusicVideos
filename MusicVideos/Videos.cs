@@ -63,6 +63,7 @@
         /// </summary>
         private readonly List<int> filteredVideos = new List<int>();
 
+        private readonly Collection<int> videoPrevious = new Collection<int>();
         private readonly Collection<int> videoQueue = new Collection<int>();
         private bool setTimer;
         private DateTime lastStart;
@@ -250,6 +251,8 @@
                 // Handle the last played video. If clicked though then lower the rating of the video.
                 if (lastVideo is object)
                 {
+                    await DS.Comms.PauseVideoAsync(DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+
                     Log.Info($"Last Video: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
 
                     if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 30)
@@ -306,8 +309,11 @@
             // Call for the video to be loaded.
             await DS.Comms.LoadVideoAsync(nextVideo);
 
+            lastVideo = nextVideo;
+            lastStart = DateTime.Now.AddMilliseconds(200).ToUniversalTime();
+
             // Call for the video to be played.
-            await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+            await DS.Comms.PlayVideoAsync(nextVideo, lastStart);
             if (nextVideo.Duration > 0)
             {
                 SetTimer = false;
@@ -319,8 +325,7 @@
                 SetTimer = true;
             }
 
-            lastVideo = nextVideo;
-            lastStart = DateTime.Now;
+            
 
             Log.Info($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
