@@ -1,12 +1,13 @@
 ﻿namespace MusicVideosRemote.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
+    using MusicVideosRemote.Views;
 
     /// <summary>
     /// VideosFilteredViewModel class.
@@ -59,14 +60,84 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the Total Videos.
+        /// </summary>
+        public string TotalVideos
+        {
+            get
+            {
+                return totalVideos;
+            }
+
+            set
+            {
+                totalVideos = value;
+                OnPropertyChanged("TotalVideos");
+            }
+        }
+
         private static VideosFilteredViewModel current;
-        private ObservableCollection<Video> videos;
+        private ObservableCollection<Video> videos = new ObservableCollection<Video>();
+        private string totalVideos;
 
         private VideosFilteredViewModel()
         {
             Debug.WriteLine("VideosFilteredViewModel.VideosFilteredViewModel");
 
             Current = this;
+            Videos.CollectionChanged += Videos_CollectionChanged;
+
+            _ = LoadVideosAsync();
+        }
+
+        private void Videos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Debug.WriteLine("VideosFilteredViewModel.Videos_CollectionChanged");
+
+            OnPropertyChanged("Videos");
+        }
+
+        /// <summary>
+        /// Updates a video in the collection.
+        /// </summary>
+        /// <param name="video">The video to update.</param>
+        public void UpdateVideo(Video video)
+        {
+            Debug.WriteLine("FilteredVideosViewModel.UpdateVideo");
+
+            if (FilterViewModel.Current.PassFilter(video))
+            {
+                if (videos.Any(vid => vid.Id == video.Id))
+                {
+                    Video existing = videos.First(vid => vid.Id == video.Id);
+                    int index = videos.IndexOf(existing);
+                    Videos[index] = video;
+                }
+                else
+                {
+                    Videos.Add(video);
+                }
+            }
+            else
+            {
+                if (videos.Any(vid => vid.Id == video.Id))
+                {
+                    Video existing = videos.First(vid => vid.Id == video.Id);
+                    int index = videos.IndexOf(existing);
+                    Videos.RemoveAt(index);
+                }
+            }
+
+            TotalVideos = $"{videos.Count} videos";
+        }
+
+        /// <summary>
+        /// Method to update the collection when the filter is updated.
+        /// </summary>
+        public void UpdateFilter()
+        {
+            _ = LoadVideosAsync();
         }
 
         /// <summary>
@@ -75,41 +146,14 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideosAsync()
         {
+            Debug.WriteLine("FilteredVideosViewModel.LoadVideosAsync");
+
             try
             {
-                Debug.WriteLine("FilteredVideosViewModel.LoadVideosAsync");
-
                 DataStore database = await DataStore.Instance;
-                List<Video> allVideos = await database.GetFilteredVideosAsync(FilterViewModel.Current.Filter);
-
-                Debug.WriteLine($"allVideos count : {allVideos.Count}");
-
-                videos = new ObservableCollection<Video>();
-
-                Filter filter = FilterViewModel.Current.Filter;
-
-                foreach (Video next in allVideos)
-                {
-                    if (next.Rating < filter.RatingMaximum)
-                    {
-                        if (next.Rating > filter.RatingMinimum)
-                        {
-                            Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync adding {next.Artist} - {next.Title} - {next.Rating}");
-                            videos.Add(next);
-                        }
-                        else
-                        {
-                            // Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync skipping {next.Artist} - {next.Title} - {next.Rating}");
-                        }
-                    }
-                    else
-                    {
-                        // Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync skipping {next.Artist} - {next.Title} - {next.Rating}");
-                    }
-                }
-
-                OnPropertyChanged("Videos");
-                OnPropertyChanged(string.Empty);
+                Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(FilterViewModel.Current.Filter));
+                VideosFilteredPage.Current.Rebind();
+                TotalVideos = $"{videos.Count} videos";
             }
             catch (Exception ex)
             {

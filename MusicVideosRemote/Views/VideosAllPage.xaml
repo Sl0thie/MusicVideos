@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicVideosRemote.Views.VideosAllPage" BackgroundColor="#000000" Title="Videos (All)">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding TotalVideos}"/>
+        <ToolbarItem Name="MenuItem1" Order="Secondary" Text="Item 2" Priority="1" />
+        <ToolbarItem Name="MenuItem2" Order="Secondary" Text="Item 2" Priority="2" />
+        <ToolbarItem Name="MenuItem3" Order="Secondary" Text="Item 2" Priority="3" />
+        <ToolbarItem Name="MenuItem4" Order="Secondary" Text="Item 2" Priority="4" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="64"/>
+            </Grid.RowDefinitions>
+
+            <CollectionView x:Name="CV" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" ItemsSource="{Binding Videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Path=Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
+                            <Label Text="{Binding Path=Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button x:Name="ButtonPrevious" Grid.Column="0" Grid.Row="1" Text="&#xE100;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonPlay" Grid.Column="1" Grid.Row="1" Text="&#xE102;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonPause" Grid.Column="2" Grid.Row="1" Text="&#xE103;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonNext" Command="{Binding NextVideoVideoCommand}" Grid.Column="3" Grid.Row="1" Text="&#xE101;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonVolume" Grid.Column="4" Grid.Row="1" Text="&#xE15D;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

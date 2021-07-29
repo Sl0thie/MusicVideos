@@ -17,7 +17,7 @@
         /// </summary>
         public Settings()
         {
-            CheckFilter();
+            // CheckFilter();
         }
 
         /// <summary>

@@ -88,16 +88,18 @@
         <ShellContent Route="NowPlayingPage" ContentTemplate="{DataTemplate local:NowPlayingPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Filtered Videos" Icon="icon_about.png">
-        <ShellContent Route="FilteredVideosPage" ContentTemplate="{DataTemplate local:FilteredVideosPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="All Videos" Icon="icon_about.png">
-        <ShellContent Route="ListAllVideosPage" ContentTemplate="{DataTemplate local:ListAllVideosPage}" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Filter" Icon="icon_about.png">
         <ShellContent Route="FilterPage" ContentTemplate="{DataTemplate local:FilterPage}" />
     </FlyoutItem>
+
+    <FlyoutItem Title="Videos (Filtered)" Icon="icon_about.png">
+        <ShellContent Route="VideosFilteredPage" ContentTemplate="{DataTemplate local:VideosFilteredPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Videos (All)" Icon="icon_about.png">
+        <ShellContent Route="VideosAllPage" ContentTemplate="{DataTemplate local:VideosAllPage}" />
+    </FlyoutItem>
+
+    
 
 </Shell>

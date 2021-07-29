@@ -2,13 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
+    using LogCore3;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
-    using LogCore3;
 
     /// <summary>
     /// MessageHub provides functions via SignalR.

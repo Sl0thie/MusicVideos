@@ -50,10 +50,12 @@
         {
             Debug.WriteLine("SignalRClient.SignalRClient");
 
+            Current = this;
+
             IinitializeSignalR();
         }
 
-        private async void IinitializeSignalR()
+        private void IinitializeSignalR()
         {
             Debug.WriteLine("SignalRClient.IinitializeSignalR");
 
@@ -72,7 +74,7 @@
                 dataHub.On<string, string>("PlayVideo", (json, time) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-                    NowplayingModel.Current.CurrentVideo = newVideo;
+                    NowPlayingViewModel.Current.CurrentVideo = newVideo;
                     Debug.WriteLine("PlayVideo: " + newVideo.Artist);
                 });
 
@@ -112,7 +114,6 @@
             await GetFilterAsync();
 
             // await GetAllVideosAsync(); // Uncomment to update all videos from server.
-
             await DatabaseChecksumAsync();
         }
 

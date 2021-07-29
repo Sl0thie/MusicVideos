@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels" x:DataType="viewmodels:NowplayingModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels" x:DataType="viewmodels:NowPlayingViewModel"
              x:Class="MusicVideosRemote.Views.NowPlayingPage" BackgroundColor="#000000" Title="Now Playing">
 
     <Grid>

@@ -5,8 +5,10 @@
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
+    using MusicVideosRemote.ViewModels;
     using SQLite;
 
     /// <summary>
@@ -79,7 +81,7 @@
             try
             {
                 string sql = "SELECT * FROM[Video] WHERE ";
-                sql += $"([Rating] BETWEEN {filter.RatingMinimum} AND {filter.RatingMaximum});";
+                sql += $"([Rating] BETWEEN {filter.RatingMinimum} AND {filter.RatingMaximum}) ORDER BY SearchArtist, Title;";
                 Task<List<Video>> videos = database.QueryAsync<Video>(sql);
                 return videos;
             }
@@ -105,6 +107,10 @@
                 Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
                 List<Video> videos = rv.Result;
 
+                // Update collections.
+                VideosFilteredViewModel.Current.UpdateVideo(video);
+
+                // Update database.
                 if (videos.Count == 1)
                 {
                     return database.UpdateAsync(video);

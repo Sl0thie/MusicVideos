@@ -1,28 +1,28 @@
 ﻿namespace MusicVideosRemote.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Text;
     using MusicVideosRemote.Models;
-    using MusicVideosRemote.Services;
-    using Xamarin.Forms;
 
     /// <summary>
-    /// NowplayingModel class.
+    /// NowPlayingViewModel class.
     /// </summary>
-    public class NowplayingModel : BaseViewModel
+    public class NowPlayingViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the current NowplayingModel.
         /// </summary>
-        internal static NowplayingModel Current
+        internal static NowPlayingViewModel Current
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.Current.Get");
+                Debug.WriteLine("NowPlayingViewModel.Current.Get");
 
                 if (current is null)
                 {
-                    current = new NowplayingModel();
+                    current = new NowPlayingViewModel();
                 }
 
                 return current;
@@ -30,7 +30,7 @@
 
             set
             {
-                Debug.WriteLine("NowplayingModel.Current.Set");
+                Debug.WriteLine("NowPlayingViewModel.Current.Set");
 
                 current = value;
             }
@@ -43,18 +43,16 @@
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.CurrentVideo.Get");
+                Debug.WriteLine("NowPlayingViewModel.CurrentVideo.Get");
 
                 return currentVideo;
             }
 
             set
             {
-                Debug.WriteLine("NowplayingModel.CurrentVideo.Set");
+                Debug.WriteLine("NowPlayingViewModel.CurrentVideo.Set");
 
                 currentVideo = value;
-                Debug.WriteLine($"NPM Artist: {currentVideo.Artist}");
-                Debug.WriteLine($"NPM Title: {currentVideo.Title}");
                 OnPropertyChanged("CurrentVideo");
                 OnPropertyChanged("LastPlayed");
                 OnPropertyChanged("Duration");
@@ -70,7 +68,7 @@
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.LastPlayed.Get");
+                Debug.WriteLine("NowPlayingViewModel.LastPlayed.Get");
 
                 if (currentVideo.LastPlayed == DateTime.MinValue)
                 {
@@ -101,7 +99,7 @@
 
             set
             {
-                Debug.WriteLine("NowplayingModel.LastPlayed.Set");
+                Debug.WriteLine("NowPlayingViewModel.LastPlayed.Set");
 
                 OnPropertyChanged();
             }
@@ -114,7 +112,7 @@
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.Duration.Get");
+                Debug.WriteLine("NowPlayingViewModel.Duration.Get");
 
                 Debug.WriteLine($"NPM Duration: {currentVideo.Duration}");
 
@@ -136,7 +134,7 @@
 
             set
             {
-                Debug.WriteLine("NowplayingModel.Duration.Set");
+                Debug.WriteLine("NowPlayingViewModel.Duration.Set");
 
                 OnPropertyChanged();
             }
@@ -149,7 +147,7 @@
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.Released.Get");
+                Debug.WriteLine("NowPlayingViewModel.Released.Get");
 
                 if (currentVideo.Released == DateTime.MinValue)
                 {
@@ -184,7 +182,7 @@
 
             set
             {
-                Debug.WriteLine("NowplayingModel.Released.Set");
+                Debug.WriteLine("NowPlayingViewModel.Released.Set");
 
                 OnPropertyChanged();
             }
@@ -197,7 +195,7 @@
         {
             get
             {
-                Debug.WriteLine("NowplayingModel.Size.Get");
+                Debug.WriteLine("NowPlayingViewModel.Size.Get");
 
                 if (currentVideo.VideoWidth == 0)
                 {
@@ -210,15 +208,15 @@
             }
         }
 
-        private static NowplayingModel current;
+        private static NowPlayingViewModel current;
         private Video currentVideo;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NowplayingModel"/> class.
+        /// Initializes a new instance of the <see cref="NowPlayingViewModel"/> class.
         /// </summary>
-        public NowplayingModel()
+        public NowPlayingViewModel()
         {
-            Debug.WriteLine("NowplayingModel.NowplayingModel");
+            Debug.WriteLine("NowPlayingViewModel.NowPlayingViewModel");
 
             Current = this;
         }

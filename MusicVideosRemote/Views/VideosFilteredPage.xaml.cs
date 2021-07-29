@@ -10,18 +10,46 @@
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// FilteredVideosPage class.
+    /// VideosFilteredPage class.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FilteredVideosPage : ContentPage
+    public partial class VideosFilteredPage : ContentPage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FilteredVideosPage"/> class.
-        /// </summary>
-        public FilteredVideosPage()
-        {
-            Debug.WriteLine("FilteredVideosPage.FilteredVideosPage");
+        private static VideosFilteredPage current;
 
+        /// <summary>
+        /// Gets or sets the current SignalRClient.
+        /// </summary>
+        internal static VideosFilteredPage Current
+        {
+            get
+            {
+                Debug.WriteLine("VideosFilteredPage.Current.Get");
+
+                if (current is null)
+                {
+                    current = new VideosFilteredPage();
+                }
+
+                return current;
+            }
+
+            set
+            {
+                Debug.WriteLine("VideosFilteredPage.Current.Set");
+
+                current = value;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideosFilteredPage"/> class.
+        /// </summary>
+        public VideosFilteredPage()
+        {
+            Debug.WriteLine("VideosFilteredPage.OnAppearing");
+
+            current = this;
             InitializeComponent();
         }
 
@@ -30,11 +58,22 @@
         /// </summary>
         protected override void OnAppearing()
         {
-            Debug.WriteLine("FilteredVideosPage.OnAppearing");
+            Debug.WriteLine("VideosFilteredPage.OnAppearing");
 
             base.OnAppearing();
-            BindingContext = FilteredVideosViewModel.Current;
-            CV.ItemsSource = FilteredVideosViewModel.Current.Videos;
+            BindingContext = VideosFilteredViewModel.Current;
+            CV.ItemsSource = VideosFilteredViewModel.Current.Videos;
+        }
+
+        /// <summary>
+        /// Method to rebind.
+        /// </summary>
+        public void Rebind()
+        {
+            Debug.WriteLine("VideosFilteredPage.Rebind");
+
+            BindingContext = VideosFilteredViewModel.Current;
+            CV.ItemsSource = VideosFilteredViewModel.Current.Videos;
         }
 
         /// <summary>
@@ -46,7 +85,7 @@
         {
             try
             {
-                Debug.WriteLine("ListAllVideosPage.CV_SelectionChangedAsync");
+                Debug.WriteLine("VideosFilteredPage.CV_SelectionChangedAsync");
 
                 Video selected = (Video)e.CurrentSelection[0];
                 _ = ProcessselectedAsync(selected.Id);
@@ -64,7 +103,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         private async Task ProcessselectedAsync(int id)
         {
-            Debug.WriteLine("ListAllVideosPage.ProcessselectedAsync");
+            Debug.WriteLine("VideosFilteredPage.ProcessselectedAsync");
 
             await SignalRClient.Current.QueueVideoAsync(id);
         }

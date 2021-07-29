@@ -143,9 +143,6 @@
                         // Debug.WriteLine($"FilteredVideosViewModel.LoadVideosAsync skipping {next.Artist} - {next.Title} - {next.Rating}");
                     }
                 }
-
-                OnPropertyChanged("Videos");
-                OnPropertyChanged("");
             }
             catch (Exception ex)
             {
