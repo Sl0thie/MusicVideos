@@ -81,10 +81,10 @@
         {
             try
             {
-                List<Video> videos = Model.Videos.Values.ToList();
+                Task<List<Video>> rv = DS.Videos.GetAllVideosAsync();
+                List<Video> videos = rv.Result;
 
                 await Clients.All.SendAsync("SendMessage", videos.Count + "Videos found.");
-
                 foreach (var item in videos)
                 {
                     await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(item, Formatting.None));

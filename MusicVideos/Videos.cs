@@ -35,7 +35,7 @@
         /// <summary>
         /// The virtual path of the directory holding the video files.
         /// </summary>
-        private const string VirtualPath = @"/Virtual/Music Videos";
+        // private const string VirtualPath = @"/Virtual/Music Videos";
 
         /// <summary>
         /// The increment to use when a video is canceled before it ends.
@@ -68,6 +68,8 @@
         private bool setTimer;
         private DateTime lastStart;
         private Video lastVideo;
+        private PlayState playState = PlayState.Unknown;
+        private int previousIndex;
 
         /// <summary>
         /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
@@ -239,6 +241,41 @@
         }
 
         /// <summary>
+        /// Plays the previous video.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task PlayPreviousVideoAsync()
+        {
+            Log.Info("Videos.PlayPreviousVideoAsync");
+
+            if (videoPrevious.Count > 0)
+            {
+                if (playState == PlayState.Previous)
+                {
+                    previousIndex--;
+                    previousIndex--;
+                    if (previousIndex < 0)
+                    {
+                        previousIndex = 0;
+                    }
+                }
+                else
+                {
+                    playState = PlayState.Previous;
+                    previousIndex = videoPrevious.Count - 1;
+                }
+            }
+            else
+            {
+                playState = PlayState.Random;
+            }
+
+            Log.Info($"previousIndex {previousIndex}");
+
+            await PlayNextVideoAsync();
+        }
+
+        /// <summary>
         /// Plays the next video.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
@@ -246,14 +283,26 @@
         {
             Log.Info("Videos.PlayNextVideoAsync");
 
+            // Handle the last played video. If clicked though then lower the rating of the video.
             try
             {
-                // Handle the last played video. If clicked though then lower the rating of the video.
+                await DS.Comms.PauseVideoAsync(DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+
                 if (lastVideo is object)
                 {
-                    await DS.Comms.PauseVideoAsync(DateTime.Now.AddMilliseconds(200).ToUniversalTime());
-
                     Log.Info($"Last Video: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
+
+                    if (playState == PlayState.Previous)
+                    {
+                        if (previousIndex >= videoPrevious.Count)
+                        {
+                            playState = PlayState.Unknown;
+                        }
+                    }
+                    else
+                    {
+                        videoPrevious.Add(lastVideo.Id);
+                    }
 
                     if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 30)
                     {
@@ -272,7 +321,6 @@
                         }
                     }
 
-                    // await SaveVideoAsync(lastVideo);
                     await DS.Comms.SaveVideoAsync(lastVideo);
                 }
             }
@@ -281,13 +329,20 @@
                 Log.Error(ex);
             }
 
-            if (videoQueue.Count > 0)
+            if (playState == PlayState.Previous)
             {
+                await PlayVideoAsync(videoPrevious[previousIndex]);
+                previousIndex++;
+            }
+            else if (videoQueue.Count > 0)
+            {
+                playState = PlayState.Queued;
                 await PlayVideoAsync(videoQueue[0]);
                 videoQueue.RemoveAt(0);
             }
             else
             {
+                playState = PlayState.Random;
                 await PickRandomVideoAsync();
             }
         }
@@ -324,8 +379,6 @@
             {
                 SetTimer = true;
             }
-
-            
 
             Log.Info($"PlayVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
@@ -379,36 +432,32 @@
         {
             Log.Info("Videos.SaveVideoAsync");
 
-            try
+            if (video is object)
             {
-                Log.Info($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
-
-                //// TODO Move this to the initial file import.
-                // video.PhysicalPath = video.Path;
-                // string path = video.Path[FilesPath.Length..];
-                // path = path.Replace(@"\", "/");
-                // path = VirtualPath + path;
-                // video.VirtualPath = path;
-
-                // Get video from the database.
-                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
-                List<Video> videos = rv.Result;
-
-                // Update the video or add it if it is not already there.
-                if (videos.Count == 1)
+                try
                 {
-                    Log.Info("Updating");
-                    await videosDatabase.UpdateAsync(video);
+                    Log.Info($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
+
+                    // Get video from the database.
+                    Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
+                    List<Video> videos = rv.Result;
+
+                    // Update the video or add it if it is not already there.
+                    if (videos.Count == 1)
+                    {
+                        Log.Info("Updating");
+                        await videosDatabase.UpdateAsync(video);
+                    }
+                    else
+                    {
+                        Log.Info("Inserting");
+                        await videosDatabase.InsertAsync(video);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Log.Info("Inserting");
-                    await videosDatabase.InsertAsync(video);
+                    Log.Error(ex);
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
             }
         }
 

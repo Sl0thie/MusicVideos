@@ -139,9 +139,8 @@
             DataStore database = await DataStore.Instance;
             int totalVideos = await database.TotalVideosAsync();
 
+            // await dataHub.InvokeAsync("DatabaseChecksum", "");
             Debug.WriteLine($"totalVideos: {totalVideos}");
-
-            //await dataHub.InvokeAsync("DatabaseChecksum", "");
         }
 
         /// <summary>
@@ -211,6 +210,17 @@
         }
 
         #region Commands
+
+        /// <summary>
+        /// Invokes the Previous Video command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task CommandPreviousVideo()
+        {
+            Debug.WriteLine("SignalRClient.CommandPreviousVideo");
+
+            await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
+        }
 
         /// <summary>
         /// Invokes the Next Video command on the server.

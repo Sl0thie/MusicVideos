@@ -270,7 +270,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // await DS.Videos.PlayNextVideoAsync();
+                    await DS.Videos.PlayPreviousVideoAsync();
                 }
             }
             catch (Exception ex)
@@ -340,7 +340,6 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // List<Video> videos = Model.Videos.Values.ToList();
                     Task<List<Video>> rv = DS.Videos.GetAllVideosAsync();
                     List<Video> videos = rv.Result;
 
@@ -372,6 +371,29 @@
                 if (DS.Comms.CheckId(id))
                 {
                     await Clients.All.SendAsync("SaveVideo", JsonConvert.SerializeObject(video, Formatting.None));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Calls clients to save the video to their database.
+        /// </summary>
+        /// <param name="id">The id for confirmation.</param>
+        /// <param name="timeStr">Time string of when to pause.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task PauseVideoAsync(string id, string timeStr)
+        {
+            Log.Info("VideoHub.PauseVideoAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    await Clients.All.SendAsync("PauseVideo", timeStr);
                 }
             }
             catch (Exception ex)

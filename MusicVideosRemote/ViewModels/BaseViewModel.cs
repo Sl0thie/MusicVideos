@@ -1,8 +1,8 @@
 ﻿namespace MusicVideosRemote.ViewModels
 {
-    using MusicVideosRemote.Services;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using MusicVideosRemote.Services;
     using Xamarin.Forms;
 
     /// <summary>
@@ -52,7 +52,7 @@
         /// <summary>
         /// Gets the Next Video command.
         /// </summary>
-        public Command NextVideoVideoCommand { get; }
+        public Command NextVideoCommand { get; }
 
         /// <summary>
         /// Gets the Volume command.
@@ -64,7 +64,13 @@
         /// </summary>
         public BaseViewModel()
         {
-            NextVideoVideoCommand = new Command(CallCommandNextVideo);
+            PreviousVideoCommand = new Command(CallCommandPreviousVideo);
+            NextVideoCommand = new Command(CallCommandNextVideo);
+        }
+
+        private void CallCommandPreviousVideo()
+        {
+            _ = SignalRClient.Current.CommandPreviousVideo();
         }
 
         private void CallCommandNextVideo()

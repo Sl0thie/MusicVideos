@@ -12,7 +12,6 @@ namespace MusicVideos
     /// <summary>
     /// Model object to hold the data.
     /// </summary>
-    [Obsolete("Replaced with DS.")]
     public static class Model
     {
         /// <summary>

@@ -36,7 +36,7 @@
             HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(HubId);
 
-            // Switch between IIS (Publish) and IIS Express. (Log.Info)
+            // Switch between IIS (Publish) and IIS Express. (Debug)
             if (Debugger.IsAttached)
             {
                 videoHub = new HubConnectionBuilder()
@@ -204,6 +204,7 @@
         /// <summary>
         /// Tell players to pause the video.
         /// </summary>
+        /// <param name="start">The time to pause.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task PauseVideoAsync(DateTime start)
         {
@@ -211,7 +212,7 @@
 
             try
             {
-                await videoHub.InvokeAsync("PauseVideoAsync", HubId);
+                await videoHub.InvokeAsync("PauseVideoAsync", HubId, start);
             }
             catch (Exception ex)
             {
