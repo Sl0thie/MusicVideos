@@ -135,5 +135,10 @@
         /// Gets or sets the virtual path of the video.
         /// </summary>
         public string VirtualPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets when the year song was released.
+        /// </summary>
+        public int ReleasedYear { get; set; }
     }
 }

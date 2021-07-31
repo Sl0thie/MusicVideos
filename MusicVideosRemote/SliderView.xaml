@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicVideosRemote.SliderView"
+             x:Name="this">
+    
+  <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="48"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="DisplayTitle" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding ControlTitle, Source={x:Reference this}}" FontSize="18" TextColor="#FFFFFF"/>
+            <Label x:Name="DisplayValue" Grid.Column="2" Grid.Row="0" Text="0" FontSize="18" TextColor="#FFFFFF" HorizontalTextAlignment="End"/>
+            <Button x:Name="Decrease" Grid.Column="0" Grid.Row="1" Text="-"  TextColor="#FFFFFF" Font="24" Clicked="Decrease_Clicked"/>
+            <Slider x:Name="Adjuster" Grid.Column="1" Grid.Row="1" Maximum="100" VerticalOptions="Center" Value="{Binding Value, Source={x:Reference this}}" />
+            <Button x:Name="Increase" Grid.Column="2" Grid.Row="1" Text="+"  TextColor="#FFFFFF" FontSize="24" Clicked="Increase_Clicked"/>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

@@ -184,6 +184,7 @@
         /// <summary>
         /// Gets or sets when the song was released.
         /// </summary>
+        [Obsolete("Use Release Year instead.")]
         public DateTime Released { get => released; set => released = value; }
 
         /// <summary>
@@ -205,6 +206,11 @@
         /// Gets or sets the virtual path of the video.
         /// </summary>
         public string VirtualPath { get => virtualPath; set => virtualPath = value; }
+
+        /// <summary>
+        /// Gets or sets when the year song was released.
+        /// </summary>
+        public int ReleasedYear { get => releasedYear; set => releasedYear = value; }
 
         private int id;
         private string artist;
@@ -229,5 +235,6 @@
         private int errors;
         private string physicalPath;
         private string virtualPath;
+        private int releasedYear;
     }
 }

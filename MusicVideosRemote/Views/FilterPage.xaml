@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels" x:DataType="viewmodels:FilterViewModel"
-             x:Class="MusicVideosRemote.Views.FilterPage" BackgroundColor="#000000" Title="Playlist Filter">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels"
+             xmlns:SliderView="clr-namespace:MusicVideosRemote"
+             x:DataType="viewmodels:FilterViewModel"
+             x:Class="MusicVideosRemote.Views.FilterPage"
+             BackgroundColor="#000000"
+             Title="Playlist Filter">
 
     <ScrollView>
         <Grid>
@@ -21,84 +26,19 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="1" Text="Video Rating" />
-            <Label Grid.Row="2" Grid.Column="1" Text="Minimum" />
-            <Slider Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Minimum="0" Maximum="100" Value="{Binding RatingMinimum, Mode=TwoWay}" />
-            <Label Grid.Row="4" Grid.Column="1" Text="Maximum" />
-            <Slider Grid.Row="5" Grid.Column="1"  Grid.ColumnSpan="3" Minimum="0" Maximum="100" Value="{Binding RatingMaximum, Mode=TwoWay}" />
+            <SliderView:SliderView x:Name="RatingMin" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" ControlTitle="Rating (Minimum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMinimum, Mode=TwoWay}" />
 
-            <Label Grid.Row="6" Grid.Column="1" Text="Time Frame" />
-            <Label Grid.Row="7" Grid.Column="1" Text="Minimum" />
-            <DatePicker  Grid.Row="8" Grid.Column="1"  Grid.ColumnSpan="3" TextColor="#FFFFFF" Date="{Binding Filter.DateTimeMinimum, Mode=TwoWay}"/>
+            <SliderView:SliderView x:Name="RatingMax" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" ControlTitle="Rating (Maximum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMaximum, Mode=TwoWay}" />
 
-            <Label Grid.Row="9" Grid.Column="1" Text="Maximum" />
-            <DatePicker Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="3" TextColor="#FFFFFF" Date="{Binding Filter.DateTimeMaximum, Mode=TwoWay}"/>
+            <SliderView:SliderView x:Name="ReleasedMin" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" ControlTitle="Released Year (Minimum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMinimum, Mode=TwoWay}" />
 
-            <Label Grid.Row="11" Grid.Column="1" Text="Genres" />
-
-            <Label Grid.Row="12" Grid.Column="1" Text="Alternative" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="13" Grid.Column="1" x:Name="Alternative" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="12" Grid.Column="3" Text="Blues" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="13" Grid.Column="3" x:Name="Blues" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="14" Grid.Column="1" Text="Classical" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="15" Grid.Column="1" x:Name="Classical" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="14" Grid.Column="3" Text="Country" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="15" Grid.Column="3" x:Name="Country" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="16" Grid.Column="1" Text="Dance" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="17" Grid.Column="1" x:Name="Dance" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="16" Grid.Column="3" Text="Dubstep" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="17" Grid.Column="3" x:Name="Dubstep" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="18" Grid.Column="1" Text="EasyListening" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="19" Grid.Column="1" x:Name="EasyListening" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="18" Grid.Column="3" Text="Electronic" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="19" Grid.Column="3" x:Name="Electronic" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="20" Grid.Column="1" Text="Grunge" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="21" Grid.Column="1" x:Name="Grunge" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="20" Grid.Column="3" Text="HipHop" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="21" Grid.Column="3" x:Name="HipHop" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="22" Grid.Column="1" Text="House" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="23" Grid.Column="1" x:Name="House" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="22" Grid.Column="3" Text="Jazz" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="23" Grid.Column="3" x:Name="Jazz" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="24" Grid.Column="1" Text="Metal" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="25" Grid.Column="1" x:Name="Metal" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="24" Grid.Column="3" Text="Pop" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="25" Grid.Column="3" x:Name="Pop" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="26" Grid.Column="1" Text="Punk" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="27" Grid.Column="1" x:Name="Punk" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="26" Grid.Column="3" Text="Reggae" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="27" Grid.Column="3" x:Name="Reggae" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="28" Grid.Column="1" Text="R and B" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="29" Grid.Column="1" x:Name="RhythmAndBlues" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="28" Grid.Column="3" Text="Rock" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="29" Grid.Column="3" x:Name="Rock" IsToggled="false" HorizontalOptions="Center" />
-
-            <Label Grid.Row="30" Grid.Column="1" Text="Ska" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="31" Grid.Column="1" x:Name="Ska" IsToggled="false" HorizontalOptions="Center" />
-            <Label Grid.Row="30" Grid.Column="3" Text="Techno" HorizontalTextAlignment="Center" />
-            <Switch Grid.Row="31" Grid.Column="3" x:Name="Techno" IsToggled="false" HorizontalOptions="Center" />
+            <SliderView:SliderView x:Name="ReleasedMax" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ControlTitle="Released Year (Maximum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMaximum, Mode=TwoWay}" />
 
         </Grid>
     </ScrollView>

@@ -38,34 +38,34 @@
 
             <StackLayout Orientation="Horizontal">
                 <Label Text="Album" Style="{StaticResource LabelSubTitle}" WidthRequest="60"/>
-                <Label x:Name="Album" Text="{Binding CurrentVideo.Album}" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+                <Label x:Name="Album" Text="{Binding CurrentVideo.Album}" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
             </StackLayout>
         </StackLayout>
         
         <Label Text="Duration" Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="Duration" Text="{Binding Duration}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="Duration" Text="{Binding Duration}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Size" Grid.Column="0" Grid.Row="4" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="Size" Text="{Binding Size}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="Size" Text="{Binding Size}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Released" Grid.Column="0" Grid.Row="5" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="Released" Text="{Binding Released}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="Released" Text="{Binding Released}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Rating" Grid.Column="0" Grid.Row="6" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="Rating" Text="{Binding CurrentVideo.Rating}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="Rating" Text="{Binding CurrentVideo.Rating}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
      
         
         <Label Text="Last played" Grid.Column="0" Grid.Row="7" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="LastPlayed" Text="{Binding LastPlayed}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="LastPlayed" Text="{Binding LastPlayed}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Play Count" Grid.Column="0" Grid.Row="8" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="PlayCount" Text="{Binding CurrentVideo.PlayCount}" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="PlayCount" Text="{Binding CurrentVideo.PlayCount}" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Date Added" Grid.Column="0" Grid.Row="9" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="DateAdded" Text="{Binding CurrentVideo.Added}" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="DateAdded" Text="{Binding CurrentVideo.Added}" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Error Count" Grid.Column="0" Grid.Row="10" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="ErrorCount" Text="{Binding CurrentVideo.Errors}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="28" />
+        <Label x:Name="ErrorCount" Text="{Binding CurrentVideo.Errors}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Button x:Name="ButtonPrevious" Command="{Binding PreviousVideoCommand}" Grid.Column="0" Grid.Row="11" Text="&#xE100;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
         <Button x:Name="ButtonPlay" Grid.Column="1" Grid.Row="11" Text="&#xE102;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />

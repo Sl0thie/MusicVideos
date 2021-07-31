@@ -200,6 +200,16 @@
                 // }
                 foreach (var next in videos)
                 {
+                    // Temp.
+                    if (next.Released == DateTime.MinValue)
+                    {
+                        next.ReleasedYear = 1900;
+                    }
+                    else
+                    {
+                        next.ReleasedYear = next.Released.Year;
+                    }
+
                     filteredVideos.Add(next.Id);
                 }
             }
@@ -207,6 +217,16 @@
             {
                 foreach (var next in videos)
                 {
+                    // Temp.
+                    if (next.Released == DateTime.MinValue)
+                    {
+                        next.ReleasedYear = 1900;
+                    }
+                    else
+                    {
+                        next.ReleasedYear = next.Released.Year;
+                    }
+
                     filteredVideos.Add(next.Id);
                 }
             }
@@ -322,6 +342,51 @@
                     }
 
                     await DS.Comms.SaveVideoAsync(lastVideo);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            if (playState == PlayState.Previous)
+            {
+                await PlayVideoAsync(videoPrevious[previousIndex]);
+                previousIndex++;
+            }
+            else if (videoQueue.Count > 0)
+            {
+                playState = PlayState.Queued;
+                await PlayVideoAsync(videoQueue[0]);
+                videoQueue.RemoveAt(0);
+            }
+            else
+            {
+                playState = PlayState.Random;
+                await PickRandomVideoAsync();
+            }
+        }
+
+        public async Task VideoError()
+        {
+            Log.Info("Videos.VideoError");
+
+            // Handle the last played video. If clicked though then lower the rating of the video.
+            try
+            {
+                await DS.Comms.PauseVideoAsync(DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+
+                if (lastVideo is object)
+                {
+                    Log.Info($"Video Error: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
+
+                    lastVideo.Errors++;
+
+                    await SaveVideoAsync(lastVideo);
+                }
+                else
+                {
+                    Log.Info("lastVideo is null");
                 }
             }
             catch (Exception ex)

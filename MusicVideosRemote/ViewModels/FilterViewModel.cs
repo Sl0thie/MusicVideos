@@ -71,6 +71,7 @@
                         Debug.WriteLine($"Filter Set: Filter changed.");
 
                         OnPropertyChanged("Filter");
+                        OnPropertyChanged("RatingMinimum");
                         FilterUpdated();
                     }
                 }
@@ -113,19 +114,69 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Get");
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + filter.RatingMinimum);
 
                 return filter.RatingMinimum;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Set");
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Set " + value);
 
                 if (filter.RatingMinimum != value)
                 {
                     filter.RatingMinimum = value;
                     OnPropertyChanged("RatingMinimum");
+                    FilterUpdated();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ReleasedMinimum.
+        /// </summary>
+        public int ReleasedMinimum
+        {
+            get
+            {
+                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + filter.ReleasedMinimum);
+
+                return filter.ReleasedMinimum;
+            }
+
+            set
+            {
+                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Set " + value);
+
+                if (filter.ReleasedMinimum != value)
+                {
+                    filter.ReleasedMinimum = value;
+                    OnPropertyChanged("ReleasedMinimum");
+                    FilterUpdated();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ReleasedMaximum.
+        /// </summary>
+        public int ReleasedMaximum
+        {
+            get
+            {
+                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + filter.ReleasedMaximum);
+
+                return filter.ReleasedMaximum;
+            }
+
+            set
+            {
+                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Set " + value);
+
+                if (filter.ReleasedMaximum != value)
+                {
+                    filter.ReleasedMaximum = value;
+                    OnPropertyChanged("ReleasedMaximum");
                     FilterUpdated();
                 }
             }
@@ -190,32 +241,17 @@
                 Debug.WriteLine($"IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {filter.RatingMinimum}");
             }
 
-            //if ((first.Genres.Count != 0) & (second.Genres.Count != 0))
-            //{
-            //    if (first.Genres.Count == second.Genres.Count)
-            //    {
-            //        for (int i = 0; i < 19; i++)
-            //        {
-            //            if (first.Genres.Contains((Genre)i))
-            //            {
-            //                if (second.Genres.Contains((Genre)i))
-            //                {
-            //                    // Debug.WriteLine($"IsFilterEqual.Genre {i}: equal");
-            //                }
-            //                else
-            //                {
-            //                    Debug.WriteLine($"IsFilterEqual.Genre {i}: different");
-            //                    diff = true;
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        diff = true;
-            //    }
-            //}
+            if (first.ReleasedMaximum != second.ReleasedMaximum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.ReleasedMaximum: first {first.ReleasedMaximum} second {filter.ReleasedMaximum}");
+            }
+
+            if (first.ReleasedMinimum != second.ReleasedMinimum)
+            {
+                diff = true;
+                Debug.WriteLine($"IsFilterEqual.ReleasedMinimum: first {first.ReleasedMinimum} second {filter.ReleasedMinimum}");
+            }
 
             if (diff)
             {
@@ -234,22 +270,22 @@
         {
             Debug.WriteLine("FilterViewModel.PassFilter");
 
-            if (toBeChecked.Released > filter.DateTimeMaximum)
-            {
-                return false;
-            }
-
-            if (toBeChecked.Released < filter.DateTimeMinimum)
-            {
-                return false;
-            }
-
             if (toBeChecked.Rating > filter.RatingMaximum)
             {
                 return false;
             }
 
             if (toBeChecked.Rating < filter.RatingMinimum)
+            {
+                return false;
+            }
+
+            if (toBeChecked.ReleasedYear > filter.ReleasedMaximum)
+            {
+                return false;
+            }
+
+            if (toBeChecked.ReleasedYear < filter.ReleasedMinimum)
             {
                 return false;
             }

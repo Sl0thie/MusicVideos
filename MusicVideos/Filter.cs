@@ -34,6 +34,16 @@
         public DateTime DateTimeMaximum { get; set; } = DateTime.MaxValue;
 
         /// <summary>
+        /// Gets or sets the minimum year for the released date.
+        /// </summary>
+        public int ReleasedMinimum { get; set; } = 1900;
+
+        /// <summary>
+        /// Gets or sets the maximum year for the released date.
+        /// </summary>
+        public int ReleasedMaximum { get; set; } = 2100;
+
+        /// <summary>
         /// Gets the collection of Genre's for the filter.
         /// </summary>
         public Collection<Genre> Genres

@@ -77,6 +77,8 @@
                 Log.Info("    Column:" + colNo);
 
                 await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
+
+                await DS.Videos.VideoError();
             }
             catch (Exception ex)
             {

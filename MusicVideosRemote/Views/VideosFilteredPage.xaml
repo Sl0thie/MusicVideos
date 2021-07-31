@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicVideosRemote.Views.VideosFilteredPage" BackgroundColor="#000000" Title="Videos (Filtered)">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding TotalVideos}"/>
         <ToolbarItem Name="MenuItem1" Order="Secondary" Text="Item 2" Priority="1" />
@@ -37,17 +43,17 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="{Binding Path=Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelTitle}" />
-                            <Label Text="{Binding Path=Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelSubTitle}"/>
+                            <Label Text="{Binding Path=Artist}" Grid.Column="1" Grid.Row="0" Style="{StaticResource ListArtist}" />
+                            <Label Text="{Binding Path=Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource ListTitle}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button x:Name="ButtonPrevious" Grid.Column="0" Grid.Row="1" Text="&#xE100;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonPrevious" Command="{Binding PreviousVideoCommand}" Grid.Column="0" Grid.Row="1" Text="&#xE100;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
             <Button x:Name="ButtonPlay" Grid.Column="1" Grid.Row="1" Text="&#xE102;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
             <Button x:Name="ButtonPause" Grid.Column="2" Grid.Row="1" Text="&#xE103;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
-            <Button x:Name="ButtonNext" Command="{Binding NextVideoVideoCommand}" Grid.Column="3" Grid.Row="1" Text="&#xE101;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+            <Button x:Name="ButtonNext" Command="{Binding NextVideoCommand}" Grid.Column="3" Grid.Row="1" Text="&#xE101;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
             <Button x:Name="ButtonVolume" Grid.Column="4" Grid.Row="1" Text="&#xE15D;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
         </Grid>
 

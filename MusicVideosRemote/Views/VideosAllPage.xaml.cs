@@ -87,7 +87,6 @@
 
                 Video selected = (Video)e.CurrentSelection[0];
                 _ = ProcessselectedAsync(selected.Id);
-
             }
             catch (Exception ex)
             {
