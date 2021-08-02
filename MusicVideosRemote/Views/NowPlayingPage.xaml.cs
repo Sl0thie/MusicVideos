@@ -55,10 +55,39 @@
         /// </summary>
         protected override void OnAppearing()
         {
-            Debug.WriteLine("ListAllVideosPage.OnAppearing");
+            Debug.WriteLine("NowPlayingPage.OnAppearing");
 
             base.OnAppearing();
             BindingContext = NowPlayingViewModel.Current;
+        }
+
+        private void ButtonVolume_Clicked(object sender, System.EventArgs e)
+        {
+            Debug.WriteLine("NowPlayingPage.ButtonVolume_Clicked");
+
+            VolumePopup.IsVisible = true;
+        }
+
+        private void Frame_Unfocused(object sender, FocusEventArgs e)
+        {
+            Debug.WriteLine("NowPlayingPage.Frame_Unfocused");
+        }
+
+        private void VolumePopup_Unfocused(object sender, FocusEventArgs e)
+        {
+            Debug.WriteLine("NowPlayingPage.VolumePopup_Unfocused");
+        }
+
+        private void VolumePopup_Focused(object sender, FocusEventArgs e)
+        {
+            Debug.WriteLine("NowPlayingPage.VolumePopup_Focused");
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            Debug.WriteLine("NowPlayingPage.TapGestureRecognizer_Tapped");
+
+            VolumePopup.IsVisible = false;
         }
     }
 }

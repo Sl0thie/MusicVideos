@@ -3,6 +3,8 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using MusicVideosRemote.Services;
+    using MusicVideosRemote.Views;
+
     using Xamarin.Forms;
 
     /// <summary>

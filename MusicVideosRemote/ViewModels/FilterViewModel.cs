@@ -217,17 +217,6 @@
             Debug.WriteLine("FilterViewModel.IsFilterEqual");
 
             bool diff = false;
-            if (first.DateTimeMaximum != second.DateTimeMaximum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.DateTimeMaximum: first {first.DateTimeMaximum} second {filter.DateTimeMaximum}");
-            }
-
-            if (first.DateTimeMinimum != second.DateTimeMinimum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.DateTimeMinimum: first {first.DateTimeMinimum} second {filter.DateTimeMinimum}");
-            }
 
             if (first.RatingMaximum != second.RatingMaximum)
             {

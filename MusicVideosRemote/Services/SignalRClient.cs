@@ -206,7 +206,7 @@
         {
             Debug.WriteLine("SignalRClient.QueueVideoAsync");
 
-            await dataHub.InvokeAsync("QueueVideo", hubId, id.ToString());
+            await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
         }
 
         #region Commands

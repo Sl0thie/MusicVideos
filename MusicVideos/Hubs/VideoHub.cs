@@ -500,7 +500,8 @@
         /// </summary>
         /// <param name="id">The id to validate.</param>
         /// <param name="videoId">The video id to add to the queue.</param>
-        public void QueueVideo(string id, string videoId)
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task QueueVideoAsync(string id, string videoId)
         {
             Log.Info("VideoHub.QueueVideo");
 
@@ -508,7 +509,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    DS.Videos.VideoQueue.Add(Convert.ToInt32(videoId));
+                    await DS.Videos.QueueVideoAsync(Convert.ToInt32(videoId));
                 }
             }
             catch (Exception ex)

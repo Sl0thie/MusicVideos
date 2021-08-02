@@ -100,6 +100,15 @@
         <ShellContent Route="VideosAllPage" ContentTemplate="{DataTemplate local:VideosAllPage}" />
     </FlyoutItem>
 
-    
+    <FlyoutItem Title="Videos (Search)" Icon="icon_about.png">
+        <ShellContent Route="VideosSearchPage" ContentTemplate="{DataTemplate local:VideosSearchPage}" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="Videos (Top 100)" Icon="icon_about.png">
+        <ShellContent Route="VideosTop100Page" ContentTemplate="{DataTemplate local:VideosTop100Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Videos (Queued)" Icon="icon_about.png">
+        <ShellContent Route="VideosQueuedPage" ContentTemplate="{DataTemplate local:VideosQueuedPage}" />
+    </FlyoutItem>
 </Shell>

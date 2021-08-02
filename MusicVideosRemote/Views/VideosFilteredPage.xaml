@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicVideosRemote.Views.VideosFilteredPage" BackgroundColor="#000000" Title="Videos (Filtered)">
+             x:Class="MusicVideosRemote.Views.VideosFilteredPage"
+             BackgroundColor="#000000"
+             Title="Videos (Filtered)">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            
-        </ResourceDictionary>
-    </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding TotalVideos}"/>

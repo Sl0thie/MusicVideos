@@ -41,7 +41,7 @@
                 <Label x:Name="Album" Text="{Binding CurrentVideo.Album}" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
             </StackLayout>
         </StackLayout>
-        
+
         <Label Text="Duration" Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="Duration" Text="{Binding Duration}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
@@ -53,8 +53,8 @@
 
         <Label Text="Rating" Grid.Column="0" Grid.Row="6" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="Rating" Text="{Binding CurrentVideo.Rating}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
-     
-        
+
+
         <Label Text="Last played" Grid.Column="0" Grid.Row="7" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="LastPlayed" Text="{Binding LastPlayed}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
@@ -71,6 +71,63 @@
         <Button x:Name="ButtonPlay" Grid.Column="1" Grid.Row="11" Text="&#xE102;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
         <Button x:Name="ButtonPause" Grid.Column="2" Grid.Row="11" Text="&#xE103;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
         <Button x:Name="ButtonNext" Command="{Binding NextVideoCommand}" Grid.Column="3" Grid.Row="11" Text="&#xE101;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
-        <Button x:Name="ButtonVolume" Grid.Column="4" Grid.Row="11" Text="&#xE15D;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32"  />
+        <Button x:Name="ButtonVolume" Grid.Column="4" Grid.Row="11" Text="&#xE15D;" FontFamily="segmdl2.ttf#Segoe MDL2 Assets" FontSize="32" Clicked="ButtonVolume_Clicked" />
+
+        <ContentView x:Name="VolumePopup"
+                     BackgroundColor="#00000000"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="5"
+                     Grid.Row="0"
+                     Grid.RowSpan="11"
+                     IsVisible="false">
+
+            <Grid BackgroundColor="#42222222">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="TapGestureRecognizer_Tapped"
+                        NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="400" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+
+                <BoxView BackgroundColor="#242424" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="6" CornerRadius="10" >
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer/>
+                    </BoxView.GestureRecognizers>
+                </BoxView>
+
+                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="Volume" FontSize="24" TextColor="#FFFFFF" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="1" Text="System" FontSize="20" TextColor="#FFFFFF" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="2" Text="App" FontSize="20" TextColor="#FFFFFF" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="3" Text="Video" FontSize="20" TextColor="#FFFFFF" HorizontalTextAlignment="Center"/>
+                
+                <Button x:Name="ButtonUp1" Grid.Column="1" Grid.Row="3" Text="+" CornerRadius="5" Margin="10,0"/>
+                <Button x:Name="ButtonUp2" Grid.Column="2" Grid.Row="3" Text="+" CornerRadius="5" Margin="10,0"/>
+                <Button x:Name="ButtonUp3" Grid.Column="3" Grid.Row="3" Text="+" CornerRadius="5" Margin="10,0"/>
+                
+                <Slider x:Name="VolumeSlider1" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Maximum="100" Value="50" Rotation="-90" Scale="1" ScaleX="1"/>
+                <Slider x:Name="VolumeSlider2" Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Maximum="100" Value="50" Rotation="-90" />
+                <Slider x:Name="VolumeSlider3" Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="4" Grid.RowSpan="1" Maximum="100" Value="50" Rotation="-90"  />
+
+                <Button x:Name="ButtonDown1" Grid.Column="1" Grid.Row="5" Text="-" CornerRadius="5" Margin="10,0"/>
+                <Button x:Name="ButtonDown2" Grid.Column="2" Grid.Row="5" Text="-" CornerRadius="5" Margin="10,0"/>
+                <Button x:Name="ButtonDown3" Grid.Column="3" Grid.Row="5" Text="-" CornerRadius="5" Margin="10,0"/>
+            </Grid>
+
+        </ContentView>
     </Grid>
 </ContentPage>

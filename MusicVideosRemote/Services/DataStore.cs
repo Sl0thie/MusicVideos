@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.ViewModels;
@@ -35,7 +33,7 @@
 
             var instance = new DataStore();
 
-            // _ = Database.DropTableAsync<Video>(); // Uncomment to drop the table. (for testing)
+            // _ = database.DropTableAsync<Video>(); // Uncomment to drop the table. (for testing)
             CreateTableResult result = await database.CreateTableAsync<Video>();
             return instance;
         });
@@ -60,7 +58,14 @@
 
             try
             {
-                return database.Table<Video>().ToListAsync();
+                // return database.Table<Video>().ToListAsync();
+                string sql = "SELECT * FROM Video ";
+                sql += "ORDER BY SearchArtist, Title;";
+
+                Debug.WriteLine($"SQL {sql}");
+
+                Task<List<Video>> videos = database.QueryAsync<Video>(sql);
+                return videos;
             }
             catch (Exception ex)
             {
@@ -80,8 +85,38 @@
 
             try
             {
-                string sql = "SELECT * FROM[Video] WHERE ";
-                sql += $"([Rating] BETWEEN {filter.RatingMinimum} AND {filter.RatingMaximum}) ORDER BY SearchArtist, Title;";
+                string sql = "SELECT * FROM Video WHERE ";
+                sql += $"(Rating BETWEEN {filter.RatingMinimum} AND {filter.RatingMaximum}) ";
+                sql += $"AND (ReleasedYear BETWEEN {filter.ReleasedMinimum} AND {filter.ReleasedMaximum}) ";
+                sql += "ORDER BY SearchArtist, Title;";
+
+                Debug.WriteLine($"SQL {sql}");
+
+                Task<List<Video>> videos = database.QueryAsync<Video>(sql);
+                return videos;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get the top 100 videos.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task<List<Video>> GetTop100VideosAsync()
+        {
+            Debug.WriteLine("DataStore.GetFilteredVideosAsync");
+
+            try
+            {
+                string sql = "SELECT * FROM Video ";
+                sql += "ORDER BY Rating DESC, QueuedCount DESC, PlayCount DESC LIMIT 100;";
+
+                Debug.WriteLine($"SQL {sql}");
+
                 Task<List<Video>> videos = database.QueryAsync<Video>(sql);
                 return videos;
             }

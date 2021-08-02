@@ -45,7 +45,12 @@
         /// <summary>
         /// The increment to use when the video is completed.
         /// </summary>
-        private const int IncrementPlayedThough = 5;
+        private const int IncrementPlayedThough = 2;
+
+        /// <summary>
+        /// The increment to use when the video is queued.
+        /// </summary>
+        private const int IncrementQueued = 5;
 
         /// <summary>
         /// Used to generate random numbers.
@@ -153,6 +158,9 @@
 
             // Filter the videos based on the current filter.
             FilterVideos();
+
+            // _ = AdjustReleaseYearAsync();
+            AddUnplayedToQueue();
         }
 
         /// <summary>
@@ -165,8 +173,8 @@
             Log.Info("FilterVideos Settings Details:");
             Log.Info($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
             Log.Info($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
-            Log.Info($"Date Min: {DS.Settings.Filter.DateTimeMinimum}");
-            Log.Info($"Date Max: {DS.Settings.Filter.DateTimeMaximum}");
+            Log.Info($"Released Min: {DS.Settings.Filter.ReleasedMinimum}");
+            Log.Info($"Released Max: {DS.Settings.Filter.ReleasedMaximum}");
 
             foreach (Genre gen in DS.Settings.Filter.Genres)
             {
@@ -176,62 +184,22 @@
             // Clear the list first.
             filteredVideos.Clear();
 
+            string sql = "SELECT * FROM [Video] WHERE ";
+            sql += $"([Rating] BETWEEN {DS.Settings.Filter.RatingMinimum} AND {DS.Settings.Filter.RatingMaximum}) ";
+            sql += $"AND ([ReleasedYear] BETWEEN {DS.Settings.Filter.ReleasedMinimum} AND {DS.Settings.Filter.ReleasedMaximum}) ";
+            sql += "ORDER BY SearchArtist, Title;";
+
             // Get the videos from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Rating] BETWEEN " + DS.Settings.Filter.RatingMinimum + " AND " + DS.Settings.Filter.RatingMaximum);
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>(sql);
+
             List<Video> videos = rv.Result;
 
             Log.Info($"FilterVideos Videos: {videos.Count}");
 
-            // Filter the videos based on the genre's.
-            if (DS.Settings.Filter.Genres.Count > 0)
+            foreach (var next in videos)
             {
-                // foreach (Video next in videos)
-                // {
-                //    Log.Info.WriteLine($"Video: {next.Artist} - {next.Title}");
-                //    foreach (Genre genre in next.Genres)
-                //    {
-                //        Log.Info.WriteLine($"Genre: {genre}");
-                //        if (DS.Settings.Filter.Genres.Contains(genre))
-                //        {
-                //            filteredVideos.Add(next.Id);
-                //            break;
-                //        }
-                //    }
-                // }
-                foreach (var next in videos)
-                {
-                    // Temp.
-                    if (next.Released == DateTime.MinValue)
-                    {
-                        next.ReleasedYear = 1900;
-                    }
-                    else
-                    {
-                        next.ReleasedYear = next.Released.Year;
-                    }
-
-                    filteredVideos.Add(next.Id);
-                }
+                filteredVideos.Add(next.Id);
             }
-            else
-            {
-                foreach (var next in videos)
-                {
-                    // Temp.
-                    if (next.Released == DateTime.MinValue)
-                    {
-                        next.ReleasedYear = 1900;
-                    }
-                    else
-                    {
-                        next.ReleasedYear = next.Released.Year;
-                    }
-
-                    filteredVideos.Add(next.Id);
-                }
-            }
-
-            AddUnplayedToQueue();
 
             Log.Info($"Total Filtered Videos: {filteredVideos.Count}");
         }
@@ -257,6 +225,66 @@
             catch (Exception ex)
             {
                 Log.Info("Error: " + ex.Message);
+            }
+        }
+
+        private async Task AdjustReleaseYearAsync()
+        {
+            Log.Info("Videos.AddUnplayedToQueue");
+
+            try
+            {
+                // Get video from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video]");
+                List<Video> videos = rv.Result;
+
+                foreach (Video next in videos)
+                {
+                    if (next.Released == DateTime.MinValue)
+                    {
+                        next.ReleasedYear = 1900;
+                    }
+                    else
+                    {
+                        next.ReleasedYear = next.Released.Year;
+                    }
+
+                    await SaveVideoAsync(next);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Info("Error: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Adds a video to the queue.
+        /// </summary>
+        /// <param name="id">The id of the video to add.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task QueueVideoAsync(int id)
+        {
+            Log.Info("Videos.QueueVideoAsync " + id);
+
+            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM Video WHERE Id = {id}");
+            List<Video> videos = rv.Result;
+            Video video = videos[0];
+            video.Rating += IncrementQueued;
+
+            if (video.Rating > 100)
+            {
+                video.Rating = 100;
+            }
+
+            VideoQueue.Add(video.Id);
+            await DS.Comms.SaveVideoAsync(video);
+            await SaveVideoAsync(video);
+
+            if (playState == PlayState.Random)
+            {
+                playState = PlayState.Queued;
+                await PlayNextVideoAsync();
             }
         }
 
@@ -342,6 +370,7 @@
                     }
 
                     await DS.Comms.SaveVideoAsync(lastVideo);
+                    await SaveVideoAsync(lastVideo);
                 }
             }
             catch (Exception ex)
@@ -367,6 +396,10 @@
             }
         }
 
+        /// <summary>
+        /// Handles video errors.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task VideoError()
         {
             Log.Info("Videos.VideoError");
@@ -381,7 +414,8 @@
                     Log.Info($"Video Error: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
 
                     lastVideo.Errors++;
-
+                    lastVideo.Rating = 0;
+                    await DS.Comms.SaveVideoAsync(lastVideo);
                     await SaveVideoAsync(lastVideo);
                 }
                 else
@@ -552,6 +586,7 @@
                     videos[0].LastPlayed = DateTime.Now;
                     videos[0].PlayCount++;
                     await DS.Comms.SaveVideoAsync(videos[0]);
+                    await SaveVideoAsync(videos[0]);
                 }
             }
             catch (Exception ex)

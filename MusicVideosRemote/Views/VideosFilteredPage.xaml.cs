@@ -47,7 +47,7 @@
         /// </summary>
         public VideosFilteredPage()
         {
-            Debug.WriteLine("VideosFilteredPage.OnAppearing");
+            Debug.WriteLine("VideosFilteredPage.VideosFilteredPage");
 
             current = this;
             InitializeComponent();

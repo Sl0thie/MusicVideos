@@ -149,7 +149,7 @@
             {
                 Debug.WriteLine("NowPlayingViewModel.Released.Get");
 
-                if (currentVideo.Released == DateTime.MinValue)
+                if (currentVideo.ReleasedYear == 1900)
                 {
                     return "Unknown";
                 }
@@ -157,19 +157,18 @@
                 {
                     try
                     {
-                        int days = DateTime.Now.Subtract(currentVideo.Released).Days;
-                        int years = days / 365;
+                        int years = DateTime.Now.Year - currentVideo.ReleasedYear;
 
                         switch (years)
                         {
                             case 0:
-                                return currentVideo.Released.ToString("yyyy") + " - This Year";
+                                return currentVideo.ReleasedYear + " - This Year";
 
                             case 1:
-                                return currentVideo.Released.ToString("yyyy") + " - Last Year";
+                                return currentVideo.ReleasedYear + " - Last Year";
 
                             default:
-                                return currentVideo.Released.ToString("yyyy") + " - " + years + " Years ago";
+                                return currentVideo.ReleasedYear + " - " + years + " Years ago";
                         }
                     }
                     catch (Exception ex)
