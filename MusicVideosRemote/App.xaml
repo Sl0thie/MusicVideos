@@ -57,6 +57,8 @@
                 <Setter Property="TextColor" Value="#FFFFFF" />
                 <Setter Property="Font" Value="Segoe UI, 22" />
             </Style>
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

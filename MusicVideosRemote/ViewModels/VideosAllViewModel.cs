@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
@@ -39,20 +40,20 @@
         }
 
         /// <summary>
-        /// Gets or sets the Videos.
+        /// Gets or sets the Videos collection.
         /// </summary>
-        public List<Video> Videos
+        public ObservableCollection<Video> Videos
         {
             get
             {
-                Debug.WriteLine("VideosAllViewModel.Videos Get");
+                Debug.WriteLine("VideosAllViewModel.Videos.Get");
 
                 return videos;
             }
 
             set
             {
-                Debug.WriteLine("VideosAllViewModel.Videos Set");
+                Debug.WriteLine("VideosAllViewModel.Videos.Set");
 
                 videos = value;
                 OnPropertyChanged("Videos");
@@ -77,7 +78,7 @@
         }
 
         private static VideosAllViewModel current;
-        private List<Video> videos = new List<Video>();
+        private ObservableCollection<Video> videos;
         private string totalVideos;
 
         /// <summary>
@@ -99,7 +100,7 @@
         }
 
         /// <summary>
-        /// Loads the Videos list with video objects.
+        /// Loads the Videos collection with video objects.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         private async Task LoadVideosAsync()
@@ -109,7 +110,7 @@
             try
             {
                 DataStore database = await DataStore.Instance;
-                Videos = await database.GetAllVideosAsync();
+                Videos = new ObservableCollection<Video>(await database.GetAllVideosAsync());
                 TotalVideos = $"{videos.Count} videos";
                 VideosAllPage.Current.Rebind();
             }

@@ -63,10 +63,17 @@ window.addEventListener('load', function () {
         playVideo(video, timeStr);
     });
 
+    // Sets the volume. Settings filter is unused.
+    connection.on('SetOutSettingsAsync', function (volume, filter) {
+        player0.volume = volume / 100;
+        player1.volume = volume / 100;
+    })
+
     // Start the SignalR connection to the server hub.
     connection.start().then(function () {
         setTimeout(connectionStarted, startupPause);
     });
+
     // Hide the mouse cursor.
     player0.style.cursor = 'none';
     player1.style.cursor = 'none';

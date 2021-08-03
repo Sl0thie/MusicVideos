@@ -16,6 +16,74 @@
     /// </summary>
     public class VideoHub : Hub
     {
+        #region Settings / Filter / Volume
+
+        /// <summary>
+        /// Sends the settings to the clients.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetOutSettingsAsync(string id)
+        {
+            Log.Info("VideoHub.GetOutSettingsAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // Send the settings objects to the clients.
+                    await Clients.Others.SendAsync("SetOutSettingsAsync", DS.Settings.Volume, JsonConvert.SerializeObject(DS.Settings.Filter, Formatting.None));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Sets the settings on the server.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="volume">The volume value.</param>
+        /// <param name="json">Serialized filter object.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SetInSettingsAsync(string id, int volume, string json)
+        {
+            Log.Info("VideoHub.SetInSettingsAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // Save the settings to the server.
+                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+
+                    if (!DS.Settings.IsFilterEqual(newFilter, DS.Settings.Filter) || (DS.Settings.Volume != volume))
+                    {
+                        DS.Settings.Volume = volume;
+                        DS.Settings.Filter = newFilter;
+
+                        DS.SaveSettings();
+
+                        // Send the new values to the clients to keep them in sync.
+                        await GetOutSettingsAsync(DS.Comms.HubId);
+
+                        // The filter has been updated so filter the videos.
+                        DS.Videos.FilterVideos();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        #endregion
+
+        #region Older Version
+
         #region Debugging
 
         /// <summary>
@@ -618,5 +686,7 @@
                 Log.Error(ex);
             }
         }
+
+        #endregion
     }
 }

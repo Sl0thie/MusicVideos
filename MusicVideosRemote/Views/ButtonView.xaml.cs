@@ -10,9 +10,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VolumeView : Grid
+    public partial class ButtonView : Grid
     {
-        public VolumeView()
+        public ButtonView()
         {
             InitializeComponent();
         }

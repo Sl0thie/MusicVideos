@@ -10,6 +10,15 @@
 
     /// <summary>
     /// SignalRClient class manages communications to the SignalR server.
+    /// .
+    /// Verbs
+    /// Client to Server
+    /// GetOut = Ask for object from server.
+    /// SetOut = Save an object from server.
+    /// .
+    /// Server to Client.
+    /// GetIn = Ask for object from client.
+    /// SetIn = Save object from client.
     /// </summary>
     public class SignalRClient
     {
@@ -90,7 +99,24 @@
                 {
                     Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    FilterViewModel.Current.Filter = newFilter;
+
+                    // FilterViewModel.Current.Filter = newFilter;
+                    Settings.Current.Filter = newFilter;
+                });
+
+                dataHub.On<string>("SaveVolume", (json) =>
+                {
+                    Debug.WriteLine($"SaveVolume:  {json}");
+                });
+
+                // -----------------------------------------------------------------------------
+                dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
+                {
+                    Debug.WriteLine($"SetOutSettingsAsync: volume = {volume}  filter = {json}");
+
+                    Settings.Current.Volume = volume;
+                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+                    Settings.Current.Filter = newFilter;
                 });
             }
             catch (Exception ex)
@@ -98,6 +124,8 @@
                 Debug.WriteLine("Error: " + ex.Message);
             }
         }
+
+        #region Connect / Registration / Checksum
 
         /// <summary>
         /// Invokes Registration and other process needed to connect with the server.
@@ -111,7 +139,8 @@
 
             await RegisterAsync();
 
-            await GetFilterAsync();
+            // await GetFilterAsync();
+            await GetOutSettingsAsync();
 
             // await GetAllVideosAsync(); // Uncomment to update all videos from server.
             await DatabaseChecksumAsync();
@@ -154,16 +183,7 @@
             await dataHub.InvokeAsync("GetVideosAsync", hubId);
         }
 
-        /// <summary>
-        /// Invokes Get Filter command on the server.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetFilterAsync()
-        {
-            Debug.WriteLine("SignalRClient.GetFilterAsync");
-
-            await dataHub.InvokeAsync("GetFilterAsync", hubId);
-        }
+        #endregion
 
         #region Debugging
 
@@ -181,13 +201,38 @@
 
         #endregion
 
-        #region Filter
+        #region Settings/Filter
+
+        /// <summary>
+        /// Ask the server for the settings object.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task GetOutSettingsAsync()
+        {
+            Debug.WriteLine("SignalRClient.GetSettingsAsync");
+
+            await dataHub.InvokeAsync("GetOutSettingsAsync", hubId);
+        }
+
+        /// <summary>
+        /// Sets the settings objects on the server.
+        /// </summary>
+        /// <param name="volume">Sets the volume for the application.</param>
+        /// <param name="filter">Sets the filter for the application.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SetInSettingsAsync(int volume, Filter filter)
+        {
+            Debug.WriteLine("SignalRClient.SetInSettingsAsync");
+
+            await dataHub.InvokeAsync("SetInSettingsAsync", hubId, volume, JsonConvert.SerializeObject(filter, Formatting.None));
+        }
 
         /// <summary>
         /// Passes a filter to the server.
         /// </summary>
         /// <param name="filter">The filter to pass.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        [Obsolete("Use SetInSettingsAsync instead.")]
         public async Task SendFilterAsync(Filter filter)
         {
             Debug.WriteLine("SignalRClient.SendFilterAsync");
@@ -195,7 +240,21 @@
             await dataHub.InvokeAsync("SendFilterAsync", hubId, JsonConvert.SerializeObject(filter, Formatting.None));
         }
 
+        /// <summary>
+        /// Invokes Get Filter command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        [Obsolete("Use GetOutSettingsAsync instead.")]
+        public async Task GetFilterAsync()
+        {
+            Debug.WriteLine("SignalRClient.GetFilterAsync");
+
+            await dataHub.InvokeAsync("GetFilterAsync", hubId);
+        }
+
         #endregion
+
+        #region Video
 
         /// <summary>
         /// Queues a video on the server.
@@ -208,6 +267,8 @@
 
             await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
         }
+
+        #endregion
 
         #region Commands
 

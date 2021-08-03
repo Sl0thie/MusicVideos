@@ -58,7 +58,6 @@
 
             try
             {
-                // return database.Table<Video>().ToListAsync();
                 string sql = "SELECT * FROM Video ";
                 sql += "ORDER BY SearchArtist, Title;";
 

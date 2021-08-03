@@ -76,7 +76,7 @@
         /// <summary>
         /// Gets or sets the maximum year for the released date.
         /// </summary>
-        public int ReleasedMaximum { get; set; } = 2100;
+        public int ReleasedMaximum { get; set; } = 2021;
 
         /// <summary>
         /// Gets or sets the DateTimeMinimum. The earliest accepted date for the video.

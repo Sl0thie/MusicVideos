@@ -1,14 +1,12 @@
 ﻿namespace MusicVideosRemote.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
     using MusicVideosRemote.Views;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// VideosTop100ViewModel class.
@@ -91,6 +89,10 @@
             _ = LoadVideosAsync();
         }
 
+        /// <summary>
+        /// Load the videos from the database.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideosAsync()
         {
             Debug.WriteLine("VideosTop100ViewModel.LoadVideosAsync");

@@ -47,6 +47,9 @@
         /// </summary>
         public VideosAllPage()
         {
+            Debug.WriteLine("VideosAllPage.VideosAllPage");
+
+            current = this;
             InitializeComponent();
         }
 
@@ -58,7 +61,6 @@
             Debug.WriteLine("VideosAllPage.OnAppearing");
 
             base.OnAppearing();
-
             BindingContext = VideosAllViewModel.Current;
             CV.ItemsSource = VideosAllViewModel.Current.Videos;
         }

@@ -16,7 +16,7 @@
         /// <summary>
         /// Gets or sets the minimum rating for the filter.
         /// </summary>
-        public int RatingMinimum { get; set; } = 1;
+        public int RatingMinimum { get; set; } = 50;
 
         /// <summary>
         /// Gets or sets the maximum rating for the filter.
@@ -41,7 +41,7 @@
         /// <summary>
         /// Gets or sets the maximum year for the released date.
         /// </summary>
-        public int ReleasedMaximum { get; set; } = 2100;
+        public int ReleasedMaximum { get; set; } = 2021;
 
         /// <summary>
         /// Gets the collection of Genre's for the filter.

@@ -45,40 +45,61 @@
             {
                 Debug.WriteLine("FilterViewModel.Filter.Get");
 
-                if (filter is null)
-                {
-                    Debug.WriteLine($"Filter Get: Filter is null.");
-                    _ = SignalRClient.Current.GetFilterAsync();
-                }
-
-                return filter;
+                // if (filter is null)
+                // {
+                //    Debug.WriteLine($"Filter Get: Filter is null.");
+                //    _ = SignalRClient.Current.GetFilterAsync();
+                // }
+                // return filter;
+                return Settings.Current.Filter;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.Filter.Set");
 
-                lastFilter = filter;
-                filter = value;
-                if (filter != null)
-                {
-                    if (IsFilterEqual(filter, lastFilter))
-                    {
-                        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"Filter Set: Filter changed.");
+                // lastFilter = filter;
+                // filter = value;
+                // if (filter != null)
+                // {
+                //    if (IsFilterEqual(filter, lastFilter))
+                //    {
+                //        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
+                //    }
+                //    else
+                //    {
+                //        Debug.WriteLine($"Filter Set: Filter changed.");
+                //        OnPropertyChanged("Filter");
+                //        OnPropertyChanged("RatingMinimum");
+                //        FilterUpdated();
+                //    }
+                // }
+                // else
+                // {
+                //    Debug.WriteLine($"Filter Set: Filter is null.");
+                // }
+                lastFilter = Settings.Current.Filter;
 
-                        OnPropertyChanged("Filter");
-                        OnPropertyChanged("RatingMinimum");
-                        FilterUpdated();
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine($"Filter Set: Filter is null.");
-                }
+                //Settings.Current.Filter = value;
+                //if (Settings.Current.Filter != null)
+                //{
+                //    if (IsFilterEqual(Settings.Current.Filter, lastFilter))
+                //    {
+                //        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
+                //    }
+                //    else
+                //    {
+                //        Debug.WriteLine($"Filter Set: Filter changed.");
+
+                //        OnPropertyChanged("Filter");
+                //        OnPropertyChanged("RatingMinimum");
+                //        FilterUpdated();
+                //    }
+                //}
+                //else
+                //{
+                //    Debug.WriteLine($"Filter Set: Filter is null.");
+                //}
             }
         }
 
@@ -91,16 +112,16 @@
             {
                 Debug.WriteLine("FilterViewModel.RatingMaximum.Get");
 
-                return filter.RatingMaximum;
+                return Settings.Current.Filter.RatingMaximum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.RatingMaximum.Set");
 
-                if (filter.RatingMaximum != value)
+                if (Settings.Current.Filter.RatingMaximum != value)
                 {
-                    filter.RatingMaximum = value;
+                    Settings.Current.Filter.RatingMaximum = value;
                     OnPropertyChanged("RatingMaximum");
                     FilterUpdated();
                 }
@@ -114,18 +135,18 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + filter.RatingMinimum);
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + Settings.Current.Filter.RatingMinimum);
 
-                return filter.RatingMinimum;
+                return Settings.Current.Filter.RatingMinimum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.RatingMinimum.Set " + value);
 
-                if (filter.RatingMinimum != value)
+                if (Settings.Current.Filter.RatingMinimum != value)
                 {
-                    filter.RatingMinimum = value;
+                    Settings.Current.Filter.RatingMinimum = value;
                     OnPropertyChanged("RatingMinimum");
                     FilterUpdated();
                 }
@@ -139,18 +160,18 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + filter.ReleasedMinimum);
+                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + Settings.Current.Filter.ReleasedMinimum);
 
-                return filter.ReleasedMinimum;
+                return Settings.Current.Filter.ReleasedMinimum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.ReleasedMinimum.Set " + value);
 
-                if (filter.ReleasedMinimum != value)
+                if (Settings.Current.Filter.ReleasedMinimum != value)
                 {
-                    filter.ReleasedMinimum = value;
+                    Settings.Current.Filter.ReleasedMinimum = value;
                     OnPropertyChanged("ReleasedMinimum");
                     FilterUpdated();
                 }
@@ -164,18 +185,18 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + filter.ReleasedMaximum);
+                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + Settings.Current.Filter.ReleasedMaximum);
 
-                return filter.ReleasedMaximum;
+                return Settings.Current.Filter.ReleasedMaximum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.ReleasedMaximum.Set " + value);
 
-                if (filter.ReleasedMaximum != value)
+                if (Settings.Current.Filter.ReleasedMaximum != value)
                 {
-                    filter.ReleasedMaximum = value;
+                    Settings.Current.Filter.ReleasedMaximum = value;
                     OnPropertyChanged("ReleasedMaximum");
                     FilterUpdated();
                 }
@@ -184,7 +205,8 @@
 
         private static FilterViewModel current;
         private Filter lastFilter;
-        private Filter filter;
+
+        // private Filter filter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterViewModel"/> class.
@@ -194,7 +216,7 @@
             Debug.WriteLine("FilterViewModel.FilterViewModel");
 
             Current = this;
-            _ = SignalRClient.Current.GetFilterAsync();
+            // _ = SignalRClient.Current.GetFilterAsync();
         }
 
         /// <summary>
@@ -203,83 +225,9 @@
         private void FilterUpdated()
         {
             VideosFilteredViewModel.Current.UpdateFilter();
-            _ = SignalRClient.Current.SendFilterAsync(filter);
-        }
 
-        /// <summary>
-        /// Checks if the Filters are equal.
-        /// </summary>
-        /// <param name="first">The first filter to check.</param>
-        /// <param name="second">The second filter to check.</param>
-        /// <returns>Returns true id the filters are equal.</returns>
-        private bool IsFilterEqual(Filter first, Filter second)
-        {
-            Debug.WriteLine("FilterViewModel.IsFilterEqual");
-
-            bool diff = false;
-
-            if (first.RatingMaximum != second.RatingMaximum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.RatingMaximum: first {first.RatingMaximum} second {filter.RatingMaximum}");
-            }
-
-            if (first.RatingMinimum != second.RatingMinimum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {filter.RatingMinimum}");
-            }
-
-            if (first.ReleasedMaximum != second.ReleasedMaximum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.ReleasedMaximum: first {first.ReleasedMaximum} second {filter.ReleasedMaximum}");
-            }
-
-            if (first.ReleasedMinimum != second.ReleasedMinimum)
-            {
-                diff = true;
-                Debug.WriteLine($"IsFilterEqual.ReleasedMinimum: first {first.ReleasedMinimum} second {filter.ReleasedMinimum}");
-            }
-
-            if (diff)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Check if the video passes the filter.
-        /// </summary>
-        /// <param name="toBeChecked">The video to be checked.</param>
-        /// <returns>Returns true if the video passes the filter.</returns>
-        public bool PassFilter(Video toBeChecked)
-        {
-            Debug.WriteLine("FilterViewModel.PassFilter");
-
-            if (toBeChecked.Rating > filter.RatingMaximum)
-            {
-                return false;
-            }
-
-            if (toBeChecked.Rating < filter.RatingMinimum)
-            {
-                return false;
-            }
-
-            if (toBeChecked.ReleasedYear > filter.ReleasedMaximum)
-            {
-                return false;
-            }
-
-            if (toBeChecked.ReleasedYear < filter.ReleasedMinimum)
-            {
-                return false;
-            }
-
-            return true;
+            // _ = SignalRClient.Current.SendFilterAsync(Settings.Current.Filter);
+            _ = SignalRClient.Current.SetInSettingsAsync(Settings.Current.Volume, Settings.Current.Filter);
         }
     }
 }

@@ -106,7 +106,7 @@
         {
             Debug.WriteLine("FilteredVideosViewModel.UpdateVideo");
 
-            if (FilterViewModel.Current.PassFilter(video))
+            if (Settings.Current.PassFilter(video))
             {
                 if (videos.Any(vid => vid.Id == video.Id))
                 {
@@ -151,7 +151,7 @@
             try
             {
                 DataStore database = await DataStore.Instance;
-                Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(FilterViewModel.Current.Filter));
+                Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(Settings.Current.Filter));
                 VideosFilteredPage.Current.Rebind();
                 TotalVideos = $"{videos.Count} videos";
             }
