@@ -99,8 +99,6 @@
                 {
                     Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-
-                    // FilterViewModel.Current.Filter = newFilter;
                     Settings.Current.Filter = newFilter;
                 });
 
@@ -136,10 +134,7 @@
             Debug.WriteLine("SignalRClient.ConnectAsync");
 
             await dataHub.StartAsync();
-
             await RegisterAsync();
-
-            // await GetFilterAsync();
             await GetOutSettingsAsync();
 
             // await GetAllVideosAsync(); // Uncomment to update all videos from server.

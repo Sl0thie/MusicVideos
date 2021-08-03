@@ -73,7 +73,7 @@
         <Label Text="Error Count" Grid.Column="0" Grid.Row="10" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="ErrorCount" Text="{Binding CurrentVideo.Errors}" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
-        <control:ButtonView Grid.Row="11" Grid.Column="0" />
+        <control:ButtonView Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5" />
 
         <control:VolumeView Grid.Row="0" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="5" />
         

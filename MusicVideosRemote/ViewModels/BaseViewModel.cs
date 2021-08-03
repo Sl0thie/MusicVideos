@@ -58,6 +58,9 @@
 
         private bool volumeVisible = false;
 
+        /// <summary>
+        /// Gets or sets VolumeVisible.
+        /// </summary>
         public bool VolumeVisible
         {
             get
@@ -76,6 +79,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets the show volume command.
+        /// </summary>
         public Command ShowVolumeCommand { get; }
 
         /// <summary>
@@ -113,11 +119,15 @@
         /// </summary>
         public BaseViewModel()
         {
+            Debug.WriteLine("BaseViewModel.BaseViewModel");
+
             PreviousVideoCommand = new Command(CallCommandPreviousVideo);
             NextVideoCommand = new Command(CallCommandNextVideo);
             ShowVolumeCommand = new Command(CallCommandShowVolume);
             VolumeUpCommand = new Command(CallCommandVolumeUp);
             VolumeDownCommand = new Command(CallCommandVolumeDown);
+
+            OnPropertyChanged("Volume");
         }
 
         private void CallCommandPreviousVideo()

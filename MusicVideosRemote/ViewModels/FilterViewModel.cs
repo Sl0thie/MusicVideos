@@ -45,12 +45,6 @@
             {
                 Debug.WriteLine("FilterViewModel.Filter.Get");
 
-                // if (filter is null)
-                // {
-                //    Debug.WriteLine($"Filter Get: Filter is null.");
-                //    _ = SignalRClient.Current.GetFilterAsync();
-                // }
-                // return filter;
                 return Settings.Current.Filter;
             }
 
@@ -58,48 +52,7 @@
             {
                 Debug.WriteLine("FilterViewModel.Filter.Set");
 
-                // lastFilter = filter;
-                // filter = value;
-                // if (filter != null)
-                // {
-                //    if (IsFilterEqual(filter, lastFilter))
-                //    {
-                //        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
-                //    }
-                //    else
-                //    {
-                //        Debug.WriteLine($"Filter Set: Filter changed.");
-                //        OnPropertyChanged("Filter");
-                //        OnPropertyChanged("RatingMinimum");
-                //        FilterUpdated();
-                //    }
-                // }
-                // else
-                // {
-                //    Debug.WriteLine($"Filter Set: Filter is null.");
-                // }
-                lastFilter = Settings.Current.Filter;
-
-                //Settings.Current.Filter = value;
-                //if (Settings.Current.Filter != null)
-                //{
-                //    if (IsFilterEqual(Settings.Current.Filter, lastFilter))
-                //    {
-                //        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
-                //    }
-                //    else
-                //    {
-                //        Debug.WriteLine($"Filter Set: Filter changed.");
-
-                //        OnPropertyChanged("Filter");
-                //        OnPropertyChanged("RatingMinimum");
-                //        FilterUpdated();
-                //    }
-                //}
-                //else
-                //{
-                //    Debug.WriteLine($"Filter Set: Filter is null.");
-                //}
+                Settings.Current.Filter = value;
             }
         }
 
@@ -204,9 +157,6 @@
         }
 
         private static FilterViewModel current;
-        private Filter lastFilter;
-
-        // private Filter filter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterViewModel"/> class.
@@ -216,7 +166,6 @@
             Debug.WriteLine("FilterViewModel.FilterViewModel");
 
             Current = this;
-            // _ = SignalRClient.Current.GetFilterAsync();
         }
 
         /// <summary>
@@ -226,7 +175,6 @@
         {
             VideosFilteredViewModel.Current.UpdateFilter();
 
-            // _ = SignalRClient.Current.SendFilterAsync(Settings.Current.Filter);
             _ = SignalRClient.Current.SetInSettingsAsync(Settings.Current.Volume, Settings.Current.Filter);
         }
     }
