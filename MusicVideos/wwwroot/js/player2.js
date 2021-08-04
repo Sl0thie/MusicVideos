@@ -31,24 +31,18 @@ let player1VideoId;
 //#endregion
 //#region Initialization
 window.addEventListener('load', function () {
+    // Add event handlers
     player0.addEventListener('mousedown', screenClick, true);
     player1.addEventListener('mousedown', screenClick, true);
     overlay.addEventListener('mousedown', screenClick, true);
-
-    player0.addEventListener('error', function (evt) {
-        logError(evt.target.error);
-    });
-
-    player1.addEventListener('error', function (evt) {
-        logError(evt.target.error);
-    });
-
+    player0.addEventListener('error', function (evt) {logError(evt.target.error);});
+    player1.addEventListener('error', function (evt) {logError(evt.target.error);});
 
     // Create the SignalR object.
     connection = new signalR.HubConnectionBuilder().withUrl('/videoHub').build();
 
     // Define the methods that will be received from the hub.
-    connection.on('setRegistration', function (id) {
+    connection.on('setOutRegistrationAsync', function (id) {
         hubId = id;
         console.log('Hub Id: ' + hubId);
     });
@@ -89,8 +83,7 @@ function connectionStarted() {
 //#region Log.Info
 function logError(e) {
     console.log('ERROR: ' + e.message);
-    //connection.invoke('LogErrorAsync', document.title, e.message, e.filename, e.lineno.toString(), e.colno.toString());
-    connection.invoke('LogErrorAsync', document.title, e.message, e.filename, e.lineno, e.colno);
+    connection.invoke('SetInJavascriptErrorAsync', document.title, e.message, e.filename, e.lineno, e.colno);
 }
 function log(message) {
     connection.invoke('LogMessageAsync', document.URL, message);

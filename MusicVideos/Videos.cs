@@ -289,6 +289,24 @@
         }
 
         /// <summary>
+        /// Pause the video.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task PauseVideoAsync()
+        {
+            Log.Info("Videos.PauseVideoAsync");
+        }
+
+        /// <summary>
+        /// restart playback of the video.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task UnpauseVideoAsync()
+        {
+            Log.Info("Videos.UnpauseVideoAsync");
+        }
+
+        /// <summary>
         /// Plays the previous video.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>

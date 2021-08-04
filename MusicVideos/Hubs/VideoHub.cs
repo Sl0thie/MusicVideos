@@ -13,6 +13,15 @@
 
     /// <summary>
     /// MessageHub provides functions via SignalR.
+    /// .
+    /// Verbs
+    /// Client to Server
+    /// GetOut = Ask for object from server.
+    /// SetOut = Save an object from server.
+    /// .
+    /// Server to Client.
+    /// GetIn = Ask for object from client.
+    /// SetIn = Save object from client.
     /// </summary>
     public class VideoHub : Hub
     {
@@ -63,7 +72,6 @@
                     {
                         DS.Settings.Volume = volume;
                         DS.Settings.Filter = newFilter;
-
                         DS.SaveSettings();
 
                         // Send the new values to the clients to keep them in sync.
@@ -73,80 +81,6 @@
                         DS.Videos.FilterVideos();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-        }
-
-        #endregion
-
-        #region Older Version
-
-        #region Debugging
-
-        /// <summary>
-        /// Sends error details to other clients.
-        /// </summary>
-        /// <param name="id">The id of the sending client.</param>
-        /// <param name="error">Serialized string of the exception.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task SendErrorAsync(string id, string error)
-        {
-            try
-            {
-                Log.Info($"VideoHub.SendErrorAsync:  {id}  {error}");
-
-                await Clients.All.SendAsync("SendError", id, error);
-            }
-            catch (Exception ex)
-            {
-                // await ErrorAsync(ex);
-                Log.Error(ex);
-            }
-        }
-
-        /// <summary>
-        /// Logs local errors.
-        /// </summary>
-        /// <param name="ex">The exception to be logged.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task ErrorAsync(Exception ex)
-        {
-            if (ex is object)
-            {
-                Log.Info($"VideoHub.ErrorAsync: {ex.Message}");
-
-                await SendErrorAsync("Hub", JsonConvert.SerializeObject(ex, Formatting.None));
-            }
-        }
-
-        /// <summary>
-        /// Logs javascript errors.
-        /// These errors are sent back to the Log.Info page to centralize them from all the sources.
-        /// </summary>
-        /// <param name="docTitle">The Title of the page that raised the error.</param>
-        /// <param name="message">The error message.</param>
-        /// <param name="filename">The filename containing the error.</param>
-        /// <param name="lineNo">The line number of the error.</param>
-        /// <param name="colNo">The column number of the error.</param>
-        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public async Task LogErrorAsync(string docTitle, string message, string filename, string lineNo, string colNo)
-        {
-            try
-            {
-                Log.Info("VideoHub.LogErrorAsync");
-
-                Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
-                Log.Info("   Message:" + message);
-                Log.Info("  Filename:" + filename);
-                Log.Info("      Line:" + lineNo);
-                Log.Info("    Column:" + colNo);
-
-                await Clients.All.SendAsync("PrintError", docTitle, message, filename, lineNo, colNo);
-
-                await DS.Videos.VideoError();
             }
             catch (Exception ex)
             {
@@ -171,7 +105,7 @@
 
                 if (DS.Comms.CheckKey(key))
                 {
-                    await Clients.Caller.SendAsync("SetRegistration", DS.Comms.GetRemoteId());
+                    await Clients.Caller.SendAsync("SetOutRegistrationAsync", DS.Comms.GetRemoteId());
                 }
             }
             catch (Exception ex)
@@ -193,7 +127,7 @@
 
                 if (DS.Comms.CheckKey(key))
                 {
-                    await Clients.Caller.SendAsync("SetRegistration", DS.Comms.GetPlayerId());
+                    await Clients.Caller.SendAsync("SetOutRegistrationAsync", DS.Comms.GetPlayerId());
                 }
             }
             catch (Exception ex)
@@ -203,6 +137,65 @@
         }
 
         #endregion
+
+        #region Debugging
+
+        /// <summary>
+        /// Logs javascript errors.
+        /// These errors are sent back to the server to centralize them from all the sources.
+        /// </summary>
+        /// <param name="docTitle">The Title of the page that raised the error.</param>
+        /// <param name="message">The error message.</param>
+        /// <param name="filename">The filename containing the error.</param>
+        /// <param name="lineNo">The line number of the error.</param>
+        /// <param name="colNo">The column number of the error.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public async Task SetInJavascriptErrorAsync(string docTitle, string message, string filename, string lineNo, string colNo)
+        {
+            try
+            {
+                Log.Info("VideoHub.SetInJavascriptErrorAsync");
+
+                Log.Info(DateTime.Now.ToString("h:mm:ss.fff") + " ERROR " + docTitle);
+                Log.Info("   Message:" + message);
+                Log.Info("  Filename:" + filename);
+                Log.Info("      Line:" + lineNo);
+                Log.Info("    Column:" + colNo);
+
+                await DS.Videos.VideoError();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        /// <summary>
+        /// Logs an exception from a xamarin client.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="json">json string of the exception to log.</param>
+        public void SetInXamarinException(string id, string json)
+        {
+            try
+            {
+                Log.Info("VideoHub.SetInXamarinException");
+
+                if (DS.Comms.CheckId(id))
+                {
+                    Exception remoteEx = JsonConvert.DeserializeObject<Exception>(json);
+                    Log.Error(remoteEx);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        #endregion
+
+        #region Older Version
 
         #region Messaging
 
@@ -362,7 +355,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // await DS.Videos.PlayNextVideoAsync();
+                    await DS.Videos.UnpauseVideoAsync();
                 }
             }
             catch (Exception ex)
@@ -384,7 +377,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // await DS.Videos.PlayNextVideoAsync();
+                    await DS.Videos.PauseVideoAsync();
                 }
             }
             catch (Exception ex)

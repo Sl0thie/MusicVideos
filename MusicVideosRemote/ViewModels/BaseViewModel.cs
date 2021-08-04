@@ -56,10 +56,10 @@
             }
         }
 
-        private bool volumeVisible = false;
+        private bool volumeVisible;
 
         /// <summary>
-        /// Gets or sets VolumeVisible.
+        /// Gets or sets a value indicating whether VolumeVisible.
         /// </summary>
         public bool VolumeVisible
         {
@@ -121,13 +121,17 @@
         {
             Debug.WriteLine("BaseViewModel.BaseViewModel");
 
+            // Setup commands.
             PreviousVideoCommand = new Command(CallCommandPreviousVideo);
             NextVideoCommand = new Command(CallCommandNextVideo);
+            PlayVideoCommand = new Command(CallCommandPlayVideo);
+            PauseVideoCommand = new Command(CallCommandPauseVideo);
             ShowVolumeCommand = new Command(CallCommandShowVolume);
             VolumeUpCommand = new Command(CallCommandVolumeUp);
             VolumeDownCommand = new Command(CallCommandVolumeDown);
 
-            OnPropertyChanged("Volume");
+            // Try setting the volume to set initial value.
+            Volume = Settings.Current.Volume;
         }
 
         private void CallCommandPreviousVideo()
@@ -138,6 +142,16 @@
         private void CallCommandNextVideo()
         {
             _ = SignalRClient.Current.CommandNextVideo();
+        }
+
+        private void CallCommandPlayVideo()
+        {
+            _ = SignalRClient.Current.CommandPlayVideo();
+        }
+
+        private void CallCommandPauseVideo()
+        {
+            _ = SignalRClient.Current.CommandPauseVideo();
         }
 
         private void CallCommandShowVolume()

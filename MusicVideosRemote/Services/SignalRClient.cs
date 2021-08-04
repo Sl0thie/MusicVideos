@@ -74,12 +74,6 @@
                     .WithUrl("http://192.168.0.6:888/videoHub")
                     .Build();
 
-                dataHub.On<string>("SetRegistration", (id) =>
-                {
-                    hubId = id;
-                    Debug.WriteLine("Hub Registration Id: " + id);
-                });
-
                 dataHub.On<string, string>("PlayVideo", (json, time) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
@@ -108,6 +102,12 @@
                 });
 
                 // -----------------------------------------------------------------------------
+                dataHub.On<string>("SetOutRegistrationAsync", (id) =>
+                {
+                    hubId = id;
+                    Debug.WriteLine("Hub Registration Id: " + id);
+                });
+
                 dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
                 {
                     Debug.WriteLine($"SetOutSettingsAsync: volume = {volume}  filter = {json}");
@@ -191,7 +191,7 @@
         {
             Debug.WriteLine("SignalRClient.ErrorAsync");
 
-            await dataHub.InvokeAsync("SendErrorAsync", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
+            await dataHub.InvokeAsync("SetInXamarinException", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
         #endregion
@@ -287,6 +287,28 @@
             Debug.WriteLine("SignalRClient.CommandNextVideo");
 
             await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+        }
+
+        /// <summary>
+        /// Invokes the Play Video command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task CommandPlayVideo()
+        {
+            Debug.WriteLine("SignalRClient.CommandPlayVideo");
+
+            await dataHub.InvokeAsync("ButtonPlayVideoAsync", hubId);
+        }
+
+        /// <summary>
+        /// Invokes the pause Video command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task CommandPauseVideo()
+        {
+            Debug.WriteLine("SignalRClient.CommandPauseVideo");
+
+            await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
         }
 
         #endregion
