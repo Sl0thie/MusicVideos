@@ -127,6 +127,33 @@
         }
 
         /// <summary>
+        /// Searches for videos based on the search term.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task<List<Video>> GetVideosFromTermAsync(string term)
+        {
+            Debug.WriteLine("DataStore.GetFilteredVideosAsync");
+
+            try
+            {
+                string sql = "SELECT * FROM Video ";
+                sql += $"WHERE (Artist LIKE '%{term}%') ";
+                sql += $"OR (Title LIKE '%{term}%') ";
+                sql += "ORDER BY SearchArtist, Title;";
+
+                Debug.WriteLine($"SQL {sql}");
+
+                Task<List<Video>> videos = database.QueryAsync<Video>(sql);
+                return videos;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Saves a video object to the database.
         /// If the video object already exists then it is updated instead.
         /// </summary>
@@ -140,9 +167,6 @@
             {
                 Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");
                 List<Video> videos = rv.Result;
-
-                // Update collections.
-                VideosFilteredViewModel.Current.UpdateVideo(video);
 
                 // Update database.
                 if (videos.Count == 1)

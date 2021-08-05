@@ -7,10 +7,6 @@
              Title="Videos (All)">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding TotalVideos}"/>
-        <ToolbarItem Name="MenuItem1" Order="Secondary" Text="Item 2" Priority="1" />
-        <ToolbarItem Name="MenuItem2" Order="Secondary" Text="Item 2" Priority="2" />
-        <ToolbarItem Name="MenuItem3" Order="Secondary" Text="Item 2" Priority="3" />
-        <ToolbarItem Name="MenuItem4" Order="Secondary" Text="Item 2" Priority="4" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -22,7 +18,7 @@
                 <RowDefinition Height="64"/>
             </Grid.RowDefinitions>
 
-            <CollectionView x:Name="CV" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
+            <CollectionView x:Name="CV" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Videos}" SelectionMode="Single" SelectedItem="{Binding SelectedVideo}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">

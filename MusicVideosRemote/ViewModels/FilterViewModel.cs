@@ -173,8 +173,6 @@
         /// </summary>
         private void FilterUpdated()
         {
-            VideosFilteredViewModel.Current.UpdateFilter();
-
             _ = SignalRClient.Current.SetInSettingsAsync(Settings.Current.Volume, Settings.Current.Filter);
         }
     }

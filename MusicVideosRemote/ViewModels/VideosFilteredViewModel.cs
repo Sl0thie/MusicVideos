@@ -15,46 +15,17 @@
     public class VideosFilteredViewModel : BaseViewModel
     {
         /// <summary>
-        /// Gets or sets the current FilteredVideosViewModel.
-        /// </summary>
-        internal static VideosFilteredViewModel Current
-        {
-            get
-            {
-                Debug.WriteLine("VideosFilteredViewModel.Current.Get");
-
-                if (current is null)
-                {
-                    current = new VideosFilteredViewModel();
-                }
-
-                return current;
-            }
-
-            set
-            {
-                Debug.WriteLine("VideosFilteredViewModel.Current.Set");
-
-                current = value;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the Videos collection.
         /// </summary>
         public ObservableCollection<Video> Videos
         {
             get
             {
-                Debug.WriteLine("VideosFilteredViewModel.Videos.Get");
-
                 return videos;
             }
 
             set
             {
-                Debug.WriteLine("VideosFilteredViewModel.Videos.Set");
-
                 videos = value;
                 OnPropertyChanged("Videos");
             }
@@ -77,25 +48,38 @@
             }
         }
 
-        private static VideosFilteredViewModel current;
-        private ObservableCollection<Video> videos = new ObservableCollection<Video>();
-        private string totalVideos;
-
-        private VideosFilteredViewModel()
+        /// <summary>
+        /// Gets or sets the selected video.
+        /// </summary>
+        public Video SelectedVideo
         {
-            Debug.WriteLine("VideosFilteredViewModel.VideosFilteredViewModel");
+            get
+            {
+                return selectedVideo;
+            }
 
-            Current = this;
-            Videos.CollectionChanged += Videos_CollectionChanged;
+            set
+            {
+                if (selectedVideo != value)
+                {
+                    selectedVideo = value;
 
-            _ = LoadVideosAsync();
+                    // Queue the selected video.
+                    _ = SignalRClient.Current.QueueVideoAsync(selectedVideo.Id);
+                }
+            }
         }
 
-        private void Videos_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            Debug.WriteLine("VideosFilteredViewModel.Videos_CollectionChanged");
+        private ObservableCollection<Video> videos = new ObservableCollection<Video>();
+        private string totalVideos;
+        private Video selectedVideo;
 
-            OnPropertyChanged("Videos");
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideosFilteredViewModel"/> class.
+        /// </summary>
+        public VideosFilteredViewModel()
+        {
+            _ = LoadVideosAsync();
         }
 
         /// <summary>
@@ -104,8 +88,6 @@
         /// <param name="video">The video to update.</param>
         public void UpdateVideo(Video video)
         {
-            Debug.WriteLine("FilteredVideosViewModel.UpdateVideo");
-
             if (Settings.Current.PassFilter(video))
             {
                 if (videos.Any(vid => vid.Id == video.Id))
@@ -146,19 +128,9 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task LoadVideosAsync()
         {
-            Debug.WriteLine("FilteredVideosViewModel.LoadVideosAsync");
-
-            try
-            {
-                DataStore database = await DataStore.Instance;
-                Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(Settings.Current.Filter));
-                VideosFilteredPage.Current.Rebind();
-                TotalVideos = $"{videos.Count} videos";
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            DataStore database = await DataStore.Instance;
+            Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(Settings.Current.Filter));
+            TotalVideos = $"{videos.Count} videos";
         }
     }
 }

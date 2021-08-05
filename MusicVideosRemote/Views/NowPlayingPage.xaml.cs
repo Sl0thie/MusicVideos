@@ -60,20 +60,5 @@
             base.OnAppearing();
             BindingContext = NowPlayingViewModel.Current;
         }
-
-        private void Frame_Unfocused(object sender, FocusEventArgs e)
-        {
-            Debug.WriteLine("NowPlayingPage.Frame_Unfocused");
-        }
-
-        private void VolumePopup_Unfocused(object sender, FocusEventArgs e)
-        {
-            Debug.WriteLine("NowPlayingPage.VolumePopup_Unfocused");
-        }
-
-        private void VolumePopup_Focused(object sender, FocusEventArgs e)
-        {
-            Debug.WriteLine("NowPlayingPage.VolumePopup_Focused");
-        }
     }
 }
