@@ -1,4 +1,4 @@
-﻿namespace MusicVideosRemote
+﻿namespace MusicVideosRemote.Controls
 {
     using System;
     using System.Diagnostics;

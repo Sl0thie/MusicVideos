@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels"
              x:DataType="viewmodels:NowPlayingViewModel"
              x:Class="MusicVideosRemote.Views.NowPlayingPage"
-             xmlns:control="clr-namespace:MusicVideosRemote.Views"
+             xmlns:control="clr-namespace:MusicVideosRemote.Controls"
              BackgroundColor="#000000"
              Title="Now Playing">
     
@@ -39,7 +39,7 @@
 
             <StackLayout Orientation="Horizontal">
                 <Label Text="Title" Style="{StaticResource LabelSubTitle}" WidthRequest="60"/>
-                <Label x:Name="Title" Text="{Binding CurrentVideo.Title}" Style="{StaticResource LabelNPTitle}" FontSize="42" />
+                <Label x:Name="VideoTitle" Text="{Binding CurrentVideo.Title}" Style="{StaticResource LabelNPTitle}" FontSize="42" />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">

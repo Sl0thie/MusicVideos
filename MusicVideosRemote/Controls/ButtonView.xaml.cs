@@ -1,4 +1,4 @@
-﻿namespace MusicVideosRemote.Views
+﻿namespace MusicVideosRemote.Controls
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

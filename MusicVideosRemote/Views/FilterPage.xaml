@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MusicVideosRemote.ViewModels"
              xmlns:SliderView="clr-namespace:MusicVideosRemote"
-             xmlns:control="clr-namespace:MusicVideosRemote.Views"
+             xmlns:control="clr-namespace:MusicVideosRemote.Controls"
              x:DataType="viewmodels:FilterViewModel"
              x:Class="MusicVideosRemote.Views.FilterPage"
              BackgroundColor="#000000"
@@ -23,10 +23,10 @@
                 <RowDefinition Height="64"/>
             </Grid.RowDefinitions>
 
-            <SliderView:SliderView x:Name="RatingMin" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Rating (Minimum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMinimum, Mode=TwoWay}" />
-            <SliderView:SliderView x:Name="RatingMax" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Rating (Maximum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMaximum, Mode=TwoWay}" />
-            <SliderView:SliderView x:Name="ReleasedMin" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Released Year (Minimum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMinimum, Mode=TwoWay}" />
-            <SliderView:SliderView x:Name="ReleasedMax" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Released Year (Maximum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMaximum, Mode=TwoWay}" />
+            <control:SliderView x:Name="RatingMin" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Rating (Minimum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMinimum, Mode=TwoWay}" />
+            <control:SliderView x:Name="RatingMax" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Rating (Maximum)" Maximum="100" Minimum="0" Value="{Binding Path=RatingMaximum, Mode=TwoWay}" />
+            <control:SliderView x:Name="ReleasedMin" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Released Year (Minimum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMinimum, Mode=TwoWay}" />
+            <control:SliderView x:Name="ReleasedMax" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" ControlTitle="Released Year (Maximum)" Maximum="2021" Minimum="1900" Value="{Binding Path=ReleasedMaximum, Mode=TwoWay}" />
             
             <control:ButtonView Grid.Row="5" Grid.Column="0" />
 

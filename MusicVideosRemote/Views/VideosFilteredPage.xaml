@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicVideosRemote.Views.VideosFilteredPage"
-             xmlns:control="clr-namespace:MusicVideosRemote.Views"
+             xmlns:control="clr-namespace:MusicVideosRemote.Controls"
              BackgroundColor="#000000"
              Title="Videos (Filtered)">
     <ContentPage.ToolbarItems>

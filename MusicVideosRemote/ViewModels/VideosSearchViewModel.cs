@@ -60,6 +60,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the search term.
+        /// </summary>
         public string SearchTerm
         {
             get
@@ -71,6 +74,23 @@
             {
                 searchTerm = value;
                 _ = SearchDatabaseAsync(searchTerm);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the Total Videos.
+        /// </summary>
+        public string TotalVideos
+        {
+            get
+            {
+                return totalVideos;
+            }
+
+            set
+            {
+                totalVideos = value;
+                OnPropertyChanged("TotalVideos");
             }
         }
 
@@ -104,7 +124,7 @@
                     Videos = new ObservableCollection<Video>(await database.GetVideosFromTermAsync(searchTerm));
                     if (videos.Count > 0)
                     {
-                        Debug.WriteLine($"No of Videos = {videos.Count}");
+                        TotalVideos = $"{videos.Count} videos";
                         OnPropertyChanged(string.Empty);
                     }
                 }
