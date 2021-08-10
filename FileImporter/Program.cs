@@ -414,7 +414,7 @@ namespace FileImporter
         }
 
         /// <summary>
-        /// Get the video details from the internet.
+        /// Get the video details from the Internet.
         /// </summary>
         /// <param name="video"></param>
         /// <returns></returns>
@@ -455,7 +455,7 @@ namespace FileImporter
                 Artist = Artist.Substring(0, Artist.IndexOf("<"));
             }
             int dist = GetDamerauLevenshteinDistance(Artist, video.Artist);
-            if(dist > 3)
+            if(dist > 300) //<----------------------------------------------------- usually three.
             {
                 if(Artist.Trim().Length == 0)
                 {

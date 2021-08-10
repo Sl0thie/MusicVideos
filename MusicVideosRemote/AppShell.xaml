@@ -17,15 +17,15 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="#000000" />
-                <Setter Property="Shell.ForegroundColor" Value="#FFFFFF" />
-                <Setter Property="Shell.TitleColor" Value="#AAAAAA" />
+                <Setter Property="Shell.ForegroundColor" Value="#777777" />
+                <Setter Property="Shell.TitleColor" Value="#777777" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="#121212" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="#777777"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
-                <Setter Property="Shell.FlyoutBackgroundColor" Value="#121212"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="#777777"/>
+                <Setter Property="Shell.FlyoutBackgroundColor" Value="#080808"/>
 
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
@@ -37,7 +37,7 @@
             -->
 
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="#777777"></Setter>
             </Style>
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -45,13 +45,14 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#242424" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#FFFFFF" />
+                                    <Setter Property="BackgroundColor" Value="#121212" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#777777" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#6666FF" />
+                                    <Setter Property="BackgroundColor" Value="#323232" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#777777" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>

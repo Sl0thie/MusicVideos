@@ -6,7 +6,6 @@
     using System.IO;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
-    using MusicVideosRemote.ViewModels;
     using SQLite;
 
     /// <summary>
