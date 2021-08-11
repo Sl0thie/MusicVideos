@@ -1,5 +1,6 @@
 ﻿namespace MusicVideosRemote.Services
 {
+    using System;
     using System.Diagnostics;
     using MusicVideosRemote.Models;
 
@@ -49,6 +50,12 @@
             {
                 Debug.WriteLine("Settings.Volume.Set");
 
+                if (value == -1)
+                {
+                    Debug.WriteLine("Settings.Volume = -1 not setting volume.");
+                    return;
+                }
+
                 if (volume != value)
                 {
                     volume = value;
@@ -90,6 +97,17 @@
                     _ = SignalRClient.Current.GetOutSettingsAsync();
                 }
 
+                if (IsFilterEqual(filter, lastFilter))
+                {
+                    Debug.WriteLine($"Filter Get: Equal so not calling property change.");
+                }
+                else
+                {
+                    Debug.WriteLine($"Filter Get: Filter property change in Get. Updating server.");
+                    _ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
+                    lastFilter = filter;
+                }
+
                 return filter;
             }
 
@@ -121,9 +139,9 @@
         }
 
         private static Settings current;
-        private int volume;
+        private int volume = -1;
         private Filter lastFilter;
-        private Filter filter = new Filter();
+        private Filter filter;
 
         private Settings()
         {
@@ -142,28 +160,41 @@
 
             bool diff = false;
 
-            if (first.RatingMaximum != last.RatingMaximum)
+            if (last is null)
             {
-                diff = true;
-                Debug.WriteLine($"Settings.IsFilterEqual.RatingMaximum: first {first.RatingMaximum} second {last.RatingMaximum}");
+                Debug.WriteLine("Last is null");
+                return false;
             }
 
-            if (first.RatingMinimum != last.RatingMinimum)
+            try
             {
-                diff = true;
-                Debug.WriteLine($"Settings.IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {last.RatingMinimum}");
-            }
+                if (first.RatingMaximum != last.RatingMaximum)
+                {
+                    diff = true;
+                    Debug.WriteLine($"Settings.IsFilterEqual.RatingMaximum: first {first.RatingMaximum} second {last.RatingMaximum}");
+                }
 
-            if (first.ReleasedMaximum != last.ReleasedMaximum)
-            {
-                diff = true;
-                Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMaximum: first {first.ReleasedMaximum} second {last.ReleasedMaximum}");
-            }
+                if (first.RatingMinimum != last.RatingMinimum)
+                {
+                    diff = true;
+                    Debug.WriteLine($"Settings.IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {last.RatingMinimum}");
+                }
 
-            if (first.ReleasedMinimum != last.ReleasedMinimum)
+                if (first.ReleasedMaximum != last.ReleasedMaximum)
+                {
+                    diff = true;
+                    Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMaximum: first {first.ReleasedMaximum} second {last.ReleasedMaximum}");
+                }
+
+                if (first.ReleasedMinimum != last.ReleasedMinimum)
+                {
+                    diff = true;
+                    Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMinimum: first {first.ReleasedMinimum} second {last.ReleasedMinimum}");
+                }
+            }
+            catch (Exception ex)
             {
-                diff = true;
-                Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMinimum: first {first.ReleasedMinimum} second {last.ReleasedMinimum}");
+                Debug.WriteLine(ex.Message);
             }
 
             if (diff)

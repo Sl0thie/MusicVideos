@@ -10,33 +10,6 @@
     public class FilterViewModel : BaseViewModel
     {
         /// <summary>
-        /// Gets or sets the current FilterViewModel.
-        /// </summary>
-        internal static FilterViewModel Current
-        {
-            get
-            {
-                Debug.WriteLine("FilterViewModel.Current.Get");
-
-                if (current is null)
-                {
-                    Debug.WriteLine($"Current Get: Current is null.");
-
-                    current = new FilterViewModel();
-                }
-
-                return current;
-            }
-
-            set
-            {
-                Debug.WriteLine("FilterViewModel.Current.Set");
-
-                current = value;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets Filter.
         /// </summary>
         public Filter Filter
@@ -53,6 +26,7 @@
                 Debug.WriteLine("FilterViewModel.Filter.Set");
 
                 Settings.Current.Filter = value;
+                OnPropertyChanged("Filter");
             }
         }
 
@@ -76,7 +50,6 @@
                 {
                     Settings.Current.Filter.RatingMaximum = value;
                     OnPropertyChanged("RatingMaximum");
-                    FilterUpdated();
                 }
             }
         }
@@ -101,7 +74,6 @@
                 {
                     Settings.Current.Filter.RatingMinimum = value;
                     OnPropertyChanged("RatingMinimum");
-                    FilterUpdated();
                 }
             }
         }
@@ -126,7 +98,6 @@
                 {
                     Settings.Current.Filter.ReleasedMinimum = value;
                     OnPropertyChanged("ReleasedMinimum");
-                    FilterUpdated();
                 }
             }
         }
@@ -151,7 +122,6 @@
                 {
                     Settings.Current.Filter.ReleasedMaximum = value;
                     OnPropertyChanged("ReleasedMaximum");
-                    FilterUpdated();
                 }
             }
         }
@@ -164,8 +134,6 @@
         public FilterViewModel()
         {
             Debug.WriteLine("FilterViewModel.FilterViewModel");
-
-            Current = this;
         }
 
         /// <summary>

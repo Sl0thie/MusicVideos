@@ -19,7 +19,6 @@
             Debug.WriteLine("FilterPage.FilterPage");
 
             InitializeComponent();
-            BindingContext = FilterViewModel.Current;
         }
 
         /// <summary>
@@ -31,7 +30,7 @@
 
             base.OnAppearing();
 
-            BindingContext = FilterViewModel.Current;
+            BindingContext = new FilterViewModel();
         }
     }
 }

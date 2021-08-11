@@ -1,8 +1,5 @@
 ﻿namespace MusicVideos
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Timers;
     using LogCore3;
@@ -13,7 +10,6 @@
     /// </summary>
     public static class DS
     {
-        // private static readonly Queue<TimelineItem> TimeLineItems = new Queue<TimelineItem>();
         private static Videos videos;
         private static Settings settings;
         private static Comms comms;
@@ -87,11 +83,15 @@
 
             if (File.Exists("settings.json"))
             {
+                Log.Info("Found Settings File.");
+
                 string json = File.ReadAllText("settings.json");
                 settings = JsonConvert.DeserializeObject<Settings>(json);
             }
             else
             {
+                Log.Info("No Settings File Found.");
+
                 settings = new Settings
                 {
                     Filter = new Filter(),

@@ -41,7 +41,7 @@
                 if (DS.Comms.CheckId(id))
                 {
                     // Send the settings objects to the clients.
-                    await Clients.Others.SendAsync("SetOutSettingsAsync", DS.Settings.Volume, JsonConvert.SerializeObject(DS.Settings.Filter, Formatting.None));
+                    await Clients.All.SendAsync("SetOutSettingsAsync", DS.Settings.Volume, JsonConvert.SerializeObject(DS.Settings.Filter, Formatting.None));
                 }
             }
             catch (Exception ex)

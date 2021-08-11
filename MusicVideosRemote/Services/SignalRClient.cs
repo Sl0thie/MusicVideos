@@ -204,7 +204,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetOutSettingsAsync()
         {
-            Debug.WriteLine("SignalRClient.GetSettingsAsync");
+            Debug.WriteLine("SignalRClient.GetOutSettingsAsync");
 
             await dataHub.InvokeAsync("GetOutSettingsAsync", hubId);
         }
