@@ -88,7 +88,7 @@
         /// <param name="video">The video to update.</param>
         public void UpdateVideo(Video video)
         {
-            if (Settings.Current.PassFilter(video))
+            if (Settings.PassFilter(video))
             {
                 if (videos.Any(vid => vid.Id == video.Id))
                 {
@@ -129,7 +129,7 @@
         public async Task LoadVideosAsync()
         {
             DataStore database = await DataStore.Instance;
-            Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(Settings.Current.Filter));
+            Videos = new ObservableCollection<Video>(await database.GetFilteredVideosAsync(Settings.Filter));
             TotalVideos = $"{videos.Count} videos";
         }
     }

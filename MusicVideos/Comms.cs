@@ -297,6 +297,13 @@
             }
         }
 
+        public async Task SetInSettingsAsync(Filter filter, int volume)
+        {
+            Log.Info("Comms.SetInSettingsAsync");
+
+            await videoHub.InvokeAsync("SetInSettingsAsync", HubId, filter, volume);
+        }
+
         /// <summary>
         /// Initializes SignalR.
         /// </summary>

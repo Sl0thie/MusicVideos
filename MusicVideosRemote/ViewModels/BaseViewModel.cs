@@ -44,14 +44,14 @@
             {
                 Debug.WriteLine("BaseViewModel.Volume.Get");
 
-                return Settings.Current.Volume;
+                return Settings.Volume;
             }
 
             set
             {
                 Debug.WriteLine("BaseViewModel.Volume.Set");
 
-                Settings.Current.Volume = (int)value;
+                Settings.Volume = (int)value;
                 OnPropertyChanged("Volume");
             }
         }
@@ -131,7 +131,7 @@
             VolumeDownCommand = new Command(CallCommandVolumeDown);
 
             // Try setting the volume to set initial value.
-            Volume = Settings.Current.Volume;
+            Volume = Settings.Volume;
         }
 
         private void CallCommandPreviousVideo()
@@ -170,7 +170,7 @@
         {
             Debug.WriteLine("BaseViewModel.CallCommandVolumeUp");
 
-            Settings.Current.Volume++;
+            Settings.Volume++;
             OnPropertyChanged("Volume");
         }
 
@@ -178,7 +178,7 @@
         {
             Debug.WriteLine("BaseViewModel.CallCommandVolumeDown");
 
-            Settings.Current.Volume--;
+            Settings.Volume--;
             OnPropertyChanged("Volume");
         }
     }

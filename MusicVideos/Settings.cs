@@ -21,8 +21,6 @@
             set
             {
                 volume = value;
-
-                // Model.SaveSettings();
             }
         }
 
@@ -55,10 +53,32 @@
 
             set
             {
+                filter = value;
+
+                if (filter != null)
+                {
+                    if (IsFilterEqual(filter, lastFilter))
+                    {
+                        Log.Info($"Filter Set: Equal so not calling property change.");
+                    }
+                    else
+                    {
+                        Log.Info($"Filter Set: Filter changed.");
+
+                        DS.Videos.FilterVideos();
+                        DS.SaveSettings();
+                        _ = DS.Comms.SetInSettingsAsync(DS.Settings.Filter, DS.Settings.Volume);
+                    }
+                }
+                else
+                {
+                    Log.Info($"Filter Set: Filter is null.");
+                }
+
                 // filter = value;
                 // DS.Videos.FilterVideos();
                 // lastFilter = filter;
-                filter = value;
+                //filter = value;
 
                 //if (filter != null)
                 //{
@@ -109,6 +129,11 @@
             Log.Info("Settings.IsFilterEqual");
 
             bool diff = false;
+
+            if (last is null)
+            {
+                return false;
+            }
 
             if (first.RatingMaximum != last.RatingMaximum)
             {

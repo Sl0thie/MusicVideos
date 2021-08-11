@@ -52,6 +52,8 @@
         /// </summary>
         private const int IncrementQueued = 5;
 
+        private const int MinutesBetweenReplays = 60;
+
         /// <summary>
         /// Used to generate random numbers.
         /// </summary>
@@ -508,36 +510,80 @@
         {
             Log.Info("Videos.PickRandomVideoAsync");
 
-            // Pick a random index from the filtered videos.
-            int index = rnd.Next(0, filteredVideos.Count + 1);
+            bool keepsearching = true;
 
-            // Get the video object from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
-            List<Video> videos = rv.Result;
-
-            // Video nextVideo = FixVideoVirtualPath(videos[0]);
-            Video nextVideo = videos[0];
-
-            // Call for the video to be loaded.
-            await DS.Comms.LoadVideoAsync(nextVideo);
-
-            // Call for the video to be played.
-            await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
-            if (nextVideo.Duration > 0)
+            do
             {
-                SetTimer = false;
-                DS.MainTimer.Interval = nextVideo.Duration;
-                DS.MainTimer.Start();
-            }
-            else
-            {
-                SetTimer = true;
-            }
+                // Pick a random index from the filtered videos.
+                int index = rnd.Next(0, filteredVideos.Count + 1);
 
-            lastVideo = nextVideo;
-            lastStart = DateTime.Now;
+                // Get the video object from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
+                List<Video> videos = rv.Result;
 
-            Log.Info($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
+                // Video nextVideo = FixVideoVirtualPath(videos[0]);
+                Video nextVideo = videos[0];
+
+                // Check if the video's last played is past the limit.
+                if (DateTime.Now.Subtract(nextVideo.LastPlayed).TotalMinutes > MinutesBetweenReplays)
+                {
+                    // Call for the video to be loaded.
+                    await DS.Comms.LoadVideoAsync(nextVideo);
+
+                    // Call for the video to be played.
+                    await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+                    if (nextVideo.Duration > 0)
+                    {
+                        SetTimer = false;
+                        DS.MainTimer.Interval = nextVideo.Duration;
+                        DS.MainTimer.Start();
+                    }
+                    else
+                    {
+                        SetTimer = true;
+                    }
+
+                    lastVideo = nextVideo;
+                    lastStart = DateTime.Now;
+                    keepsearching = false;
+
+                    Log.Info($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
+                }
+            }
+            while (keepsearching);
+
+            //Log.Info("Videos.PickRandomVideoAsync");
+
+            //// Pick a random index from the filtered videos.
+            //int index = rnd.Next(0, filteredVideos.Count + 1);
+
+            //// Get the video object from the database.
+            //Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
+            //List<Video> videos = rv.Result;
+
+            //// Video nextVideo = FixVideoVirtualPath(videos[0]);
+            //Video nextVideo = videos[0];
+
+            //// Call for the video to be loaded.
+            //await DS.Comms.LoadVideoAsync(nextVideo);
+
+            //// Call for the video to be played.
+            //await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
+            //if (nextVideo.Duration > 0)
+            //{
+            //    SetTimer = false;
+            //    DS.MainTimer.Interval = nextVideo.Duration;
+            //    DS.MainTimer.Start();
+            //}
+            //else
+            //{
+            //    SetTimer = true;
+            //}
+
+            //lastVideo = nextVideo;
+            //lastStart = DateTime.Now;
+
+            //Log.Info($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
         /// <summary>

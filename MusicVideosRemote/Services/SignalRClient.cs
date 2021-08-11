@@ -83,8 +83,10 @@
 
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
-                    Debug.WriteLine($"SaveVideo:  {json}");
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
+
+                    Debug.WriteLine($"SaveVideo: {newVideo.GetHashCode()}  {json}");
+
                     DataStore database = await DataStore.Instance;
                     await database.SaveVideoAsync(newVideo);
                 });
@@ -93,7 +95,7 @@
                 {
                     Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    Settings.Current.Filter = newFilter;
+                    Settings.Filter = newFilter;
                 });
 
                 dataHub.On<string>("SaveVolume", (json) =>
@@ -112,9 +114,17 @@
                 {
                     Debug.WriteLine($"SetOutSettingsAsync: volume = {volume}  filter = {json}");
 
-                    Settings.Current.Volume = volume;
+                    Settings.Volume = volume;
+                    //Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+                    //Settings.Filter = newFilter;
+                });
+
+                dataHub.On<string>("SetOutFilterAsync", (json) =>
+                {
+                    Debug.WriteLine($"SetOutFilterAsync: filter = {json}");
+
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    Settings.Current.Filter = newFilter;
+                    Settings.Filter = newFilter;
                 });
             }
             catch (Exception ex)
@@ -135,7 +145,7 @@
 
             await dataHub.StartAsync();
             await RegisterAsync();
-            await GetOutSettingsAsync();
+            await GetOutFilterAsync();
 
             // await GetAllVideosAsync(); // Uncomment to update all videos from server.
             await DatabaseChecksumAsync();
@@ -197,6 +207,27 @@
         #endregion
 
         #region Settings/Filter
+
+        public async Task GetOutFilterAsync()
+        {
+            Debug.WriteLine("SignalRClient.GetOutFilterAsync");
+
+            await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+        }
+
+        public async Task SetInFiltersAsync()
+        {
+            Debug.WriteLine("SignalRClient.SetInFiltersAsync");
+
+            if (Settings.Filter is object)
+            {
+                await dataHub.InvokeAsync("SetInFilter", hubId, JsonConvert.SerializeObject(Settings.Filter, Formatting.None));
+            }
+            else
+            {
+                Debug.WriteLine("Filter object is null.");
+            }
+        }
 
         /// <summary>
         /// Ask the server for the settings object.

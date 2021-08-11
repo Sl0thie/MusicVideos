@@ -18,14 +18,14 @@
             {
                 Debug.WriteLine("FilterViewModel.Filter.Get");
 
-                return Settings.Current.Filter;
+                return Settings.Filter;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.Filter.Set");
 
-                Settings.Current.Filter = value;
+                Settings.Filter = value;
                 OnPropertyChanged("Filter");
             }
         }
@@ -39,16 +39,16 @@
             {
                 Debug.WriteLine("FilterViewModel.RatingMaximum.Get");
 
-                return Settings.Current.Filter.RatingMaximum;
+                return Settings.Filter.RatingMaximum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.RatingMaximum.Set");
 
-                if (Settings.Current.Filter.RatingMaximum != value)
+                if (Settings.Filter.RatingMaximum != value)
                 {
-                    Settings.Current.Filter.RatingMaximum = value;
+                    Settings.Filter.RatingMaximum = value;
                     OnPropertyChanged("RatingMaximum");
                 }
             }
@@ -61,18 +61,18 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + Settings.Current.Filter.RatingMinimum);
+                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + Settings.Filter.RatingMinimum);
 
-                return Settings.Current.Filter.RatingMinimum;
+                return Settings.Filter.RatingMinimum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.RatingMinimum.Set " + value);
 
-                if (Settings.Current.Filter.RatingMinimum != value)
+                if (Settings.Filter.RatingMinimum != value)
                 {
-                    Settings.Current.Filter.RatingMinimum = value;
+                    Settings.Filter.RatingMinimum = value;
                     OnPropertyChanged("RatingMinimum");
                 }
             }
@@ -85,18 +85,18 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + Settings.Current.Filter.ReleasedMinimum);
+                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + Settings.ReleasedMinimum);
 
-                return Settings.Current.Filter.ReleasedMinimum;
+                return Settings.ReleasedMinimum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.ReleasedMinimum.Set " + value);
 
-                if (Settings.Current.Filter.ReleasedMinimum != value)
+                if (Settings.ReleasedMinimum != value)
                 {
-                    Settings.Current.Filter.ReleasedMinimum = value;
+                    Settings.ReleasedMinimum = value;
                     OnPropertyChanged("ReleasedMinimum");
                 }
             }
@@ -109,24 +109,22 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + Settings.Current.Filter.ReleasedMaximum);
+                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + Settings.ReleasedMaximum);
 
-                return Settings.Current.Filter.ReleasedMaximum;
+                return Settings.ReleasedMaximum;
             }
 
             set
             {
                 Debug.WriteLine("FilterViewModel.ReleasedMaximum.Set " + value);
 
-                if (Settings.Current.Filter.ReleasedMaximum != value)
+                if (Settings.ReleasedMaximum != value)
                 {
-                    Settings.Current.Filter.ReleasedMaximum = value;
+                    Settings.ReleasedMaximum = value;
                     OnPropertyChanged("ReleasedMaximum");
                 }
             }
         }
-
-        private static FilterViewModel current;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FilterViewModel"/> class.
@@ -134,14 +132,6 @@
         public FilterViewModel()
         {
             Debug.WriteLine("FilterViewModel.FilterViewModel");
-        }
-
-        /// <summary>
-        /// Updates external objects.
-        /// </summary>
-        private void FilterUpdated()
-        {
-            _ = SignalRClient.Current.SetInSettingsAsync(Settings.Current.Volume, Settings.Current.Filter);
         }
     }
 }

@@ -7,37 +7,12 @@
     /// <summary>
     /// Settings class.
     /// </summary>
-    public class Settings
+    public static class Settings
     {
-        /// <summary>
-        /// Gets or sets the current SignalRClient.
-        /// </summary>
-        internal static Settings Current
-        {
-            get
-            {
-                Debug.WriteLine("Settings.Current.Get");
-
-                if (current is null)
-                {
-                    current = new Settings();
-                }
-
-                return current;
-            }
-
-            set
-            {
-                Debug.WriteLine("Settings.Current.Set");
-
-                current = value;
-            }
-        }
-
         /// <summary>
         ///  Gets or sets the Volume.
         /// </summary>
-        public int Volume
+        public static int Volume
         {
             get
             {
@@ -70,7 +45,7 @@
                         volume = 0;
                     }
 
-                    _ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
+                    //_ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
 
                     Debug.WriteLine("Settings.Volume = " + volume);
                 }
@@ -84,69 +59,79 @@
         /// <summary>
         /// Gets or sets the filter for the video playlist.
         /// </summary>
-        public Filter Filter
+        public static Filter Filter
         {
             get
             {
-                Debug.WriteLine("Settings.Filter.Get");
-
-                if (filter is null)
-                {
-                    Debug.WriteLine($"Filter Get: Filter is null.");
-
-                    _ = SignalRClient.Current.GetOutSettingsAsync();
-                }
-
-                if (IsFilterEqual(filter, lastFilter))
-                {
-                    Debug.WriteLine($"Filter Get: Equal so not calling property change.");
-                }
-                else
-                {
-                    Debug.WriteLine($"Filter Get: Filter property change in Get. Updating server.");
-                    _ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
-                    lastFilter = filter;
-                }
-
                 return filter;
             }
 
             set
             {
-                Debug.WriteLine("Settings.Filter.Set");
-
                 lastFilter = filter;
-
-                if (value != null)
-                {
-                    if (IsFilterEqual(value, lastFilter))
-                    {
-                        Debug.WriteLine($"Filter Set: Equal so not calling property change.");
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"Filter Set: Filter changed.");
-
-                        filter = value;
-                        _ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
-                    }
-                }
-                else
-                {
-                    Debug.WriteLine($"Filter Set: Filter is null.");
-                }
+                filter = value;
             }
         }
 
-        private static Settings current;
-        private int volume = -1;
-        private Filter lastFilter;
-        private Filter filter;
-
-        private Settings()
+        public static int RatingMinimum
         {
-            Current = this;
+            get
+            {
+                return filter.RatingMinimum;
+            }
+
+            set
+            {
+                filter.RatingMinimum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
         }
+
+        public static int RatingMaximum
+        {
+            get
+            {
+                return filter.RatingMaximum;
+            }
+
+            set
+            {
+                filter.RatingMaximum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        public static int ReleasedMinimum
+        {
+            get
+            {
+                return filter.ReleasedMinimum;
+            }
+
+            set
+            {
+                filter.ReleasedMinimum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        public static int ReleasedMaximum
+        {
+            get
+            {
+                return filter.ReleasedMaximum;
+            }
+
+            set
+            {
+                filter.ReleasedMaximum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        private static int volume = -1;
+        private static Filter lastFilter;
+        private static Filter filter;
 
         /// <summary>
         /// Checks if the Filters are equal.
@@ -154,7 +139,7 @@
         /// <param name="first">The first filter to check.</param>
         /// <param name="last">The second filter to check.</param>
         /// <returns>Returns true id the filters are equal.</returns>
-        private bool IsFilterEqual(Filter first, Filter last)
+        private static bool IsFilterEqual(Filter first, Filter last)
         {
             Debug.WriteLine("Settings.IsFilterEqual");
 
@@ -165,6 +150,9 @@
                 Debug.WriteLine("Last is null");
                 return false;
             }
+
+            Debug.WriteLine($"RatingMaximum: first {first.RatingMaximum} second {last.RatingMaximum}");
+            Debug.WriteLine($"RatingMinimum: first {first.RatingMinimum} second {last.RatingMinimum}");
 
             try
             {
@@ -210,7 +198,7 @@
         /// </summary>
         /// <param name="toBeChecked">The video to be checked.</param>
         /// <returns>Returns true if the video passes the filter.</returns>
-        public bool PassFilter(Video toBeChecked)
+        public static bool PassFilter(Video toBeChecked)
         {
             Debug.WriteLine("Settings.PassFilter");
 

@@ -17,12 +17,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="16"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="24"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="24"/>
             <RowDefinition Height="24"/>
             <RowDefinition Height="24"/>
             <RowDefinition Height="24"/>
@@ -37,31 +37,13 @@
             <Label Text="Album" Style="{StaticResource LabelSubTitle}" />
         </StackLayout>
 
-        <Image Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Source="NowPlayingArtistOverlay.png" HorizontalOptions="Center" VerticalOptions="Start" />
-        
-        <StackLayout Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1">
+        <Image Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="2" Source="NowPlayingArtistOverlay.png" HorizontalOptions="Center" VerticalOptions="Start" />
+
+        <StackLayout Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" IsClippedToBounds="True">
             <Label x:Name="Artist" Text="{Binding CurrentVideo.Artist}" Style="{StaticResource LabelNPTitle}" FontSize="42" HorizontalTextAlignment="Center"/>
             <Label x:Name="VideoTitle" Text="{Binding CurrentVideo.Title}" Style="{StaticResource LabelNPTitle}" FontSize="42" HorizontalTextAlignment="Center"/>
             <Label x:Name="Album" Text="{Binding CurrentVideo.Album}" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" HorizontalTextAlignment="Center"/>
         </StackLayout>
-
-        
-
-        <!--<StackLayout Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Artist"  Style="{StaticResource LabelSubTitle}" WidthRequest="60" />
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Title" Style="{StaticResource LabelSubTitle}" WidthRequest="60"/>
-                
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Album" Style="{StaticResource LabelSubTitle}" WidthRequest="60"/>
-                
-            </StackLayout>
-        </StackLayout>-->
 
         <Label Text="Duration" Grid.Column="0" Grid.Row="3" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="Duration" Text="{Binding Duration}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
@@ -73,8 +55,7 @@
         <Label x:Name="Released" Text="{Binding Released}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
 
         <Label Text="Rating" Grid.Column="0" Grid.Row="6" Style="{StaticResource LabelSubTitle}"/>
-        <Label x:Name="Rating" Text="{Binding CurrentVideo.Rating}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
-
+        <Label x:Name="Rating" Text="{Binding CurrentVideo.Rating}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" FontSize="16" />
 
         <Label Text="Last played" Grid.Column="0" Grid.Row="7" Style="{StaticResource LabelSubTitle}"/>
         <Label x:Name="LastPlayed" Text="{Binding LastPlayed}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="4" Style="{StaticResource LabelNPTitle}" />
