@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using Newtonsoft.Json;
     using SQLite;
 
     /// <summary>
@@ -212,6 +213,26 @@
         /// </summary>
         public int ReleasedYear { get => releasedYear; set => releasedYear = value; }
 
+        /// <summary>
+        /// Gets or sets the top 100 index.
+        /// </summary>
+        [JsonIgnore]
+        public int Top100
+        {
+            get { return top100; }
+            set { top100 = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the checksum.
+        /// </summary>
+        [JsonIgnore]
+        public int Checksum
+        {
+            get { return checksum; }
+            set { checksum = value; }
+        }
+
         private int id;
         private string artist;
         private string searchArtist;
@@ -236,5 +257,7 @@
         private string physicalPath;
         private string virtualPath;
         private int releasedYear;
+        private int top100;
+        private int checksum;
     }
 }

@@ -115,8 +115,6 @@
                     Debug.WriteLine($"SetOutSettingsAsync: volume = {volume}  filter = {json}");
 
                     Settings.Volume = volume;
-                    //Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    //Settings.Filter = newFilter;
                 });
 
                 dataHub.On<string>("SetOutFilterAsync", (json) =>
@@ -125,6 +123,14 @@
 
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     Settings.Filter = newFilter;
+                });
+
+                dataHub.On<int, int>("SetOutChecksum", async (index, checksum) =>
+                {
+                    Debug.WriteLine($"SetOutChecksum: index = {index} checksum = {checksum}");
+
+                    DataStore database = await DataStore.Instance;
+                    database.Checksum(index, checksum);
                 });
             }
             catch (Exception ex)
@@ -170,11 +176,14 @@
         {
             Debug.WriteLine("SignalRClient.DatabaseChecksumAsync");
 
-            DataStore database = await DataStore.Instance;
-            int totalVideos = await database.TotalVideosAsync();
+            await dataHub.InvokeAsync("GetOutChecksum", hubId);
+        }
 
-            // await dataHub.InvokeAsync("DatabaseChecksum", "");
-            Debug.WriteLine($"totalVideos: {totalVideos}");
+        public async Task FailedChecksumAsync(int index)
+        {
+            Debug.WriteLine("SignalRClient.FailedChecksumAsync");
+
+            await dataHub.InvokeAsync("FailedChecksumAsync", hubId, index);
         }
 
         /// <summary>

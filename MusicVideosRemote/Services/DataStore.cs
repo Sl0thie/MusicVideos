@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
     using MusicVideosRemote.Models;
     using SQLite;
@@ -45,6 +46,37 @@
             Debug.WriteLine("DataStore.DataStore");
 
             database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SQLite.db3"), Flags);
+        }
+
+        public void Checksum(int index, int checksum)
+        {
+            Debug.WriteLine("DataStore.Checksum");
+
+            int newchecksum = 0;
+
+            try
+            {
+                for (int j = 0; j < 100; j++)
+                {
+                    int id = index + j;
+                    Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + id + "'");
+                    List<Video> videos = rv.Result;
+                    Video nextVideo = videos[0];
+
+                    newchecksum += nextVideo.Checksum;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error: " + ex.Message);
+            }
+
+            if (newchecksum != checksum)
+            {
+                _ = SignalRClient.Current.FailedChecksumAsync(index);
+            }
+
+            Debug.WriteLine($"Checksum compare for {index} server = {checksum} client = {newchecksum}");
         }
 
         /// <summary>
@@ -162,6 +194,26 @@
         {
             Debug.WriteLine("DataStore.SaveVideoAsync");
 
+            // Get the checksum before saving the video.
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
+            stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
+            stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
+            stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
+
+            string str = stringBuilder.ToString();
+
+            video.Checksum = 0;
+
+            byte[] binary = Encoding.Unicode.GetBytes(str);
+
+            foreach (byte b in binary)
+            {
+                video.Checksum += b;
+            }
+
+            // Debug.WriteLine($"{video.Artist} - {video.Title} code = {video.Checksum}");
+            // Add to database.
             try
             {
                 Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + video.Id + "'");

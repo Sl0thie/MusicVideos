@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using LogCore3;
     using Newtonsoft.Json;
@@ -77,6 +79,8 @@
         private Video lastVideo;
         private PlayState playState = PlayState.Unknown;
         private int previousIndex;
+
+        private CancellationTokenSource cts;
 
         /// <summary>
         /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
@@ -551,39 +555,6 @@
                 }
             }
             while (keepsearching);
-
-            //Log.Info("Videos.PickRandomVideoAsync");
-
-            //// Pick a random index from the filtered videos.
-            //int index = rnd.Next(0, filteredVideos.Count + 1);
-
-            //// Get the video object from the database.
-            //Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {filteredVideos[index]}");
-            //List<Video> videos = rv.Result;
-
-            //// Video nextVideo = FixVideoVirtualPath(videos[0]);
-            //Video nextVideo = videos[0];
-
-            //// Call for the video to be loaded.
-            //await DS.Comms.LoadVideoAsync(nextVideo);
-
-            //// Call for the video to be played.
-            //await DS.Comms.PlayVideoAsync(nextVideo, DateTime.Now.AddMilliseconds(200).ToUniversalTime());
-            //if (nextVideo.Duration > 0)
-            //{
-            //    SetTimer = false;
-            //    DS.MainTimer.Interval = nextVideo.Duration;
-            //    DS.MainTimer.Start();
-            //}
-            //else
-            //{
-            //    SetTimer = true;
-            //}
-
-            //lastVideo = nextVideo;
-            //lastStart = DateTime.Now;
-
-            //Log.Info($"PickRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Duration}");
         }
 
         /// <summary>
@@ -597,6 +568,28 @@
 
             if (video is object)
             {
+                // Get the checksum before saving the video.
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
+                stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
+                stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
+                stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
+
+                string str = stringBuilder.ToString();
+
+                Log.Info(str);
+
+                video.Checksum = 0;
+
+                byte[] binary = Encoding.Unicode.GetBytes(str);
+
+                foreach (byte b in binary)
+                {
+                    video.Checksum += b;
+                }
+
+                Log.Info($"{video.Artist} - {video.Title} code = {video.Checksum}");
+
                 try
                 {
                     Log.Info($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
@@ -726,6 +719,81 @@
 
             Task<int> rv = videosDatabase.Table<Video>().CountAsync();
             return rv.Result;
+        }
+
+        /// <summary>
+        /// Calculates the checksums and broadcasts them to the clients.
+        /// </summary>
+        public async Task BroadcastChecksumsAsync()
+        {
+            Log.Info("Videos.BroadcastChecksums");
+
+            // _ = Run(cts.Token);
+
+            await Task.Run(
+                async () =>
+                {
+                    int totalvideos = GetTotalVideos();
+                    for (int i = 0; i < totalvideos; i = i + 100)
+                    {
+                        // token.ThrowIfCancellationRequested();
+                        await Task.Delay(5000);
+
+                        Log.Info("Processing " + i);
+
+                        try
+                        {
+                            int checksum = 0;
+                            for (int j = 0; j < 100; j++)
+                            {
+                                // Get the video object from the database.
+                                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {i + j}");
+                                List<Video> videos = rv.Result;
+                                Video nextVideo = videos[0];
+
+                                checksum += nextVideo.Checksum;
+                            }
+
+                            await DS.Comms.SetOutChecksum(i, checksum);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+                        }
+                    }
+
+                    return;
+                });
+        }
+
+        public async Task SendVideosBlock(int index)
+        {
+            Log.Info("Videos.SendVideosBlock " + index);
+
+            await Task.Run(
+                async () =>
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+                        await Task.Delay(1000);
+
+                        try
+                        {
+                            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {index + i}");
+                            List<Video> videos = rv.Result;
+                            Video nextVideo = videos[0];
+
+                            await DS.Comms.SaveVideoAsync(nextVideo);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+                        }
+                    }
+
+                    return;
+                });
         }
     }
 }

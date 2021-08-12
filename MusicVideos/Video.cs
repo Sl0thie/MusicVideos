@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using Newtonsoft.Json;
     using SQLite;
 
     /// <summary>
@@ -140,5 +141,17 @@
         /// Gets or sets when the year song was released.
         /// </summary>
         public int ReleasedYear { get; set; }
+
+        /// <summary>
+        /// Gets or sets the checksum.
+        /// </summary>
+        [JsonIgnore]
+        public int Checksum
+        {
+            get { return checksum; }
+            set { checksum = value; }
+        }
+
+        private int checksum;
     }
 }

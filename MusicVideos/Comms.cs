@@ -65,17 +65,10 @@
                   _ = DS.Videos.GetDatabaseChecksumAsync();
               });
 
-            videoHub.On<string, string>("SaveVideo", (id, video) =>
+            videoHub.On<string>("SaveVideo", ( video) =>
               {
-                  Log.Info($"SaveVideo: {id} - {video}");
-                  if (DS.Comms.CheckId(id))
-                  {
-                      _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
-                  }
-                  else
-                  {
-                      Log.Info("Id check failed.");
-                  }
+                  Log.Info($"SaveVideo: - {video}");
+                  _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
               });
 
             // Initialize SignalR.
@@ -319,6 +312,13 @@
             {
                 Log.Error(ex);
             }
+        }
+
+        public async Task SetOutChecksum(int index, int checksum)
+        {
+            Log.Info("Comms.SetOutChecksum");
+
+            await videoHub.InvokeAsync("SetOutChecksumAsync", HubId, index, checksum);
         }
     }
 }

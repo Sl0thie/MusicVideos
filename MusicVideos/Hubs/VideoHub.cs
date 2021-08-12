@@ -25,6 +25,64 @@
     /// </summary>
     public class VideoHub : Hub
     {
+        /// <summary>
+        /// Asks the server to broadcast the checksums.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        public void GetOutChecksum(string id)
+        {
+            Log.Info("VideoHub.GetOutChecksums");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // _ = DS.Videos.BroadcastChecksums();
+                    Task.Run(() => DS.Videos.BroadcastChecksumsAsync());
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public async Task SetOutChecksumAsync(string id, int index, int checksum)
+        {
+            Log.Info("VideoHub.SetOutChecksumAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // Send the settings objects to the clients.
+                    await Clients.All.SendAsync("SetOutChecksum", index, checksum);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public async Task FailedChecksumAsync(string id, int index)
+        {
+            Log.Info("VideoHub.FailedChecksumAsync");
+
+            try
+            {
+                if (DS.Comms.CheckId(id))
+                {
+                    // Send the settings objects to the clients.
+                    _ = DS.Videos.SendVideosBlock(index);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
         #region Settings / Filter / Volume
 
         public async Task GetOutFilterAsync(string id)
@@ -230,6 +288,8 @@
         }
 
         #endregion
+
+
 
         #region Older Version
 
