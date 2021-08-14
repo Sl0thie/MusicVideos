@@ -14,8 +14,6 @@
         /// </summary>
         public App()
         {
-            Debug.WriteLine("App.App");
-
             InitializeComponent();
 
             // Startup the SignalR Client.

@@ -35,9 +35,9 @@
         private const string FilesPath = @"F:\Music Videos";
 
         /// <summary>
-        /// The virtual path of the directory holding the video files.
+        /// The size of the checksum block sum.
         /// </summary>
-        // private const string VirtualPath = @"/Virtual/Music Videos";
+        private const int BlockSize = 40;
 
         /// <summary>
         /// The increment to use when a video is canceled before it ends.
@@ -79,8 +79,7 @@
         private Video lastVideo;
         private PlayState playState = PlayState.Unknown;
         private int previousIndex;
-
-        private CancellationTokenSource cts;
+        private bool processingChecksum;
 
         /// <summary>
         /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
@@ -176,38 +175,45 @@
         {
             Log.Info("Videos.FilterVideos");
 
-            Log.Info("FilterVideos Settings Details:");
-            Log.Info($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
-            Log.Info($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
-            Log.Info($"Released Min: {DS.Settings.Filter.ReleasedMinimum}");
-            Log.Info($"Released Max: {DS.Settings.Filter.ReleasedMaximum}");
-
-            foreach (Genre gen in DS.Settings.Filter.Genres)
+            try
             {
-                Log.Info($"Genre: {gen}");
+                Log.Info("FilterVideos Settings Details:");
+                Log.Info($"Rating Min: {DS.Settings.Filter.RatingMinimum}");
+                Log.Info($"Rating Max: {DS.Settings.Filter.RatingMaximum}");
+                Log.Info($"Released Min: {DS.Settings.Filter.ReleasedMinimum}");
+                Log.Info($"Released Max: {DS.Settings.Filter.ReleasedMaximum}");
+
+                foreach (Genre gen in DS.Settings.Filter.Genres)
+                {
+                    Log.Info($"Genre: {gen}");
+                }
+
+                // Clear the list first.
+                filteredVideos.Clear();
+
+                string sql = "SELECT * FROM [Video] WHERE ";
+                sql += $"([Rating] BETWEEN {DS.Settings.Filter.RatingMinimum} AND {DS.Settings.Filter.RatingMaximum}) ";
+                sql += $"AND ([ReleasedYear] BETWEEN {DS.Settings.Filter.ReleasedMinimum} AND {DS.Settings.Filter.ReleasedMaximum}) ";
+                sql += "ORDER BY SearchArtist, Title;";
+
+                // Get the videos from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>(sql);
+
+                List<Video> videos = rv.Result;
+
+                Log.Info($"FilterVideos Videos: {videos.Count}");
+
+                foreach (var next in videos)
+                {
+                    filteredVideos.Add(next.Id);
+                }
+
+                Log.Info($"Total Filtered Videos: {filteredVideos.Count}");
             }
-
-            // Clear the list first.
-            filteredVideos.Clear();
-
-            string sql = "SELECT * FROM [Video] WHERE ";
-            sql += $"([Rating] BETWEEN {DS.Settings.Filter.RatingMinimum} AND {DS.Settings.Filter.RatingMaximum}) ";
-            sql += $"AND ([ReleasedYear] BETWEEN {DS.Settings.Filter.ReleasedMinimum} AND {DS.Settings.Filter.ReleasedMaximum}) ";
-            sql += "ORDER BY SearchArtist, Title;";
-
-            // Get the videos from the database.
-            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>(sql);
-
-            List<Video> videos = rv.Result;
-
-            Log.Info($"FilterVideos Videos: {videos.Count}");
-
-            foreach (var next in videos)
+            catch (Exception ex)
             {
-                filteredVideos.Add(next.Id);
+                Log.Error(ex);
             }
-
-            Log.Info($"Total Filtered Videos: {filteredVideos.Count}");
         }
 
         /// <summary>
@@ -226,36 +232,6 @@
                 foreach (Video next in videos)
                 {
                     videoQueue.Add(next.Id);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Info("Error: " + ex.Message);
-            }
-        }
-
-        private async Task AdjustReleaseYearAsync()
-        {
-            Log.Info("Videos.AddUnplayedToQueue");
-
-            try
-            {
-                // Get video from the database.
-                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video]");
-                List<Video> videos = rv.Result;
-
-                foreach (Video next in videos)
-                {
-                    if (next.Released == DateTime.MinValue)
-                    {
-                        next.ReleasedYear = 1900;
-                    }
-                    else
-                    {
-                        next.ReleasedYear = next.Released.Year;
-                    }
-
-                    await SaveVideoAsync(next);
                 }
             }
             catch (Exception ex)
@@ -378,7 +354,7 @@
 
                     if (DateTime.Now.Subtract(lastVideo.LastPlayed).TotalSeconds < 30)
                     {
-                        lastVideo.Rating = lastVideo.Rating + IncrementClickedThough;
+                        lastVideo.Rating += IncrementClickedThough;
                         if (lastVideo.Rating < 0)
                         {
                             lastVideo.Rating = 0;
@@ -386,7 +362,7 @@
                     }
                     else
                     {
-                        lastVideo.Rating = lastVideo.Rating + IncrementPlayedThough;
+                        lastVideo.Rating += IncrementPlayedThough;
                         if (lastVideo.Rating > 100)
                         {
                             lastVideo.Rating = 100;
@@ -724,17 +700,20 @@
         /// <summary>
         /// Calculates the checksums and broadcasts them to the clients.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task BroadcastChecksumsAsync()
         {
             Log.Info("Videos.BroadcastChecksums");
 
-            // _ = Run(cts.Token);
+            if (!processingChecksum)
+            {
+                processingChecksum = true;
 
-            await Task.Run(
+                await Task.Run(
                 async () =>
                 {
                     int totalvideos = GetTotalVideos();
-                    for (int i = 0; i < totalvideos; i = i + 100)
+                    for (int i = 0; i < totalvideos; i += BlockSize)
                     {
                         // token.ThrowIfCancellationRequested();
                         await Task.Delay(5000);
@@ -744,7 +723,7 @@
                         try
                         {
                             int checksum = 0;
-                            for (int j = 0; j < 100; j++)
+                            for (int j = 0; j < BlockSize; j++)
                             {
                                 // Get the video object from the database.
                                 Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {i + j}");
@@ -755,7 +734,6 @@
                             }
 
                             await DS.Comms.SetOutChecksum(i, checksum);
-
                         }
                         catch (Exception ex)
                         {
@@ -765,8 +743,16 @@
 
                     return;
                 });
+            }
+
+            processingChecksum = false;
         }
 
+        /// <summary>
+        /// Sends a block of videos to the clients.
+        /// </summary>
+        /// <param name="index">The starting index of the block.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SendVideosBlock(int index)
         {
             Log.Info("Videos.SendVideosBlock " + index);
@@ -774,9 +760,9 @@
             await Task.Run(
                 async () =>
                 {
-                    for (int i = 0; i < 100; i++)
+                    for (int i = 0; i < BlockSize; i++)
                     {
-                        await Task.Delay(1000);
+                        await Task.Delay(5000);
 
                         try
                         {

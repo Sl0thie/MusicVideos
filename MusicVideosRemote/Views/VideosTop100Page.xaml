@@ -23,7 +23,7 @@
                 <RowDefinition Height="64"/>
             </Grid.RowDefinitions>
 
-            <CollectionView x:Name="CV" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
+            <CollectionView x:Name="CV" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Videos}" SelectionMode="Single"   SelectedItem="{Binding SelectedVideo}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">

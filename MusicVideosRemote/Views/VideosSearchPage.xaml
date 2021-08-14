@@ -22,7 +22,7 @@
         <Editor Grid.Row="1" Grid.Column="0" BackgroundColor="#3A3A3A" TextColor="#FFFFFF" Keyboard="Text" Text="{Binding SearchTerm, Mode=TwoWay}" />
 
         <ScrollView Grid.Row="2" Grid.Column="0">
-            <CollectionView x:Name="CV" ItemsSource="{Binding Videos}" SelectionMode="Single"  SelectionChanged="CV_SelectionChanged" >
+            <CollectionView x:Name="CV" ItemsSource="{Binding Videos}" SelectionMode="Single" SelectedItem="{Binding SelectedVideo}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">

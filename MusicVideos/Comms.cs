@@ -13,6 +13,22 @@
     /// </summary>
     public class Comms
     {
+        /// <summary>
+        /// Gets or sets the validation id.
+        /// </summary>
+        public string HubId
+        {
+            get
+            {
+                return hubId;
+            }
+
+            set
+            {
+                hubId = value;
+            }
+        }
+
         private static HubConnection videoHub;
         private readonly Random rnd = new Random();
         private readonly Collection<string> ids = new Collection<string>();
@@ -21,58 +37,80 @@
         private string hubId;
 
         /// <summary>
-        /// Gets or sets the validation id.
-        /// </summary>
-        public string HubId { get => hubId; set => hubId = value; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Comms"/> class.
         /// </summary>
         public Comms()
         {
             Log.Info("Comms.Comms");
 
-            // Create new id for the hub.
-            HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
-            ids.Add(HubId);
-
-            // Switch between IIS (Publish) and IIS Express. (Debug)
-            if (Debugger.IsAttached)
+            try
             {
-                videoHub = new HubConnectionBuilder()
-                            .WithUrl("http://localhost:8888/videoHub")
-                            .Build();
+                // Create new id for the hub.
+                HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+                ids.Add(HubId);
+
+                // Switch between IIS (Publish) and IIS Express. (Debug)
+                if (Debugger.IsAttached)
+                {
+                    videoHub = new HubConnectionBuilder()
+                                .WithUrl("http://localhost:8888/videoHub")
+                                .Build();
+                }
+                else
+                {
+                    videoHub = new HubConnectionBuilder()
+                           .WithUrl("http://192.168.0.6:888/videoHub")
+                           .Build();
+                }
+
+                videoHub.On<string, string>("SendMessage", (id, message) =>
+                {
+                    Log.Info($"SendMessage: {id} - {message}");
+                });
+
+                videoHub.On<string, string>("SendError", (id, json) =>
+                {
+                    Log.Info($"ERROR: {id} - {json}");
+                });
+
+                videoHub.On<string>("GetDatabaseChecksum", (id) =>
+                {
+                    _ = DS.Videos.GetDatabaseChecksumAsync();
+                });
+
+                // --------------------------------------------------------------------------------------------------
+                videoHub.On<string>("SaveVideo", (video) =>
+                {
+                    Log.Info($"SaveVideo: - {video}");
+                    _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
+                });
+
+                // Initialize SignalR.
+                _ = InitializeSignalRAsync();
             }
-            else
+            catch (Exception ex)
             {
-                videoHub = new HubConnectionBuilder()
-                       .WithUrl("http://192.168.0.6:888/videoHub")
-                       .Build();
+                Log.Error(ex);
             }
+        }
 
-            videoHub.On<string, string>("SendMessage", (id, message) =>
+        #region Connection
+
+        /// <summary>
+        /// Initializes SignalR.
+        /// </summary>
+        private static async Task InitializeSignalRAsync()
+        {
+            Log.Info("Comms.InitializeSignalRAsync");
+
+            try
             {
-                Log.Info($"SendMessage: {id} - {message}");
-            });
-
-            videoHub.On<string, string>("SendError", (id, json) =>
+                await videoHub.StartAsync();
+            }
+            catch (Exception ex)
             {
-                Log.Info($"ERROR: {id} - {json}");
-            });
-
-            videoHub.On<string>("GetDatabaseChecksum", (id) =>
-              {
-                  _ = DS.Videos.GetDatabaseChecksumAsync();
-              });
-
-            videoHub.On<string>("SaveVideo", ( video) =>
-              {
-                  Log.Info($"SaveVideo: - {video}");
-                  _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
-              });
-
-            // Initialize SignalR.
-            _ = InitializeSignalRAsync();
+                Log.Error(ex);
+            }
         }
 
         /// <summary>
@@ -125,6 +163,8 @@
                     break;
             }
         }
+
+        #endregion
 
         #region Registration
 
@@ -193,6 +233,8 @@
         }
 
         #endregion
+
+        #region Video
 
         /// <summary>
         /// Tell players to pause the video.
@@ -271,6 +313,10 @@
             }
         }
 
+        #endregion
+
+        #region Checksum
+
         /// <summary>
         /// Passes the total number of videos for a simple checksum.
         /// </summary>
@@ -290,35 +336,47 @@
             }
         }
 
-        public async Task SetInSettingsAsync(Filter filter, int volume)
-        {
-            Log.Info("Comms.SetInSettingsAsync");
-
-            await videoHub.InvokeAsync("SetInSettingsAsync", HubId, filter, volume);
-        }
-
         /// <summary>
-        /// Initializes SignalR.
+        /// Send a checksum block to the clients.
         /// </summary>
-        private static async Task InitializeSignalRAsync()
-        {
-            Log.Info("Comms.InitializeSignalRAsync");
-
-            try
-            {
-                await videoHub.StartAsync();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-        }
-
+        /// <param name="index">The starting index for the block.</param>
+        /// <param name="checksum">The checksum for the block.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetOutChecksum(int index, int checksum)
         {
             Log.Info("Comms.SetOutChecksum");
 
-            await videoHub.InvokeAsync("SetOutChecksumAsync", HubId, index, checksum);
+            await videoHub.InvokeAsync("SetOutChecksum", HubId, index, checksum);
         }
+
+        #endregion
+
+        #region Settings / Filter / Volume
+
+        /// <summary>
+        /// Sends the current volume to clients.
+        /// </summary>
+        /// <param name="volume">The current volume value.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SetOutVolumeAsync(int volume)
+        {
+            Log.Info("Comms.GetOutVolumeAsync");
+
+            await videoHub.InvokeAsync("GetOutVolumeAsync", HubId, volume);
+        }
+
+        /// <summary>
+        /// Sends the current filter to the clients.
+        /// </summary>
+        /// <param name="filter">The current filter.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task SetOutFilterAsync(Filter filter)
+        {
+            Log.Info("Comms.SetOutFilterAsync");
+
+            await videoHub.InvokeAsync("SetOutFilterAsync", HubId, filter);
+        }
+
+        #endregion
     }
 }

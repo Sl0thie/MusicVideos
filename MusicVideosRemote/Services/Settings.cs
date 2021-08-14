@@ -16,18 +16,13 @@
         {
             get
             {
-                Debug.WriteLine("Settings.Volume.Get");
-
                 return volume;
             }
 
             set
             {
-                Debug.WriteLine("Settings.Volume.Set");
-
                 if (value == -1)
                 {
-                    Debug.WriteLine("Settings.Volume = -1 not setting volume.");
                     return;
                 }
 
@@ -45,13 +40,9 @@
                         volume = 0;
                     }
 
-                    //_ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
+                    Debug.WriteLine("Setting Volume " + volume);
 
-                    Debug.WriteLine("Settings.Volume = " + volume);
-                }
-                else
-                {
-                    Debug.WriteLine("Settings.Volume = same = " + volume);
+                    _ = SignalRClient.Current.SetInVolumeAsync(volume);
                 }
             }
         }
@@ -68,11 +59,13 @@
 
             set
             {
-                lastFilter = filter;
                 filter = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum rating.
+        /// </summary>
         public static int RatingMinimum
         {
             get
@@ -87,6 +80,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum rating.
+        /// </summary>
         public static int RatingMaximum
         {
             get
@@ -101,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the minimum released.
+        /// </summary>
         public static int ReleasedMinimum
         {
             get
@@ -115,6 +114,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum released.
+        /// </summary>
         public static int ReleasedMaximum
         {
             get
@@ -130,68 +132,7 @@
         }
 
         private static int volume = -1;
-        private static Filter lastFilter;
         private static Filter filter;
-
-        /// <summary>
-        /// Checks if the Filters are equal.
-        /// </summary>
-        /// <param name="first">The first filter to check.</param>
-        /// <param name="last">The second filter to check.</param>
-        /// <returns>Returns true id the filters are equal.</returns>
-        private static bool IsFilterEqual(Filter first, Filter last)
-        {
-            Debug.WriteLine("Settings.IsFilterEqual");
-
-            bool diff = false;
-
-            if (last is null)
-            {
-                Debug.WriteLine("Last is null");
-                return false;
-            }
-
-            Debug.WriteLine($"RatingMaximum: first {first.RatingMaximum} second {last.RatingMaximum}");
-            Debug.WriteLine($"RatingMinimum: first {first.RatingMinimum} second {last.RatingMinimum}");
-
-            try
-            {
-                if (first.RatingMaximum != last.RatingMaximum)
-                {
-                    diff = true;
-                    Debug.WriteLine($"Settings.IsFilterEqual.RatingMaximum: first {first.RatingMaximum} second {last.RatingMaximum}");
-                }
-
-                if (first.RatingMinimum != last.RatingMinimum)
-                {
-                    diff = true;
-                    Debug.WriteLine($"Settings.IsFilterEqual.RatingMinimum: first {first.RatingMinimum} second {last.RatingMinimum}");
-                }
-
-                if (first.ReleasedMaximum != last.ReleasedMaximum)
-                {
-                    diff = true;
-                    Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMaximum: first {first.ReleasedMaximum} second {last.ReleasedMaximum}");
-                }
-
-                if (first.ReleasedMinimum != last.ReleasedMinimum)
-                {
-                    diff = true;
-                    Debug.WriteLine($"Settings.IsFilterEqual.ReleasedMinimum: first {first.ReleasedMinimum} second {last.ReleasedMinimum}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            if (diff)
-            {
-                return false;
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Check if the video passes the filter.
@@ -200,8 +141,6 @@
         /// <returns>Returns true if the video passes the filter.</returns>
         public static bool PassFilter(Video toBeChecked)
         {
-            Debug.WriteLine("Settings.PassFilter");
-
             if (toBeChecked.Rating > filter.RatingMaximum)
             {
                 return false;

@@ -31,8 +31,6 @@
         {
             get
             {
-                Debug.WriteLine("SignalRClient.Current.Get");
-
                 if (current is null)
                 {
                     current = new SignalRClient();
@@ -43,8 +41,6 @@
 
             set
             {
-                Debug.WriteLine("SignalRClient.Current.Set");
-
                 current = value;
             }
         }
@@ -57,17 +53,12 @@
         /// </summary>
         public SignalRClient()
         {
-            Debug.WriteLine("SignalRClient.SignalRClient");
-
             Current = this;
-
             IinitializeSignalR();
         }
 
         private void IinitializeSignalR()
         {
-            Debug.WriteLine("SignalRClient.IinitializeSignalR");
-
             try
             {
                 dataHub = new HubConnectionBuilder()
@@ -78,29 +69,19 @@
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
                     NowPlayingViewModel.Current.CurrentVideo = newVideo;
-                    Debug.WriteLine("PlayVideo: " + newVideo.Artist);
                 });
 
                 dataHub.On<string>("SaveVideo", async (json) =>
                 {
                     Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-
-                    Debug.WriteLine($"SaveVideo: {newVideo.GetHashCode()}  {json}");
-
                     DataStore database = await DataStore.Instance;
                     await database.SaveVideoAsync(newVideo);
                 });
 
                 dataHub.On<string>("SaveFilter", (json) =>
                 {
-                    Debug.WriteLine($"SaveFilter:  {json}");
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     Settings.Filter = newFilter;
-                });
-
-                dataHub.On<string>("SaveVolume", (json) =>
-                {
-                    Debug.WriteLine($"SaveVolume:  {json}");
                 });
 
                 // -----------------------------------------------------------------------------
@@ -112,25 +93,25 @@
 
                 dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
                 {
-                    Debug.WriteLine($"SetOutSettingsAsync: volume = {volume}  filter = {json}");
-
                     Settings.Volume = volume;
                 });
 
                 dataHub.On<string>("SetOutFilterAsync", (json) =>
                 {
-                    Debug.WriteLine($"SetOutFilterAsync: filter = {json}");
-
                     Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
                     Settings.Filter = newFilter;
                 });
 
                 dataHub.On<int, int>("SetOutChecksum", async (index, checksum) =>
                 {
-                    Debug.WriteLine($"SetOutChecksum: index = {index} checksum = {checksum}");
-
                     DataStore database = await DataStore.Instance;
                     database.Checksum(index, checksum);
+                });
+
+                dataHub.On<int>("SetOutVolumeAsync", (volume) =>
+                {
+                    Debug.WriteLine($"SetOutVolumeAsync:  {volume}");
+                    Settings.Volume = volume;
                 });
             }
             catch (Exception ex)
@@ -147,13 +128,9 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ConnectAsync()
         {
-            Debug.WriteLine("SignalRClient.ConnectAsync");
-
             await dataHub.StartAsync();
             await RegisterAsync();
             await GetOutFilterAsync();
-
-            // await GetAllVideosAsync(); // Uncomment to update all videos from server.
             await DatabaseChecksumAsync();
         }
 
@@ -163,8 +140,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task RegisterAsync()
         {
-            Debug.WriteLine("SignalRClient.RegisterAsync");
-
             await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
         }
 
@@ -174,27 +149,17 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task DatabaseChecksumAsync()
         {
-            Debug.WriteLine("SignalRClient.DatabaseChecksumAsync");
-
             await dataHub.InvokeAsync("GetOutChecksum", hubId);
         }
 
-        public async Task FailedChecksumAsync(int index)
-        {
-            Debug.WriteLine("SignalRClient.FailedChecksumAsync");
-
-            await dataHub.InvokeAsync("FailedChecksumAsync", hubId, index);
-        }
-
         /// <summary>
-        /// Invokes Get All Videos command on server.
+        /// Tell the server that this checksum block has failed. The server will then resend the data.
         /// </summary>
+        /// <param name="index">The start index of the block.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetAllVideosAsync()
+        public async Task FailedChecksum(int index)
         {
-            Debug.WriteLine("SignalRClient.GetAllVideosAsync");
-
-            await dataHub.InvokeAsync("GetVideosAsync", hubId);
+            await dataHub.InvokeAsync("FailedChecksumAsync", hubId, index);
         }
 
         #endregion
@@ -208,33 +173,31 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task ErrorAsync(Exception ex)
         {
-            Debug.WriteLine("SignalRClient.ErrorAsync");
-
             await dataHub.InvokeAsync("SetInXamarinException", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
         }
 
         #endregion
 
-        #region Settings/Filter
+        #region Settings / Filter / Volume
 
+        /// <summary>
+        /// Ask the server for the current filter.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetOutFilterAsync()
         {
-            Debug.WriteLine("SignalRClient.GetOutFilterAsync");
-
             await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
         }
 
+        /// <summary>
+        /// Sends the current filter to the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetInFiltersAsync()
         {
-            Debug.WriteLine("SignalRClient.SetInFiltersAsync");
-
             if (Settings.Filter is object)
             {
                 await dataHub.InvokeAsync("SetInFilter", hubId, JsonConvert.SerializeObject(Settings.Filter, Formatting.None));
-            }
-            else
-            {
-                Debug.WriteLine("Filter object is null.");
             }
         }
 
@@ -242,24 +205,19 @@
         /// Ask the server for the settings object.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetOutSettingsAsync()
+        public async Task GetOutVolumeAsync()
         {
-            Debug.WriteLine("SignalRClient.GetOutSettingsAsync");
-
-            await dataHub.InvokeAsync("GetOutSettingsAsync", hubId);
+            await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
         }
 
         /// <summary>
-        /// Sets the settings objects on the server.
+        /// Sets the volume on the server.
         /// </summary>
         /// <param name="volume">Sets the volume for the application.</param>
-        /// <param name="filter">Sets the filter for the application.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task SetInSettingsAsync(int volume, Filter filter)
+        public async Task SetInVolumeAsync(int volume)
         {
-            Debug.WriteLine("SignalRClient.SetInSettingsAsync");
-
-            await dataHub.InvokeAsync("SetInSettingsAsync", hubId, volume, JsonConvert.SerializeObject(filter, Formatting.None));
+            await dataHub.InvokeAsync("SetOutVolume", hubId, volume);
         }
 
         /// <summary>
@@ -270,8 +228,6 @@
         [Obsolete("Use SetInSettingsAsync instead.")]
         public async Task SendFilterAsync(Filter filter)
         {
-            Debug.WriteLine("SignalRClient.SendFilterAsync");
-
             await dataHub.InvokeAsync("SendFilterAsync", hubId, JsonConvert.SerializeObject(filter, Formatting.None));
         }
 
@@ -282,8 +238,6 @@
         [Obsolete("Use GetOutSettingsAsync instead.")]
         public async Task GetFilterAsync()
         {
-            Debug.WriteLine("SignalRClient.GetFilterAsync");
-
             await dataHub.InvokeAsync("GetFilterAsync", hubId);
         }
 
@@ -298,8 +252,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task QueueVideoAsync(int id)
         {
-            Debug.WriteLine("SignalRClient.QueueVideoAsync");
-
             await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
         }
 
@@ -313,8 +265,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPreviousVideo()
         {
-            Debug.WriteLine("SignalRClient.CommandPreviousVideo");
-
             await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
         }
 
@@ -324,8 +274,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandNextVideo()
         {
-            Debug.WriteLine("SignalRClient.CommandNextVideo");
-
             await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
         }
 
@@ -335,8 +283,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPlayVideo()
         {
-            Debug.WriteLine("SignalRClient.CommandPlayVideo");
-
             await dataHub.InvokeAsync("ButtonPlayVideoAsync", hubId);
         }
 
@@ -346,8 +292,6 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPauseVideo()
         {
-            Debug.WriteLine("SignalRClient.CommandPauseVideo");
-
             await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
         }
 

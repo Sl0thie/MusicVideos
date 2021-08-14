@@ -18,8 +18,6 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.Current.Get");
-
                 if (current is null)
                 {
                     current = new NowPlayingViewModel();
@@ -30,8 +28,6 @@
 
             set
             {
-                Debug.WriteLine("NowPlayingViewModel.Current.Set");
-
                 current = value;
             }
         }
@@ -43,15 +39,11 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.CurrentVideo.Get");
-
                 return currentVideo;
             }
 
             set
             {
-                Debug.WriteLine("NowPlayingViewModel.CurrentVideo.Set");
-
                 currentVideo = value;
                 OnPropertyChanged("CurrentVideo");
                 OnPropertyChanged("LastPlayed");
@@ -68,8 +60,6 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.LastPlayed.Get");
-
                 if (currentVideo.LastPlayed == DateTime.MinValue)
                 {
                     return "Never";
@@ -99,8 +89,6 @@
 
             set
             {
-                Debug.WriteLine("NowPlayingViewModel.LastPlayed.Set");
-
                 OnPropertyChanged();
             }
         }
@@ -112,18 +100,10 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.Duration.Get");
-
-                Debug.WriteLine($"NPM Duration: {currentVideo.Duration}");
-
                 if (currentVideo.Duration > 0)
                 {
                     TimeSpan ts = TimeSpan.FromMilliseconds(currentVideo.Duration);
-
                     string rv = ts.ToString(@"m\:ss");
-
-                    Debug.WriteLine($"NPM Duration String: {rv}");
-
                     return rv;
                 }
                 else
@@ -134,8 +114,6 @@
 
             set
             {
-                Debug.WriteLine("NowPlayingViewModel.Duration.Set");
-
                 OnPropertyChanged();
             }
         }
@@ -147,8 +125,6 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.Released.Get");
-
                 if (currentVideo.ReleasedYear == 1900)
                 {
                     return "Unknown";
@@ -181,8 +157,6 @@
 
             set
             {
-                Debug.WriteLine("NowPlayingViewModel.Released.Set");
-
                 OnPropertyChanged();
             }
         }
@@ -194,8 +168,6 @@
         {
             get
             {
-                Debug.WriteLine("NowPlayingViewModel.Size.Get");
-
                 if (currentVideo.VideoWidth == 0)
                 {
                     return "Unknown";
@@ -215,8 +187,6 @@
         /// </summary>
         public NowPlayingViewModel()
         {
-            Debug.WriteLine("NowPlayingViewModel.NowPlayingViewModel");
-
             Current = this;
         }
     }

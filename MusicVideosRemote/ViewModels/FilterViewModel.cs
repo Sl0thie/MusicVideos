@@ -16,15 +16,11 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.Filter.Get");
-
                 return Settings.Filter;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.Filter.Set");
-
                 Settings.Filter = value;
                 OnPropertyChanged("Filter");
             }
@@ -37,15 +33,11 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.RatingMaximum.Get");
-
                 return Settings.Filter.RatingMaximum;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.RatingMaximum.Set");
-
                 if (Settings.Filter.RatingMaximum != value)
                 {
                     Settings.Filter.RatingMaximum = value;
@@ -61,15 +53,11 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Get " + Settings.Filter.RatingMinimum);
-
                 return Settings.Filter.RatingMinimum;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.RatingMinimum.Set " + value);
-
                 if (Settings.Filter.RatingMinimum != value)
                 {
                     Settings.Filter.RatingMinimum = value;
@@ -85,15 +73,11 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Get " + Settings.ReleasedMinimum);
-
                 return Settings.ReleasedMinimum;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMinimum.Set " + value);
-
                 if (Settings.ReleasedMinimum != value)
                 {
                     Settings.ReleasedMinimum = value;
@@ -109,15 +93,11 @@
         {
             get
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Get " + Settings.ReleasedMaximum);
-
                 return Settings.ReleasedMaximum;
             }
 
             set
             {
-                Debug.WriteLine("FilterViewModel.ReleasedMaximum.Set " + value);
-
                 if (Settings.ReleasedMaximum != value)
                 {
                     Settings.ReleasedMaximum = value;
@@ -131,7 +111,6 @@
         /// </summary>
         public FilterViewModel()
         {
-            Debug.WriteLine("FilterViewModel.FilterViewModel");
         }
     }
 }

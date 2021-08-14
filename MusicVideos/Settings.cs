@@ -15,12 +15,28 @@
         {
             get
             {
+                Log.Info("Settings.Volume.Get");
                 return volume;
             }
 
             set
             {
-                volume = value;
+                Log.Info("Settings.Volume.Set");
+                if (volume != value)
+                {
+                    volume = value;
+                    DS.SaveSettings();
+
+                    try
+                    {
+                        // Send the settings objects to the clients.
+                        _ = DS.Comms.SetOutVolumeAsync(DS.Settings.Volume);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                    }
+                }
             }
         }
 
@@ -48,61 +64,38 @@
         {
             get
             {
+                Log.Info("Settings.Filter.Get");
                 return filter;
             }
 
             set
             {
+                Log.Info("Settings.Filter.Set");
                 filter = value;
 
-                if (filter != null)
+                try
                 {
-                    if (IsFilterEqual(filter, lastFilter))
+                    if (filter != null)
                     {
-                        Log.Info($"Filter Set: Equal so not calling property change.");
-                    }
-                    else
-                    {
-                        Log.Info($"Filter Set: Filter changed.");
+                        if (IsFilterEqual(filter, lastFilter))
+                        {
+                            Log.Info($"Filter Set: Equal so not calling property change.");
+                        }
+                        else
+                        {
+                            Log.Info($"Filter Set: Filter changed.");
 
-                        DS.Videos.FilterVideos();
-                        DS.SaveSettings();
-                        _ = DS.Comms.SetInSettingsAsync(DS.Settings.Filter, DS.Settings.Volume);
+                            DS.Videos.FilterVideos();
+                            DS.SaveSettings();
+                            lastFilter = filter;
+                            _ = DS.Comms.SetOutFilterAsync(DS.Settings.Filter);
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Log.Info($"Filter Set: Filter is null.");
+                    Log.Error(ex);
                 }
-
-                // filter = value;
-                // DS.Videos.FilterVideos();
-                // lastFilter = filter;
-                //filter = value;
-
-                //if (filter != null)
-                //{
-                //    if (IsFilterEqual(filter, lastFilter))
-                //    {
-                //        Log.Info($"Filter Set: Equal so not calling property change.");
-                //    }
-                //    else
-                //    {
-                //        Log.Info($"Filter Set: Filter changed.");
-
-                //        // OnPropertyChanged("Filter");
-                //        // OnPropertyChanged("RatingMinimum");
-                //        // FilterUpdated();
-
-                //        // _ = SignalRClient.Current.SetInSettingsAsync(volume, filter);
-                //        DS.Videos.FilterVideos();
-                //        DS.SaveSettings();
-                //    }
-                //}
-                //else
-                //{
-                //    Log.Info($"Filter Set: Filter is null.");
-                //}
             }
         }
 

@@ -47,7 +47,6 @@
             set
             {
                 ratingMinimum = value;
-                //OnPropertyChanged("RatingMinimum");
             }
         }
 
@@ -64,7 +63,6 @@
             set
             {
                 ratingMaximum = value;
-                //OnPropertyChanged("RatingMaximum");
             }
         }
 
@@ -91,7 +89,6 @@
             set
             {
                 dateTimeMinimum = value;
-                //OnPropertyChanged("DateTimeMinimum");
             }
         }
 
@@ -108,7 +105,6 @@
             set
             {
                 dateTimeMaximum = value;
-                //OnPropertyChanged("DateTimeMaximum");
             }
         }
 

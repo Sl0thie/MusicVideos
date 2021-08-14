@@ -16,8 +16,6 @@
         /// </summary>
         public VideosSearchPage()
         {
-            Debug.WriteLine("VideosSearchPage.VideosSearchPage");
-
             InitializeComponent();
         }
 
@@ -26,14 +24,12 @@
         /// </summary>
         protected override void OnAppearing()
         {
-            Debug.WriteLine("VideosSearchPage.OnAppearing");
-
             base.OnAppearing();
             BindingContext = VideosSearchViewModel.Current;
         }
 
-        private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
+        //private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //}
     }
 }

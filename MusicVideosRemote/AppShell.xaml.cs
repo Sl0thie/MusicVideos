@@ -12,8 +12,6 @@
         /// </summary>
         public AppShell()
         {
-            Debug.WriteLine("AppShell.AppShell");
-
             InitializeComponent();
         }
     }

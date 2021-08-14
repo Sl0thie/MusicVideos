@@ -3,6 +3,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
+    using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
     using Xamarin.Forms;
 
@@ -80,6 +81,28 @@
         }
 
         /// <summary>
+        /// Gets or sets the selected video.
+        /// </summary>
+        public Video SelectedVideo
+        {
+            get
+            {
+                return selectedVideo;
+            }
+
+            set
+            {
+                if (selectedVideo != value)
+                {
+                    selectedVideo = value;
+
+                    // Queue the selected video.
+                    _ = SignalRClient.Current.QueueVideoAsync(selectedVideo.Id);
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets the show volume command.
         /// </summary>
         public Command ShowVolumeCommand { get; }
@@ -114,13 +137,13 @@
         /// </summary>
         public Command NextVideoCommand { get; }
 
+        private Video selectedVideo;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseViewModel"/> class.
         /// </summary>
         public BaseViewModel()
         {
-            Debug.WriteLine("BaseViewModel.BaseViewModel");
-
             // Setup commands.
             PreviousVideoCommand = new Command(CallCommandPreviousVideo);
             NextVideoCommand = new Command(CallCommandNextVideo);

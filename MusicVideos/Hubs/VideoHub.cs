@@ -3,9 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using LogCore3;
     using Microsoft.AspNetCore.SignalR;
@@ -25,6 +22,8 @@
     /// </summary>
     public class VideoHub : Hub
     {
+        #region Checksum
+
         /// <summary>
         /// Asks the server to broadcast the checksums.
         /// </summary>
@@ -37,7 +36,6 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // _ = DS.Videos.BroadcastChecksums();
                     Task.Run(() => DS.Videos.BroadcastChecksumsAsync());
                 }
             }
@@ -47,7 +45,14 @@
             }
         }
 
-        public async Task SetOutChecksumAsync(string id, int index, int checksum)
+        /// <summary>
+        /// Send the checksum for a block to clients.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="index">The index of the block.</param>
+        /// <param name="checksum">The checksum for the block.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public void SetOutChecksum(string id, int index, int checksum)
         {
             Log.Info("VideoHub.SetOutChecksumAsync");
 
@@ -56,7 +61,7 @@
                 if (DS.Comms.CheckId(id))
                 {
                     // Send the settings objects to the clients.
-                    await Clients.All.SendAsync("SetOutChecksum", index, checksum);
+                    _ = Task.Run(() => Clients.All.SendAsync("SetOutChecksum", index, checksum));
                 }
             }
             catch (Exception ex)
@@ -65,7 +70,13 @@
             }
         }
 
-        public async Task FailedChecksumAsync(string id, int index)
+        /// <summary>
+        /// Client notifies that the checksum has failed for this block.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="index">The start index of the block.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public void FailedChecksum(string id, int index)
         {
             Log.Info("VideoHub.FailedChecksumAsync");
 
@@ -74,7 +85,7 @@
                 if (DS.Comms.CheckId(id))
                 {
                     // Send the settings objects to the clients.
-                    _ = DS.Videos.SendVideosBlock(index);
+                    _ = Task.Run(() => DS.Videos.SendVideosBlock(index));
                 }
             }
             catch (Exception ex)
@@ -83,8 +94,15 @@
             }
         }
 
+        #endregion
+
         #region Settings / Filter / Volume
 
+        /// <summary>
+        /// Client asks for the filter. Server sends it to all clients.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetOutFilterAsync(string id)
         {
             Log.Info("VideoHub.GetOutFilterAsync");
@@ -103,6 +121,11 @@
             }
         }
 
+        /// <summary>
+        /// Client sends the filter to the server.
+        /// </summary>
+        /// <param name="id">The id to validate.</param>
+        /// <param name="json">Serialized filter from the client.</param>
         public void SetInFilter(string id, string json)
         {
             Log.Info("VideoHub.SetInFilterAsync");
@@ -131,21 +154,20 @@
         }
 
         /// <summary>
-        /// Sends the settings to the clients.
+        /// Sends the volume to the clients.
         /// </summary>
         /// <param name="id">The id to validate.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [Obsolete("Use GetOutFilterAsync instead.")]
-        public async Task GetOutSettingsAsync(string id)
+        public async Task GetOutVolumeAsync(string id)
         {
-            Log.Info("VideoHub.GetOutSettingsAsync");
+            Log.Info("VideoHub.GetOutVolumeAsync");
 
             try
             {
                 if (DS.Comms.CheckId(id))
                 {
                     // Send the settings objects to the clients.
-                    await Clients.All.SendAsync("SetOutSettingsAsync", DS.Settings.Volume, JsonConvert.SerializeObject(DS.Settings.Filter, Formatting.None));
+                    await Clients.All.SendAsync("SetOutVolumeAsync", DS.Settings.Volume);
                 }
             }
             catch (Exception ex)
@@ -155,24 +177,19 @@
         }
 
         /// <summary>
-        /// Sets the settings on the server.
+        /// Sets the volume on the server.
         /// </summary>
         /// <param name="id">The id to validate.</param>
         /// <param name="volume">The volume value.</param>
-        /// <param name="json">Serialized filter object.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task SetInSettingsAsync(string id, int volume, string json)
+        public void SetOutVolume(string id, int volume)
         {
-            Log.Info("VideoHub.SetInSettingsAsync");
+            Log.Info("VideoHub.SetOutVolume");
 
             try
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    // Save the settings to the server.
-                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    DS.Settings.Filter = newFilter;
-
+                    // Save the volume to the server. The server will then send it to clients.
                     DS.Settings.Volume = volume;
                 }
             }
@@ -288,8 +305,6 @@
         }
 
         #endregion
-
-
 
         #region Older Version
 

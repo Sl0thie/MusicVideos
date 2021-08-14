@@ -25,6 +25,11 @@
         private static SQLiteAsyncConnection database;
 
         /// <summary>
+        /// The size of the checksum block sum.
+        /// </summary>
+        private const int BlockSize = 40;
+
+        /// <summary>
         /// Singleton access.
         /// </summary>
         public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
@@ -32,8 +37,6 @@
             Debug.WriteLine("DataStore.Instance");
 
             var instance = new DataStore();
-
-            // _ = database.DropTableAsync<Video>(); // Uncomment to drop the table. (for testing)
             CreateTableResult result = await database.CreateTableAsync<Video>();
             return instance;
         });
@@ -48,6 +51,11 @@
             database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SQLite.db3"), Flags);
         }
 
+        /// <summary>
+        /// Checks the block by checksum.
+        /// </summary>
+        /// <param name="index">The start index of the block.</param>
+        /// <param name="checksum">The checksum for the block.</param>
         public void Checksum(int index, int checksum)
         {
             Debug.WriteLine("DataStore.Checksum");
@@ -56,7 +64,7 @@
 
             try
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < BlockSize; j++)
                 {
                     int id = index + j;
                     Task<List<Video>> rv = database.QueryAsync<Video>("SELECT * FROM [Video] WHERE [Id] = '" + id + "'");
@@ -73,7 +81,7 @@
 
             if (newchecksum != checksum)
             {
-                _ = SignalRClient.Current.FailedChecksumAsync(index);
+                _ = SignalRClient.Current.FailedChecksum(index);
             }
 
             Debug.WriteLine($"Checksum compare for {index} server = {checksum} client = {newchecksum}");
@@ -160,6 +168,7 @@
         /// <summary>
         /// Searches for videos based on the search term.
         /// </summary>
+        /// <param name="term">The search term.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public Task<List<Video>> GetVideosFromTermAsync(string term)
         {
@@ -192,7 +201,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public Task<int> SaveVideoAsync(Video video)
         {
-            Debug.WriteLine("DataStore.SaveVideoAsync");
+            Debug.WriteLine($"DataStore.SaveVideoAsync {video.Artist} - {video.Title}");
 
             // Get the checksum before saving the video.
             StringBuilder stringBuilder = new StringBuilder();
@@ -212,7 +221,6 @@
                 video.Checksum += b;
             }
 
-            // Debug.WriteLine($"{video.Artist} - {video.Title} code = {video.Checksum}");
             // Add to database.
             try
             {

@@ -58,7 +58,7 @@ window.addEventListener('load', function () {
     });
 
     // Sets the volume. Settings filter is unused.
-    connection.on('SetOutSettingsAsync', function (volume, filter) {
+    connection.on('SetOutVolumeAsync', function (volume) {
         player0.volume = volume / 100;
         player1.volume = volume / 100;
     })
