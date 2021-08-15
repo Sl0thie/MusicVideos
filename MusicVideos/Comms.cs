@@ -9,7 +9,7 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// VideoConnection class.
+    /// Comms class. Manages the communications to the SignalR server.
     /// </summary>
     public class Comms
     {
@@ -54,12 +54,14 @@
                 {
                     videoHub = new HubConnectionBuilder()
                                 .WithUrl("http://localhost:8888/videoHub")
+                                .WithAutomaticReconnect()
                                 .Build();
                 }
                 else
                 {
                     videoHub = new HubConnectionBuilder()
                            .WithUrl("http://192.168.0.6:888/videoHub")
+                           .WithAutomaticReconnect()
                            .Build();
                 }
 
@@ -360,9 +362,9 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetOutVolumeAsync(int volume)
         {
-            Log.Info("Comms.GetOutVolumeAsync");
+            Log.Info("Comms.GetOutVolumeAsync " + volume);
 
-            await videoHub.InvokeAsync("GetOutVolumeAsync", HubId, volume);
+            await videoHub.InvokeAsync("GetOutVolumeAsync", HubId);
         }
 
         /// <summary>

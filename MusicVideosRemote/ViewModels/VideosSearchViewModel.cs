@@ -12,7 +12,7 @@
     /// <summary>
     /// VideosSearchViewModel class.
     /// </summary>
-    public class VideosSearchViewModel : BaseViewModel
+    internal class VideosSearchViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the current ListAllVideosViewModel.

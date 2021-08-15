@@ -7,7 +7,7 @@
     /// <summary>
     /// VideosQueuedViewModel class.
     /// </summary>
-    public class VideosQueuedViewModel : BaseViewModel
+    internal class VideosQueuedViewModel : BaseViewModel
     {
     }
 }

@@ -9,7 +9,7 @@
     /// <summary>
     /// NowPlayingViewModel class.
     /// </summary>
-    public class NowPlayingViewModel : BaseViewModel
+    internal class NowPlayingViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the current NowplayingModel.

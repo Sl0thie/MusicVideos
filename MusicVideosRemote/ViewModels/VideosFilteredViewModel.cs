@@ -12,7 +12,7 @@
     /// <summary>
     /// VideosFilteredViewModel class.
     /// </summary>
-    public class VideosFilteredViewModel : BaseViewModel
+    internal class VideosFilteredViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the Videos collection.
@@ -48,31 +48,8 @@
             }
         }
 
-        ///// <summary>
-        ///// Gets or sets the selected video.
-        ///// </summary>
-        //public Video SelectedVideo
-        //{
-        //    get
-        //    {
-        //        return selectedVideo;
-        //    }
-
-        //    set
-        //    {
-        //        if (selectedVideo != value)
-        //        {
-        //            selectedVideo = value;
-
-        //            // Queue the selected video.
-        //            _ = SignalRClient.Current.QueueVideoAsync(selectedVideo.Id);
-        //        }
-        //    }
-        //}
-
         private ObservableCollection<Video> videos = new ObservableCollection<Video>();
         private string totalVideos;
-        //private Video selectedVideo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VideosFilteredViewModel"/> class.

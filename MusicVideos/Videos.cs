@@ -5,7 +5,6 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Text;
-    using System.Threading;
     using System.Threading.Tasks;
     using LogCore3;
     using Newtonsoft.Json;
@@ -277,6 +276,8 @@
         public async Task PauseVideoAsync()
         {
             Log.Info("Videos.PauseVideoAsync");
+
+            await Task.Delay(1);
         }
 
         /// <summary>
@@ -286,6 +287,8 @@
         public async Task UnpauseVideoAsync()
         {
             Log.Info("Videos.UnpauseVideoAsync");
+
+            await Task.Delay(1);
         }
 
         /// <summary>

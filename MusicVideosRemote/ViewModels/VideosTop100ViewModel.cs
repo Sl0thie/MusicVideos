@@ -11,7 +11,7 @@
     /// <summary>
     /// VideosTop100ViewModel class.
     /// </summary>
-    public class VideosTop100ViewModel : BaseViewModel
+    internal class VideosTop100ViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the Videos collection.

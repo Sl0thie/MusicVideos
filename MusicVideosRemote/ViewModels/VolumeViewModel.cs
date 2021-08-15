@@ -7,7 +7,7 @@
     /// <summary>
     /// VolumeViewModel class.
     /// </summary>
-    public class VolumeViewModel : BaseViewModel
+    internal class VolumeViewModel : BaseViewModel
     {
     }
 }

@@ -104,7 +104,7 @@
             videos = new Videos();
 
             MainTimer = new Timer();
-            MainTimer.Elapsed += MainTimer_Elapsed;
+            MainTimer.Elapsed += MainTimerElapsed;
             MainTimer.Interval = 5000;
             MainTimer.Start();
         }
@@ -120,7 +120,8 @@
             File.WriteAllText("settings.json", json);
         }
 
-        private static void MainTimer_Elapsed(object sender, ElapsedEventArgs e)
+
+        public static void MainTimerElapsed(object sender, ElapsedEventArgs e)
         {
             Log.Info("DS.MainTimer_Elapsed");
 

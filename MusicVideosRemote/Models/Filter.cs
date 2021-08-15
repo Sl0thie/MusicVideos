@@ -2,38 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Filter class.
     /// </summary>
-    public class Filter : INotifyPropertyChanged
+    public class Filter
     {
-        #region INotifyPropertyChanged Interface
-
-        /// <summary>
-        /// Occurs when a property is changed.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Invoke event when properties change.
-        /// </summary>
-        /// <param name="propertyName">The property name that changed.</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-            {
-                return;
-            }
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
         /// <summary>
         /// Gets or sets the RatingMinimum. The lowest accepted value for the video rating.
         /// </summary>
@@ -121,7 +95,6 @@
             set
             {
                 genres = value;
-                OnPropertyChanged("Genres");
             }
         }
 

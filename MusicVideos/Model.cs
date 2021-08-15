@@ -12,7 +12,7 @@ namespace MusicVideos
     /// <summary>
     /// Model object to hold the data.
     /// </summary>
-    public static class Model
+    internal static class Model
     {
         /// <summary>
         /// File name for the database.

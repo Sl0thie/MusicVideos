@@ -1,6 +1,5 @@
 ﻿namespace MusicVideosRemote.Services
 {
-    using System;
     using System.Diagnostics;
     using MusicVideosRemote.Models;
 

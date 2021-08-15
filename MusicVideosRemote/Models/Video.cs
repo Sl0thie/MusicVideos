@@ -10,32 +10,8 @@
     /// <summary>
     /// Video object to store properties related to the video file.
     /// </summary>
-    public class Video : INotifyPropertyChanged
+    public class Video
     {
-        #region INotifyPropertyChanged Interface
-
-        /// <summary>
-        /// Occurs when a property is changed.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Invoke event when properties change.
-        /// </summary>
-        /// <param name="propertyName">The property name that changed.</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-            {
-                return;
-            }
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
         /// <summary>
         /// Gets or sets the id of the video.
         /// </summary>
@@ -50,7 +26,6 @@
             set
             {
                 id = value;
-                OnPropertyChanged("Id");
             }
         }
 
@@ -67,7 +42,6 @@
             set
             {
                 artist = value;
-                OnPropertyChanged("Artist");
             }
         }
 
@@ -85,7 +59,6 @@
             set
             {
                 searchArtist = value;
-                OnPropertyChanged("SearchArtist");
             }
         }
 
@@ -102,7 +75,6 @@
             set
             {
                 title = value;
-                OnPropertyChanged("Title");
             }
         }
 

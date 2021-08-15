@@ -7,7 +7,7 @@
     /// <summary>
     /// FilterViewModel class.
     /// </summary>
-    public class FilterViewModel : BaseViewModel
+    internal class FilterViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets Filter.

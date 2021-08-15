@@ -22,17 +22,17 @@
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
 
-        private static SQLiteAsyncConnection database;
-
         /// <summary>
         /// The size of the checksum block sum.
         /// </summary>
         private const int BlockSize = 40;
 
+        private static SQLiteAsyncConnection database;
+
         /// <summary>
         /// Singleton access.
         /// </summary>
-        public static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
+        internal static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
         {
             Debug.WriteLine("DataStore.Instance");
 
@@ -44,7 +44,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStore"/> class.
         /// </summary>
-        public DataStore()
+        private DataStore()
         {
             Debug.WriteLine("DataStore.DataStore");
 
@@ -56,7 +56,7 @@
         /// </summary>
         /// <param name="index">The start index of the block.</param>
         /// <param name="checksum">The checksum for the block.</param>
-        public void Checksum(int index, int checksum)
+        public void CheckSumOfBlock(int index, int checksum)
         {
             Debug.WriteLine("DataStore.Checksum");
 
@@ -81,16 +81,16 @@
 
             if (newchecksum != checksum)
             {
-                _ = SignalRClient.Current.FailedChecksum(index);
+                _ = SignalRClient.Current.FailedChecksumAsync(index);
             }
 
             Debug.WriteLine($"Checksum compare for {index} server = {checksum} client = {newchecksum}");
         }
 
         /// <summary>
-        /// Gets all videos from the database.
+        /// Gets a List of all videos from the database.
         /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <returns>A <see cref="List"/> of <see cref="Video"/> objects.</returns>
         public Task<List<Video>> GetAllVideosAsync()
         {
             Debug.WriteLine("DataStore.GetVideosAsync");
@@ -113,10 +113,10 @@
         }
 
         /// <summary>
-        /// Get a filtered list of videos.
+        /// Get a filtered List of Videos based on the filter argument.
         /// </summary>
-        /// <param name="filter">The filter to apply to the list.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <param name="filter">The filter used to restrict the List.</param>
+        /// <returns>A <see cref="List"/> of <see cref="Video"/> objects.</returns>
         public Task<List<Video>> GetFilteredVideosAsync(Filter filter)
         {
             Debug.WriteLine("DataStore.GetFilteredVideosAsync");
@@ -141,9 +141,9 @@
         }
 
         /// <summary>
-        /// Get the top 100 videos.
+        /// Get a List top 100 Videos.
         /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <returns>A <see cref="List"/> of <see cref="Video"/> objects.</returns>
         public Task<List<Video>> GetTop100VideosAsync()
         {
             Debug.WriteLine("DataStore.GetFilteredVideosAsync");
@@ -166,10 +166,10 @@
         }
 
         /// <summary>
-        /// Searches for videos based on the search term.
+        /// Gets a List of Videos that match the term argument.
         /// </summary>
         /// <param name="term">The search term.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <returns>A <see cref="List"/> of <see cref="Video"/> objects.</returns>
         public Task<List<Video>> GetVideosFromTermAsync(string term)
         {
             Debug.WriteLine("DataStore.GetFilteredVideosAsync");
@@ -194,26 +194,23 @@
         }
 
         /// <summary>
-        /// Saves a video object to the database.
-        /// If the video object already exists then it is updated instead.
+        /// Saves a Video object to the database.
+        /// If the Video object already exists then it is updated instead of added.
         /// </summary>
-        /// <param name="video">The video to save.</param>
+        /// <param name="video">The <see cref="Video"/> object to save to the database.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public Task<int> SaveVideoAsync(Video video)
         {
             Debug.WriteLine($"DataStore.SaveVideoAsync {video.Artist} - {video.Title}");
 
-            // Get the checksum before saving the video.
+            // Get the current checksum of the object before saving the video.
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
             stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
             stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
             stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
-
             string str = stringBuilder.ToString();
-
             video.Checksum = 0;
-
             byte[] binary = Encoding.Unicode.GetBytes(str);
 
             foreach (byte b in binary)
@@ -241,26 +238,6 @@
             {
                 Debug.WriteLine("Error: " + ex.Message);
                 return null;
-            }
-        }
-
-        /// <summary>
-        /// Returns the total number of videos in the database.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task<int> TotalVideosAsync()
-        {
-            Debug.WriteLine("DataStore.TotalVideosAsync");
-
-            try
-            {
-                int rv = await database.ExecuteScalarAsync<int>("SELECT COUNT(Id) from Video;");
-                return rv;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error: " + ex.Message);
-                return 0;
             }
         }
     }

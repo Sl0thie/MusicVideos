@@ -27,9 +27,5 @@
             base.OnAppearing();
             BindingContext = VideosSearchViewModel.Current;
         }
-
-        //private void CV_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //}
     }
 }

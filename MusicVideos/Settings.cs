@@ -123,6 +123,11 @@
 
             bool diff = false;
 
+            if (first is null)
+            {
+                throw new ArgumentNullException("first");
+            }
+
             if (last is null)
             {
                 return false;

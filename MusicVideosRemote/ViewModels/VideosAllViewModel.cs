@@ -8,7 +8,7 @@
     /// <summary>
     /// VideosAllViewModel class.
     /// </summary>
-    public class VideosAllViewModel : BaseViewModel
+    internal class VideosAllViewModel : BaseViewModel
     {
         /// <summary>
         /// Gets or sets the Videos collection.
@@ -26,8 +26,6 @@
                 OnPropertyChanged("Videos");
             }
         }
-
-        
 
         /// <summary>
         /// Gets or sets the Total Videos.
@@ -48,7 +46,6 @@
 
         private ObservableCollection<Video> videos;
         private string totalVideos;
-        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VideosAllViewModel"/> class.

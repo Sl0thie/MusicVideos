@@ -51,7 +51,6 @@
         /// <param name="id">The id to validate.</param>
         /// <param name="index">The index of the block.</param>
         /// <param name="checksum">The checksum for the block.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public void SetOutChecksum(string id, int index, int checksum)
         {
             Log.Info("VideoHub.SetOutChecksumAsync");
@@ -75,10 +74,9 @@
         /// </summary>
         /// <param name="id">The id to validate.</param>
         /// <param name="index">The start index of the block.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public void FailedChecksum(string id, int index)
         {
-            Log.Info("VideoHub.FailedChecksumAsync");
+            Log.Info("VideoHub.FailedChecksum");
 
             try
             {
@@ -160,7 +158,7 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetOutVolumeAsync(string id)
         {
-            Log.Info("VideoHub.GetOutVolumeAsync");
+            Log.Info("VideoHub.GetOutVolumeAsync " + DS.Settings.Volume);
 
             try
             {
@@ -183,7 +181,7 @@
         /// <param name="volume">The volume value.</param>
         public void SetOutVolume(string id, int volume)
         {
-            Log.Info("VideoHub.SetOutVolume");
+            Log.Info("VideoHub.SetOutVolume " + volume);
 
             try
             {
@@ -645,11 +643,6 @@
                     // Convert duration to milliseconds.
                     int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
 
-                    // Log.Info.WriteLine($"videoId: {videoId}");
-                    // Log.Info.WriteLine($"duration: {duration}");
-                    // Log.Info.WriteLine($"durationFixed: {durationFixed}");
-                    // Log.Info.WriteLine($"videoWidth: {videoWidth}");
-                    // Log.Info.WriteLine($"videoHeight: {videoHeight}");
                     if (DS.Videos.SetTimer)
                     {
                         DS.MainTimer.Interval = durationFixed;

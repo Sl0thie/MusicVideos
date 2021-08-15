@@ -27,7 +27,7 @@
         /// <summary>
         /// Gets or sets the current SignalRClient.
         /// </summary>
-        internal static SignalRClient Current
+        public static SignalRClient Current
         {
             get
             {
@@ -51,18 +51,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalRClient"/> class.
         /// </summary>
-        public SignalRClient()
+        private SignalRClient()
         {
             Current = this;
-            IinitializeSignalR();
-        }
 
-        private void IinitializeSignalR()
-        {
             try
             {
                 dataHub = new HubConnectionBuilder()
                     .WithUrl("http://192.168.0.6:888/videoHub")
+                    .WithAutomaticReconnect()
                     .Build();
 
                 dataHub.On<string, string>("PlayVideo", (json, time) =>
@@ -105,7 +102,7 @@
                 dataHub.On<int, int>("SetOutChecksum", async (index, checksum) =>
                 {
                     DataStore database = await DataStore.Instance;
-                    database.Checksum(index, checksum);
+                    database.CheckSumOfBlock(index, checksum);
                 });
 
                 dataHub.On<int>("SetOutVolumeAsync", (volume) =>
@@ -135,25 +132,28 @@
         }
 
         /// <summary>
-        /// Invokes Registration with the server.
+        /// Registers the client with the server.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task RegisterAsync()
+        private async Task RegisterAsync()
         {
             await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
         }
 
         /// <summary>
-        /// Invokes DatabaseChecksumAsync with the server.
+        /// Asks the server to start the checksum process.
+        /// This process will not start if another client has already started it.
+        /// If another client has started if then this client uses the previous client's process.
+        /// This will reduce the network traffic and increase the servers responsiveness.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task DatabaseChecksumAsync()
+        private async Task DatabaseChecksumAsync()
         {
             await dataHub.InvokeAsync("GetOutChecksum", hubId);
         }
 
         /// <summary>
-        /// Tell the server that this checksum block has failed. The server will then resend the data.
+        /// Tell the server that this checksum block has failed. The server will then resend the data of that block.
         /// </summary>
         /// <param name="index">The start index of the block.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
@@ -164,27 +164,13 @@
 
         #endregion
 
-        #region Debugging
-
-        /// <summary>
-        /// Passes an exception to the server.
-        /// </summary>
-        /// <param name="ex">The exception to pass.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task ErrorAsync(Exception ex)
-        {
-            await dataHub.InvokeAsync("SetInXamarinException", hubId, JsonConvert.SerializeObject(ex, Formatting.None));
-        }
-
-        #endregion
-
         #region Settings / Filter / Volume
 
         /// <summary>
         /// Ask the server for the current filter.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetOutFilterAsync()
+        private async Task GetOutFilterAsync()
         {
             await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
         }
@@ -218,27 +204,6 @@
         public async Task SetInVolumeAsync(int volume)
         {
             await dataHub.InvokeAsync("SetOutVolume", hubId, volume);
-        }
-
-        /// <summary>
-        /// Passes a filter to the server.
-        /// </summary>
-        /// <param name="filter">The filter to pass.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [Obsolete("Use SetInSettingsAsync instead.")]
-        public async Task SendFilterAsync(Filter filter)
-        {
-            await dataHub.InvokeAsync("SendFilterAsync", hubId, JsonConvert.SerializeObject(filter, Formatting.None));
-        }
-
-        /// <summary>
-        /// Invokes Get Filter command on the server.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        [Obsolete("Use GetOutSettingsAsync instead.")]
-        public async Task GetFilterAsync()
-        {
-            await dataHub.InvokeAsync("GetFilterAsync", hubId);
         }
 
         #endregion
