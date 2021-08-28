@@ -73,12 +73,14 @@
 
         private readonly Collection<int> videoPrevious = new Collection<int>();
         private readonly Collection<int> videoQueue = new Collection<int>();
+        private readonly Collection<int> checksumVideos = new Collection<int>();
         private bool setTimer;
         private DateTime lastStart;
         private Video lastVideo;
         private PlayState playState = PlayState.Unknown;
         private int previousIndex;
         private bool processingChecksum;
+        private bool processingChecksumVideos;
 
         /// <summary>
         /// Gets or sets a value indicating whether the timer needs to be set. (video started with a 0 duration).
@@ -710,18 +712,16 @@
 
             if (!processingChecksum)
             {
-                processingChecksum = true;
-
                 await Task.Run(
                 async () =>
                 {
+                    processingChecksum = true;
                     int totalvideos = GetTotalVideos();
                     for (int i = 0; i < totalvideos; i += BlockSize)
                     {
-                        // token.ThrowIfCancellationRequested();
                         await Task.Delay(5000);
 
-                        Log.Info("Processing " + i);
+                        // Log.Info("Processing " + i);
 
                         try
                         {
@@ -744,11 +744,10 @@
                         }
                     }
 
+                    processingChecksum = false;
                     return;
                 });
             }
-
-            processingChecksum = false;
         }
 
         /// <summary>
@@ -761,28 +760,45 @@
             Log.Info("Videos.SendVideosBlock " + index);
 
             await Task.Run(
-                async () =>
+                () =>
                 {
                     for (int i = 0; i < BlockSize; i++)
                     {
-                        await Task.Delay(5000);
-
-                        try
-                        {
-                            Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {index + i}");
-                            List<Video> videos = rv.Result;
-                            Video nextVideo = videos[0];
-
-                            await DS.Comms.SaveVideoAsync(nextVideo);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(ex);
-                        }
+                        checksumVideos.Add(index + i);
+                        // await Task.Delay(5000);
                     }
 
-                    return;
+                    ProcessChecksumVideos();
                 });
+        }
+
+        /// <summary>
+        /// Process all the failed checksum blocks of videos by resending them.
+        /// </summary>
+        public void ProcessChecksumVideos()
+        {
+            Log.Info("Videos.ProcessChecksumVideos");
+
+            if (!processingChecksumVideos)
+            {
+                Task.Run(
+                async () =>
+                {
+                    processingChecksumVideos = true;
+
+                    while (checksumVideos.Count > 0)
+                    {
+                        Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = {checksumVideos[0]}");
+                        List<Video> videos = rv.Result;
+                        Video nextVideo = videos[0];
+                        await DS.Comms.SaveVideoAsync(nextVideo);
+                        await Task.Delay(1000);
+                        checksumVideos.RemoveAt(0);
+                    }
+
+                    processingChecksumVideos = false;
+                });
+            }
         }
     }
 }

@@ -84,7 +84,7 @@
                 _ = SignalRClient.Current.FailedChecksumAsync(index);
             }
 
-            Debug.WriteLine($"Checksum compare for {index} server = {checksum} client = {newchecksum}");
+            Debug.WriteLine($"Checksum compare for {index} server = {checksum} client = {newchecksum} diff = {checksum - newchecksum}");
         }
 
         /// <summary>

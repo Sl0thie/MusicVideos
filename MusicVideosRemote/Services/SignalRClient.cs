@@ -45,7 +45,7 @@
             }
         }
 
-        private HubConnection dataHub;
+        private readonly HubConnection dataHub;
         private string hubId = string.Empty;
 
         /// <summary>
@@ -157,9 +157,9 @@
         /// </summary>
         /// <param name="index">The start index of the block.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task FailedChecksum(int index)
+        public async Task FailedChecksumAsync(int index)
         {
-            await dataHub.InvokeAsync("FailedChecksumAsync", hubId, index);
+            await dataHub.InvokeAsync("FailedChecksum", hubId, index);
         }
 
         #endregion

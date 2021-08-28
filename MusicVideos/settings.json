@@ -1,1 +1,1 @@
-{"Volume":0,"FilterRating":0,"Filter":{"RatingMinimum":50,"RatingMaximum":100,"DateTimeMinimum":"1940-01-01T00:00:00","DateTimeMaximum":"2021-07-24T22:18:28.803452+10:00","Genres":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]}}
+{"Volume":50,"FilterRating":0,"Filter":{"RatingMinimum":50,"RatingMaximum":100,"DateTimeMinimum":"0001-01-01T00:00:00","DateTimeMaximum":"9999-12-31T23:59:59.9999999","ReleasedMinimum":1900,"ReleasedMaximum":2021,"Genres":[]}}

@@ -120,8 +120,7 @@
             File.WriteAllText("settings.json", json);
         }
 
-
-        public static void MainTimerElapsed(object sender, ElapsedEventArgs e)
+        private static void MainTimerElapsed(object sender, ElapsedEventArgs e)
         {
             Log.Info("DS.MainTimer_Elapsed");
 
