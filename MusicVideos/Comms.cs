@@ -65,27 +65,27 @@
                            .Build();
                 }
 
-                videoHub.On<string, string>("SendMessage", (id, message) =>
-                {
-                    Log.Info($"SendMessage: {id} - {message}");
-                });
+                _ = videoHub.On<string, string>("SendMessage", (id, message) =>
+                  {
+                      Log.Info($"SendMessage: {id} - {message}");
+                  });
 
-                videoHub.On<string, string>("SendError", (id, json) =>
-                {
-                    Log.Info($"ERROR: {id} - {json}");
-                });
+                _ = videoHub.On<string, string>("SendError", (id, json) =>
+                  {
+                      Log.Info($"ERROR: {id} - {json}");
+                  });
 
-                videoHub.On<string>("GetDatabaseChecksum", (id) =>
-                {
-                    _ = DS.Videos.GetDatabaseChecksumAsync();
-                });
+                _ = videoHub.On<string>("GetDatabaseChecksum", (id) =>
+                  {
+                      _ = DS.Videos.GetDatabaseChecksumAsync();
+                  });
 
                 // --------------------------------------------------------------------------------------------------
-                videoHub.On<string>("SaveVideo", (video) =>
-                {
-                    Log.Info($"SaveVideo: - {video}");
-                    _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
-                });
+                _ = videoHub.On<string>("SaveVideo", (video) =>
+                  {
+                      Log.Info($"SaveVideo: - {video}");
+                      _ = DS.Videos.SaveVideoAsync(JsonConvert.DeserializeObject<Video>(video));
+                  });
 
                 // Initialize SignalR.
                 _ = InitializeSignalRAsync();

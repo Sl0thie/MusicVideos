@@ -62,54 +62,54 @@
                     .WithAutomaticReconnect()
                     .Build();
 
-                dataHub.On<string, string>("PlayVideo", (json, time) =>
-                {
-                    Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-                    NowPlayingViewModel.Current.CurrentVideo = newVideo;
-                });
+                _ = dataHub.On<string, string>("PlayVideo", (json, time) =>
+                  {
+                      Video newVideo = JsonConvert.DeserializeObject<Video>(json);
+                      NowPlayingViewModel.Current.CurrentVideo = newVideo;
+                  });
 
-                dataHub.On<string>("SaveVideo", async (json) =>
-                {
-                    Video newVideo = JsonConvert.DeserializeObject<Video>(json);
-                    DataStore database = await DataStore.Instance;
-                    await database.SaveVideoAsync(newVideo);
-                });
+                _ = dataHub.On<string>("SaveVideo", async (json) =>
+                  {
+                      Video newVideo = JsonConvert.DeserializeObject<Video>(json);
+                      DataStore database = await DataStore.Instance;
+                      _ = await database.SaveVideoAsync(newVideo);
+                  });
 
-                dataHub.On<string>("SaveFilter", (json) =>
-                {
-                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    Settings.Filter = newFilter;
-                });
+                _ = dataHub.On<string>("SaveFilter", (json) =>
+                  {
+                      Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+                      Settings.Filter = newFilter;
+                  });
 
                 // -----------------------------------------------------------------------------
-                dataHub.On<string>("SetOutRegistrationAsync", (id) =>
-                {
-                    hubId = id;
-                    Debug.WriteLine("Hub Registration Id: " + id);
-                });
+                _ = dataHub.On<string>("SetOutRegistrationAsync", (id) =>
+                  {
+                      hubId = id;
+                      Debug.WriteLine("Hub Registration Id: " + id);
+                  });
 
-                dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
-                {
-                    Settings.Volume = volume;
-                });
+                _ = dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
+                  {
+                      Settings.Volume = volume;
+                  });
 
-                dataHub.On<string>("SetOutFilterAsync", (json) =>
-                {
-                    Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
-                    Settings.Filter = newFilter;
-                });
+                _ = dataHub.On<string>("SetOutFilterAsync", (json) =>
+                  {
+                      Filter newFilter = JsonConvert.DeserializeObject<Filter>(json);
+                      Settings.Filter = newFilter;
+                  });
 
-                dataHub.On<int, int>("SetOutChecksum", async (index, checksum) =>
-                {
-                    DataStore database = await DataStore.Instance;
-                    database.CheckSumOfBlock(index, checksum);
-                });
+                _ = dataHub.On<int, int>("SetOutChecksum", async (index, checksum) =>
+                  {
+                      DataStore database = await DataStore.Instance;
+                      database.CheckSumOfBlock(index, checksum);
+                  });
 
-                dataHub.On<int>("SetOutVolumeAsync", (volume) =>
-                {
-                    Debug.WriteLine($"SetOutVolumeAsync:  {volume}");
-                    Settings.Volume = volume;
-                });
+                _ = dataHub.On<int>("SetOutVolumeAsync", (volume) =>
+                  {
+                      Debug.WriteLine($"SetOutVolumeAsync:  {volume}");
+                      Settings.Volume = volume;
+                  });
             }
             catch (Exception ex)
             {
@@ -172,7 +172,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         private async Task GetOutFilterAsync()
         {
-            await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+            }
         }
 
         /// <summary>
@@ -181,9 +189,20 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetInFiltersAsync()
         {
-            if (Settings.Filter is object)
+            if (dataHub.State == HubConnectionState.Connected)
             {
-                await dataHub.InvokeAsync("SetInFilter", hubId, JsonConvert.SerializeObject(Settings.Filter, Formatting.None));
+                if (Settings.Filter is object)
+                {
+                    await dataHub.InvokeAsync("SetInFilter", hubId, JsonConvert.SerializeObject(Settings.Filter, Formatting.None));
+                }
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                if (Settings.Filter is object)
+                {
+                    await dataHub.InvokeAsync("SetInFilter", hubId, JsonConvert.SerializeObject(Settings.Filter, Formatting.None));
+                }
             }
         }
 
@@ -193,7 +212,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task GetOutVolumeAsync()
         {
-            await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
+            }
         }
 
         /// <summary>
@@ -203,7 +230,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SetInVolumeAsync(int volume)
         {
-            await dataHub.InvokeAsync("SetOutVolume", hubId, volume);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("SetOutVolume", hubId, volume);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("SetOutVolume", hubId, volume);
+            }
         }
 
         #endregion
@@ -217,7 +252,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task QueueVideoAsync(int id)
         {
-            await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("QueueVideoAsync", hubId, id.ToString());
+            }
         }
 
         #endregion
@@ -230,7 +273,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPreviousVideo()
         {
-            await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
+            }
         }
 
         /// <summary>
@@ -239,7 +290,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandNextVideo()
         {
-            await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+            }
         }
 
         /// <summary>
@@ -248,7 +307,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPlayVideo()
         {
-            await dataHub.InvokeAsync("ButtonPlayVideoAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("ButtonPlayVideoAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("ButtonPlayVideoAsync", hubId);
+            }
         }
 
         /// <summary>
@@ -257,7 +324,15 @@
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CommandPauseVideo()
         {
-            await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+            }
         }
 
         #endregion

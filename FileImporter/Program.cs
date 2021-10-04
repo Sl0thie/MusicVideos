@@ -23,7 +23,6 @@ namespace FileImporter
         private static Dictionary<int, Video> Videos = new Dictionary<int, Video>(); // Dictionary of Video objects related to the files.
         private const string VideoDatabaseFilename = "VideoDatabase.db3";
 
-
         /// <summary>
         /// Physical path to the directory holding the video files.
         /// </summary>
@@ -40,7 +39,6 @@ namespace FileImporter
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
-
         private static int NoOfVideos { get; set; }                                  // No of Videos that are in the store.
         private static DateTime LastWebSearch = DateTime.MinValue;                   // Time of the last web search. Used to limit searches per hour.
 
@@ -49,7 +47,6 @@ namespace FileImporter
         /// Could probably use a better name.
         /// </summary>
         private static SQLiteAsyncConnection videosDatabase;
-
 
         /// <summary>
         /// FilImporter preforms several tasks related to the management of a file collection of music videos. Files are first converted to formats that can be played by HTML5 Video tag. Files are then stored in a "Artist\Title" format after several properties are obtained. Then the details of these operations are recorded in a json file in the base folder.
@@ -60,7 +57,7 @@ namespace FileImporter
             //ConvertAllWebM();
             ProcessNewVideos();
             Console.Write("Press any key to close this window...");
-            Console.ReadKey();
+            _ = Console.ReadKey();
         }
 
         /// <summary>
@@ -93,7 +90,7 @@ namespace FileImporter
             {
                 Video video = new Video();
                 video.Path = path;
-                ConvertWebMtoMP4(video);
+                _ = ConvertWebMtoMP4(video);
             }
         }
 
@@ -133,6 +130,7 @@ namespace FileImporter
                     Log("File Rejected (name pattern) : " + path);
                     continue;
                 }
+
                 string artist = filename.Substring(0, filename.IndexOf(" - ")).Trim();
                 string title = filename.Substring(filename.IndexOf(" - ") + 3).Trim();
 
@@ -180,6 +178,7 @@ namespace FileImporter
                             MoveFileToErrorFolder(video);
                             continue;
                         }
+
                         break;
                     case ".mp4":
                     case ".MP4":
@@ -234,7 +233,6 @@ namespace FileImporter
 
                 SaveVideoAsync(video);
 
-
                 Log("Video Added : " + video.Artist + " - " + video.Title);
             }
         }
@@ -257,11 +255,11 @@ namespace FileImporter
                 // Update the video or add it if it is not already there.
                 if (videos.Count == 1)
                 {
-                    videosDatabase.UpdateAsync(video);
+                    _ = videosDatabase.UpdateAsync(video);
                 }
                 else
                 {
-                    videosDatabase.InsertAsync(video);
+                    _ = videosDatabase.InsertAsync(video);
                 }
             }
             catch (Exception ex)
@@ -269,7 +267,6 @@ namespace FileImporter
                 Debug.WriteLine("Error: " + ex.Message);
             }
         }
-
 
         /// <summary>
         /// Moves the file to the error directory.
@@ -399,11 +396,12 @@ namespace FileImporter
             //Create new folder for file.
             if (!Directory.Exists(BasePath + video.Artist))
             {
-                Directory.CreateDirectory(BasePath + video.Artist);
+                _ = Directory.CreateDirectory(BasePath + video.Artist);
             }
+
             if (!Directory.Exists(BasePath + video.Artist + @"\" + video.Title))
             {
-                Directory.CreateDirectory(BasePath + video.Artist + @"\" + video.Title);
+                _ = Directory.CreateDirectory(BasePath + video.Artist + @"\" + video.Title);
             } 
 
             //Move the file to new folder.
@@ -454,6 +452,7 @@ namespace FileImporter
                 Artist = Artist.Substring(Artist.IndexOf(">") + 1);
                 Artist = Artist.Substring(0, Artist.IndexOf("<"));
             }
+
             int dist = GetDamerauLevenshteinDistance(Artist, video.Artist);
             if(dist > 300) //<----------------------------------------------------- usually three.
             {
@@ -476,6 +475,7 @@ namespace FileImporter
                 Album = Album.Substring(Album.IndexOf(">") + 1);
                 Album = Album.Substring(0, Album.IndexOf("<"));
             }
+
             video.Album = Album;
 
             if (htmlString.IndexOf(">Released</") > 0)
@@ -485,6 +485,7 @@ namespace FileImporter
                 Released = Released.Substring(0, Released.IndexOf("</div>") - 6);
                 Released = Detag(Released);
             }
+
             if (Released.Length == 4)
             {
                 video.Released = new DateTime(Convert.ToInt32(Released), 1, 1, 0, 0, 0, DateTimeKind.Local);
@@ -536,6 +537,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Alternative);
                         }
+
                         break;
 
                     case "blues":
@@ -544,6 +546,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Blues);
                         }
+
                         break;
 
                     case "country":
@@ -554,6 +557,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Country);
                         }
+
                         break;
 
                     case "dance":
@@ -562,6 +566,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Dance);
                         }
+
                         break;
 
                     case "dance/electronic":
@@ -572,10 +577,12 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Dance);
                         }
+
                         if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
                             video.Genres.Add(FileImporter.Genre.Electronic);
                         }
+
                         break;
 
                     case "dance pop":
@@ -583,10 +590,12 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Dance);
                         }
+
                         if (!video.Genres.Contains(FileImporter.Genre.Pop))
                         {
                             video.Genres.Add(FileImporter.Genre.Pop);
                         }
+
                         break;
 
                     case "disco":
@@ -595,6 +604,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Pop);
                         }
+
                         break;
 
                     case "dubstep":
@@ -602,6 +612,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Dubstep);
                         }
+
                         break;
 
                     case "easy listening":
@@ -611,6 +622,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.EasyListening);
                         }
+
                         break;
 
                     case "electronica":
@@ -619,6 +631,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Electronic);
                         }
+
                         break;
 
                     case "electro house":
@@ -626,10 +639,12 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.House);
                         }
+
                         if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
                             video.Genres.Add(FileImporter.Genre.Electronic);
                         }
+
                         break;
 
                     case "electropop":
@@ -637,10 +652,12 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Pop);
                         }
+
                         if (!video.Genres.Contains(FileImporter.Genre.Electronic))
                         {
                             video.Genres.Add(FileImporter.Genre.Electronic);
                         }
+
                         break;
 
                     case "hip-hop/rap":
@@ -656,6 +673,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.HipHop);
                         }
+
                         break;
 
                     case "house":
@@ -667,6 +685,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.House);
                         }
+
                         break;
 
                     case "jazz":
@@ -674,6 +693,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Jazz);
                         }
+
                         break;
 
                     case "metal":
@@ -686,6 +706,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Metal);
                         }
+
                         break;
 
                     case "pop":
@@ -706,6 +727,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Pop);
                         }
+
                         break;
 
                     case "punk":
@@ -714,6 +736,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Punk);
                         }
+
                         break;
 
                     case "reggae":
@@ -722,6 +745,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Reggae);
                         }
+
                         break;
 
                     case "rhythm and blues":
@@ -736,6 +760,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.RhythmAndBlues);
                         }
+
                         break;
 
                     case "rock":
@@ -750,6 +775,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Rock);
                         }
+
                         break;
 
                     case "ska":
@@ -758,6 +784,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Ska);
                         }
+
                         break;
 
                     case "techno":
@@ -765,6 +792,7 @@ namespace FileImporter
                         {
                             video.Genres.Add(FileImporter.Genre.Techno);
                         }
+
                         break;
 
                     default:
@@ -820,8 +848,15 @@ namespace FileImporter
 
             int[,] matrix = new int[bounds.Height, bounds.Width];
 
-            for (int height = 0; height < bounds.Height; height++) { matrix[height, 0] = height; };
-            for (int width = 0; width < bounds.Width; width++) { matrix[0, width] = width; };
+            for (int height = 0; height < bounds.Height; height++)
+            {
+                matrix[height, 0] = height;
+            };
+
+            for (int width = 0; width < bounds.Width; width++)
+            {
+                matrix[0, width] = width;
+            };
 
             for (int height = 1; height < bounds.Height; height++)
             {
@@ -858,7 +893,7 @@ namespace FileImporter
             newpath = "\"" + newpath + ".png\"";
             string arguments = "-i " + closedpath + " -ss 00:00:02 -frames:v 1 " + newpath;
 
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
@@ -867,12 +902,12 @@ namespace FileImporter
                 WorkingDirectory = ffmpegpathEx
             };
 
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
                 p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
-                p.Start();
-                p.WaitForExit(120000);
+                _ = p.Start();
+                _ = p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
                     Log("MakeThumbnail Failed for " + filepath);
@@ -891,7 +926,7 @@ namespace FileImporter
             newpath = "\"" + newpath + "_wave1.png\"";
             string arguments = "-i " + closedpath + " -filter_complex \"compand=gain=3,showwavespic=s=50000x100:colors=#4040ff\" -frames:v 1 " + newpath;
             string eOut = null;
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
@@ -900,12 +935,12 @@ namespace FileImporter
                 WorkingDirectory = ffmpegpathEx
             };
 
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
                 p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
-                p.Start();
-                p.WaitForExit(120000);
+                _ = p.Start();
+                _ = p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
                     Log("MakeWaveForm1 Failed for " + filepath);
@@ -924,7 +959,7 @@ namespace FileImporter
             string newpath = filepath.Substring(0, filepath.LastIndexOf("."));
             newpath = "\"" + newpath + "_wave2.png\"";
             string arguments = "-i " + closedpath + " -filter_complex \"compand=gain=3,showwavespic=s=50000x100:colors=#323232\" -frames:v 1 " + newpath;
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = true,
                 UseShellExecute = false,
@@ -933,12 +968,12 @@ namespace FileImporter
                 WorkingDirectory = ffmpegpathEx
             };
 
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
                 p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
-                p.Start();
-                p.WaitForExit(120000);
+                _ = p.Start();
+                _ = p.WaitForExit(120000);
                 if (!p.HasExited)
                 {
                     Log("MakeWaveForm2 Failed for " + filepath);
@@ -962,7 +997,7 @@ namespace FileImporter
             Log("closed path " + closedpath);
             Log("new path " + newpath);
 
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = false,
                 UseShellExecute = true,
@@ -1009,7 +1044,7 @@ namespace FileImporter
             Log("closedpath " + closedpath);
             Log("newpath " + newpath);
 
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = false,
                 UseShellExecute = true,
@@ -1056,7 +1091,7 @@ namespace FileImporter
             Log("closed path " + closedpath);
             Log("new path " + newpath);
 
-            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
+            ProcessStartInfo processInfo = new ProcessStartInfo("cmd.exe", "/c " + "ffmpeg" + " " + arguments)
             {
                 CreateNoWindow = false,
                 UseShellExecute = true,

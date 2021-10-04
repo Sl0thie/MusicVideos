@@ -227,11 +227,12 @@
             try
             {
                 // Get video from the database.
-                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [PlayCount] = 0");
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM Video WHERE PlayCount = 0");
                 List<Video> videos = rv.Result;
 
                 foreach (Video next in videos)
                 {
+                    Log.Info("Videos.AddUnplayedToQueue item = " + next.Id);
                     videoQueue.Add(next.Id);
                 }
             }
@@ -551,10 +552,10 @@
             {
                 // Get the checksum before saving the video.
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
-                stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
-                stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
-                stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
+                _ = stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
+                _ = stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
+                _ = stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
+                _ = stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
 
                 string str = stringBuilder.ToString();
 
@@ -583,12 +584,12 @@
                     if (videos.Count == 1)
                     {
                         Log.Info("Updating");
-                        await videosDatabase.UpdateAsync(video);
+                        _ = await videosDatabase.UpdateAsync(video);
                     }
                     else
                     {
                         Log.Info("Inserting");
-                        await videosDatabase.InsertAsync(video);
+                        _ = await videosDatabase.InsertAsync(video);
                     }
                 }
                 catch (Exception ex)
@@ -722,7 +723,6 @@
                         await Task.Delay(5000);
 
                         // Log.Info("Processing " + i);
-
                         try
                         {
                             int checksum = 0;
@@ -765,7 +765,6 @@
                     for (int i = 0; i < BlockSize; i++)
                     {
                         checksumVideos.Add(index + i);
-                        // await Task.Delay(5000);
                     }
 
                     ProcessChecksumVideos();
@@ -781,7 +780,7 @@
 
             if (!processingChecksumVideos)
             {
-                Task.Run(
+                _ = Task.Run(
                 async () =>
                 {
                     processingChecksumVideos = true;

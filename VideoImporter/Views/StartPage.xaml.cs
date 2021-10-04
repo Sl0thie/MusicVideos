@@ -16,7 +16,7 @@
     using System.Windows.Shapes;
 
     /// <summary>
-    /// Interaction logic for StartPage.xaml
+    /// Interaction logic for StartPage.xaml.
     /// </summary>
     public partial class StartPage : Page
     {

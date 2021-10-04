@@ -36,7 +36,7 @@
         {
             Debug.WriteLine("DataStore.Instance");
 
-            var instance = new DataStore();
+            DataStore instance = new DataStore();
             CreateTableResult result = await database.CreateTableAsync<Video>();
             return instance;
         });
@@ -151,7 +151,9 @@
             try
             {
                 string sql = "SELECT * FROM Video ";
-                sql += "ORDER BY Rating DESC, QueuedCount DESC, PlayCount DESC LIMIT 100;";
+
+                // sql += "ORDER BY Rating DESC, QueuedCount DESC, PlayCount DESC LIMIT 100;";
+                sql += "ORDER BY Rating DESC, QueuedCount DESC, PlayCount;";
 
                 Debug.WriteLine($"SQL {sql}");
 
@@ -205,10 +207,10 @@
 
             // Get the current checksum of the object before saving the video.
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
-            stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
-            stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
-            stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
+            _ = stringBuilder.Append(video.Added.ToBinary()).Append(video.Album).Append(video.Artist).Append(video.Duration).Append(video.Errors);
+            _ = stringBuilder.Append(video.Extension).Append(video.Id).Append(video.LastPlayed.ToBinary()).Append(video.LastQueued.ToBinary()).Append(video.PhysicalPath);
+            _ = stringBuilder.Append(video.PlayCount).Append(video.PlayTime).Append(video.QueuedCount).Append(video.Rating).Append(video.ReleasedYear);
+            _ = stringBuilder.Append(video.SearchArtist).Append(video.Title).Append(video.VideoHeight).Append(video.VideoWidth).Append(video.VirtualPath);
             string str = stringBuilder.ToString();
             video.Checksum = 0;
             byte[] binary = Encoding.Unicode.GetBytes(str);

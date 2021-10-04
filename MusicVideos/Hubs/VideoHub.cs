@@ -36,7 +36,7 @@
             {
                 if (DS.Comms.CheckId(id))
                 {
-                    Task.Run(() => DS.Videos.BroadcastChecksumsAsync());
+                    _ = Task.Run(() => DS.Videos.BroadcastChecksumsAsync());
                 }
             }
             catch (Exception ex)
