@@ -27,6 +27,7 @@
         /// </summary>
         private const int BlockSize = 40;
 
+        // private static SQLiteAsyncConnection database;
         private static SQLiteAsyncConnection database;
 
         /// <summary>

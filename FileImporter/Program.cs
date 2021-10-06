@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 [assembly: CLSCompliant(true)]
 namespace FileImporter
 {
-    class Program
+    internal class Program
     {
         private const string ImportPath = @"F:\Music Videos for Import\";            // Path that the files are to be imported from.
         private const string BasePath = @"F:\Music Videos\";                         // Base path that the files are stored.
@@ -51,7 +51,7 @@ namespace FileImporter
         /// <summary>
         /// FilImporter preforms several tasks related to the management of a file collection of music videos. Files are first converted to formats that can be played by HTML5 Video tag. Files are then stored in a "Artist\Title" format after several properties are obtained. Then the details of these operations are recorded in a json file in the base folder.
         /// </summary>
-        static void Main()
+        private static void Main()
         {
             //MoveAllFiles();
             //ConvertAllWebM();
@@ -76,7 +76,7 @@ namespace FileImporter
         /// </summary>
         private static void MoveAllFiles()
         {
-            foreach (var path in Directory.EnumerateFiles(BasePath, "*.*", SearchOption.AllDirectories))
+            foreach (string path in Directory.EnumerateFiles(BasePath, "*.*", SearchOption.AllDirectories))
             {
                 string filename = path.Substring(path.LastIndexOf(@"\") + 1);
                 Log("Moving File : " + path);
@@ -86,10 +86,12 @@ namespace FileImporter
 
         private static void ConvertAllWebM()
         {
-            foreach (var path in Directory.EnumerateFiles(BasePath, "*.webm", SearchOption.AllDirectories))
+            foreach (string path in Directory.EnumerateFiles(BasePath, "*.webm", SearchOption.AllDirectories))
             {
-                Video video = new Video();
-                video.Path = path;
+                Video video = new Video
+                {
+                    Path = path
+                };
                 _ = ConvertWebMtoMP4(video);
             }
         }
@@ -119,7 +121,7 @@ namespace FileImporter
             }
 
             // Convert all videos.
-            foreach (var path in Directory.EnumerateFiles(ImportPath, "*.*", SearchOption.TopDirectoryOnly))
+            foreach (string path in Directory.EnumerateFiles(ImportPath, "*.*", SearchOption.TopDirectoryOnly))
             {
                 // Check for the artist/title split pattern.
                 string filename = path.Substring(path.LastIndexOf(@"\") + 1);
@@ -134,19 +136,21 @@ namespace FileImporter
                 string artist = filename.Substring(0, filename.IndexOf(" - ")).Trim();
                 string title = filename.Substring(filename.IndexOf(" - ") + 3).Trim();
 
-                Video video = new Video();
-                video.Artist = artist;
-                video.Title = title;
-                video.Extension = extension;
-                video.Path = path;
-                video.LastPlayed = DateTime.MinValue;
-                video.LastQueued = DateTime.MinValue;
-                video.Released = DateTime.MinValue;
-                video.Added = DateTime.Now;
-                video.Rating = 50;
-                video.PlayCount = 0;
-                video.PlayTime = 0;
-                video.QueuedCount = 0;
+                Video video = new Video
+                {
+                    Artist = artist,
+                    Title = title,
+                    Extension = extension,
+                    Path = path,
+                    LastPlayed = DateTime.MinValue,
+                    LastQueued = DateTime.MinValue,
+                    Released = DateTime.MinValue,
+                    Added = DateTime.Now,
+                    Rating = 50,
+                    PlayCount = 0,
+                    PlayTime = 0,
+                    QueuedCount = 0
+                };
                 if (artist.Length > 4)
                 {
                     if (artist.Substring(0, 4) == "The ")
@@ -851,12 +855,12 @@ namespace FileImporter
             for (int height = 0; height < bounds.Height; height++)
             {
                 matrix[height, 0] = height;
-            };
+            }
 
             for (int width = 0; width < bounds.Width; width++)
             {
                 matrix[0, width] = width;
-            };
+            }
 
             for (int height = 1; height < bounds.Height; height++)
             {
@@ -1112,34 +1116,32 @@ namespace FileImporter
         /// <returns></returns>
         public static string GetSearchEngineString(string searchTerm, SearchEngine engine)
         {
-            string returnValue = "";
-
             //General replacement.
-            returnValue = searchTerm.Replace("+", "%2B"); // For query only otherwise use %20.
-            returnValue = searchTerm.Replace(" ", "+");
-            returnValue = searchTerm.Replace("%", "%25");
-            returnValue = searchTerm.Replace(",", "u%2C");
-            returnValue = searchTerm.Replace("&", "%26");
-            returnValue = searchTerm.Replace("!", "%21");
-            returnValue = searchTerm.Replace("@", "%40");
-            returnValue = searchTerm.Replace("#", "%23");
-            returnValue = searchTerm.Replace("$", "%24");
-            returnValue = searchTerm.Replace("^", "%5E");
-            returnValue = searchTerm.Replace("(", "%28");
-            returnValue = searchTerm.Replace(")", "%29");
-            returnValue = searchTerm.Replace("=", "%3D");
-            returnValue = searchTerm.Replace("`", "%60");
-            returnValue = searchTerm.Replace("{", "%7B");
-            returnValue = searchTerm.Replace("}", "%7D");
-            returnValue = searchTerm.Replace("[", "%5B");
-            returnValue = searchTerm.Replace("]", "%5D");
-            returnValue = searchTerm.Replace("|", "%7C");
-            returnValue = searchTerm.Replace("\\", "%5C");
-            returnValue = searchTerm.Replace(":", "%3A");
-            returnValue = searchTerm.Replace(";", "%3B");
-            returnValue = searchTerm.Replace("'", "%27");
-            returnValue = searchTerm.Replace("?", "%3F");
-            returnValue = searchTerm.Replace("/", "%2F");
+            string returnValue = searchTerm.Replace("+", "%2B");
+            returnValue = returnValue.Replace(" ", "+");
+            returnValue = returnValue.Replace("%", "%25");
+            returnValue = returnValue.Replace(",", "u%2C");
+            returnValue = returnValue.Replace("&", "%26");
+            returnValue = returnValue.Replace("!", "%21");
+            returnValue = returnValue.Replace("@", "%40");
+            returnValue = returnValue.Replace("#", "%23");
+            returnValue = returnValue.Replace("$", "%24");
+            returnValue = returnValue.Replace("^", "%5E");
+            returnValue = returnValue.Replace("(", "%28");
+            returnValue = returnValue.Replace(")", "%29");
+            returnValue = returnValue.Replace("=", "%3D");
+            returnValue = returnValue.Replace("`", "%60");
+            returnValue = returnValue.Replace("{", "%7B");
+            returnValue = returnValue.Replace("}", "%7D");
+            returnValue = returnValue.Replace("[", "%5B");
+            returnValue = returnValue.Replace("]", "%5D");
+            returnValue = returnValue.Replace("|", "%7C");
+            returnValue = returnValue.Replace("\\", "%5C");
+            returnValue = returnValue.Replace(":", "%3A");
+            returnValue = returnValue.Replace(";", "%3B");
+            returnValue = returnValue.Replace("'", "%27");
+            returnValue = returnValue.Replace("?", "%3F");
+            returnValue = returnValue.Replace("/", "%2F");
 
             //Engine specific replacement.
             switch (engine)

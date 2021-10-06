@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace MusicVideos.Pages
+﻿namespace MusicVideos.Pages
 {
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     /// <summary>
     /// Razor page for Player.cshtml.
     /// </summary>

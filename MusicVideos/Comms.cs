@@ -46,7 +46,7 @@
             try
             {
                 // Create new id for the hub.
-                HubId = "H" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+                HubId = "H" + nextRemote++.ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
                 ids.Add(HubId);
 
                 // Switch between IIS (Publish) and IIS Express. (Debug)
@@ -197,7 +197,7 @@
         {
             Log.Info("Comms.GetRemoteId");
 
-            string registration = "R" + (nextRemote++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+            string registration = "R" + nextRemote++.ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(registration);
             return registration;
         }
@@ -210,7 +210,7 @@
         {
             Log.Info("Comms.GetPlayerId");
 
-            string registration = "P" + (nextPlayer++).ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
+            string registration = "P" + nextPlayer++.ToString("000") + "-" + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString() + rnd.Next(0, 10).ToString();
             ids.Add(registration);
             return registration;
         }

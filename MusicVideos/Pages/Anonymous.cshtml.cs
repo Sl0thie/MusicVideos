@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace MusicVideos.Pages
 {
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     /// <summary>
     /// AnonymousModel class.
     /// </summary>

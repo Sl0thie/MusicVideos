@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MusicVideos.Hubs;
-
-namespace MusicVideos
+﻿namespace MusicVideos
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
+    using MusicVideos.Hubs;
+
     /// <summary>
     /// This is the entry point of the ASP.net application. It contains application configuration related items.
     /// </summary>
@@ -18,7 +19,7 @@ namespace MusicVideos
         /// <param name="configuration">Represents a set of key/value application configuration properties.</param>
         public Startup(IConfiguration configuration)
         {
-            this.Configuration = configuration;
+            Configuration = configuration;
         }
 
         /// <summary>
