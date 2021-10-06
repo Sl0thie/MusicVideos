@@ -432,18 +432,17 @@ namespace FileImporter
             WebClient client = new WebClient();
             client.Headers.Add("user-agent", "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/90.0.4430.93 safari/537.36 edg/90.0.818.50");
             string searchterm = GetSearchEngineString(video.Artist + " - " + video.Title, SearchEngine.GoogleAU);
-
-            string htmlString = "";
             string Artist = "";
             string Album = "";
             string Released = "";
             string Genre = "";
+            string htmlString;
 
             try
             {
                 htmlString = client.DownloadString(searchterm);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log(ex.Message);
                 return false;
@@ -909,7 +908,7 @@ namespace FileImporter
             using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
-                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
+                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => eOut += e.Data);
                 _ = p.Start();
                 _ = p.WaitForExit(120000);
                 if (!p.HasExited)
@@ -942,7 +941,7 @@ namespace FileImporter
             using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
-                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
+                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => eOut += e.Data);
                 _ = p.Start();
                 _ = p.WaitForExit(120000);
                 if (!p.HasExited)
@@ -975,7 +974,7 @@ namespace FileImporter
             using (Process p = new Process())
             {
                 p.StartInfo = processInfo;
-                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { eOut += e.Data; });
+                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => eOut += e.Data);
                 _ = p.Start();
                 _ = p.WaitForExit(120000);
                 if (!p.HasExited)

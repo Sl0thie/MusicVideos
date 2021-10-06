@@ -33,8 +33,8 @@
         /// <param name="services">Specifies the contract for a collection of service descriptors.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
-            services.AddSignalR();
+            _ = services.AddRazorPages();
+            _ = services.AddSignalR();
         }
 
         /// <summary>
@@ -46,22 +46,22 @@
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                _ = app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                _ = app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapHub<VideoHub>("/videoHub");
-                endpoints.MapHub<MessageHub>("/messageHub");
-            });
+            _ = app.UseStaticFiles();
+            _ = app.UseRouting();
+            _ = app.UseAuthorization();
+            _ = app.UseEndpoints(endpoints =>
+              {
+                  _ = endpoints.MapRazorPages();
+                  _ = endpoints.MapHub<VideoHub>("/videoHub");
+                  _ = endpoints.MapHub<MessageHub>("/messageHub");
+              });
         }
     }
 }

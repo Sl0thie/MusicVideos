@@ -65,20 +65,11 @@
                            .Build();
                 }
 
-                _ = videoHub.On<string, string>("SendMessage", (id, message) =>
-                  {
-                      Log.Info($"SendMessage: {id} - {message}");
-                  });
+                _ = videoHub.On<string, string>("SendMessage", (id, message) => Log.Info($"SendMessage: {id} - {message}"));
 
-                _ = videoHub.On<string, string>("SendError", (id, json) =>
-                  {
-                      Log.Info($"ERROR: {id} - {json}");
-                  });
+                _ = videoHub.On<string, string>("SendError", (id, json) => Log.Info($"ERROR: {id} - {json}"));
 
-                _ = videoHub.On<string>("GetDatabaseChecksum", (id) =>
-                  {
-                      _ = DS.Videos.GetDatabaseChecksumAsync();
-                  });
+                _ = videoHub.On<string>("GetDatabaseChecksum", (id) => _ = DS.Videos.GetDatabaseChecksumAsync());
 
                 // --------------------------------------------------------------------------------------------------
                 _ = videoHub.On<string>("SaveVideo", (video) =>

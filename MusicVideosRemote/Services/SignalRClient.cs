@@ -88,10 +88,7 @@
                       Debug.WriteLine("Hub Registration Id: " + id);
                   });
 
-                _ = dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) =>
-                  {
-                      Settings.Volume = volume;
-                  });
+                _ = dataHub.On<int, string>("SetOutSettingsAsync", (volume, json) => Settings.Volume = volume);
 
                 _ = dataHub.On<string>("SetOutFilterAsync", (json) =>
                   {

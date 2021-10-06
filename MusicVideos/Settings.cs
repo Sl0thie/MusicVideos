@@ -125,7 +125,7 @@
 
             if (first is null)
             {
-                throw new ArgumentNullException("first");
+                throw new ArgumentNullException(paramName: "The 1st parameter is null.");
             }
 
             if (last is null)
