@@ -420,7 +420,8 @@
                     Log.Info($"Video Error: {lastVideo.Artist} - {lastVideo.Title} id: {lastVideo.Id} rating: {lastVideo.Rating}");
 
                     lastVideo.Errors++;
-                    lastVideo.Rating = 0;
+
+                    // lastVideo.Rating = 0;
                     await DS.Comms.SaveVideoAsync(lastVideo);
                     await SaveVideoAsync(lastVideo);
                 }
