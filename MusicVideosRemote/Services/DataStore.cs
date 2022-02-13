@@ -6,7 +6,9 @@
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
+
     using MusicVideosRemote.Models;
+
     using SQLite;
 
     /// <summary>
@@ -15,6 +17,23 @@
     public class DataStore
     {
         /// <summary>
+        /// Singleton access.
+        /// </summary>
+        internal static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
+           {
+               Debug.WriteLine("DataStore.Instance");
+
+               DataStore instance = new DataStore();
+               CreateTableResult result = await database.CreateTableAsync<Video>();
+               return instance;
+           });
+
+        /// <summary>
+        /// The size of the checksum block sum.
+        /// </summary>
+        private const int BlockSize = 40;
+
+        /// <summary>
         /// Flags used by Sqlite.
         /// </summary>
         private const SQLiteOpenFlags Flags =
@@ -22,25 +41,8 @@
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
 
-        /// <summary>
-        /// The size of the checksum block sum.
-        /// </summary>
-        private const int BlockSize = 40;
-
         // private static SQLiteAsyncConnection database;
         private static SQLiteAsyncConnection database;
-
-        /// <summary>
-        /// Singleton access.
-        /// </summary>
-        internal static readonly AsyncLazy<DataStore> Instance = new AsyncLazy<DataStore>(async () =>
-        {
-            Debug.WriteLine("DataStore.Instance");
-
-            DataStore instance = new DataStore();
-            CreateTableResult result = await database.CreateTableAsync<Video>();
-            return instance;
-        });
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataStore"/> class.

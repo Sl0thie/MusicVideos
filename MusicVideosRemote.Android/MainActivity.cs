@@ -15,7 +15,10 @@
         {
             base.OnCreate(savedInstanceState);
 
-            Window.AddFlags(WindowManagerFlags.Fullscreen);
+            //Window.AddFlags(WindowManagerFlags.Fullscreen);
+            Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+            Window.AddFlags(WindowManagerFlags.KeepScreenOn);
+
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);

@@ -3,9 +3,12 @@
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.SignalR.Client;
+
     using MusicVideosRemote.Models;
     using MusicVideosRemote.ViewModels;
+
     using Newtonsoft.Json;
 
     /// <summary>
@@ -24,28 +27,8 @@
     {
         private static SignalRClient current;
 
-        /// <summary>
-        /// Gets or sets the current SignalRClient.
-        /// </summary>
-        public static SignalRClient Current
-        {
-            get
-            {
-                if (current is null)
-                {
-                    current = new SignalRClient();
-                }
-
-                return current;
-            }
-
-            set
-            {
-                current = value;
-            }
-        }
-
         private readonly HubConnection dataHub;
+
         private string hubId = string.Empty;
 
         /// <summary>
@@ -114,6 +97,27 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the current SignalRClient.
+        /// </summary>
+        public static SignalRClient Current
+        {
+            get
+            {
+                if (current is null)
+                {
+                    current = new SignalRClient();
+                }
+
+                return current;
+            }
+
+            set
+            {
+                current = value;
+            }
+        }
+
         #region Connect / Registration / Checksum
 
         /// <summary>
@@ -129,12 +133,13 @@
         }
 
         /// <summary>
-        /// Registers the client with the server.
+        /// Tell the server that this checksum block has failed. The server will then resend the data of that block.
         /// </summary>
+        /// <param name="index">The start index of the block.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        private async Task RegisterAsync()
+        public async Task FailedChecksumAsync(int index)
         {
-            await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
+            await dataHub.InvokeAsync("FailedChecksum", hubId, index);
         }
 
         /// <summary>
@@ -150,33 +155,32 @@
         }
 
         /// <summary>
-        /// Tell the server that this checksum block has failed. The server will then resend the data of that block.
+        /// Registers the client with the server.
         /// </summary>
-        /// <param name="index">The start index of the block.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task FailedChecksumAsync(int index)
+        private async Task RegisterAsync()
         {
-            await dataHub.InvokeAsync("FailedChecksum", hubId, index);
+            await dataHub.InvokeAsync("RegisterRemoteAsync", "123456");
         }
 
-        #endregion
+        #endregion Connect / Registration / Checksum
 
         #region Settings / Filter / Volume
 
         /// <summary>
-        /// Ask the server for the current filter.
+        /// Ask the server for the settings object.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        private async Task GetOutFilterAsync()
+        public async Task GetOutVolumeAsync()
         {
             if (dataHub.State == HubConnectionState.Connected)
             {
-                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
             }
             else
             {
                 await dataHub.StartAsync();
-                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
             }
         }
 
@@ -204,23 +208,6 @@
         }
 
         /// <summary>
-        /// Ask the server for the settings object.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task GetOutVolumeAsync()
-        {
-            if (dataHub.State == HubConnectionState.Connected)
-            {
-                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
-            }
-            else
-            {
-                await dataHub.StartAsync();
-                await dataHub.InvokeAsync("GetOutVolumeAsync", hubId);
-            }
-        }
-
-        /// <summary>
         /// Sets the volume on the server.
         /// </summary>
         /// <param name="volume">Sets the volume for the application.</param>
@@ -238,7 +225,24 @@
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Ask the server for the current filter.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        private async Task GetOutFilterAsync()
+        {
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("GetOutFilterAsync", hubId);
+            }
+        }
+
+        #endregion Settings / Filter / Volume
 
         #region Video
 
@@ -260,26 +264,9 @@
             }
         }
 
-        #endregion
+        #endregion Video
 
         #region Commands
-
-        /// <summary>
-        /// Invokes the Previous Video command on the server.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task CommandPreviousVideo()
-        {
-            if (dataHub.State == HubConnectionState.Connected)
-            {
-                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
-            }
-            else
-            {
-                await dataHub.StartAsync();
-                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
-            }
-        }
 
         /// <summary>
         /// Invokes the Next Video command on the server.
@@ -295,6 +282,23 @@
             {
                 await dataHub.StartAsync();
                 await dataHub.InvokeAsync("ButtonNextVideoAsync", hubId);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the pause Video command on the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public async Task CommandPauseVideo()
+        {
+            if (dataHub.State == HubConnectionState.Connected)
+            {
+                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+            }
+            else
+            {
+                await dataHub.StartAsync();
+                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
             }
         }
 
@@ -316,22 +320,22 @@
         }
 
         /// <summary>
-        /// Invokes the pause Video command on the server.
+        /// Invokes the Previous Video command on the server.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task CommandPauseVideo()
+        public async Task CommandPreviousVideo()
         {
             if (dataHub.State == HubConnectionState.Connected)
             {
-                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
             }
             else
             {
                 await dataHub.StartAsync();
-                await dataHub.InvokeAsync("ButtonPauseVideoAsync", hubId);
+                await dataHub.InvokeAsync("ButtonPreviousVideoAsync", hubId);
             }
         }
 
-        #endregion
+        #endregion Commands
     }
 }

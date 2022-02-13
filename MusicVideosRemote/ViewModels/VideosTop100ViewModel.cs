@@ -4,9 +4,9 @@
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Threading.Tasks;
+
     using MusicVideosRemote.Models;
     using MusicVideosRemote.Services;
-    using MusicVideosRemote.Views;
 
     /// <summary>
     /// VideosTop100ViewModel class.

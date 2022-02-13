@@ -8,6 +8,94 @@
     /// </summary>
     public static class Settings
     {
+        private static Filter filter;
+
+        private static int volume = -1;
+
+        /// <summary>
+        /// Gets or sets the filter for the video playlist.
+        /// </summary>
+        public static Filter Filter
+        {
+            get
+            {
+                return filter;
+            }
+
+            set
+            {
+                filter = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maximum rating.
+        /// </summary>
+        public static int RatingMaximum
+        {
+            get
+            {
+                return filter.RatingMaximum;
+            }
+
+            set
+            {
+                filter.RatingMaximum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the minimum rating.
+        /// </summary>
+        public static int RatingMinimum
+        {
+            get
+            {
+                return filter.RatingMinimum;
+            }
+
+            set
+            {
+                filter.RatingMinimum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maximum released.
+        /// </summary>
+        public static int ReleasedMaximum
+        {
+            get
+            {
+                return filter.ReleasedMaximum;
+            }
+
+            set
+            {
+                filter.ReleasedMaximum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the minimum released.
+        /// </summary>
+        public static int ReleasedMinimum
+        {
+            get
+            {
+                return filter.ReleasedMinimum;
+            }
+
+            set
+            {
+                filter.ReleasedMinimum = value;
+                _ = SignalRClient.Current.SetInFiltersAsync();
+            }
+        }
+
         /// <summary>
         ///  Gets or sets the Volume.
         /// </summary>
@@ -45,93 +133,6 @@
                 }
             }
         }
-
-        /// <summary>
-        /// Gets or sets the filter for the video playlist.
-        /// </summary>
-        public static Filter Filter
-        {
-            get
-            {
-                return filter;
-            }
-
-            set
-            {
-                filter = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the minimum rating.
-        /// </summary>
-        public static int RatingMinimum
-        {
-            get
-            {
-                return filter.RatingMinimum;
-            }
-
-            set
-            {
-                filter.RatingMinimum = value;
-                _ = SignalRClient.Current.SetInFiltersAsync();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum rating.
-        /// </summary>
-        public static int RatingMaximum
-        {
-            get
-            {
-                return filter.RatingMaximum;
-            }
-
-            set
-            {
-                filter.RatingMaximum = value;
-                _ = SignalRClient.Current.SetInFiltersAsync();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the minimum released.
-        /// </summary>
-        public static int ReleasedMinimum
-        {
-            get
-            {
-                return filter.ReleasedMinimum;
-            }
-
-            set
-            {
-                filter.ReleasedMinimum = value;
-                _ = SignalRClient.Current.SetInFiltersAsync();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the maximum released.
-        /// </summary>
-        public static int ReleasedMaximum
-        {
-            get
-            {
-                return filter.ReleasedMaximum;
-            }
-
-            set
-            {
-                filter.ReleasedMaximum = value;
-                _ = SignalRClient.Current.SetInFiltersAsync();
-            }
-        }
-
-        private static int volume = -1;
-        private static Filter filter;
 
         /// <summary>
         /// Check if the video passes the filter.
