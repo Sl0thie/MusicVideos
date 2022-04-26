@@ -27,6 +27,20 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#Black"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#333333"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -41,8 +55,11 @@
                             <Label Text="{Binding Path=Title}" Grid.Column="1" Grid.Row="1" Style="{StaticResource ListTitle}"/>
                             
                         </Grid>
+                        
                     </DataTemplate>
+                    
                 </CollectionView.ItemTemplate>
+                
             </CollectionView>
 
             <control:ButtonView Grid.Row="1" Grid.Column="0" />

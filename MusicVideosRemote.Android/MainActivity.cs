@@ -15,8 +15,8 @@
         {
             base.OnCreate(savedInstanceState);
 
-            //Window.AddFlags(WindowManagerFlags.Fullscreen);
-            Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+            Window.AddFlags(WindowManagerFlags.Fullscreen);
+            //Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
             Window.AddFlags(WindowManagerFlags.KeepScreenOn);
 
 
