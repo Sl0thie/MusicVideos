@@ -1,5 +1,5 @@
 # MusicVideos
-A .NET Core Web Application that provides a HTML player for a smart TV and a html remote for a smart phone to make a video jukebox. It uses SignalR to communicate between the pages and the server.
+A .NET Core Web Application that provides a HTML player for a smart TV and a html remote for a smart phone to make a video jukebox. It uses SignalR to communicate between the pages and the server. It is currently a work in process that is moving from a web server to a stand alone windows service. 
 
 ![musicvideos](https://user-images.githubusercontent.com/28429345/116331378-fe0bdc80-a812-11eb-973e-7592a99743ea.png)
 
@@ -15,3 +15,9 @@ The remote razor page provides control of the Player via a SignalR hub.
 
 # File Importer
 File Importer is a console application that imports video files to a base directory for use in the web application. It stores the files in a folder for the artist and then a folder for the video title. If then creates a thumbnail for the video as well as two waveform files using ffmepg.
+
+## MusicVideos
+This is the web site version of the server.
+
+## MusicVideosService 
+This is the windows service version of the server.
