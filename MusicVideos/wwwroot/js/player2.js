@@ -41,6 +41,8 @@ window.addEventListener('load', function () {
     // Create the SignalR object.
     connection = new signalR.HubConnectionBuilder().withUrl('/videoHub').build();
 
+
+
     // Define the methods that will be received from the hub.
     connection.on('setOutRegistrationAsync', function (id) {
         hubId = id;

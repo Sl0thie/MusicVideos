@@ -1,0 +1,2286 @@
+2022-08-17 09:52:41.028 +10:00 [INF] DataStore.Constructor
+2022-08-17 09:52:42.152 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 09:52:42.154 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 09:52:42.155 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 09:52:42.157 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 09:52:42.159 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 09:52:42.161 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 09:52:42.302 +10:00 [INF] Server Constructor
+2022-08-17 09:52:44.707 +10:00 [INF] Disconnected
+2022-08-17 09:52:45.705 +10:00 [INF] Disconnected
+2022-08-17 09:52:46.705 +10:00 [INF] Disconnected
+2022-08-17 09:52:47.714 +10:00 [INF] Disconnected
+2022-08-17 09:52:48.709 +10:00 [INF] Disconnected
+2022-08-17 09:52:49.712 +10:00 [INF] Disconnected
+2022-08-17 09:52:50.703 +10:00 [INF] Disconnected
+2022-08-17 09:52:51.709 +10:00 [INF] Disconnected
+2022-08-17 09:52:52.711 +10:00 [INF] Disconnected
+2022-08-17 09:52:53.708 +10:00 [INF] Disconnected
+2022-08-17 09:52:54.708 +10:00 [INF] Disconnected
+2022-08-17 09:52:55.705 +10:00 [INF] Disconnected
+2022-08-17 09:52:56.717 +10:00 [INF] Disconnected
+2022-08-17 09:56:13.212 +10:00 [INF] DataStore.Constructor
+2022-08-17 09:56:13.376 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 09:56:13.378 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 09:56:13.381 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 09:56:13.383 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 09:56:13.385 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 09:56:13.388 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 09:56:13.403 +10:00 [INF] Server Constructor
+2022-08-17 09:56:14.649 +10:00 [INF] Server.Play
+2022-08-17 09:56:15.630 +10:00 [INF] Server.Play
+2022-08-17 09:56:16.617 +10:00 [INF] Server.Play
+2022-08-17 09:56:17.627 +10:00 [INF] Server.Play
+2022-08-17 09:56:18.629 +10:00 [INF] Server.Play
+2022-08-17 09:56:19.620 +10:00 [INF] Server.Play
+2022-08-17 09:56:20.627 +10:00 [INF] Server.Play
+2022-08-17 09:56:21.636 +10:00 [INF] Server.Play
+2022-08-17 09:56:22.617 +10:00 [INF] Server.Play
+2022-08-17 09:56:23.625 +10:00 [INF] Server.Play
+2022-08-17 09:56:24.627 +10:00 [INF] Server.Play
+2022-08-17 09:56:25.639 +10:00 [INF] Server.Play
+2022-08-17 09:56:26.619 +10:00 [INF] Server.Play
+2022-08-17 09:56:27.628 +10:00 [INF] Server.Play
+2022-08-17 09:56:28.617 +10:00 [INF] Server.Play
+2022-08-17 09:56:29.623 +10:00 [INF] Server.Play
+2022-08-17 10:00:10.437 +10:00 [INF] DataStore.Constructor
+2022-08-17 10:00:10.599 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 10:00:10.601 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 10:00:10.603 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 10:00:10.604 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 10:00:10.607 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 10:00:10.608 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 10:00:10.623 +10:00 [INF] Server Constructor
+2022-08-17 10:00:11.790 +10:00 [INF] Server.Play
+2022-08-17 10:00:12.771 +10:00 [INF] Server.Play
+2022-08-17 10:00:13.774 +10:00 [INF] Server.Play
+2022-08-17 10:00:14.774 +10:00 [INF] Server.Play
+2022-08-17 10:00:15.774 +10:00 [INF] Server.Play
+2022-08-17 10:00:16.773 +10:00 [INF] Server.Play
+2022-08-17 10:00:17.778 +10:00 [INF] Server.Play
+2022-08-17 10:00:18.779 +10:00 [INF] Server.Play
+2022-08-17 10:00:19.781 +10:00 [INF] Server.Play
+2022-08-17 10:01:44.386 +10:00 [INF] DataStore.Constructor
+2022-08-17 10:01:44.536 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 10:01:44.538 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 10:01:44.540 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 10:01:44.542 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 10:01:44.544 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 10:01:44.547 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 10:01:44.565 +10:00 [INF] Server Constructor
+2022-08-17 10:01:45.739 +10:00 [INF] Server.Play
+2022-08-17 10:01:46.711 +10:00 [INF] Server.Play
+2022-08-17 10:01:47.712 +10:00 [INF] Server.Play
+2022-08-17 10:01:48.708 +10:00 [INF] Server.Play
+2022-08-17 10:01:49.710 +10:00 [INF] Server.Play
+2022-08-17 10:01:50.710 +10:00 [INF] Server.Play
+2022-08-17 10:01:51.709 +10:00 [INF] Server.Play
+2022-08-17 10:01:52.708 +10:00 [INF] Server.Play
+2022-08-17 10:06:48.919 +10:00 [INF] DataStore.Constructor
+2022-08-17 10:06:49.146 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 10:06:49.148 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 10:06:49.150 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 10:06:49.152 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 10:06:49.154 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 10:06:49.156 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 10:06:49.174 +10:00 [INF] Server Constructor
+2022-08-17 10:06:50.456 +10:00 [INF] Disconnected
+2022-08-17 10:06:51.452 +10:00 [INF] Disconnected
+2022-08-17 10:06:52.464 +10:00 [INF] Disconnected
+2022-08-17 10:06:53.458 +10:00 [INF] Disconnected
+2022-08-17 10:06:54.459 +10:00 [INF] Disconnected
+2022-08-17 10:06:55.450 +10:00 [INF] Disconnected
+2022-08-17 10:06:56.458 +10:00 [INF] Disconnected
+2022-08-17 10:06:57.454 +10:00 [INF] Disconnected
+2022-08-17 10:06:58.450 +10:00 [INF] Disconnected
+2022-08-17 10:06:59.456 +10:00 [INF] Disconnected
+2022-08-17 10:07:00.458 +10:00 [INF] Disconnected
+2022-08-17 10:07:01.456 +10:00 [INF] Disconnected
+2022-08-17 10:07:02.449 +10:00 [INF] Disconnected
+2022-08-17 10:07:03.451 +10:00 [INF] Disconnected
+2022-08-17 13:13:27.093 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:13:27.300 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:13:27.302 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:13:27.303 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:13:27.305 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:13:27.308 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:13:27.310 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:13:27.327 +10:00 [INF] Server Constructor
+2022-08-17 13:13:28.678 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:29.596 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:30.577 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:31.582 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:32.638 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:33.580 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:34.578 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:13:35.574 +10:00 [ERR] Failed to invoke 'PlayVideo' due to an error on the server. HubException: Method does not exist.
+2022-08-17 13:14:39.822 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:14:39.965 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:14:39.967 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:14:39.968 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:14:39.970 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:14:39.971 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:14:39.972 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:14:39.985 +10:00 [INF] Server Constructor
+2022-08-17 13:14:41.223 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:42.170 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:43.208 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:44.224 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:45.184 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:46.173 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:47.180 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:48.186 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:49.179 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:50.172 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:51.228 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:14:52.197 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:14.369 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:16:14.534 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:16:14.536 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:16:14.537 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:16:14.539 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:16:14.540 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:16:14.542 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:16:14.559 +10:00 [INF] Server Constructor
+2022-08-17 13:16:15.837 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:16.783 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:17.768 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:18.756 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:19.769 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:20.769 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:21.772 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:22.765 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:23.776 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:24.765 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:25.775 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:26.766 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:27.800 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:16:28.760 +10:00 [ERR] Failed to invoke 'PlayVideoAsync' due to an error on the server. InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
+2022-08-17 13:17:13.213 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:17:13.363 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:17:13.365 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:17:13.366 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:17:13.368 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:17:13.369 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:17:13.370 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:17:13.385 +10:00 [INF] Server Constructor
+2022-08-17 13:17:14.583 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:17:14.670 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:21:26.804 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:21:26.968 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:21:26.970 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:21:26.972 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:21:26.974 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:21:26.976 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:21:26.978 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:21:26.992 +10:00 [INF] Server Constructor
+2022-08-17 13:21:28.229 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:21:28.300 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:22:27.201 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:22:27.367 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:22:27.368 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:22:27.370 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:22:27.371 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:22:27.373 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:22:27.374 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:22:27.390 +10:00 [INF] Server Constructor
+2022-08-17 13:22:28.594 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:22:28.675 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:23:26.696 +10:00 [INF] Server.Play
+2022-08-17 13:28:21.100 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:28:21.447 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:28:21.449 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:28:21.450 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:28:21.452 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:28:21.453 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:28:21.455 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:28:21.585 +10:00 [INF] Server Constructor
+2022-08-17 13:28:23.071 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:28:23.140 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:34:17.689 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:34:17.848 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:34:17.850 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:34:17.852 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:34:17.854 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:34:17.856 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:34:17.857 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:34:17.873 +10:00 [INF] Server Constructor
+2022-08-17 13:34:19.094 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:34:19.172 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:39:07.048 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:39:07.235 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:39:07.237 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:39:07.239 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:39:07.241 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:39:07.243 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:39:07.244 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:39:07.259 +10:00 [INF] Server Constructor
+2022-08-17 13:39:08.496 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:39:08.579 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:41:09.165 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:41:09.384 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:41:09.397 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:41:09.399 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:41:09.401 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:41:09.413 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:41:09.421 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:41:09.439 +10:00 [INF] Server Constructor
+2022-08-17 13:41:10.814 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:41:10.890 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:47:37.387 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:47:37.545 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:47:37.547 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:47:37.549 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:47:37.550 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:47:37.552 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:47:37.554 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:47:37.568 +10:00 [INF] Server Constructor
+2022-08-17 13:47:38.736 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:47:38.813 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:52:38.697 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:52:38.971 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:52:38.973 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:52:38.975 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:52:38.978 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:52:38.980 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:52:38.982 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:52:39.021 +10:00 [INF] Server Constructor
+2022-08-17 13:52:39.939 +10:00 [INF] Server.Play
+2022-08-17 13:52:40.229 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:52:40.304 +10:00 [ERR] '0' is not a valid value for 'Interval'. 'Interval' must be greater than 0.
+2022-08-17 13:56:25.765 +10:00 [INF] DataStore.Constructor
+2022-08-17 13:56:26.008 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 13:56:26.010 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 13:56:26.012 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 13:56:26.015 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 13:56:26.017 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 13:56:26.019 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 13:56:26.037 +10:00 [INF] Server Constructor
+2022-08-17 13:56:26.927 +10:00 [INF] Server.Play
+2022-08-17 13:56:27.292 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:27.307 +10:00 [INF] PlayRandomVideoAsync: Styx - Babe - 0
+2022-08-17 13:56:28.321 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:28.323 +10:00 [INF] PlayRandomVideoAsync: Jeff Buckley - Hallelujah - 0
+2022-08-17 13:56:29.337 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:29.341 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Right There ft. Big Sean - 0
+2022-08-17 13:56:30.359 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:30.361 +10:00 [INF] PlayRandomVideoAsync: Zedd ft. Maren Morris, Grey - The Middle - 0
+2022-08-17 13:56:31.370 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:31.376 +10:00 [INF] PlayRandomVideoAsync: Annie Lennox - A Whiter Shade of Pale - 0
+2022-08-17 13:56:32.394 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:32.399 +10:00 [INF] PlayRandomVideoAsync: Usher - OMG ft. will.i.am - 0
+2022-08-17 13:56:33.401 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:33.406 +10:00 [INF] PlayRandomVideoAsync: Rise Against - Make It Stop - 0
+2022-08-17 13:56:34.408 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:34.410 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Quit - 0
+2022-08-17 13:56:35.419 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:35.422 +10:00 [INF] PlayRandomVideoAsync: Marcy Playground - Sex And Candy - 0
+2022-08-17 13:56:36.432 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:36.435 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Single Ladies - 0
+2022-08-17 13:56:37.449 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:37.455 +10:00 [INF] PlayRandomVideoAsync: Example - Stay Awake - 0
+2022-08-17 13:56:38.475 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:38.480 +10:00 [INF] PlayRandomVideoAsync: Adele - Send My Love (To Your New Lover) - 0
+2022-08-17 13:56:39.485 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:39.488 +10:00 [INF] PlayRandomVideoAsync: The Everly Brothers - All I Have To Do Is Dream - 0
+2022-08-17 13:56:40.498 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 13:56:40.501 +10:00 [INF] PlayRandomVideoAsync: Elton John - Nikita - 0
+2022-08-17 14:16:25.885 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:16:26.111 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:16:26.114 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:16:26.116 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:16:26.119 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:16:26.121 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:16:26.123 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:16:26.141 +10:00 [INF] Server Constructor
+2022-08-17 14:16:27.066 +10:00 [INF] Server.Play
+2022-08-17 14:16:27.336 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:27.350 +10:00 [INF] PlayRandomVideoAsync: Saffron - One Love - 0
+2022-08-17 14:16:28.364 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:28.367 +10:00 [INF] PlayRandomVideoAsync: Lenny Kravitz - The Chamber - 0
+2022-08-17 14:16:29.374 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:29.376 +10:00 [INF] PlayRandomVideoAsync: The Specials - Do Nothing - 0
+2022-08-17 14:16:30.380 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:30.384 +10:00 [INF] PlayRandomVideoAsync: The Chainsmokers - Haunt ft. Halsey - 0
+2022-08-17 14:16:31.398 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:31.411 +10:00 [INF] PlayRandomVideoAsync: Yazoo - Don''t Go - 0
+2022-08-17 14:16:32.434 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:32.439 +10:00 [INF] PlayRandomVideoAsync: Atomic Kitten - I Want Your Love - 0
+2022-08-17 14:16:33.448 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:33.450 +10:00 [INF] PlayRandomVideoAsync: Mariah Carey - Hero - 0
+2022-08-17 14:16:34.464 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:34.467 +10:00 [INF] PlayRandomVideoAsync: Hunters & Collectors - Throw Your Arms Around Me (Live) - 0
+2022-08-17 14:16:35.472 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:35.475 +10:00 [INF] PlayRandomVideoAsync: The Clash - Should I Stay or Should I Go - 0
+2022-08-17 14:16:36.485 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:36.488 +10:00 [INF] PlayRandomVideoAsync: John Lennon - Imagine - 0
+2022-08-17 14:16:37.515 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:37.517 +10:00 [INF] PlayRandomVideoAsync: Sonique - It Feels So Good - 0
+2022-08-17 14:16:38.529 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:38.536 +10:00 [INF] PlayRandomVideoAsync: Powderfinger - Like A Dog - 0
+2022-08-17 14:16:39.552 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:39.560 +10:00 [INF] PlayRandomVideoAsync: Taylor Swift - Style - 0
+2022-08-17 14:16:40.568 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:40.572 +10:00 [INF] PlayRandomVideoAsync: Rihanna - Shut Up And Drive - 0
+2022-08-17 14:16:41.594 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:41.597 +10:00 [INF] PlayRandomVideoAsync: OneRepublic - Counting Stars - 0
+2022-08-17 14:16:42.611 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:42.619 +10:00 [INF] PlayRandomVideoAsync: Macklemore - Wings ft. Ryan Lewis - 0
+2022-08-17 14:16:43.643 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:43.648 +10:00 [INF] PlayRandomVideoAsync: Shakira - She Wolf - 0
+2022-08-17 14:16:44.665 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:44.668 +10:00 [INF] PlayRandomVideoAsync: OMC - How Bizzare - 0
+2022-08-17 14:16:45.677 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:45.684 +10:00 [INF] PlayRandomVideoAsync: James Blunt - Wisemen - 0
+2022-08-17 14:16:46.688 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:46.695 +10:00 [INF] PlayRandomVideoAsync: Justin Bieber - I''ll Show You - 0
+2022-08-17 14:16:47.711 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:47.718 +10:00 [INF] PlayRandomVideoAsync: The Chemical Brothers - Hey Boy Hey Girl - 0
+2022-08-17 14:16:48.726 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:48.733 +10:00 [INF] PlayRandomVideoAsync: Nickelback - Gotta Be Somebody - 0
+2022-08-17 14:16:49.753 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:49.764 +10:00 [INF] PlayRandomVideoAsync: Dropkick Murphys - Rose Tattoo - 0
+2022-08-17 14:16:50.777 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:50.782 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Dance for You - 0
+2022-08-17 14:16:51.792 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:51.795 +10:00 [INF] PlayRandomVideoAsync: Justin Bieber - Love Yourself - 0
+2022-08-17 14:16:52.801 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:52.804 +10:00 [INF] PlayRandomVideoAsync: Skunkhour - Free Man - 0
+2022-08-17 14:16:53.822 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:53.826 +10:00 [INF] PlayRandomVideoAsync: Major Lazer & DJ Snake - Lean On - 0
+2022-08-17 14:16:54.836 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:54.845 +10:00 [INF] PlayRandomVideoAsync: Marshmello x Jonas Brothers - Leave Before You Love Me - 0
+2022-08-17 14:16:55.853 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:55.856 +10:00 [INF] PlayRandomVideoAsync: Grace VanderWaal - City Song - 0
+2022-08-17 14:16:56.865 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:56.870 +10:00 [INF] PlayRandomVideoAsync: Kelly Llorenna - Tell It To My Heart - 0
+2022-08-17 14:16:57.880 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:57.887 +10:00 [INF] PlayRandomVideoAsync: Coldplay - Adventure Of A Lifetime - 0
+2022-08-17 14:16:58.896 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:58.899 +10:00 [INF] PlayRandomVideoAsync: will.i.am - Scream & Shout ft. Britney Spears - 0
+2022-08-17 14:16:59.906 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:16:59.912 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Break Free ft. Zedd - 0
+2022-08-17 14:17:00.937 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:00.941 +10:00 [INF] PlayRandomVideoAsync: Gabriella Cilmi - Sweet About Me - 0
+2022-08-17 14:17:01.945 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:01.947 +10:00 [INF] PlayRandomVideoAsync: Billy Joel - Honesty - 0
+2022-08-17 14:17:02.960 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:02.963 +10:00 [INF] PlayRandomVideoAsync: East 17 - Steam - 0
+2022-08-17 14:17:03.983 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:03.985 +10:00 [INF] PlayRandomVideoAsync: The Exploited - Fuck The USA - 0
+2022-08-17 14:17:04.996 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:04.998 +10:00 [INF] PlayRandomVideoAsync: Bo Donaldson and The Heywoods - Billy Don''t Be A Hero - 0
+2022-08-17 14:17:06.013 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:06.024 +10:00 [INF] PlayRandomVideoAsync: INXS - By My Side - 0
+2022-08-17 14:17:07.045 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:07.050 +10:00 [INF] PlayRandomVideoAsync: The Clash - Rebel Waltz - 0
+2022-08-17 14:17:08.067 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:08.082 +10:00 [INF] PlayRandomVideoAsync: SYML - Body - 0
+2022-08-17 14:17:09.109 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:09.114 +10:00 [INF] PlayRandomVideoAsync: Britney Spears - Criminal - 0
+2022-08-17 14:17:10.140 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:10.147 +10:00 [INF] PlayRandomVideoAsync: Skrillex & Team EZY (ft. NJOMZA) - Pretty Bye Bye - 0
+2022-08-17 14:17:11.154 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:11.157 +10:00 [INF] PlayRandomVideoAsync: Demi Lovato - Sorry Not Sorry - 0
+2022-08-17 14:17:12.166 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:12.174 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Why Don''t You Love Me - 0
+2022-08-17 14:17:13.179 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:13.182 +10:00 [INF] PlayRandomVideoAsync: Des''ree - You Gotta Be - 0
+2022-08-17 14:17:14.188 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:14.201 +10:00 [INF] PlayRandomVideoAsync: The Cure - Friday I''m In Love - 0
+2022-08-17 14:17:15.221 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:15.232 +10:00 [INF] PlayRandomVideoAsync: Anna Kendrick - Get Back Up Again - 0
+2022-08-17 14:17:16.245 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:16.248 +10:00 [INF] PlayRandomVideoAsync: Limp Bizkit - My Way - 0
+2022-08-17 14:17:17.257 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:17.260 +10:00 [INF] PlayRandomVideoAsync: Snoop Dogg - Drop It Like It''s Hot  ft. Pharrell - 0
+2022-08-17 14:17:18.327 +10:00 [ERR] Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+2022-08-17 14:17:19.282 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:19.288 +10:00 [INF] PlayRandomVideoAsync: The Saturdays - What About Us - 0
+2022-08-17 14:17:20.303 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:20.306 +10:00 [INF] PlayRandomVideoAsync: Sheryl Crow - All I Wanna Do - 0
+2022-08-17 14:17:21.321 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:21.331 +10:00 [INF] PlayRandomVideoAsync: La Bouche - Sweet Dreams - 0
+2022-08-17 14:17:22.340 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:22.350 +10:00 [INF] PlayRandomVideoAsync: Pearl Jam - Do the Evolution - 0
+2022-08-17 14:17:23.364 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:23.366 +10:00 [INF] PlayRandomVideoAsync: Rancid - Bloodclot - 0
+2022-08-17 14:17:24.379 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:24.384 +10:00 [INF] PlayRandomVideoAsync: Evanescence - Call Me When You''re Sober - 0
+2022-08-17 14:17:25.390 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:25.399 +10:00 [INF] PlayRandomVideoAsync: York - On The Beach - 0
+2022-08-17 14:17:26.414 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:26.419 +10:00 [INF] PlayRandomVideoAsync: Ministry - N.W.O. - 0
+2022-08-17 14:17:27.427 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:27.430 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - Waking Up In Vegas - 0
+2022-08-17 14:17:28.444 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:28.448 +10:00 [INF] PlayRandomVideoAsync: Rollergirl - Dear Jessie - 0
+2022-08-17 14:17:29.464 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:29.467 +10:00 [INF] PlayRandomVideoAsync: David Bowie - Lazarus - 0
+2022-08-17 14:17:30.476 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:30.488 +10:00 [INF] PlayRandomVideoAsync: Rancid - Bloodclot - 0
+2022-08-17 14:17:31.507 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:31.519 +10:00 [INF] PlayRandomVideoAsync: ASAP Rocky - Babushka Boi - 0
+2022-08-17 14:17:32.539 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:32.550 +10:00 [INF] PlayRandomVideoAsync: Jason Derulo - Ridin'' Solo - 0
+2022-08-17 14:17:33.624 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:33.627 +10:00 [INF] PlayRandomVideoAsync: Miami Sound Machine - Conga - 0
+2022-08-17 14:17:34.660 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:34.674 +10:00 [INF] PlayRandomVideoAsync: David Bowie - Space Oddity - 0
+2022-08-17 14:17:35.692 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:35.698 +10:00 [INF] PlayRandomVideoAsync: Guns N'' Roses - November Rain - 0
+2022-08-17 14:17:36.725 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:36.736 +10:00 [INF] PlayRandomVideoAsync: Prodigy - Pretty Thug - 0
+2022-08-17 14:17:37.743 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:37.746 +10:00 [INF] PlayRandomVideoAsync: Iggy Azalea - Bounce - 0
+2022-08-17 14:17:38.761 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:38.763 +10:00 [INF] PlayRandomVideoAsync: Madonna - Ray Of Light - 0
+2022-08-17 14:17:39.771 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:39.777 +10:00 [INF] PlayRandomVideoAsync: The Clash - Sean Flynn - 0
+2022-08-17 14:17:40.786 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:40.789 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Let Me Love You ft. Nicki Minaj - 0
+2022-08-17 14:17:41.802 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:41.815 +10:00 [INF] PlayRandomVideoAsync: Lenny Kravitz - Stand By My Woman - 0
+2022-08-17 14:17:42.828 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:42.831 +10:00 [INF] PlayRandomVideoAsync: Geographer - Lonely - 0
+2022-08-17 14:17:43.840 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:43.844 +10:00 [INF] PlayRandomVideoAsync: Calvin Harris - Feels ft. Pharrell Williams, Katy Perry, Big Sean - 0
+2022-08-17 14:17:44.855 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:44.872 +10:00 [INF] PlayRandomVideoAsync: Australian Crawl - Errol - 0
+2022-08-17 14:17:45.887 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:45.893 +10:00 [INF] PlayRandomVideoAsync: Coolio - C U When U Get There - 0
+2022-08-17 14:17:46.898 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:46.900 +10:00 [INF] PlayRandomVideoAsync: Kings Of Leon - Use Somebody - 0
+2022-08-17 14:17:47.901 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:47.903 +10:00 [INF] PlayRandomVideoAsync: Avicii - Wake Me Up - 0
+2022-08-17 14:17:48.918 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:48.921 +10:00 [INF] PlayRandomVideoAsync: Yazoo - Don''t Go - 0
+2022-08-17 14:17:49.930 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:49.935 +10:00 [INF] PlayRandomVideoAsync: Rain Radio & DJ Craig Gorman - Talk About - 0
+2022-08-17 14:17:50.952 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:50.969 +10:00 [INF] PlayRandomVideoAsync: Grace VanderWaal - So Much More Than This - 0
+2022-08-17 14:17:51.975 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:51.978 +10:00 [INF] PlayRandomVideoAsync: Britney Spears - Piece Of Me - 0
+2022-08-17 14:17:52.999 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:53.007 +10:00 [INF] PlayRandomVideoAsync: Iggy Azalea - Mo Bounce - 0
+2022-08-17 14:17:54.028 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:54.035 +10:00 [INF] PlayRandomVideoAsync: Alicia Keys - We Are Here - 0
+2022-08-17 14:17:55.045 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:55.051 +10:00 [INF] PlayRandomVideoAsync: Jimmy Barnes - I''d Die To Be With You Tonight - 0
+2022-08-17 14:17:56.072 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:56.087 +10:00 [INF] PlayRandomVideoAsync: The Weeknd - Save Your Tears - 0
+2022-08-17 14:17:57.099 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:57.102 +10:00 [INF] PlayRandomVideoAsync: Skunkhour - Weightlessness - 0
+2022-08-17 14:17:58.110 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:58.113 +10:00 [INF] PlayRandomVideoAsync: The Offspring - This Is Not Utopia - 0
+2022-08-17 14:17:59.129 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:17:59.132 +10:00 [INF] PlayRandomVideoAsync: U2 - Hold me, Thrill me, Kiss me, Kill me - 0
+2022-08-17 14:18:00.140 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:00.143 +10:00 [INF] PlayRandomVideoAsync: Hunters & Collectors - Easy - 0
+2022-08-17 14:18:01.168 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:01.171 +10:00 [INF] PlayRandomVideoAsync: Goo Goo Dolls - Iris - 0
+2022-08-17 14:18:02.181 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:02.187 +10:00 [INF] PlayRandomVideoAsync: Santana - Smooth (Stereo) ft. Rob Thomas - 0
+2022-08-17 14:18:03.195 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:03.199 +10:00 [INF] PlayRandomVideoAsync: Avicii - Lonely Together ft. Rita Ora - 0
+2022-08-17 14:18:04.213 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:04.218 +10:00 [INF] PlayRandomVideoAsync: Alan Walker - Faded EDM MIX ♫ Shuffle Dance Video - 0
+2022-08-17 14:18:05.231 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:05.242 +10:00 [INF] PlayRandomVideoAsync: Coolio - Gangsta''s Paradise feat. L.V. - 0
+2022-08-17 14:18:06.254 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:06.259 +10:00 [INF] PlayRandomVideoAsync: Tove Lo - Habits (Stay High) - 0
+2022-08-17 14:18:07.274 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:07.278 +10:00 [INF] PlayRandomVideoAsync: Tina Turner - Simply The Best - 0
+2022-08-17 14:18:08.286 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:08.288 +10:00 [INF] PlayRandomVideoAsync: The Clash - I Fought the Law - 0
+2022-08-17 14:18:09.302 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:18:09.308 +10:00 [INF] PlayRandomVideoAsync: Radio Birdman - New Race (original version) - 0
+2022-08-17 14:24:42.670 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:24:42.914 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:24:42.916 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:24:42.940 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:24:42.943 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:24:42.945 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:24:42.978 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:24:43.035 +10:00 [INF] Server Constructor
+2022-08-17 14:24:43.874 +10:00 [INF] Server.Play
+2022-08-17 14:24:44.303 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:24:44.315 +10:00 [INF] PlayRandomVideoAsync: Little Mix - Cannonball - 0
+2022-08-17 14:24:54.320 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:24:54.323 +10:00 [INF] PlayRandomVideoAsync: Coldplay - Adventure Of A Lifetime - 0
+2022-08-17 14:25:04.337 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:25:04.343 +10:00 [INF] PlayRandomVideoAsync: U2 - Vertigo - 0
+2022-08-17 14:25:14.346 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:25:14.349 +10:00 [INF] PlayRandomVideoAsync: Rogue Traders - Voodoo Child - 0
+2022-08-17 14:25:24.376 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:25:24.387 +10:00 [INF] PlayRandomVideoAsync: Taylor Dayne - Can''t Get Enough Of Your Love - 0
+2022-08-17 14:27:05.607 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:27:05.771 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:27:05.773 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:27:05.774 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:27:05.776 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:27:05.777 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:27:05.779 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:27:05.793 +10:00 [INF] Server Constructor
+2022-08-17 14:27:06.725 +10:00 [INF] Server.Play
+2022-08-17 14:27:06.975 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:27:06.990 +10:00 [INF] PlayRandomVideoAsync: Holly Valance - Down Boy - 0
+2022-08-17 14:27:07.154 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:27:07.157 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:27:07.166 +10:00 [INF] InsertOrUpdateVideo: Holly Valance - Down Boy - 204480
+2022-08-17 14:27:07.169 +10:00 [INF] Updating
+2022-08-17 14:27:16.999 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:27:17.002 +10:00 [INF] PlayRandomVideoAsync: No Doubt - Sunday Morning - 0
+2022-08-17 14:27:17.255 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:27:17.258 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:27:17.261 +10:00 [INF] InsertOrUpdateVideo: No Doubt - Sunday Morning - 260552
+2022-08-17 14:27:17.265 +10:00 [INF] Updating
+2022-08-17 14:27:27.010 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:27:27.024 +10:00 [INF] PlayRandomVideoAsync: Crazy Town - Butterfly - 0
+2022-08-17 14:27:27.100 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:27:27.102 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:27:27.104 +10:00 [INF] InsertOrUpdateVideo: Crazy Town - Butterfly - 213391
+2022-08-17 14:27:27.106 +10:00 [INF] Updating
+2022-08-17 14:27:37.044 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:27:37.052 +10:00 [INF] PlayRandomVideoAsync: Alice In Chains - Rooster - 0
+2022-08-17 14:27:37.421 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:27:37.423 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:27:37.425 +10:00 [INF] InsertOrUpdateVideo: Alice In Chains - Rooster - 375118
+2022-08-17 14:27:37.428 +10:00 [INF] Updating
+2022-08-17 14:27:47.057 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:27:47.061 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Diva - 0
+2022-08-17 14:27:47.158 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:27:47.160 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:27:47.164 +10:00 [INF] InsertOrUpdateVideo: Beyoncé - Diva - 212601
+2022-08-17 14:27:47.166 +10:00 [INF] Updating
+2022-08-17 14:28:36.999 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:28:37.208 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:28:37.209 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:28:37.211 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:28:37.212 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:28:37.213 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:28:37.215 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:28:37.227 +10:00 [INF] Server Constructor
+2022-08-17 14:28:38.180 +10:00 [INF] Server.Play
+2022-08-17 14:28:38.394 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:28:38.411 +10:00 [INF] PlayRandomVideoAsync: Gnarls Barkley - Crazy - 0
+2022-08-17 14:28:38.476 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:28:38.479 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:28:38.482 +10:00 [INF] InsertOrUpdateVideo: Gnarls Barkley - Crazy - 183275
+2022-08-17 14:28:38.484 +10:00 [INF] Updating
+2022-08-17 14:28:48.426 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:28:48.432 +10:00 [INF] PlayRandomVideoAsync: The Specials - Guns Of Navarone - 0
+2022-08-17 14:28:48.531 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:28:48.533 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:28:48.535 +10:00 [INF] InsertOrUpdateVideo: The Specials - Guns Of Navarone - 155226
+2022-08-17 14:28:48.538 +10:00 [INF] Updating
+2022-08-17 14:28:58.443 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:28:58.445 +10:00 [INF] PlayRandomVideoAsync: Cheap Trick - I Want You to Want Me - 0
+2022-08-17 14:28:58.509 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:28:58.511 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:28:58.515 +10:00 [INF] InsertOrUpdateVideo: Cheap Trick - I Want You to Want Me - 222489
+2022-08-17 14:28:58.519 +10:00 [INF] Updating
+2022-08-17 14:29:08.469 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:29:08.479 +10:00 [INF] PlayRandomVideoAsync: Nights in White Satin - The Moody Blues - 0
+2022-08-17 14:29:08.599 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:29:08.602 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:29:08.604 +10:00 [INF] InsertOrUpdateVideo: Nights in White Satin - The Moody Blues - 264499
+2022-08-17 14:29:08.606 +10:00 [INF] Updating
+2022-08-17 14:29:18.487 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:29:18.493 +10:00 [INF] PlayRandomVideoAsync: Britney Spears - Piece Of Me - 0
+2022-08-17 14:29:18.527 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:29:18.532 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:29:18.537 +10:00 [INF] InsertOrUpdateVideo: Britney Spears - Piece Of Me - 189749
+2022-08-17 14:29:18.542 +10:00 [INF] Updating
+2022-08-17 14:29:28.495 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:29:28.499 +10:00 [INF] PlayRandomVideoAsync: The Ting Tings - That''s Not My Name - 0
+2022-08-17 14:29:38.512 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:29:38.514 +10:00 [INF] PlayRandomVideoAsync: Bread - Guitar Man - 0
+2022-08-17 14:29:38.569 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:29:38.570 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:29:38.572 +10:00 [INF] InsertOrUpdateVideo: Bread - Guitar Man - 228625
+2022-08-17 14:29:38.575 +10:00 [INF] Updating
+2022-08-17 14:31:12.149 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:31:12.487 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:31:12.505 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:31:12.509 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:31:12.511 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:31:12.514 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:31:12.516 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:31:12.540 +10:00 [INF] Server Constructor
+2022-08-17 14:31:13.475 +10:00 [INF] Server.Play
+2022-08-17 14:31:13.740 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:13.752 +10:00 [INF] PlayRandomVideoAsync: The Clash - Tommy Gun - 0
+2022-08-17 14:31:13.814 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:13.818 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:13.826 +10:00 [INF] InsertOrUpdateVideo: The Clash - Tommy Gun - 193320
+2022-08-17 14:31:13.830 +10:00 [INF] Updating
+2022-08-17 14:31:14.760 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:14.762 +10:00 [INF] PlayRandomVideoAsync: Mr. Mister - Kyrie - 0
+2022-08-17 14:31:14.849 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:14.851 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:14.853 +10:00 [INF] InsertOrUpdateVideo: Mr. Mister - Kyrie - 257062
+2022-08-17 14:31:14.855 +10:00 [INF] Updating
+2022-08-17 14:31:15.771 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:15.773 +10:00 [INF] PlayRandomVideoAsync: Nada Surf - Popular - 0
+2022-08-17 14:31:15.876 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:15.878 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:15.881 +10:00 [INF] InsertOrUpdateVideo: Nada Surf - Popular - 218470
+2022-08-17 14:31:15.883 +10:00 [INF] Updating
+2022-08-17 14:31:16.798 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:16.804 +10:00 [INF] PlayRandomVideoAsync: Michael Jackson - They Don’t Care About Us - 0
+2022-08-17 14:31:17.085 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:17.087 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:17.090 +10:00 [INF] InsertOrUpdateVideo: Michael Jackson - They Don’t Care About Us - 282084
+2022-08-17 14:31:17.093 +10:00 [INF] Updating
+2022-08-17 14:31:17.816 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:17.819 +10:00 [INF] PlayRandomVideoAsync: Hooverphonic - 2 Wicky - 0
+2022-08-17 14:31:17.891 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:17.893 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:17.895 +10:00 [INF] InsertOrUpdateVideo: Hooverphonic - 2 Wicky - 198530
+2022-08-17 14:31:17.898 +10:00 [INF] Updating
+2022-08-17 14:31:18.833 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:18.836 +10:00 [INF] PlayRandomVideoAsync: Bazzi - Beautiful ft. Camila Cabello - 0
+2022-08-17 14:31:18.910 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:18.912 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:18.914 +10:00 [INF] InsertOrUpdateVideo: Bazzi - Beautiful ft. Camila Cabello - 194955
+2022-08-17 14:31:18.917 +10:00 [INF] Updating
+2022-08-17 14:31:19.844 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:19.847 +10:00 [INF] PlayRandomVideoAsync: The White Stripes - Seven Nation Army - 0
+2022-08-17 14:31:19.911 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:19.917 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:19.921 +10:00 [INF] InsertOrUpdateVideo: The White Stripes - Seven Nation Army - 238984
+2022-08-17 14:31:19.925 +10:00 [INF] Updating
+2022-08-17 14:31:20.858 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:20.866 +10:00 [INF] PlayRandomVideoAsync: U2 - One - Anton Corbjin Version - 0
+2022-08-17 14:31:20.938 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:20.940 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:20.944 +10:00 [INF] InsertOrUpdateVideo: U2 - One - Anton Corbjin Version - 278591
+2022-08-17 14:31:20.947 +10:00 [INF] Updating
+2022-08-17 14:31:21.888 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:21.908 +10:00 [INF] PlayRandomVideoAsync: David Guetta - Lovers On The Sun - 0
+2022-08-17 14:31:22.048 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:22.050 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:22.052 +10:00 [INF] InsertOrUpdateVideo: David Guetta - Lovers On The Sun - 223753
+2022-08-17 14:31:22.054 +10:00 [INF] Updating
+2022-08-17 14:31:22.919 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:22.930 +10:00 [INF] PlayRandomVideoAsync: Carpenters - We''ve Only Just Begun - 0
+2022-08-17 14:31:23.948 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:23.961 +10:00 [INF] PlayRandomVideoAsync: Becky G - Lovin'' So Hard - 0
+2022-08-17 14:31:24.975 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:24.987 +10:00 [INF] PlayRandomVideoAsync: Sum 41 - With Me - 0
+2022-08-17 14:31:25.147 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:25.150 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:25.155 +10:00 [INF] InsertOrUpdateVideo: Sum 41 - With Me - 293453
+2022-08-17 14:31:25.160 +10:00 [INF] Updating
+2022-08-17 14:31:26.017 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:26.029 +10:00 [INF] PlayRandomVideoAsync: The Style Council - Walls Come Tumbling Down! - 0
+2022-08-17 14:31:26.141 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:26.143 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:26.146 +10:00 [INF] InsertOrUpdateVideo: The Style Council - Walls Come Tumbling Down! - 204155
+2022-08-17 14:31:26.148 +10:00 [INF] Updating
+2022-08-17 14:31:27.040 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:27.043 +10:00 [INF] PlayRandomVideoAsync: John Farnham - That''s Freedom - 0
+2022-08-17 14:31:28.058 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:28.069 +10:00 [INF] PlayRandomVideoAsync: Limp Bizkit - (Mission Impossible 2) - 0
+2022-08-17 14:31:28.181 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:28.185 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:28.189 +10:00 [INF] InsertOrUpdateVideo: Limp Bizkit - (Mission Impossible 2) - 314173
+2022-08-17 14:31:28.193 +10:00 [INF] Updating
+2022-08-17 14:31:29.084 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:29.095 +10:00 [INF] PlayRandomVideoAsync: OutKast - Roses - 0
+2022-08-17 14:31:29.279 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:29.282 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:29.284 +10:00 [INF] InsertOrUpdateVideo: OutKast - Roses - 364311
+2022-08-17 14:31:29.287 +10:00 [INF] Updating
+2022-08-17 14:31:30.108 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:30.110 +10:00 [INF] PlayRandomVideoAsync: Naked Eyes - Always Something There To Remind Me - 0
+2022-08-17 14:31:30.299 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:30.301 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:30.304 +10:00 [INF] InsertOrUpdateVideo: Naked Eyes - Always Something There To Remind Me - 201478
+2022-08-17 14:31:30.306 +10:00 [INF] Updating
+2022-08-17 14:31:31.125 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:31.132 +10:00 [INF] PlayRandomVideoAsync: The White Stripes - Fell In Love With A Girl - 0
+2022-08-17 14:31:31.220 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:31.222 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:31.224 +10:00 [INF] InsertOrUpdateVideo: The White Stripes - Fell In Love With A Girl - 120257
+2022-08-17 14:31:31.227 +10:00 [INF] Updating
+2022-08-17 14:31:32.143 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:32.146 +10:00 [INF] PlayRandomVideoAsync: Geographer - Lonely - 0
+2022-08-17 14:31:32.161 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:32.163 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:32.166 +10:00 [INF] InsertOrUpdateVideo: Geographer - Lonely - 257300
+2022-08-17 14:31:32.167 +10:00 [INF] Updating
+2022-08-17 14:31:33.165 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:33.181 +10:00 [INF] PlayRandomVideoAsync: Green Day - Pollyanna - 0
+2022-08-17 14:31:33.298 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:33.300 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:33.304 +10:00 [INF] InsertOrUpdateVideo: Green Day - Pollyanna - 194997
+2022-08-17 14:31:33.307 +10:00 [INF] Updating
+2022-08-17 14:31:34.192 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:34.203 +10:00 [INF] PlayRandomVideoAsync: Drake - Started From The Bottom - 0
+2022-08-17 14:31:34.323 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:34.326 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:34.330 +10:00 [INF] InsertOrUpdateVideo: Drake - Started From The Bottom - 320621
+2022-08-17 14:31:34.333 +10:00 [INF] Updating
+2022-08-17 14:31:35.210 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:35.213 +10:00 [INF] PlayRandomVideoAsync: Carpenters - We''ve Only Just Begun - 0
+2022-08-17 14:31:36.233 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:36.240 +10:00 [INF] PlayRandomVideoAsync: Village People - YMCA - 0
+2022-08-17 14:31:36.351 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:36.353 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:36.356 +10:00 [INF] InsertOrUpdateVideo: Village People - YMCA - 241168
+2022-08-17 14:31:36.359 +10:00 [INF] Updating
+2022-08-17 14:31:37.253 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:37.255 +10:00 [INF] PlayRandomVideoAsync: Tupac Shakur - Changes - 0
+2022-08-17 14:31:37.337 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:37.339 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:37.342 +10:00 [INF] InsertOrUpdateVideo: Tupac Shakur - Changes - 270520
+2022-08-17 14:31:37.345 +10:00 [INF] Updating
+2022-08-17 14:31:38.273 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:31:38.278 +10:00 [INF] PlayRandomVideoAsync: Rage Against the Machine - People Of The Sun - 0
+2022-08-17 14:31:38.440 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:31:38.443 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:31:38.449 +10:00 [INF] InsertOrUpdateVideo: Rage Against the Machine - People Of The Sun - 151187
+2022-08-17 14:31:38.458 +10:00 [INF] Updating
+2022-08-17 14:44:13.498 +10:00 [INF] DataStore.Constructor
+2022-08-17 14:44:13.682 +10:00 [INF] File Path F:\Music Videos for Import\Born In East L.A. (Cheech And Chong) [HD]-sFUFw1GH6ic.webm
+2022-08-17 14:44:13.684 +10:00 [INF] File Path F:\Music Videos for Import\Music's Got Me Feeling So Free-LOr3WS0aWSs.webm
+2022-08-17 14:44:13.685 +10:00 [INF] File Path F:\Music Videos for Import\Swedish House Mafia – Lifetime ft. Ty Dolla $ign & 070 Shake (Official Video)-t0RwGmzFCdA.webm
+2022-08-17 14:44:13.687 +10:00 [INF] File Path F:\Music Videos for Import\The Bodyguard • I Will Always Love You [Kevin Costner, Whitney Houston Movie HD]-bhuI3FdkdB8.webm
+2022-08-17 14:44:13.689 +10:00 [INF] File Path F:\Music Videos for Import\There She Goes (Official)-68MKLkNSMN4.webm
+2022-08-17 14:44:13.693 +10:00 [INF] File Path F:\Music Videos for Import\weird party time with acid friends-JdkLMm0j4Fo.webm
+2022-08-17 14:44:13.712 +10:00 [INF] Server Constructor
+2022-08-17 14:44:14.606 +10:00 [INF] Server.Play
+2022-08-17 14:44:14.912 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:14.926 +10:00 [INF] PlayRandomVideoAsync: Selena Gomez - Kill Em With Kindness - 0
+2022-08-17 14:44:15.935 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:15.938 +10:00 [INF] PlayRandomVideoAsync: The Chemical Brothers - Star Guitar - 0
+2022-08-17 14:44:16.804 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:16.812 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:16.827 +10:00 [INF] InsertOrUpdateVideo: The Chemical Brothers - Star Guitar - 239602
+2022-08-17 14:44:16.831 +10:00 [INF] Updating
+2022-08-17 14:44:17.233 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:17.237 +10:00 [INF] PlayRandomVideoAsync: Soundgarden - Spoonman - 0
+2022-08-17 14:44:17.613 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:17.616 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:17.623 +10:00 [INF] InsertOrUpdateVideo: Soundgarden - Spoonman - 264694
+2022-08-17 14:44:17.628 +10:00 [INF] Updating
+2022-08-17 14:44:18.256 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:18.259 +10:00 [INF] PlayRandomVideoAsync: Debby Boone - You light up my life - 0
+2022-08-17 14:44:18.313 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:18.315 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:18.318 +10:00 [INF] InsertOrUpdateVideo: Debby Boone - You light up my life - 213790
+2022-08-17 14:44:18.320 +10:00 [INF] Updating
+2022-08-17 14:44:19.260 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:19.263 +10:00 [INF] PlayRandomVideoAsync: The Kid LAROI, Justin Bieber - STAY - 0
+2022-08-17 14:44:19.332 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:19.335 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:19.338 +10:00 [INF] InsertOrUpdateVideo: The Kid LAROI, Justin Bieber - STAY - 157681
+2022-08-17 14:44:19.350 +10:00 [INF] Updating
+2022-08-17 14:44:20.280 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:20.282 +10:00 [INF] PlayRandomVideoAsync: Iggy Pop - Real Wild Child (Wild One) - 0
+2022-08-17 14:44:20.606 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:20.609 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:20.612 +10:00 [INF] InsertOrUpdateVideo: Iggy Pop - Real Wild Child (Wild One) - 207656
+2022-08-17 14:44:20.615 +10:00 [INF] Updating
+2022-08-17 14:44:21.294 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:21.300 +10:00 [INF] PlayRandomVideoAsync: Miami Sound Machine - Conga - 0
+2022-08-17 14:44:21.339 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:21.343 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:21.345 +10:00 [INF] InsertOrUpdateVideo: Miami Sound Machine - Conga - 320782
+2022-08-17 14:44:21.347 +10:00 [INF] Updating
+2022-08-17 14:44:22.305 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:22.307 +10:00 [INF] PlayRandomVideoAsync: Jimi Hendrix - Purple Haze - 0
+2022-08-17 14:44:22.473 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:22.476 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:22.479 +10:00 [INF] InsertOrUpdateVideo: Jimi Hendrix - Purple Haze - 228074
+2022-08-17 14:44:22.481 +10:00 [INF] Updating
+2022-08-17 14:44:23.315 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:23.319 +10:00 [INF] PlayRandomVideoAsync: Lime Spiders - Out Of Control - 0
+2022-08-17 14:44:23.429 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:23.432 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:23.434 +10:00 [INF] InsertOrUpdateVideo: Lime Spiders - Out Of Control - 198646
+2022-08-17 14:44:23.436 +10:00 [INF] Updating
+2022-08-17 14:44:24.331 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:24.333 +10:00 [INF] PlayRandomVideoAsync: Hoodoo Gurus - 1000 Miles Away - 0
+2022-08-17 14:44:24.432 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:24.435 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:24.438 +10:00 [INF] InsertOrUpdateVideo: Hoodoo Gurus - 1000 Miles Away - 270211
+2022-08-17 14:44:24.440 +10:00 [INF] Updating
+2022-08-17 14:44:25.340 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:25.344 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - Hey Hey Hey - 0
+2022-08-17 14:44:25.461 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:25.464 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:25.466 +10:00 [INF] InsertOrUpdateVideo: Katy Perry - Hey Hey Hey - 225233
+2022-08-17 14:44:25.469 +10:00 [INF] Updating
+2022-08-17 14:44:26.356 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:26.361 +10:00 [INF] PlayRandomVideoAsync: Rednex - Cotton Eye Joe - 0
+2022-08-17 14:44:26.493 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:26.496 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:26.499 +10:00 [INF] InsertOrUpdateVideo: Rednex - Cotton Eye Joe - 194113
+2022-08-17 14:44:26.502 +10:00 [INF] Updating
+2022-08-17 14:44:27.377 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:27.379 +10:00 [INF] PlayRandomVideoAsync: Skrillex & Damian - Make It Bun Dem - 0
+2022-08-17 14:44:27.485 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:27.488 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:27.492 +10:00 [INF] InsertOrUpdateVideo: Skrillex & Damian - Make It Bun Dem - 218360
+2022-08-17 14:44:27.495 +10:00 [INF] Updating
+2022-08-17 14:44:28.386 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:28.389 +10:00 [INF] PlayRandomVideoAsync: Peter Gabriel - Games Without Frontiers - 0
+2022-08-17 14:44:28.482 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:28.485 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:28.487 +10:00 [INF] InsertOrUpdateVideo: Peter Gabriel - Games Without Frontiers - 242098
+2022-08-17 14:44:28.490 +10:00 [INF] Updating
+2022-08-17 14:44:29.397 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:29.400 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - Hot N Cold - 0
+2022-08-17 14:44:29.509 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:29.512 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:29.515 +10:00 [INF] InsertOrUpdateVideo: Katy Perry - Hot N Cold - 283654
+2022-08-17 14:44:29.518 +10:00 [INF] Updating
+2022-08-17 14:44:30.411 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:30.415 +10:00 [INF] PlayRandomVideoAsync: M - Pop Muzik - 0
+2022-08-17 14:44:30.534 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:30.537 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:30.539 +10:00 [INF] InsertOrUpdateVideo: M - Pop Muzik - 193492
+2022-08-17 14:44:30.543 +10:00 [INF] Updating
+2022-08-17 14:44:31.426 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:31.428 +10:00 [INF] PlayRandomVideoAsync: Uniting Nations - Out Of Touch - 0
+2022-08-17 14:44:31.643 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:31.645 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:31.648 +10:00 [INF] InsertOrUpdateVideo: Uniting Nations - Out Of Touch - 170063
+2022-08-17 14:44:31.651 +10:00 [INF] Updating
+2022-08-17 14:44:32.434 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:32.436 +10:00 [INF] PlayRandomVideoAsync: Lana Del Rey - Summertime Sadness - 0
+2022-08-17 14:44:32.555 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:32.558 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:32.561 +10:00 [INF] InsertOrUpdateVideo: Lana Del Rey - Summertime Sadness - 282558
+2022-08-17 14:44:32.563 +10:00 [INF] Updating
+2022-08-17 14:44:33.446 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:33.453 +10:00 [INF] PlayRandomVideoAsync: The Specials - Nite Klub - 0
+2022-08-17 14:44:33.655 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:33.660 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:33.663 +10:00 [INF] InsertOrUpdateVideo: The Specials - Nite Klub - 205159
+2022-08-17 14:44:33.665 +10:00 [INF] Updating
+2022-08-17 14:44:34.456 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:34.460 +10:00 [INF] PlayRandomVideoAsync: Idina Menzel - Let It Go - 0
+2022-08-17 14:44:34.676 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:34.679 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:34.681 +10:00 [INF] InsertOrUpdateVideo: Idina Menzel - Let It Go - 225211
+2022-08-17 14:44:34.684 +10:00 [INF] Updating
+2022-08-17 14:44:35.480 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:35.483 +10:00 [INF] PlayRandomVideoAsync: LMFAO - Sexy and I Know It - 0
+2022-08-17 14:44:35.561 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:35.563 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:35.566 +10:00 [INF] InsertOrUpdateVideo: LMFAO - Sexy and I Know It - 203592
+2022-08-17 14:44:35.568 +10:00 [INF] Updating
+2022-08-17 14:44:36.495 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:36.497 +10:00 [INF] PlayRandomVideoAsync: Cheat Codes ft. Little Mix - Only You - 0
+2022-08-17 14:44:36.610 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:36.626 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:36.632 +10:00 [INF] InsertOrUpdateVideo: Cheat Codes ft. Little Mix - Only You - 191030
+2022-08-17 14:44:36.635 +10:00 [INF] Updating
+2022-08-17 14:44:37.509 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:37.512 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - God is a woman - 0
+2022-08-17 14:44:37.645 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:37.647 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:37.651 +10:00 [INF] InsertOrUpdateVideo: Ariana Grande - God is a woman - 241533
+2022-08-17 14:44:37.653 +10:00 [INF] Updating
+2022-08-17 14:44:38.527 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:38.530 +10:00 [INF] PlayRandomVideoAsync: Black Flag - Rise Above - 0
+2022-08-17 14:44:38.611 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:38.614 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:38.618 +10:00 [INF] InsertOrUpdateVideo: Black Flag - Rise Above - 137012
+2022-08-17 14:44:38.621 +10:00 [INF] Updating
+2022-08-17 14:44:39.544 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:39.547 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Video Phone - 0
+2022-08-17 14:44:39.621 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:39.624 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:39.628 +10:00 [INF] InsertOrUpdateVideo: Beyoncé - Video Phone - 229250
+2022-08-17 14:44:39.631 +10:00 [INF] Updating
+2022-08-17 14:44:40.563 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:40.565 +10:00 [INF] PlayRandomVideoAsync: Surfaces - Sunny Side Up - 0
+2022-08-17 14:44:40.693 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:40.696 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:40.699 +10:00 [INF] InsertOrUpdateVideo: Surfaces - Sunny Side Up - 171139
+2022-08-17 14:44:40.701 +10:00 [INF] Updating
+2022-08-17 14:44:41.570 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:41.573 +10:00 [INF] PlayRandomVideoAsync: Natalie Imbruglia - Shiver - 0
+2022-08-17 14:44:41.663 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:41.666 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:41.670 +10:00 [INF] InsertOrUpdateVideo: Natalie Imbruglia - Shiver - 251147
+2022-08-17 14:44:41.673 +10:00 [INF] Updating
+2022-08-17 14:44:42.586 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:42.589 +10:00 [INF] PlayRandomVideoAsync: Rihanna - Cheers (Drink To That) - 0
+2022-08-17 14:44:42.704 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:42.706 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:42.711 +10:00 [INF] InsertOrUpdateVideo: Rihanna - Cheers (Drink To That) - 281216
+2022-08-17 14:44:42.713 +10:00 [INF] Updating
+2022-08-17 14:44:43.599 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:43.601 +10:00 [INF] PlayRandomVideoAsync: Sheryl Crow - Love Is Free - 0
+2022-08-17 14:44:43.693 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:43.696 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:43.698 +10:00 [INF] InsertOrUpdateVideo: Sheryl Crow - Love Is Free - 213600
+2022-08-17 14:44:43.701 +10:00 [INF] Updating
+2022-08-17 14:44:44.612 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:44.615 +10:00 [INF] PlayRandomVideoAsync: Bloodhound Gang - Fire Water Burn - 0
+2022-08-17 14:44:44.746 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:44.749 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:44.755 +10:00 [INF] InsertOrUpdateVideo: Bloodhound Gang - Fire Water Burn - 304437
+2022-08-17 14:44:44.757 +10:00 [INF] Updating
+2022-08-17 14:44:45.618 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:45.623 +10:00 [INF] PlayRandomVideoAsync: Macklemore & Ryan Lewis - Otherside - 0
+2022-08-17 14:44:45.721 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:45.724 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:45.727 +10:00 [INF] InsertOrUpdateVideo: Macklemore & Ryan Lewis - Otherside - 304367
+2022-08-17 14:44:45.730 +10:00 [INF] Updating
+2022-08-17 14:44:46.636 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:46.639 +10:00 [INF] PlayRandomVideoAsync: The Breakfast Club - Don''t You (Forget About Me) - 0
+2022-08-17 14:44:47.647 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:47.649 +10:00 [INF] PlayRandomVideoAsync: Marshmello - Flashbacks - 0
+2022-08-17 14:44:47.767 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:47.770 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:47.773 +10:00 [INF] InsertOrUpdateVideo: Marshmello - Flashbacks - 165442
+2022-08-17 14:44:47.776 +10:00 [INF] Updating
+2022-08-17 14:44:48.656 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:48.660 +10:00 [INF] PlayRandomVideoAsync: Leona Lewis - Bleeding Love - 0
+2022-08-17 14:44:48.738 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:48.741 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:48.745 +10:00 [INF] InsertOrUpdateVideo: Leona Lewis - Bleeding Love - 279065
+2022-08-17 14:44:48.748 +10:00 [INF] Updating
+2022-08-17 14:44:49.664 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:49.667 +10:00 [INF] PlayRandomVideoAsync: Lo Moon - Tried to Make You My Own - 0
+2022-08-17 14:44:49.768 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:49.771 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:49.774 +10:00 [INF] InsertOrUpdateVideo: Lo Moon - Tried to Make You My Own - 397455
+2022-08-17 14:44:49.778 +10:00 [INF] Updating
+2022-08-17 14:44:50.671 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:50.674 +10:00 [INF] PlayRandomVideoAsync: Black Eyed Peas - Meet Me Halfway - 0
+2022-08-17 14:44:50.851 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:50.855 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:50.860 +10:00 [INF] InsertOrUpdateVideo: Black Eyed Peas - Meet Me Halfway - 289361
+2022-08-17 14:44:50.863 +10:00 [INF] Updating
+2022-08-17 14:44:51.695 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:51.697 +10:00 [INF] PlayRandomVideoAsync: Madness - Tomorrow''s (Just another Day) - 0
+2022-08-17 14:44:52.707 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:52.710 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - This Is How We Do - 0
+2022-08-17 14:44:52.963 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:52.967 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:52.969 +10:00 [INF] InsertOrUpdateVideo: Katy Perry - This Is How We Do - 209491
+2022-08-17 14:44:52.972 +10:00 [INF] Updating
+2022-08-17 14:44:53.725 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:53.728 +10:00 [INF] PlayRandomVideoAsync: U2 - Vertigo - 0
+2022-08-17 14:44:53.850 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:53.852 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:53.855 +10:00 [INF] InsertOrUpdateVideo: U2 - Vertigo - 190937
+2022-08-17 14:44:53.858 +10:00 [INF] Updating
+2022-08-17 14:44:54.732 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:54.735 +10:00 [INF] PlayRandomVideoAsync: Talking Heads - And She Was - 0
+2022-08-17 14:44:54.852 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:54.855 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:54.858 +10:00 [INF] InsertOrUpdateVideo: Talking Heads - And She Was - 219189
+2022-08-17 14:44:54.862 +10:00 [INF] Updating
+2022-08-17 14:44:55.743 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:55.746 +10:00 [INF] PlayRandomVideoAsync: Sugababes - Soul Sound - 0
+2022-08-17 14:44:56.673 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:56.676 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:56.679 +10:00 [INF] InsertOrUpdateVideo: Sugababes - Soul Sound - 230203
+2022-08-17 14:44:56.681 +10:00 [INF] Updating
+2022-08-17 14:44:56.782 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:56.785 +10:00 [INF] PlayRandomVideoAsync: Charli XCX - Break The Rules - 0
+2022-08-17 14:44:56.889 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:56.894 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:56.897 +10:00 [INF] InsertOrUpdateVideo: Charli XCX - Break The Rules - 205844
+2022-08-17 14:44:56.900 +10:00 [INF] Updating
+2022-08-17 14:44:57.801 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:57.804 +10:00 [INF] PlayRandomVideoAsync: Cascada - Everytime We Touch - 0
+2022-08-17 14:44:57.921 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:57.926 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:57.929 +10:00 [INF] InsertOrUpdateVideo: Cascada - Everytime We Touch - 201572
+2022-08-17 14:44:57.931 +10:00 [INF] Updating
+2022-08-17 14:44:58.814 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:58.818 +10:00 [INF] PlayRandomVideoAsync: James Blunt - 1973 - 0
+2022-08-17 14:44:58.987 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:58.991 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:58.995 +10:00 [INF] InsertOrUpdateVideo: James Blunt - 1973 - 233244
+2022-08-17 14:44:58.997 +10:00 [INF] Updating
+2022-08-17 14:44:59.837 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:44:59.840 +10:00 [INF] PlayRandomVideoAsync: Hailee Steinfeld ft. Alesso - Let Me Go - 0
+2022-08-17 14:44:59.940 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:44:59.944 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:44:59.947 +10:00 [INF] InsertOrUpdateVideo: Hailee Steinfeld ft. Alesso - Let Me Go - 182183
+2022-08-17 14:44:59.950 +10:00 [INF] Updating
+2022-08-17 14:45:00.845 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:00.849 +10:00 [INF] PlayRandomVideoAsync: Katy Perry, Britney Spears, Sia ft. Iggy Azalea - Passenger - 0
+2022-08-17 14:45:00.947 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:00.950 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:00.953 +10:00 [INF] InsertOrUpdateVideo: Katy Perry, Britney Spears, Sia ft. Iggy Azalea - Passenger - 222981
+2022-08-17 14:45:00.956 +10:00 [INF] Updating
+2022-08-17 14:45:01.852 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:01.855 +10:00 [INF] PlayRandomVideoAsync: Hoodoo Gurus - Miss Freelove ''69 - 0
+2022-08-17 14:45:02.867 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:02.870 +10:00 [INF] PlayRandomVideoAsync: Ke$ha - Animal - 0
+2022-08-17 14:45:02.958 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:02.962 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:02.965 +10:00 [INF] InsertOrUpdateVideo: Ke$ha - Animal - 235961
+2022-08-17 14:45:02.968 +10:00 [INF] Updating
+2022-08-17 14:45:03.885 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:03.887 +10:00 [INF] PlayRandomVideoAsync: Cher - Gypsys Tramps And Thieves - 0
+2022-08-17 14:45:03.982 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:03.985 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:03.988 +10:00 [INF] InsertOrUpdateVideo: Cher - Gypsys Tramps And Thieves - 173228
+2022-08-17 14:45:03.992 +10:00 [INF] Updating
+2022-08-17 14:45:04.907 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:04.910 +10:00 [INF] PlayRandomVideoAsync: Metallica - The Unforgiven - 0
+2022-08-17 14:45:05.039 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:05.043 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:05.046 +10:00 [INF] InsertOrUpdateVideo: Metallica - The Unforgiven - 384334
+2022-08-17 14:45:05.048 +10:00 [INF] Updating
+2022-08-17 14:45:05.920 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:05.925 +10:00 [INF] PlayRandomVideoAsync: Grace VanderWaal - So Much More Than This - 0
+2022-08-17 14:45:06.008 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:06.012 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:06.015 +10:00 [INF] InsertOrUpdateVideo: Grace VanderWaal - So Much More Than This - 178027
+2022-08-17 14:45:06.017 +10:00 [INF] Updating
+2022-08-17 14:45:06.947 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:06.950 +10:00 [INF] PlayRandomVideoAsync: Selena Gomez - Back To You - 0
+2022-08-17 14:45:07.068 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:07.070 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:07.073 +10:00 [INF] InsertOrUpdateVideo: Selena Gomez - Back To You - 267354
+2022-08-17 14:45:07.079 +10:00 [INF] Updating
+2022-08-17 14:45:07.961 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:07.965 +10:00 [INF] PlayRandomVideoAsync: The Bangles - Walk Like An Egyptian - 0
+2022-08-17 14:45:08.087 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:08.090 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:08.092 +10:00 [INF] InsertOrUpdateVideo: The Bangles - Walk Like An Egyptian - 198046
+2022-08-17 14:45:08.095 +10:00 [INF] Updating
+2022-08-17 14:45:08.974 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:08.978 +10:00 [INF] PlayRandomVideoAsync: Creed - What''s this life for & Lyrics - 0
+2022-08-17 14:45:09.980 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:09.983 +10:00 [INF] PlayRandomVideoAsync: Cher Lloyd - Swagger Jagger - 0
+2022-08-17 14:45:10.121 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:10.123 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:10.126 +10:00 [INF] InsertOrUpdateVideo: Cher Lloyd - Swagger Jagger - 205682
+2022-08-17 14:45:10.129 +10:00 [INF] Updating
+2022-08-17 14:45:10.990 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:10.993 +10:00 [INF] PlayRandomVideoAsync: Winger - Seventeen - 0
+2022-08-17 14:45:11.104 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:11.108 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:11.112 +10:00 [INF] InsertOrUpdateVideo: Winger - Seventeen - 248902
+2022-08-17 14:45:11.114 +10:00 [INF] Updating
+2022-08-17 14:45:12.003 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:12.006 +10:00 [INF] PlayRandomVideoAsync: Wham! - Everything She Wants - 0
+2022-08-17 14:45:12.112 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:12.115 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:12.118 +10:00 [INF] InsertOrUpdateVideo: Wham! - Everything She Wants - 396945
+2022-08-17 14:45:12.121 +10:00 [INF] Updating
+2022-08-17 14:45:13.025 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:13.028 +10:00 [INF] PlayRandomVideoAsync: Taylor Swift - Bad Blood ft. Kendrick Lamar - 0
+2022-08-17 14:45:13.275 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:13.280 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:13.283 +10:00 [INF] InsertOrUpdateVideo: Taylor Swift - Bad Blood ft. Kendrick Lamar - 244901
+2022-08-17 14:45:13.286 +10:00 [INF] Updating
+2022-08-17 14:45:14.042 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:14.047 +10:00 [INF] PlayRandomVideoAsync: The Fray - You Found Me - 0
+2022-08-17 14:45:14.246 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:14.250 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:14.252 +10:00 [INF] InsertOrUpdateVideo: The Fray - You Found Me - 241022
+2022-08-17 14:45:14.255 +10:00 [INF] Updating
+2022-08-17 14:45:15.058 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:15.062 +10:00 [INF] PlayRandomVideoAsync: Selena Gomez - Come & Get It - 0
+2022-08-17 14:45:15.205 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:15.207 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:15.209 +10:00 [INF] InsertOrUpdateVideo: Selena Gomez - Come & Get It - 289280
+2022-08-17 14:45:15.212 +10:00 [INF] Updating
+2022-08-17 14:45:16.073 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:16.076 +10:00 [INF] PlayRandomVideoAsync: Taylor Swift - Love Story - 0
+2022-08-17 14:45:16.560 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:16.563 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:16.566 +10:00 [INF] InsertOrUpdateVideo: Taylor Swift - Love Story - 236519
+2022-08-17 14:45:16.569 +10:00 [INF] Updating
+2022-08-17 14:45:17.082 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:17.085 +10:00 [INF] PlayRandomVideoAsync: Sugababes - Push The Button - 0
+2022-08-17 14:45:17.186 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:17.190 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:17.195 +10:00 [INF] InsertOrUpdateVideo: Sugababes - Push The Button - 224924
+2022-08-17 14:45:17.198 +10:00 [INF] Updating
+2022-08-17 14:45:18.095 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:18.098 +10:00 [INF] PlayRandomVideoAsync: Tiffany - I Think We''re Alone Now - 0
+2022-08-17 14:45:19.105 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:19.108 +10:00 [INF] PlayRandomVideoAsync: Alicia Keys - Brand New Me - 0
+2022-08-17 14:45:19.205 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:19.207 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:19.210 +10:00 [INF] InsertOrUpdateVideo: Alicia Keys - Brand New Me - 281170
+2022-08-17 14:45:19.213 +10:00 [INF] Updating
+2022-08-17 14:45:20.128 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:20.130 +10:00 [INF] PlayRandomVideoAsync: Beyoncé - Dance for You - 0
+2022-08-17 14:45:20.204 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:20.207 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:20.211 +10:00 [INF] InsertOrUpdateVideo: Beyoncé - Dance for You - 264150
+2022-08-17 14:45:20.214 +10:00 [INF] Updating
+2022-08-17 14:45:21.135 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:21.138 +10:00 [INF] PlayRandomVideoAsync: The Doors - The End - 0
+2022-08-17 14:45:21.264 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:21.267 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:21.270 +10:00 [INF] InsertOrUpdateVideo: The Doors - The End - 707891
+2022-08-17 14:45:21.273 +10:00 [INF] Updating
+2022-08-17 14:45:22.146 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:22.148 +10:00 [INF] PlayRandomVideoAsync: Shakira - Empire - 0
+2022-08-17 14:45:22.246 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:22.249 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:22.251 +10:00 [INF] InsertOrUpdateVideo: Shakira - Empire - 242555
+2022-08-17 14:45:22.254 +10:00 [INF] Updating
+2022-08-17 14:45:23.163 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:23.166 +10:00 [INF] PlayRandomVideoAsync: Silver Convention - Fly Robin Fly - 0
+2022-08-17 14:45:23.264 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:23.267 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:23.270 +10:00 [INF] InsertOrUpdateVideo: Silver Convention - Fly Robin Fly - 159473
+2022-08-17 14:45:23.273 +10:00 [INF] Updating
+2022-08-17 14:45:24.178 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:24.182 +10:00 [INF] PlayRandomVideoAsync: Colbie Caillat - Brighter Than The Sun - 0
+2022-08-17 14:45:24.291 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:24.295 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:24.298 +10:00 [INF] InsertOrUpdateVideo: Colbie Caillat - Brighter Than The Sun - 234405
+2022-08-17 14:45:24.301 +10:00 [INF] Updating
+2022-08-17 14:45:25.191 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:25.194 +10:00 [INF] PlayRandomVideoAsync: Dua Lipa - We''re Good - 0
+2022-08-17 14:45:26.208 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:26.212 +10:00 [INF] PlayRandomVideoAsync: The Interrupters - Family - 0
+2022-08-17 14:45:26.348 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:26.351 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:26.354 +10:00 [INF] InsertOrUpdateVideo: The Interrupters - Family - 160845
+2022-08-17 14:45:26.356 +10:00 [INF] Updating
+2022-08-17 14:45:27.225 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:27.229 +10:00 [INF] PlayRandomVideoAsync: Motorhead - Born to Raise Hell - 0
+2022-08-17 14:45:27.335 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:27.337 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:27.340 +10:00 [INF] InsertOrUpdateVideo: Motorhead - Born to Raise Hell - 307721
+2022-08-17 14:45:27.342 +10:00 [INF] Updating
+2022-08-17 14:45:28.234 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:28.237 +10:00 [INF] PlayRandomVideoAsync: Public Enemy - Harder Than You Think - 0
+2022-08-17 14:45:28.361 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:28.365 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:28.369 +10:00 [INF] InsertOrUpdateVideo: Public Enemy - Harder Than You Think - 242601
+2022-08-17 14:45:28.373 +10:00 [INF] Updating
+2022-08-17 14:45:29.257 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:29.261 +10:00 [INF] PlayRandomVideoAsync: Skrillex & Diplo ft. Kai - Mind - 0
+2022-08-17 14:45:29.358 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:29.362 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:29.365 +10:00 [INF] InsertOrUpdateVideo: Skrillex & Diplo ft. Kai - Mind - 241719
+2022-08-17 14:45:29.370 +10:00 [INF] Updating
+2022-08-17 14:45:30.273 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:30.278 +10:00 [INF] PlayRandomVideoAsync: Joe Cocker & Jennifer Warnes - Up Where We Belong - 0
+2022-08-17 14:45:30.402 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:30.406 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:30.409 +10:00 [INF] InsertOrUpdateVideo: Joe Cocker & Jennifer Warnes - Up Where We Belong - 232391
+2022-08-17 14:45:30.414 +10:00 [INF] Updating
+2022-08-17 14:45:31.292 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:31.295 +10:00 [INF] PlayRandomVideoAsync: The Push - Strange World - 0
+2022-08-17 14:45:31.395 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:31.398 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:31.401 +10:00 [INF] InsertOrUpdateVideo: The Push - Strange World - 477216
+2022-08-17 14:45:31.404 +10:00 [INF] Updating
+2022-08-17 14:45:32.307 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:32.311 +10:00 [INF] PlayRandomVideoAsync: Dire Straits - Walk Of Life - 0
+2022-08-17 14:45:32.424 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:32.428 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:32.432 +10:00 [INF] InsertOrUpdateVideo: Dire Straits - Walk Of Life - 265514
+2022-08-17 14:45:32.434 +10:00 [INF] Updating
+2022-08-17 14:45:33.316 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:33.321 +10:00 [INF] PlayRandomVideoAsync: Fifth Harmony - BO$$ (BOSS) - 0
+2022-08-17 14:45:33.467 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:33.469 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:33.473 +10:00 [INF] InsertOrUpdateVideo: Fifth Harmony - BO$$ (BOSS) - 184157
+2022-08-17 14:45:33.475 +10:00 [INF] Updating
+2022-08-17 14:45:34.326 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:34.331 +10:00 [INF] PlayRandomVideoAsync: Skrillex - Rock n Roll (Will Take You to the Mountain) - 0
+2022-08-17 14:45:34.445 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:34.448 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:34.451 +10:00 [INF] InsertOrUpdateVideo: Skrillex - Rock n Roll (Will Take You to the Mountain) - 273740
+2022-08-17 14:45:34.453 +10:00 [INF] Updating
+2022-08-17 14:45:35.346 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:35.348 +10:00 [INF] PlayRandomVideoAsync: Ben Harper - Diamonds On The Inside - 0
+2022-08-17 14:45:35.468 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:35.472 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:35.475 +10:00 [INF] InsertOrUpdateVideo: Ben Harper - Diamonds On The Inside - 223144
+2022-08-17 14:45:35.478 +10:00 [INF] Updating
+2022-08-17 14:45:36.352 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:36.355 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - California Gurls ft. Snoop Dogg - 0
+2022-08-17 14:45:36.441 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:36.443 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:36.446 +10:00 [INF] InsertOrUpdateVideo: Katy Perry - California Gurls ft. Snoop Dogg - 234196
+2022-08-17 14:45:36.449 +10:00 [INF] Updating
+2022-08-17 14:45:37.368 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:37.371 +10:00 [INF] PlayRandomVideoAsync: Urban Cookie Collective - The Key The Secret - 0
+2022-08-17 14:45:37.499 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:37.502 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:37.505 +10:00 [INF] InsertOrUpdateVideo: Urban Cookie Collective - The Key The Secret - 434516
+2022-08-17 14:45:37.507 +10:00 [INF] Updating
+2022-08-17 14:45:38.381 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:38.384 +10:00 [INF] PlayRandomVideoAsync: Spin Doctors - Little Miss Can''t Be Wrong - 0
+2022-08-17 14:45:39.395 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:39.399 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Boyfriend Material - 0
+2022-08-17 14:45:39.500 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:39.502 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:39.505 +10:00 [INF] InsertOrUpdateVideo: Ariana Grande - Boyfriend Material - 193561
+2022-08-17 14:45:39.507 +10:00 [INF] Updating
+2022-08-17 14:45:40.412 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:40.416 +10:00 [INF] PlayRandomVideoAsync: The Weather Station - Impossible - 0
+2022-08-17 14:45:40.512 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:40.515 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:40.518 +10:00 [INF] InsertOrUpdateVideo: The Weather Station - Impossible - 207795
+2022-08-17 14:45:40.521 +10:00 [INF] Updating
+2022-08-17 14:45:41.425 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:41.429 +10:00 [INF] PlayRandomVideoAsync: The Droogs - Change Is Gonna Come - 0
+2022-08-17 14:45:41.512 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:41.514 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:41.518 +10:00 [INF] InsertOrUpdateVideo: The Droogs - Change Is Gonna Come - 220209
+2022-08-17 14:45:41.522 +10:00 [INF] Updating
+2022-08-17 14:45:42.432 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:42.435 +10:00 [INF] PlayRandomVideoAsync: Frank Sinatra - My Way - 0
+2022-08-17 14:45:42.537 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:42.539 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:42.542 +10:00 [INF] InsertOrUpdateVideo: Frank Sinatra - My Way - 274088
+2022-08-17 14:45:42.546 +10:00 [INF] Updating
+2022-08-17 14:45:43.447 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:43.450 +10:00 [INF] PlayRandomVideoAsync: Duncan Sheik - Barely Breathing - 0
+2022-08-17 14:45:43.570 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:43.572 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:43.575 +10:00 [INF] InsertOrUpdateVideo: Duncan Sheik - Barely Breathing - 249238
+2022-08-17 14:45:43.578 +10:00 [INF] Updating
+2022-08-17 14:45:44.452 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:44.455 +10:00 [INF] PlayRandomVideoAsync: Jeremih - Down On Me ft. 50 Cent - 0
+2022-08-17 14:45:44.548 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:44.552 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:44.554 +10:00 [INF] InsertOrUpdateVideo: Jeremih - Down On Me ft. 50 Cent - 231735
+2022-08-17 14:45:44.557 +10:00 [INF] Updating
+2022-08-17 14:45:45.459 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:45.463 +10:00 [INF] PlayRandomVideoAsync: Noisestorm - Crab Rave [Monstercat Release] - 0
+2022-08-17 14:45:45.583 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:45.587 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:45.590 +10:00 [INF] InsertOrUpdateVideo: Noisestorm - Crab Rave [Monstercat Release] - 192284
+2022-08-17 14:45:45.592 +10:00 [INF] Updating
+2022-08-17 14:45:46.476 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:46.479 +10:00 [INF] PlayRandomVideoAsync: Bad Religion - _True North_ - 0
+2022-08-17 14:45:46.590 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:46.593 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:46.597 +10:00 [INF] InsertOrUpdateVideo: Bad Religion - _True North_ - 134648
+2022-08-17 14:45:46.600 +10:00 [INF] Updating
+2022-08-17 14:45:47.490 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:47.495 +10:00 [INF] PlayRandomVideoAsync: RANCID - Salvation - 0
+2022-08-17 14:45:47.579 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:47.581 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:47.583 +10:00 [INF] InsertOrUpdateVideo: RANCID - Salvation - 176937
+2022-08-17 14:45:47.586 +10:00 [INF] Updating
+2022-08-17 14:45:48.499 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:48.502 +10:00 [INF] PlayRandomVideoAsync: Nicki Minaj - Your Love - 0
+2022-08-17 14:45:48.612 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:48.615 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:48.618 +10:00 [INF] InsertOrUpdateVideo: Nicki Minaj - Your Love - 245551
+2022-08-17 14:45:48.621 +10:00 [INF] Updating
+2022-08-17 14:45:49.504 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:49.508 +10:00 [INF] PlayRandomVideoAsync: Grease - You''re The One That I Want - 0
+2022-08-17 14:45:50.521 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:50.526 +10:00 [INF] PlayRandomVideoAsync: Wham! - Bad Boys - 0
+2022-08-17 14:45:51.442 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:51.446 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:51.448 +10:00 [INF] InsertOrUpdateVideo: Wham! - Bad Boys - 202222
+2022-08-17 14:45:51.450 +10:00 [INF] Updating
+2022-08-17 14:45:51.579 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:51.584 +10:00 [INF] PlayRandomVideoAsync: Far East Movement - Like A G6 - 0
+2022-08-17 14:45:51.690 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:51.692 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:51.696 +10:00 [INF] InsertOrUpdateVideo: Far East Movement - Like A G6 - 225024
+2022-08-17 14:45:51.698 +10:00 [INF] Updating
+2022-08-17 14:45:52.584 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:52.588 +10:00 [INF] PlayRandomVideoAsync: Diddy - Dirty Money - 0
+2022-08-17 14:45:52.709 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:52.715 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:52.718 +10:00 [INF] InsertOrUpdateVideo: Diddy - Dirty Money - 250055
+2022-08-17 14:45:52.721 +10:00 [INF] Updating
+2022-08-17 14:45:53.603 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:53.606 +10:00 [INF] PlayRandomVideoAsync: Taylor Swift - Fearless - 0
+2022-08-17 14:45:53.713 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:53.717 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:53.721 +10:00 [INF] InsertOrUpdateVideo: Taylor Swift - Fearless - 250358
+2022-08-17 14:45:53.725 +10:00 [INF] Updating
+2022-08-17 14:45:54.608 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:54.612 +10:00 [INF] PlayRandomVideoAsync: Shanice - I Love Your Smile - 0
+2022-08-17 14:45:54.735 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:54.737 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:54.740 +10:00 [INF] InsertOrUpdateVideo: Shanice - I Love Your Smile - 230326
+2022-08-17 14:45:54.742 +10:00 [INF] Updating
+2022-08-17 14:45:55.631 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:55.634 +10:00 [INF] PlayRandomVideoAsync: Jimmy Ray - Are You Jimmy Ray - 0
+2022-08-17 14:45:55.714 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:55.717 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:55.720 +10:00 [INF] InsertOrUpdateVideo: Jimmy Ray - Are You Jimmy Ray - 202762
+2022-08-17 14:45:55.723 +10:00 [INF] Updating
+2022-08-17 14:45:56.659 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:56.663 +10:00 [INF] PlayRandomVideoAsync: Lil Wayne - How To Love - 0
+2022-08-17 14:45:56.763 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:56.765 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:56.768 +10:00 [INF] InsertOrUpdateVideo: Lil Wayne - How To Love - 321758
+2022-08-17 14:45:56.771 +10:00 [INF] Updating
+2022-08-17 14:45:57.682 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:57.684 +10:00 [INF] PlayRandomVideoAsync: Cypress Hill - How I Could Just Kill a Man - 0
+2022-08-17 14:45:57.824 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:57.826 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:57.830 +10:00 [INF] InsertOrUpdateVideo: Cypress Hill - How I Could Just Kill a Man - 252935
+2022-08-17 14:45:57.833 +10:00 [INF] Updating
+2022-08-17 14:45:58.692 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:58.696 +10:00 [INF] PlayRandomVideoAsync: Elastica - Connection - 0
+2022-08-17 14:45:58.943 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:58.947 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:58.951 +10:00 [INF] InsertOrUpdateVideo: Elastica - Connection - 137638
+2022-08-17 14:45:58.954 +10:00 [INF] Updating
+2022-08-17 14:45:59.698 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:45:59.701 +10:00 [INF] PlayRandomVideoAsync: Rage Against the Machine - Pistol Grip Pump - 0
+2022-08-17 14:45:59.794 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:45:59.798 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:45:59.801 +10:00 [INF] InsertOrUpdateVideo: Rage Against the Machine - Pistol Grip Pump - 198530
+2022-08-17 14:45:59.804 +10:00 [INF] Updating
+2022-08-17 14:46:00.713 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:00.716 +10:00 [INF] PlayRandomVideoAsync: Clean Bandit - Rather Be ft. Jess Glynne - 0
+2022-08-17 14:46:00.848 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:00.851 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:00.854 +10:00 [INF] InsertOrUpdateVideo: Clean Bandit - Rather Be ft. Jess Glynne - 268470
+2022-08-17 14:46:00.857 +10:00 [INF] Updating
+2022-08-17 14:46:01.729 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:01.732 +10:00 [INF] PlayRandomVideoAsync: P!nk - Who Knew - 0
+2022-08-17 14:46:01.827 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:01.832 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:01.835 +10:00 [INF] InsertOrUpdateVideo: P!nk - Who Knew - 212330
+2022-08-17 14:46:01.838 +10:00 [INF] Updating
+2022-08-17 14:46:02.747 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:02.751 +10:00 [INF] PlayRandomVideoAsync: My Bloody Valentine - Only Shallow - 0
+2022-08-17 14:46:02.888 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:02.891 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:02.894 +10:00 [INF] InsertOrUpdateVideo: My Bloody Valentine - Only Shallow - 223654
+2022-08-17 14:46:02.897 +10:00 [INF] Updating
+2022-08-17 14:46:03.759 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:03.766 +10:00 [INF] PlayRandomVideoAsync: The Offspring - Million Miles Away - 0
+2022-08-17 14:46:03.858 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:03.861 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:03.864 +10:00 [INF] InsertOrUpdateVideo: The Offspring - Million Miles Away - 219893
+2022-08-17 14:46:03.867 +10:00 [INF] Updating
+2022-08-17 14:46:04.776 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:04.781 +10:00 [INF] PlayRandomVideoAsync: Kungs - Don''t You Know ft. Jamie N Commons - 0
+2022-08-17 14:46:05.793 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:05.796 +10:00 [INF] PlayRandomVideoAsync: P!nk - God Is A DJ - 0
+2022-08-17 14:46:05.865 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:05.868 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:05.872 +10:00 [INF] InsertOrUpdateVideo: P!nk - God Is A DJ - 224605
+2022-08-17 14:46:05.875 +10:00 [INF] Updating
+2022-08-17 14:46:06.808 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:06.812 +10:00 [INF] PlayRandomVideoAsync: Eddie Money - Take Me Home Tonight - 0
+2022-08-17 14:46:06.926 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:06.932 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:06.934 +10:00 [INF] InsertOrUpdateVideo: Eddie Money - Take Me Home Tonight - 210838
+2022-08-17 14:46:06.938 +10:00 [INF] Updating
+2022-08-17 14:46:07.823 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:07.826 +10:00 [INF] PlayRandomVideoAsync: Third Eye Blind - Semi-Charmed Life - 0
+2022-08-17 14:46:07.956 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:07.958 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:07.961 +10:00 [INF] InsertOrUpdateVideo: Third Eye Blind - Semi-Charmed Life - 240019
+2022-08-17 14:46:07.964 +10:00 [INF] Updating
+2022-08-17 14:46:08.838 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:08.841 +10:00 [INF] PlayRandomVideoAsync: Kevin Gates - Me Too - 0
+2022-08-17 14:46:08.953 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:08.957 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:08.961 +10:00 [INF] InsertOrUpdateVideo: Kevin Gates - Me Too - 202362
+2022-08-17 14:46:08.965 +10:00 [INF] Updating
+2022-08-17 14:46:09.852 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:09.856 +10:00 [INF] PlayRandomVideoAsync: Robbie Williams - Better Man - 0
+2022-08-17 14:46:09.965 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:09.968 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:09.971 +10:00 [INF] InsertOrUpdateVideo: Robbie Williams - Better Man - 205976
+2022-08-17 14:46:09.974 +10:00 [INF] Updating
+2022-08-17 14:46:10.866 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:46:10.869 +10:00 [INF] PlayRandomVideoAsync: The Style Council - Walls Come Tumbling Down! - 204155
+2022-08-17 14:46:10.919 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:46:10.921 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:46:10.924 +10:00 [INF] InsertOrUpdateVideo: The Style Council - Walls Come Tumbling Down! - 204155
+2022-08-17 14:46:10.927 +10:00 [INF] Updating
+2022-08-17 14:49:35.034 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:35.037 +10:00 [INF] PlayRandomVideoAsync: Bee Gees - How can you mend a broken heart - 0
+2022-08-17 14:49:35.141 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:35.145 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:35.149 +10:00 [INF] InsertOrUpdateVideo: Bee Gees - How can you mend a broken heart - 326039
+2022-08-17 14:49:35.152 +10:00 [INF] Updating
+2022-08-17 14:49:36.056 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:36.058 +10:00 [INF] PlayRandomVideoAsync: Haddaway - What Is Love - 0
+2022-08-17 14:49:36.127 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:36.130 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:36.133 +10:00 [INF] InsertOrUpdateVideo: Haddaway - What Is Love - 272749
+2022-08-17 14:49:36.135 +10:00 [INF] Updating
+2022-08-17 14:49:37.074 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:37.076 +10:00 [INF] PlayRandomVideoAsync: Groove Armada - I See You Baby (Fatboy Slim Remix) - 0
+2022-08-17 14:49:37.261 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:37.265 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:37.268 +10:00 [INF] InsertOrUpdateVideo: Groove Armada - I See You Baby (Fatboy Slim Remix) - 211092
+2022-08-17 14:49:37.272 +10:00 [INF] Updating
+2022-08-17 14:49:38.089 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:38.092 +10:00 [INF] PlayRandomVideoAsync: Nine Inch Nails - Head Like A Hole - 0
+2022-08-17 14:49:38.179 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:38.182 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:38.184 +10:00 [INF] InsertOrUpdateVideo: Nine Inch Nails - Head Like A Hole - 271972
+2022-08-17 14:49:38.188 +10:00 [INF] Updating
+2022-08-17 14:49:39.102 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:39.105 +10:00 [INF] PlayRandomVideoAsync: Tom Petty - Free Fallin'' - 0
+2022-08-17 14:49:40.117 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:40.119 +10:00 [INF] PlayRandomVideoAsync: Ed Sheeran - All Of The Stars - 0
+2022-08-17 14:49:40.233 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:40.236 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:40.239 +10:00 [INF] InsertOrUpdateVideo: Ed Sheeran - All Of The Stars - 254931
+2022-08-17 14:49:40.241 +10:00 [INF] Updating
+2022-08-17 14:49:41.129 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:41.133 +10:00 [INF] PlayRandomVideoAsync: Puretone - Addicted To Bass - 0
+2022-08-17 14:49:41.306 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:41.310 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:41.313 +10:00 [INF] InsertOrUpdateVideo: Puretone - Addicted To Bass - 242835
+2022-08-17 14:49:41.315 +10:00 [INF] Updating
+2022-08-17 14:49:42.156 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:42.159 +10:00 [INF] PlayRandomVideoAsync: Foreign Beggars feat Skrillex - Still Gettin It - 0
+2022-08-17 14:49:42.239 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:42.247 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:42.259 +10:00 [INF] InsertOrUpdateVideo: Foreign Beggars feat Skrillex - Still Gettin It - 240273
+2022-08-17 14:49:42.263 +10:00 [INF] Updating
+2022-08-17 14:49:43.175 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:43.177 +10:00 [INF] PlayRandomVideoAsync: Dire Straits - Brothers In Arms - 0
+2022-08-17 14:49:43.273 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:43.276 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:43.279 +10:00 [INF] InsertOrUpdateVideo: Dire Straits - Brothers In Arms - 291195
+2022-08-17 14:49:43.281 +10:00 [INF] Updating
+2022-08-17 14:49:44.190 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:44.193 +10:00 [INF] PlayRandomVideoAsync: Kendrick Lamar - HUMBLE. (Skrillex Remix) - 0
+2022-08-17 14:49:44.575 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:44.579 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:44.582 +10:00 [INF] InsertOrUpdateVideo: Kendrick Lamar - HUMBLE. (Skrillex Remix) - 156851
+2022-08-17 14:49:44.584 +10:00 [INF] Updating
+2022-08-17 14:49:45.206 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:45.209 +10:00 [INF] PlayRandomVideoAsync: The Chainsmokers - Selfie - 0
+2022-08-17 14:49:45.528 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:45.531 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:45.533 +10:00 [INF] InsertOrUpdateVideo: The Chainsmokers - Selfie - 223841
+2022-08-17 14:49:45.536 +10:00 [INF] Updating
+2022-08-17 14:49:46.231 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:46.234 +10:00 [INF] PlayRandomVideoAsync: ZAYN - Dusk Till Dawn ft. Sia - 0
+2022-08-17 14:49:46.900 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:46.905 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:46.909 +10:00 [INF] InsertOrUpdateVideo: ZAYN - Dusk Till Dawn ft. Sia - 337014
+2022-08-17 14:49:46.912 +10:00 [INF] Updating
+2022-08-17 14:49:47.244 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:47.248 +10:00 [INF] PlayRandomVideoAsync: Coldplay - Paradise - 0
+2022-08-17 14:49:47.368 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:47.373 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:47.376 +10:00 [INF] InsertOrUpdateVideo: Coldplay - Paradise - 260040
+2022-08-17 14:49:47.379 +10:00 [INF] Updating
+2022-08-17 14:49:48.259 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:48.264 +10:00 [INF] PlayRandomVideoAsync: Katy Perry - Swish Swish ft. Nicki Minaj - 0
+2022-08-17 14:49:48.398 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:48.400 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:48.405 +10:00 [INF] InsertOrUpdateVideo: Katy Perry - Swish Swish ft. Nicki Minaj - 384011
+2022-08-17 14:49:48.411 +10:00 [INF] Updating
+2022-08-17 14:49:49.268 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:49.271 +10:00 [INF] PlayRandomVideoAsync: Arrested Development - Mr. Wendal - 0
+2022-08-17 14:49:49.374 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:49.377 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:49.379 +10:00 [INF] InsertOrUpdateVideo: Arrested Development - Mr. Wendal - 254120
+2022-08-17 14:49:49.381 +10:00 [INF] Updating
+2022-08-17 14:49:50.275 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:50.278 +10:00 [INF] PlayRandomVideoAsync: Travis Scott - Antidote - 0
+2022-08-17 14:49:50.464 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:50.468 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:50.472 +10:00 [INF] InsertOrUpdateVideo: Travis Scott - Antidote - 282982
+2022-08-17 14:49:50.476 +10:00 [INF] Updating
+2022-08-17 14:49:51.288 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:51.291 +10:00 [INF] PlayRandomVideoAsync: Imagine Dragons - Shots - 0
+2022-08-17 14:49:51.927 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:51.930 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:51.933 +10:00 [INF] InsertOrUpdateVideo: Imagine Dragons - Shots - 241070
+2022-08-17 14:49:51.936 +10:00 [INF] Updating
+2022-08-17 14:49:52.305 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:52.308 +10:00 [INF] PlayRandomVideoAsync: Britney Spears - If U Seek Amy - 0
+2022-08-17 14:49:52.406 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:52.410 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:52.414 +10:00 [INF] InsertOrUpdateVideo: Britney Spears - If U Seek Amy - 225442
+2022-08-17 14:49:52.417 +10:00 [INF] Updating
+2022-08-17 14:49:53.323 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:53.325 +10:00 [INF] PlayRandomVideoAsync: Milk Inc - In My Eyes - 0
+2022-08-17 14:49:53.425 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:53.428 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:53.430 +10:00 [INF] InsertOrUpdateVideo: Milk Inc - In My Eyes - 172223
+2022-08-17 14:49:53.432 +10:00 [INF] Updating
+2022-08-17 14:49:54.335 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:54.339 +10:00 [INF] PlayRandomVideoAsync: Atomic Kitten - Someone Like Me - 0
+2022-08-17 14:49:55.015 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:55.018 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:55.020 +10:00 [INF] InsertOrUpdateVideo: Atomic Kitten - Someone Like Me - 127523
+2022-08-17 14:49:55.023 +10:00 [INF] Updating
+2022-08-17 14:49:55.347 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:55.352 +10:00 [INF] PlayRandomVideoAsync: Honeymoon Suite - New Girl Now - 0
+2022-08-17 14:49:55.767 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:55.771 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:55.773 +10:00 [INF] InsertOrUpdateVideo: Honeymoon Suite - New Girl Now - 253174
+2022-08-17 14:49:55.776 +10:00 [INF] Updating
+2022-08-17 14:49:56.363 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:56.365 +10:00 [INF] PlayRandomVideoAsync: Nicky Romero - Toulouse - 0
+2022-08-17 14:49:56.478 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:56.480 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:56.483 +10:00 [INF] InsertOrUpdateVideo: Nicky Romero - Toulouse - 259459
+2022-08-17 14:49:56.485 +10:00 [INF] Updating
+2022-08-17 14:49:57.386 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:57.390 +10:00 [INF] PlayRandomVideoAsync: WALK THE MOON - One Foot - 0
+2022-08-17 14:49:57.489 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:57.492 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:57.495 +10:00 [INF] InsertOrUpdateVideo: WALK THE MOON - One Foot - 259761
+2022-08-17 14:49:57.498 +10:00 [INF] Updating
+2022-08-17 14:49:58.396 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:58.399 +10:00 [INF] PlayRandomVideoAsync: The Human League - (Keep Feeling) Fascination - 0
+2022-08-17 14:49:58.506 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:58.511 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:58.515 +10:00 [INF] InsertOrUpdateVideo: The Human League - (Keep Feeling) Fascination - 224134
+2022-08-17 14:49:58.518 +10:00 [INF] Updating
+2022-08-17 14:49:59.413 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:49:59.415 +10:00 [INF] PlayRandomVideoAsync: Counting Crows - Big Yellow Taxi ft. Vanessa Carlton - 0
+2022-08-17 14:49:59.502 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:49:59.506 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:49:59.509 +10:00 [INF] InsertOrUpdateVideo: Counting Crows - Big Yellow Taxi ft. Vanessa Carlton - 225995
+2022-08-17 14:49:59.512 +10:00 [INF] Updating
+2022-08-17 14:50:00.427 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:00.430 +10:00 [INF] PlayRandomVideoAsync: The Doors - Riders On The Storm - 0
+2022-08-17 14:50:00.549 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:00.552 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:00.556 +10:00 [INF] InsertOrUpdateVideo: The Doors - Riders On The Storm - 493000
+2022-08-17 14:50:00.559 +10:00 [INF] Updating
+2022-08-17 14:50:01.433 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:01.437 +10:00 [INF] PlayRandomVideoAsync: Chris Brown - Look At Me Now - 0
+2022-08-17 14:50:01.551 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:01.555 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:01.565 +10:00 [INF] InsertOrUpdateVideo: Chris Brown - Look At Me Now - 248430
+2022-08-17 14:50:01.570 +10:00 [INF] Updating
+2022-08-17 14:50:02.445 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:02.448 +10:00 [INF] PlayRandomVideoAsync: Sugababes - Run for Cover - 0
+2022-08-17 14:50:02.556 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:02.561 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:02.565 +10:00 [INF] InsertOrUpdateVideo: Sugababes - Run for Cover - 244071
+2022-08-17 14:50:02.568 +10:00 [INF] Updating
+2022-08-17 14:50:03.450 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:03.453 +10:00 [INF] PlayRandomVideoAsync: Macklemore - My Oh My ft. Ryan Lewis - 0
+2022-08-17 14:50:03.565 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:03.567 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:03.571 +10:00 [INF] InsertOrUpdateVideo: Macklemore - My Oh My ft. Ryan Lewis - 263407
+2022-08-17 14:50:03.574 +10:00 [INF] Updating
+2022-08-17 14:50:04.458 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:04.460 +10:00 [INF] PlayRandomVideoAsync: The Clash - Police on my back - 0
+2022-08-17 14:50:05.127 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:05.131 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:05.134 +10:00 [INF] InsertOrUpdateVideo: The Clash - Police on my back - 198960
+2022-08-17 14:50:05.136 +10:00 [INF] Updating
+2022-08-17 14:50:05.479 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:05.481 +10:00 [INF] PlayRandomVideoAsync: Ian Dury - Hit Me With Your Rhythm Stick - 0
+2022-08-17 14:50:05.722 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:05.725 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:05.727 +10:00 [INF] InsertOrUpdateVideo: Ian Dury - Hit Me With Your Rhythm Stick - 227533
+2022-08-17 14:50:05.730 +10:00 [INF] Updating
+2022-08-17 14:50:06.493 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:06.497 +10:00 [INF] PlayRandomVideoAsync: America - Sister Golden Hair - 0
+2022-08-17 14:50:07.279 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:07.284 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:07.288 +10:00 [INF] InsertOrUpdateVideo: America - Sister Golden Hair - 194277
+2022-08-17 14:50:07.291 +10:00 [INF] Updating
+2022-08-17 14:50:07.505 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:07.508 +10:00 [INF] PlayRandomVideoAsync: Stardust - Music Sounds Better With You - 0
+2022-08-17 14:50:07.626 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:07.628 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:07.632 +10:00 [INF] InsertOrUpdateVideo: Stardust - Music Sounds Better With You - 263040
+2022-08-17 14:50:07.635 +10:00 [INF] Updating
+2022-08-17 14:50:08.519 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:08.522 +10:00 [INF] PlayRandomVideoAsync: 50 Cent - In Da Club - 0
+2022-08-17 14:50:08.781 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:08.785 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:08.788 +10:00 [INF] InsertOrUpdateVideo: 50 Cent - In Da Club - 249893
+2022-08-17 14:50:08.791 +10:00 [INF] Updating
+2022-08-17 14:50:09.540 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:09.542 +10:00 [INF] PlayRandomVideoAsync: The Perennials - On Our Way - 0
+2022-08-17 14:50:09.668 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:09.671 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:09.674 +10:00 [INF] InsertOrUpdateVideo: The Perennials - On Our Way - 189962
+2022-08-17 14:50:09.677 +10:00 [INF] Updating
+2022-08-17 14:50:10.550 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:10.553 +10:00 [INF] PlayRandomVideoAsync: The Chemical Brothers - Setting Sun - 0
+2022-08-17 14:50:10.657 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:10.660 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:10.662 +10:00 [INF] InsertOrUpdateVideo: The Chemical Brothers - Setting Sun - 239490
+2022-08-17 14:50:10.665 +10:00 [INF] Updating
+2022-08-17 14:50:11.558 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:11.560 +10:00 [INF] PlayRandomVideoAsync: Ed Sheeran - Thinking Out Loud - 0
+2022-08-17 14:50:11.760 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:11.763 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:11.766 +10:00 [INF] InsertOrUpdateVideo: Ed Sheeran - Thinking Out Loud - 296612
+2022-08-17 14:50:11.768 +10:00 [INF] Updating
+2022-08-17 14:50:12.586 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:12.589 +10:00 [INF] PlayRandomVideoAsync: Olivia Rodrigo - All I Want - 0
+2022-08-17 14:50:12.722 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:12.724 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:12.727 +10:00 [INF] InsertOrUpdateVideo: Olivia Rodrigo - All I Want - 184640
+2022-08-17 14:50:12.731 +10:00 [INF] Updating
+2022-08-17 14:50:13.599 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:13.602 +10:00 [INF] PlayRandomVideoAsync: Live - Selling The Drama - 0
+2022-08-17 14:50:13.712 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:13.714 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:13.717 +10:00 [INF] InsertOrUpdateVideo: Live - Selling The Drama - 209537
+2022-08-17 14:50:13.720 +10:00 [INF] Updating
+2022-08-17 14:50:14.609 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:14.612 +10:00 [INF] PlayRandomVideoAsync: The Art of Noise - Paranoimia ft. Max Headroom - 0
+2022-08-17 14:50:14.701 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:14.706 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:14.709 +10:00 [INF] InsertOrUpdateVideo: The Art of Noise - Paranoimia ft. Max Headroom - 205437
+2022-08-17 14:50:14.713 +10:00 [INF] Updating
+2022-08-17 14:50:15.634 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:15.637 +10:00 [INF] PlayRandomVideoAsync: Ginuwine - Pony - 0
+2022-08-17 14:50:15.693 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:15.697 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:15.701 +10:00 [INF] InsertOrUpdateVideo: Ginuwine - Pony - 273765
+2022-08-17 14:50:15.704 +10:00 [INF] Updating
+2022-08-17 14:50:16.647 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:16.649 +10:00 [INF] PlayRandomVideoAsync: Rihanna - Don''t Stop The Music - 0
+2022-08-17 14:50:17.655 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:17.657 +10:00 [INF] PlayRandomVideoAsync: Atomic Kittens - Tide is High - 0
+2022-08-17 14:50:17.831 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:17.835 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:17.837 +10:00 [INF] InsertOrUpdateVideo: Atomic Kittens - Tide is High - 206843
+2022-08-17 14:50:17.840 +10:00 [INF] Updating
+2022-08-17 14:50:18.680 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:18.683 +10:00 [INF] PlayRandomVideoAsync: Everclear - Santa Monica - 0
+2022-08-17 14:50:18.787 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:18.791 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:18.794 +10:00 [INF] InsertOrUpdateVideo: Everclear - Santa Monica - 199895
+2022-08-17 14:50:18.796 +10:00 [INF] Updating
+2022-08-17 14:50:19.694 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:19.696 +10:00 [INF] PlayRandomVideoAsync: Public Enemy - Bring The Noise - 0
+2022-08-17 14:50:19.823 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:19.825 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:19.828 +10:00 [INF] InsertOrUpdateVideo: Public Enemy - Bring The Noise - 185110
+2022-08-17 14:50:19.831 +10:00 [INF] Updating
+2022-08-17 14:50:20.699 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:20.702 +10:00 [INF] PlayRandomVideoAsync: Blind Melon - Galaxie - 0
+2022-08-17 14:50:20.834 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:20.837 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:20.841 +10:00 [INF] InsertOrUpdateVideo: Blind Melon - Galaxie - 193054
+2022-08-17 14:50:20.843 +10:00 [INF] Updating
+2022-08-17 14:50:21.713 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:21.718 +10:00 [INF] PlayRandomVideoAsync: Mazzy Star - Fade Into You - 0
+2022-08-17 14:50:21.860 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:21.865 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:21.869 +10:00 [INF] InsertOrUpdateVideo: Mazzy Star - Fade Into You - 262390
+2022-08-17 14:50:21.873 +10:00 [INF] Updating
+2022-08-17 14:50:22.725 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:22.731 +10:00 [INF] PlayRandomVideoAsync: The Mamas & The Papas - California Dreamin'' - 0
+2022-08-17 14:50:23.744 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:23.747 +10:00 [INF] PlayRandomVideoAsync: Sheryl Crow - Soak Up The Sun - 0
+2022-08-17 14:50:23.816 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:23.819 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:23.823 +10:00 [INF] InsertOrUpdateVideo: Sheryl Crow - Soak Up The Sun - 231336
+2022-08-17 14:50:23.826 +10:00 [INF] Updating
+2022-08-17 14:50:24.754 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:24.759 +10:00 [INF] PlayRandomVideoAsync: Björk - Human Behaviour - 0
+2022-08-17 14:50:24.852 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:24.856 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:24.858 +10:00 [INF] InsertOrUpdateVideo: Björk - Human Behaviour - 258046
+2022-08-17 14:50:24.861 +10:00 [INF] Updating
+2022-08-17 14:50:25.770 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:25.781 +10:00 [INF] PlayRandomVideoAsync: Armin van Buuren - Blah Blah Blah - 0
+2022-08-17 14:50:26.174 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:26.177 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:26.181 +10:00 [INF] InsertOrUpdateVideo: Armin van Buuren - Blah Blah Blah - 193906
+2022-08-17 14:50:26.185 +10:00 [INF] Updating
+2022-08-17 14:50:26.795 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:26.797 +10:00 [INF] PlayRandomVideoAsync: Aerosmith - Janie''s Got A Gun - 0
+2022-08-17 14:50:27.809 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:27.812 +10:00 [INF] PlayRandomVideoAsync: Bananarama - Venus - 0
+2022-08-17 14:50:27.924 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:27.926 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:27.930 +10:00 [INF] InsertOrUpdateVideo: Bananarama - Venus - 218734
+2022-08-17 14:50:27.933 +10:00 [INF] Updating
+2022-08-17 14:50:28.827 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:28.830 +10:00 [INF] PlayRandomVideoAsync: The Beatles - Yesterday - 0
+2022-08-17 14:50:29.062 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:29.064 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:29.067 +10:00 [INF] InsertOrUpdateVideo: The Beatles - Yesterday - 168577
+2022-08-17 14:50:29.070 +10:00 [INF] Updating
+2022-08-17 14:50:29.838 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:29.842 +10:00 [INF] PlayRandomVideoAsync: Wretch 32 - Don''t Go ft. Josh Kumra - 0
+2022-08-17 14:50:30.847 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:30.850 +10:00 [INF] PlayRandomVideoAsync: Meat Loaf - I''d Do Anything For Love (But I Won''t Do That) - 0
+2022-08-17 14:50:31.858 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:50:31.860 +10:00 [INF] PlayRandomVideoAsync: Holly Valance - Down Boy - 204480
+2022-08-17 14:50:31.973 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:50:31.976 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:50:31.979 +10:00 [INF] InsertOrUpdateVideo: Holly Valance - Down Boy - 204480
+2022-08-17 14:50:31.982 +10:00 [INF] Updating
+2022-08-17 14:53:56.343 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:53:56.347 +10:00 [INF] PlayRandomVideoAsync: Enya - The Celts - 0
+2022-08-17 14:53:56.475 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:53:56.478 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:53:56.483 +10:00 [INF] InsertOrUpdateVideo: Enya - The Celts - 188941
+2022-08-17 14:53:56.486 +10:00 [INF] Updating
+2022-08-17 14:53:57.408 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:53:57.411 +10:00 [INF] PlayRandomVideoAsync: Tom Odell - Another Love (Zwette Edit) - 0
+2022-08-17 14:53:57.555 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:53:57.557 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:53:57.559 +10:00 [INF] InsertOrUpdateVideo: Tom Odell - Another Love (Zwette Edit) - 393299
+2022-08-17 14:53:57.561 +10:00 [INF] Updating
+2022-08-17 14:53:58.426 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:53:58.433 +10:00 [INF] PlayRandomVideoAsync: Flo Rida - Good Feeling - 0
+2022-08-17 14:53:58.588 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:53:58.592 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:53:58.602 +10:00 [INF] InsertOrUpdateVideo: Flo Rida - Good Feeling - 270257
+2022-08-17 14:53:58.604 +10:00 [INF] Updating
+2022-08-17 14:53:59.434 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:53:59.437 +10:00 [INF] PlayRandomVideoAsync: Manfred Mann''s Earth Band - Blinded by the Light - 0
+2022-08-17 14:54:00.453 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:00.467 +10:00 [INF] PlayRandomVideoAsync: Ram Jam - Black Betty - 0
+2022-08-17 14:54:00.580 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:00.583 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:00.586 +10:00 [INF] InsertOrUpdateVideo: Ram Jam - Black Betty - 144392
+2022-08-17 14:54:00.589 +10:00 [INF] Updating
+2022-08-17 14:54:01.480 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:01.488 +10:00 [INF] PlayRandomVideoAsync: Basement Jaxx - Red Alert - 0
+2022-08-17 14:54:01.647 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:01.650 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:01.653 +10:00 [INF] InsertOrUpdateVideo: Basement Jaxx - Red Alert - 236658
+2022-08-17 14:54:01.655 +10:00 [INF] Updating
+2022-08-17 14:54:02.493 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:02.507 +10:00 [INF] PlayRandomVideoAsync: James Bay - Us - 0
+2022-08-17 14:54:02.583 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:02.586 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:02.589 +10:00 [INF] InsertOrUpdateVideo: James Bay - Us - 193213
+2022-08-17 14:54:02.592 +10:00 [INF] Updating
+2022-08-17 14:54:03.525 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:03.537 +10:00 [INF] PlayRandomVideoAsync: Michael Jackson - The Way You Make Me Feel - 0
+2022-08-17 14:54:03.722 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:03.725 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:03.727 +10:00 [INF] InsertOrUpdateVideo: Michael Jackson - The Way You Make Me Feel - 403797
+2022-08-17 14:54:03.729 +10:00 [INF] Updating
+2022-08-17 14:54:04.556 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:04.571 +10:00 [INF] PlayRandomVideoAsync: Cat Stevens - How Can I Tell You - 0
+2022-08-17 14:54:04.676 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:04.679 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:04.682 +10:00 [INF] InsertOrUpdateVideo: Cat Stevens - How Can I Tell You - 339058
+2022-08-17 14:54:04.684 +10:00 [INF] Updating
+2022-08-17 14:54:05.589 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:05.593 +10:00 [INF] PlayRandomVideoAsync: David Guetta - Bang My Head feat Sia & Fetty Wap - 0
+2022-08-17 14:54:05.735 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:05.737 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:05.740 +10:00 [INF] InsertOrUpdateVideo: David Guetta - Bang My Head feat Sia & Fetty Wap - 213530
+2022-08-17 14:54:05.743 +10:00 [INF] Updating
+2022-08-17 14:54:06.599 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:06.603 +10:00 [INF] PlayRandomVideoAsync: Sum 41 - Fake My Own Death - 0
+2022-08-17 14:54:06.717 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:06.720 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:06.723 +10:00 [INF] InsertOrUpdateVideo: Sum 41 - Fake My Own Death - 194490
+2022-08-17 14:54:06.726 +10:00 [INF] Updating
+2022-08-17 14:54:07.611 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:07.613 +10:00 [INF] PlayRandomVideoAsync: Britney Spears - Oops!...I Did It Again - 0
+2022-08-17 14:54:07.704 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:07.708 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:07.711 +10:00 [INF] InsertOrUpdateVideo: Britney Spears - Oops!...I Did It Again - 251541
+2022-08-17 14:54:07.713 +10:00 [INF] Updating
+2022-08-17 14:54:08.639 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:08.645 +10:00 [INF] PlayRandomVideoAsync: Katrina & The Waves - Walking On Sunshine - 0
+2022-08-17 14:54:08.788 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:08.790 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:08.793 +10:00 [INF] InsertOrUpdateVideo: Katrina & The Waves - Walking On Sunshine - 229558
+2022-08-17 14:54:08.795 +10:00 [INF] Updating
+2022-08-17 14:54:09.681 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:09.684 +10:00 [INF] PlayRandomVideoAsync: The Cardigans - My Favourite Game - 0
+2022-08-17 14:54:09.869 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:09.871 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:09.874 +10:00 [INF] InsertOrUpdateVideo: The Cardigans - My Favourite Game - 262356
+2022-08-17 14:54:09.876 +10:00 [INF] Updating
+2022-08-17 14:54:10.686 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:10.688 +10:00 [INF] PlayRandomVideoAsync: Ariana Grande - Break Free ft. Zedd - 0
+2022-08-17 14:54:10.752 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:10.755 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:10.758 +10:00 [INF] InsertOrUpdateVideo: Ariana Grande - Break Free ft. Zedd - 247919
+2022-08-17 14:54:10.760 +10:00 [INF] Updating
+2022-08-17 14:54:11.694 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:11.697 +10:00 [INF] PlayRandomVideoAsync: Becky G - Zooted ft. French Montana - 0
+2022-08-17 14:54:11.802 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:11.805 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:11.807 +10:00 [INF] InsertOrUpdateVideo: Becky G - Zooted ft. French Montana - 250892
+2022-08-17 14:54:11.810 +10:00 [INF] Updating
+2022-08-17 14:54:12.708 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:12.710 +10:00 [INF] PlayRandomVideoAsync: Marshmello ft. Logic - Everyday - 0
+2022-08-17 14:54:12.803 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:12.806 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:12.810 +10:00 [INF] InsertOrUpdateVideo: Marshmello ft. Logic - Everyday - 601071
+2022-08-17 14:54:12.813 +10:00 [INF] Updating
+2022-08-17 14:54:13.730 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:13.735 +10:00 [INF] PlayRandomVideoAsync: Shania Twain - From This Moment On - 0
+2022-08-17 14:54:13.868 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:13.874 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:13.879 +10:00 [INF] InsertOrUpdateVideo: Shania Twain - From This Moment On - 236681
+2022-08-17 14:54:13.883 +10:00 [INF] Updating
+2022-08-17 14:54:14.750 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:14.753 +10:00 [INF] PlayRandomVideoAsync: The Fixx - Red Skies - 0
+2022-08-17 14:54:14.952 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:14.955 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:14.958 +10:00 [INF] InsertOrUpdateVideo: The Fixx - Red Skies - 209398
+2022-08-17 14:54:14.960 +10:00 [INF] Updating
+2022-08-17 14:54:15.765 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:15.768 +10:00 [INF] PlayRandomVideoAsync: Bruno Mars - Gorilla - 0
+2022-08-17 14:54:15.856 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:15.860 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:15.863 +10:00 [INF] InsertOrUpdateVideo: Bruno Mars - Gorilla - 362788
+2022-08-17 14:54:15.866 +10:00 [INF] Updating
+2022-08-17 14:54:16.790 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:16.795 +10:00 [INF] PlayRandomVideoAsync: Grace VanderWaal - Moonlight - 0
+2022-08-17 14:54:16.920 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:16.924 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:16.927 +10:00 [INF] InsertOrUpdateVideo: Grace VanderWaal - Moonlight - 186085
+2022-08-17 14:54:16.929 +10:00 [INF] Updating
+2022-08-17 14:54:17.802 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:17.804 +10:00 [INF] PlayRandomVideoAsync: Sugababes - Get Sexy - 0
+2022-08-17 14:54:17.899 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:17.902 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:17.904 +10:00 [INF] InsertOrUpdateVideo: Sugababes - Get Sexy - 201177
+2022-08-17 14:54:17.906 +10:00 [INF] Updating
+2022-08-17 14:54:18.807 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:18.810 +10:00 [INF] PlayRandomVideoAsync: Hoodoo Gurus - Bittersweet - 0
+2022-08-17 14:54:18.875 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:18.878 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:18.882 +10:00 [INF] InsertOrUpdateVideo: Hoodoo Gurus - Bittersweet - 217989
+2022-08-17 14:54:18.885 +10:00 [INF] Updating
+2022-08-17 14:54:19.818 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:19.821 +10:00 [INF] PlayRandomVideoAsync: Bobby McFerrin - Don''t Worry Be Happy - 0
+2022-08-17 14:54:20.840 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:20.847 +10:00 [INF] PlayRandomVideoAsync: Tony Sway - Give U Love - 0
+2022-08-17 14:54:20.978 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:20.982 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:20.985 +10:00 [INF] InsertOrUpdateVideo: Tony Sway - Give U Love - 256835
+2022-08-17 14:54:20.987 +10:00 [INF] Updating
+2022-08-17 14:54:21.851 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:21.856 +10:00 [INF] PlayRandomVideoAsync: Enigma - Sadeness - 0
+2022-08-17 14:54:21.978 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:21.983 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:21.987 +10:00 [INF] InsertOrUpdateVideo: Enigma - Sadeness - 453526
+2022-08-17 14:54:21.990 +10:00 [INF] Updating
+2022-08-17 14:54:22.865 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:22.869 +10:00 [INF] PlayRandomVideoAsync: Van Halen - Jump - 0
+2022-08-17 14:54:23.001 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:23.004 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:23.007 +10:00 [INF] InsertOrUpdateVideo: Van Halen - Jump - 242276
+2022-08-17 14:54:23.011 +10:00 [INF] Updating
+2022-08-17 14:54:23.878 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:23.880 +10:00 [INF] PlayRandomVideoAsync: Olivia Rodrigo - deja vu - 0
+2022-08-17 14:54:23.993 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:23.996 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:23.999 +10:00 [INF] InsertOrUpdateVideo: Olivia Rodrigo - deja vu - 231453
+2022-08-17 14:54:24.002 +10:00 [INF] Updating
+2022-08-17 14:54:24.889 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:24.892 +10:00 [INF] PlayRandomVideoAsync: Crowded House - Don''t Dream It''s Over - 0
+2022-08-17 14:54:25.902 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:25.906 +10:00 [INF] PlayRandomVideoAsync: Darude - Feel The Beat - 0
+2022-08-17 14:54:26.016 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:26.019 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:26.023 +10:00 [INF] InsertOrUpdateVideo: Darude - Feel The Beat - 251217
+2022-08-17 14:54:26.025 +10:00 [INF] Updating
+2022-08-17 14:54:26.917 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:26.921 +10:00 [INF] PlayRandomVideoAsync: Robert Palmer - Addicted To Love - 0
+2022-08-17 14:54:27.034 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:27.036 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:27.038 +10:00 [INF] InsertOrUpdateVideo: Robert Palmer - Addicted To Love - 234478
+2022-08-17 14:54:27.040 +10:00 [INF] Updating
+2022-08-17 14:54:27.933 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:27.954 +10:00 [INF] PlayRandomVideoAsync: N-Trance - Set You Free - 0
+2022-08-17 14:54:28.079 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:28.082 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:28.085 +10:00 [INF] InsertOrUpdateVideo: N-Trance - Set You Free - 264518
+2022-08-17 14:54:28.087 +10:00 [INF] Updating
+2022-08-17 14:54:28.969 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:28.973 +10:00 [INF] PlayRandomVideoAsync: P!nk - Beautiful Trauma - 0
+2022-08-17 14:54:29.043 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:29.046 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:29.050 +10:00 [INF] InsertOrUpdateVideo: P!nk - Beautiful Trauma - 297889
+2022-08-17 14:54:29.053 +10:00 [INF] Updating
+2022-08-17 14:54:29.979 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:29.992 +10:00 [INF] PlayRandomVideoAsync: Birdy Nam Nam - U.R.A.O - 0
+2022-08-17 14:54:30.119 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:30.122 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:30.124 +10:00 [INF] InsertOrUpdateVideo: Birdy Nam Nam - U.R.A.O - 248941
+2022-08-17 14:54:30.126 +10:00 [INF] Updating
+2022-08-17 14:54:31.000 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:31.003 +10:00 [INF] PlayRandomVideoAsync: Justin Timberlake - SexyBack ft. Timbaland - 0
+2022-08-17 14:54:31.099 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:31.102 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:31.104 +10:00 [INF] InsertOrUpdateVideo: Justin Timberlake - SexyBack ft. Timbaland - 265961
+2022-08-17 14:54:31.107 +10:00 [INF] Updating
+2022-08-17 14:54:32.012 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:32.021 +10:00 [INF] PlayRandomVideoAsync: The Beat - Mirror in the Bathroom - 0
+2022-08-17 14:54:32.208 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:32.211 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:32.213 +10:00 [INF] InsertOrUpdateVideo: The Beat - Mirror in the Bathroom - 182800
+2022-08-17 14:54:32.216 +10:00 [INF] Updating
+2022-08-17 14:54:33.047 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:33.055 +10:00 [INF] PlayRandomVideoAsync: Prince & The Revolution - Raspberry Beret - 0
+2022-08-17 14:54:33.183 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:33.186 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:33.189 +10:00 [INF] InsertOrUpdateVideo: Prince & The Revolution - Raspberry Beret - 261225
+2022-08-17 14:54:33.192 +10:00 [INF] Updating
+2022-08-17 14:54:34.066 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:34.069 +10:00 [INF] PlayRandomVideoAsync: Scooter - The Logical Song - 0
+2022-08-17 14:54:34.157 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:34.162 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:34.166 +10:00 [INF] InsertOrUpdateVideo: Scooter - The Logical Song - 239211
+2022-08-17 14:54:34.170 +10:00 [INF] Updating
+2022-08-17 14:54:35.088 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:35.092 +10:00 [INF] PlayRandomVideoAsync: The Animals - We Gotta Get Out Of This Place - 0
+2022-08-17 14:54:35.166 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:35.170 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:35.173 +10:00 [INF] InsertOrUpdateVideo: The Animals - We Gotta Get Out Of This Place - 204057
+2022-08-17 14:54:35.175 +10:00 [INF] Updating
+2022-08-17 14:54:36.106 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:36.110 +10:00 [INF] PlayRandomVideoAsync: Rage Against the Machine - Wake up - 0
+2022-08-17 14:54:36.204 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:36.209 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:36.212 +10:00 [INF] InsertOrUpdateVideo: Rage Against the Machine - Wake up - 364413
+2022-08-17 14:54:36.215 +10:00 [INF] Updating
+2022-08-17 14:54:37.115 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:37.119 +10:00 [INF] PlayRandomVideoAsync: Moloko - Sing It Back - 0
+2022-08-17 14:54:37.175 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:37.179 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:37.183 +10:00 [INF] InsertOrUpdateVideo: Moloko - Sing It Back - 249061
+2022-08-17 14:54:37.186 +10:00 [INF] Updating
+2022-08-17 14:54:38.130 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:38.133 +10:00 [INF] PlayRandomVideoAsync: The Fray - How to Save a Life - 0
+2022-08-17 14:54:38.298 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:38.302 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:38.305 +10:00 [INF] InsertOrUpdateVideo: The Fray - How to Save a Life - 266904
+2022-08-17 14:54:38.308 +10:00 [INF] Updating
+2022-08-17 14:54:39.147 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:39.151 +10:00 [INF] PlayRandomVideoAsync: Ed Sheeran - Small Bump - 0
+2022-08-17 14:54:39.250 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:39.256 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:39.259 +10:00 [INF] InsertOrUpdateVideo: Ed Sheeran - Small Bump - 247084
+2022-08-17 14:54:39.262 +10:00 [INF] Updating
+2022-08-17 14:54:40.170 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:40.172 +10:00 [INF] PlayRandomVideoAsync: John Lee Hooker - Boom Boom (from _The Blues Brothers_) - 0
+2022-08-17 14:54:40.269 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:40.272 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:40.274 +10:00 [INF] InsertOrUpdateVideo: John Lee Hooker - Boom Boom (from _The Blues Brothers_) - 179581
+2022-08-17 14:54:40.277 +10:00 [INF] Updating
+2022-08-17 14:54:41.188 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:41.191 +10:00 [INF] PlayRandomVideoAsync: Billy Joel - Just the Way You Are - 0
+2022-08-17 14:54:41.247 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:41.250 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:41.254 +10:00 [INF] InsertOrUpdateVideo: Billy Joel - Just the Way You Are - 250484
+2022-08-17 14:54:41.256 +10:00 [INF] Updating
+2022-08-17 14:54:42.201 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:42.204 +10:00 [INF] PlayRandomVideoAsync: Maxwell - Sumthin'' Sumthin'' - 0
+2022-08-17 14:54:43.231 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:43.238 +10:00 [INF] PlayRandomVideoAsync: Lana Del Rey - Lust For Life ft. The Weeknd - 0
+2022-08-17 14:54:43.342 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:43.345 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:43.347 +10:00 [INF] InsertOrUpdateVideo: Lana Del Rey - Lust For Life ft. The Weeknd - 318857
+2022-08-17 14:54:43.350 +10:00 [INF] Updating
+2022-08-17 14:54:44.244 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:44.247 +10:00 [INF] PlayRandomVideoAsync: Hailee Steinfeld, Alesso - Let Me Go ft. Florida Georgia Line - 0
+2022-08-17 14:54:44.358 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:44.363 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:44.368 +10:00 [INF] InsertOrUpdateVideo: Hailee Steinfeld, Alesso - Let Me Go ft. Florida Georgia Line - 182253
+2022-08-17 14:54:44.371 +10:00 [INF] Updating
+2022-08-17 14:54:45.299 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:45.302 +10:00 [INF] PlayRandomVideoAsync: Quality Control ft. Nicki Minaj - She For Keeps - 0
+2022-08-17 14:54:45.410 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:45.417 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:45.420 +10:00 [INF] InsertOrUpdateVideo: Quality Control ft. Nicki Minaj - She For Keeps - 198762
+2022-08-17 14:54:45.424 +10:00 [INF] Updating
+2022-08-17 14:54:46.310 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:46.314 +10:00 [INF] PlayRandomVideoAsync: Faith No More - Epic - 0
+2022-08-17 14:54:46.424 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:46.427 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:46.430 +10:00 [INF] InsertOrUpdateVideo: Faith No More - Epic - 266500
+2022-08-17 14:54:46.433 +10:00 [INF] Updating
+2022-08-17 14:54:47.324 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:47.328 +10:00 [INF] PlayRandomVideoAsync: Red Hot Chili Peppers - Higher Ground - 0
+2022-08-17 14:54:47.456 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:47.459 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:47.461 +10:00 [INF] InsertOrUpdateVideo: Red Hot Chili Peppers - Higher Ground - 202054
+2022-08-17 14:54:47.464 +10:00 [INF] Updating
+2022-08-17 14:54:48.337 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:48.340 +10:00 [INF] PlayRandomVideoAsync: Faith Hill - This Kiss - 0
+2022-08-17 14:54:48.456 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:48.459 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:48.462 +10:00 [INF] InsertOrUpdateVideo: Faith Hill - This Kiss - 193997
+2022-08-17 14:54:48.464 +10:00 [INF] Updating
+2022-08-17 14:54:49.356 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:49.372 +10:00 [INF] PlayRandomVideoAsync: Arozin Sabyh - Fall In Love - 0
+2022-08-17 14:54:49.561 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:49.563 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:49.566 +10:00 [INF] InsertOrUpdateVideo: Arozin Sabyh - Fall In Love - 206268
+2022-08-17 14:54:49.569 +10:00 [INF] Updating
+2022-08-17 14:54:50.381 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:50.391 +10:00 [INF] PlayRandomVideoAsync: Madonna - Vogue - 0
+2022-08-17 14:54:50.491 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:50.493 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:50.495 +10:00 [INF] InsertOrUpdateVideo: Madonna - Vogue - 384862
+2022-08-17 14:54:50.498 +10:00 [INF] Updating
+2022-08-17 14:54:51.397 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:51.415 +10:00 [INF] PlayRandomVideoAsync: Smash Mouth - Walkin'' On The Sun - 0
+2022-08-17 14:54:52.422 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:52.424 +10:00 [INF] PlayRandomVideoAsync: Kungs - Don''t You Know ft. Jamie N Commons - 0
+2022-08-17 14:54:53.467 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:53.470 +10:00 [INF] PlayRandomVideoAsync: Eminem - Not Afraid - 0
+2022-08-17 14:54:53.595 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:53.598 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:53.602 +10:00 [INF] InsertOrUpdateVideo: Eminem - Not Afraid - 258716
+2022-08-17 14:54:53.606 +10:00 [INF] Updating
+2022-08-17 14:54:54.493 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:54.495 +10:00 [INF] PlayRandomVideoAsync: The Weeknd & Ariana Grande - Save Your Tears - 0
+2022-08-17 14:54:54.619 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:54.622 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:54.625 +10:00 [INF] InsertOrUpdateVideo: The Weeknd & Ariana Grande - Save Your Tears - 205120
+2022-08-17 14:54:54.629 +10:00 [INF] Updating
+2022-08-17 14:54:55.510 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:55.512 +10:00 [INF] PlayRandomVideoAsync: Will Smith - Gettin'' Jiggy Wit It - 0
+2022-08-17 14:54:56.525 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:56.538 +10:00 [INF] PlayRandomVideoAsync: Rage Against the Machine - How I Could Just Kill a Man - 0
+2022-08-17 14:54:56.659 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:56.661 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:56.664 +10:00 [INF] InsertOrUpdateVideo: Rage Against the Machine - How I Could Just Kill a Man - 244877
+2022-08-17 14:54:56.666 +10:00 [INF] Updating
+2022-08-17 14:54:57.547 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:57.550 +10:00 [INF] PlayRandomVideoAsync: The Georgia Satellites - Keep Your Hands To Yourself - 0
+2022-08-17 14:54:57.650 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:57.653 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:57.657 +10:00 [INF] InsertOrUpdateVideo: The Georgia Satellites - Keep Your Hands To Yourself - 206446
+2022-08-17 14:54:57.660 +10:00 [INF] Updating
+2022-08-17 14:54:58.555 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:58.558 +10:00 [INF] PlayRandomVideoAsync: James Blunt - Same Mistake - 0
+2022-08-17 14:54:58.753 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:58.756 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:58.759 +10:00 [INF] InsertOrUpdateVideo: James Blunt - Same Mistake - 231271
+2022-08-17 14:54:58.761 +10:00 [INF] Updating
+2022-08-17 14:54:59.607 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:54:59.688 +10:00 [INF] PlayRandomVideoAsync: Anna Kendrick - Cups - 0
+2022-08-17 14:54:59.972 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:54:59.975 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:54:59.978 +10:00 [INF] InsertOrUpdateVideo: Anna Kendrick - Cups - 261712
+2022-08-17 14:54:59.981 +10:00 [INF] Updating
+2022-08-17 14:55:00.699 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:00.702 +10:00 [INF] PlayRandomVideoAsync: Gucci Mane ft. Bruno Mars, Kodak Black - Wake Up in The Sky - 0
+2022-08-17 14:55:00.818 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:00.822 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:00.825 +10:00 [INF] InsertOrUpdateVideo: Gucci Mane ft. Bruno Mars, Kodak Black - Wake Up in The Sky - 206727
+2022-08-17 14:55:00.828 +10:00 [INF] Updating
+2022-08-17 14:55:01.714 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:01.719 +10:00 [INF] PlayRandomVideoAsync: Armin van Buuren - In And Out Of Love ft. Sharon den Adel - 0
+2022-08-17 14:55:01.885 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:01.888 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:01.890 +10:00 [INF] InsertOrUpdateVideo: Armin van Buuren - In And Out Of Love ft. Sharon den Adel - 188029
+2022-08-17 14:55:01.893 +10:00 [INF] Updating
+2022-08-17 14:55:02.723 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:02.726 +10:00 [INF] PlayRandomVideoAsync: Powderfinger - Passenger - 0
+2022-08-17 14:55:02.859 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:02.862 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:02.864 +10:00 [INF] InsertOrUpdateVideo: Powderfinger - Passenger - 280102
+2022-08-17 14:55:02.867 +10:00 [INF] Updating
+2022-08-17 14:55:03.739 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:03.742 +10:00 [INF] PlayRandomVideoAsync: Good Charlotte - Lifestyles of the Rich & Famous - 0
+2022-08-17 14:55:03.824 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:03.827 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:03.830 +10:00 [INF] InsertOrUpdateVideo: Good Charlotte - Lifestyles of the Rich & Famous - 201938
+2022-08-17 14:55:03.832 +10:00 [INF] Updating
+2022-08-17 14:55:04.754 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:04.756 +10:00 [INF] PlayRandomVideoAsync: Sarah McLachlan - Building A Mystery - 0
+2022-08-17 14:55:04.874 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:04.877 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:04.880 +10:00 [INF] InsertOrUpdateVideo: Sarah McLachlan - Building A Mystery - 248082
+2022-08-17 14:55:04.882 +10:00 [INF] Updating
+2022-08-17 14:55:05.757 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:05.761 +10:00 [INF] PlayRandomVideoAsync: Alicia Keys - Like You''ll Never See Me Again - 0
+2022-08-17 14:55:06.775 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:06.777 +10:00 [INF] PlayRandomVideoAsync: Moby - This Wild Darkness - 0
+2022-08-17 14:55:06.867 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:06.871 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:06.874 +10:00 [INF] InsertOrUpdateVideo: Moby - This Wild Darkness - 247060
+2022-08-17 14:55:06.878 +10:00 [INF] Updating
+2022-08-17 14:55:07.814 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:07.820 +10:00 [INF] PlayRandomVideoAsync: Daft Punk - One More Time - 0
+2022-08-17 14:55:07.977 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:07.979 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:07.982 +10:00 [INF] InsertOrUpdateVideo: Daft Punk - One More Time - 321451
+2022-08-17 14:55:07.985 +10:00 [INF] Updating
+2022-08-17 14:55:08.829 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:08.831 +10:00 [INF] PlayRandomVideoAsync: Queen - I Want To Break Free - 0
+2022-08-17 14:55:08.906 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:08.910 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:08.913 +10:00 [INF] InsertOrUpdateVideo: Queen - I Want To Break Free - 271373
+2022-08-17 14:55:08.917 +10:00 [INF] Updating
+2022-08-17 14:55:09.844 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:09.847 +10:00 [INF] PlayRandomVideoAsync: Powderfinger - Sunsets (Live) - 0
+2022-08-17 14:55:09.952 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:09.955 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:09.957 +10:00 [INF] InsertOrUpdateVideo: Powderfinger - Sunsets (Live) - 240419
+2022-08-17 14:55:09.960 +10:00 [INF] Updating
+2022-08-17 14:55:10.854 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:10.858 +10:00 [INF] PlayRandomVideoAsync: Pixie Lott - All About Tonight - 0
+2022-08-17 14:55:10.964 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:10.967 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:10.970 +10:00 [INF] InsertOrUpdateVideo: Pixie Lott - All About Tonight - 192911
+2022-08-17 14:55:10.973 +10:00 [INF] Updating
+2022-08-17 14:55:11.871 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:11.879 +10:00 [INF] PlayRandomVideoAsync: Kansas - Carry On Wayward Son - 0
+2022-08-17 14:55:12.011 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:12.014 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:12.018 +10:00 [INF] InsertOrUpdateVideo: Kansas - Carry On Wayward Son - 323291
+2022-08-17 14:55:12.021 +10:00 [INF] Updating
+2022-08-17 14:55:12.887 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:12.893 +10:00 [INF] PlayRandomVideoAsync: 2 Unlimited - Tribal Dance 2.4 - 0
+2022-08-17 14:55:13.086 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:13.090 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:13.093 +10:00 [INF] InsertOrUpdateVideo: 2 Unlimited - Tribal Dance 2.4 - 221160
+2022-08-17 14:55:13.096 +10:00 [INF] Updating
+2022-08-17 14:55:13.916 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:13.926 +10:00 [INF] PlayRandomVideoAsync: Avicii - Pure Grinding - 0
+2022-08-17 14:55:14.019 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:14.021 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:14.024 +10:00 [INF] InsertOrUpdateVideo: Avicii - Pure Grinding - 196162
+2022-08-17 14:55:14.027 +10:00 [INF] Updating
+2022-08-17 14:55:14.937 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:14.943 +10:00 [INF] PlayRandomVideoAsync: Atomic Kitten - Follow Me - 0
+2022-08-17 14:55:15.092 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:15.095 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:15.097 +10:00 [INF] InsertOrUpdateVideo: Atomic Kitten - Follow Me - 196960
+2022-08-17 14:55:15.100 +10:00 [INF] Updating
+2022-08-17 14:55:15.959 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:15.961 +10:00 [INF] PlayRandomVideoAsync: Marshmello ft. Bastille - Happier - 0
+2022-08-17 14:55:16.061 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:16.064 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:16.066 +10:00 [INF] InsertOrUpdateVideo: Marshmello ft. Bastille - Happier - 233291
+2022-08-17 14:55:16.070 +10:00 [INF] Updating
+2022-08-17 14:55:16.963 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:16.966 +10:00 [INF] PlayRandomVideoAsync: The Offspring - Gone Away - 0
+2022-08-17 14:55:17.144 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:17.147 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:17.150 +10:00 [INF] InsertOrUpdateVideo: The Offspring - Gone Away - 272880
+2022-08-17 14:55:17.153 +10:00 [INF] Updating
+2022-08-17 14:55:17.971 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:17.975 +10:00 [INF] PlayRandomVideoAsync: OutKast - B.O.B. (Bombs Over Baghdad) - 0
+2022-08-17 14:55:18.097 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:18.100 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:18.106 +10:00 [INF] InsertOrUpdateVideo: OutKast - B.O.B. (Bombs Over Baghdad) - 263564
+2022-08-17 14:55:18.111 +10:00 [INF] Updating
+2022-08-17 14:55:18.987 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:18.989 +10:00 [INF] PlayRandomVideoAsync: Ratt - Round And Round - 0
+2022-08-17 14:55:19.085 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:19.088 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:19.091 +10:00 [INF] InsertOrUpdateVideo: Ratt - Round And Round - 263464
+2022-08-17 14:55:19.094 +10:00 [INF] Updating
+2022-08-17 14:55:19.997 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:20.003 +10:00 [INF] PlayRandomVideoAsync: One Direction - Where Do Broken Hearts Go (Audio) - 0
+2022-08-17 14:55:20.142 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:20.144 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:20.147 +10:00 [INF] InsertOrUpdateVideo: One Direction - Where Do Broken Hearts Go (Audio) - 230598
+2022-08-17 14:55:20.150 +10:00 [INF] Updating
+2022-08-17 14:55:21.027 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:21.029 +10:00 [INF] PlayRandomVideoAsync: One Direction - Perfect - 0
+2022-08-17 14:55:21.127 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:21.129 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:21.132 +10:00 [INF] InsertOrUpdateVideo: One Direction - Perfect - 228910
+2022-08-17 14:55:21.135 +10:00 [INF] Updating
+2022-08-17 14:55:22.035 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:22.038 +10:00 [INF] PlayRandomVideoAsync: The Jam - Going Underground - 0
+2022-08-17 14:55:22.226 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:22.230 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:22.234 +10:00 [INF] InsertOrUpdateVideo: The Jam - Going Underground - 184160
+2022-08-17 14:55:22.238 +10:00 [INF] Updating
+2022-08-17 14:55:23.050 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:23.056 +10:00 [INF] PlayRandomVideoAsync: Rancid - Bloodclot - 0
+2022-08-17 14:55:23.152 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:23.155 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:23.158 +10:00 [INF] InsertOrUpdateVideo: Rancid - Bloodclot - 166302
+2022-08-17 14:55:23.161 +10:00 [INF] Updating
+2022-08-17 14:55:24.072 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:24.080 +10:00 [INF] PlayRandomVideoAsync: Avicii - Feeling Good - 0
+2022-08-17 14:55:24.194 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:24.196 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:24.199 +10:00 [INF] InsertOrUpdateVideo: Avicii - Feeling Good - 242631
+2022-08-17 14:55:24.202 +10:00 [INF] Updating
+2022-08-17 14:55:25.103 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:25.106 +10:00 [INF] PlayRandomVideoAsync: Birdy - Wild Horses - 0
+2022-08-17 14:55:25.168 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:25.171 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:25.174 +10:00 [INF] InsertOrUpdateVideo: Birdy - Wild Horses - 196348
+2022-08-17 14:55:25.177 +10:00 [INF] Updating
+2022-08-17 14:55:26.118 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:26.124 +10:00 [INF] PlayRandomVideoAsync: Jack Johnson - If I Had Eyes - 0
+2022-08-17 14:55:26.233 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:26.237 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:26.240 +10:00 [INF] InsertOrUpdateVideo: Jack Johnson - If I Had Eyes - 237424
+2022-08-17 14:55:26.243 +10:00 [INF] Updating
+2022-08-17 14:55:27.136 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:27.139 +10:00 [INF] PlayRandomVideoAsync: No Love - Save Ferris - 0
+2022-08-17 14:55:27.253 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:27.257 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:27.263 +10:00 [INF] InsertOrUpdateVideo: No Love - Save Ferris - 288897
+2022-08-17 14:55:27.265 +10:00 [INF] Updating
+2022-08-17 14:55:28.158 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:28.162 +10:00 [INF] PlayRandomVideoAsync: R.E.M. - Shiny Happy People - 0
+2022-08-17 14:55:28.272 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:28.275 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:28.278 +10:00 [INF] InsertOrUpdateVideo: R.E.M. - Shiny Happy People - 237280
+2022-08-17 14:55:28.282 +10:00 [INF] Updating
+2022-08-17 14:55:29.182 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:29.185 +10:00 [INF] PlayRandomVideoAsync: The Weeknd - Blinding Lights - 0
+2022-08-17 14:55:29.303 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:29.306 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:29.308 +10:00 [INF] InsertOrUpdateVideo: The Weeknd - Blinding Lights - 262572
+2022-08-17 14:55:29.311 +10:00 [INF] Updating
+2022-08-17 14:55:30.196 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:30.204 +10:00 [INF] PlayRandomVideoAsync: U2 - Sunday Bloody Sunday - 0
+2022-08-17 14:55:30.299 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:30.303 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:30.306 +10:00 [INF] InsertOrUpdateVideo: U2 - Sunday Bloody Sunday - 353681
+2022-08-17 14:55:30.309 +10:00 [INF] Updating
+2022-08-17 14:55:31.233 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:31.239 +10:00 [INF] PlayRandomVideoAsync: Michael Jackson - Smooth Criminal - 0
+2022-08-17 14:55:31.330 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:31.334 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:31.339 +10:00 [INF] InsertOrUpdateVideo: Michael Jackson - Smooth Criminal - 574642
+2022-08-17 14:55:31.343 +10:00 [INF] Updating
+2022-08-17 14:55:32.246 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:32.252 +10:00 [INF] PlayRandomVideoAsync: Jason Derulo - Don''t Wanna Go Home - 0
+2022-08-17 14:55:33.273 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:33.275 +10:00 [INF] PlayRandomVideoAsync: Skunkhour - State - 0
+2022-08-17 14:55:33.391 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:33.394 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:33.396 +10:00 [INF] InsertOrUpdateVideo: Skunkhour - State - 225141
+2022-08-17 14:55:33.399 +10:00 [INF] Updating
+2022-08-17 14:55:34.289 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:34.305 +10:00 [INF] PlayRandomVideoAsync: Adam & The Ants - Stand And Deliver - 0
+2022-08-17 14:55:34.463 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:34.466 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:34.472 +10:00 [INF] InsertOrUpdateVideo: Adam & The Ants - Stand And Deliver - 187014
+2022-08-17 14:55:34.475 +10:00 [INF] Updating
+2022-08-17 14:55:35.322 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:35.325 +10:00 [INF] PlayRandomVideoAsync: Breeze vs Lost Witness ft. Naz - Rise Again - 0
+2022-08-17 14:55:35.433 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:35.435 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:35.438 +10:00 [INF] InsertOrUpdateVideo: Breeze vs Lost Witness ft. Naz - Rise Again - 161537
+2022-08-17 14:55:35.441 +10:00 [INF] Updating
+2022-08-17 14:55:36.332 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:36.336 +10:00 [INF] PlayRandomVideoAsync: Shawn Mendes - Aftertaste - 0
+2022-08-17 14:55:36.472 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:36.476 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:36.480 +10:00 [INF] InsertOrUpdateVideo: Shawn Mendes - Aftertaste - 189242
+2022-08-17 14:55:36.483 +10:00 [INF] Updating
+2022-08-17 14:55:37.356 +10:00 [INF] VideoHub.PlayVideoAsync
+2022-08-17 14:55:37.359 +10:00 [INF] PlayRandomVideoAsync: Shakira - Empire - 242555
+2022-08-17 14:55:37.444 +10:00 [INF] VideoHub.UpdateVideoPropertiesAsync
+2022-08-17 14:55:37.447 +10:00 [INF] Videos.UpdateVideoDetailsAsync
+2022-08-17 14:55:37.450 +10:00 [INF] InsertOrUpdateVideo: Shakira - Empire - 242555
+2022-08-17 14:55:37.455 +10:00 [INF] Updating

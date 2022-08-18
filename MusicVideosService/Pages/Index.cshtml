@@ -1,0 +1,38 @@
+﻿@page
+    <div class="container">
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendDataButton" value="Send Data" />
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/data.js"></script>
+
+<script>
+    var playerWindow;
+
+    openWindows();
+    window.addEventListener('beforeunload', closeWindows);
+
+    function openWindows() {
+        playerWindow = window.open("Player", "Player", "left=2410,top=45,width=1440,height=900");
+    }
+
+    function closeWindows() {
+        playerWindow.close();
+    }
+
+</script>

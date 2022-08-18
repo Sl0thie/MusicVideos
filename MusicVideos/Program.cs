@@ -2,8 +2,11 @@
 {
     using System;
     using LogCore3;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using MusicVideos.Hubs;
 
     /// <summary>
     /// Program class.
@@ -21,7 +24,34 @@
 
             // Model.LoadSettings();
             // Model.LoadVideos();
-            CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
+
+
+
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+            _ = builder.Services.AddRazorPages();
+            _ = builder.Services.AddSignalR();
+
+            WebApplication app = builder.Build();
+
+            if (!app.Environment.IsDevelopment())
+            {
+                _ = app.UseExceptionHandler("/Error");
+                _ = app.UseHsts();
+            }
+
+            _ = app.UseHttpsRedirection();
+            _ = app.UseStaticFiles();
+
+            _ = app.UseRouting();
+
+            _ = app.UseAuthorization();
+
+            _ = app.MapRazorPages();
+            _ = app.MapHub<VideoHub>("/videoHub");
+
+            app.Run();
         }
 
         /// <summary>

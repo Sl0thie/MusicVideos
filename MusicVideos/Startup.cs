@@ -34,7 +34,10 @@
         public void ConfigureServices(IServiceCollection services)
         {
             _ = services.AddRazorPages();
-            _ = services.AddSignalR();
+            _ = services.AddSignalR(hubOptions =>
+            {
+                hubOptions.EnableDetailedErrors = true;
+            });
         }
 
         /// <summary>
@@ -56,12 +59,13 @@
             _ = app.UseStaticFiles();
             _ = app.UseRouting();
             _ = app.UseAuthorization();
-            _ = app.UseEndpoints(endpoints =>
-              {
-                  _ = endpoints.MapRazorPages();
-                  _ = endpoints.MapHub<VideoHub>("/videoHub");
-                  _ = endpoints.MapHub<MessageHub>("/messageHub");
-              });
+
+            //_ = app.UseEndpoints(endpoints =>
+            //  {
+            //      _ = endpoints.MapRazorPages();
+            //      _ = endpoints.MapHub<VideoHub>("/videoHub");
+            //      //_ = endpoints.MapHub<MessageHub>("/messageHub");
+            //  });
         }
     }
 }

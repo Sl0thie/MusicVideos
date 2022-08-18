@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31129.286
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicVideos", "MusicVideos\MusicVideos.csproj", "{696FC9A9-4442-4A90-BD86-EB959B2EC2D7}"
 EndProject
@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoImporter", "VideoImpor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVideosRemote2.Android", "MusicVideosRemote2\MusicVideosRemote2.Android\MusicVideosRemote2.Android.csproj", "{A5C98602-133F-4B82-BAE1-C1264F8296AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVideosRemote2", "MusicVideosRemote2\MusicVideosRemote2\MusicVideosRemote2.csproj", "{6A191D97-4C97-4E96-B268-6A126AFEB086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicVideosRemote2", "MusicVideosRemote2\MusicVideosRemote2\MusicVideosRemote2.csproj", "{6A191D97-4C97-4E96-B268-6A126AFEB086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicVideosService", "MusicVideosService\MusicVideosService.csproj", "{5C749AA5-6BC4-4368-935C-794A8B5A6091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{6A191D97-4C97-4E96-B268-6A126AFEB086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A191D97-4C97-4E96-B268-6A126AFEB086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A191D97-4C97-4E96-B268-6A126AFEB086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C749AA5-6BC4-4368-935C-794A8B5A6091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C749AA5-6BC4-4368-935C-794A8B5A6091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C749AA5-6BC4-4368-935C-794A8B5A6091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C749AA5-6BC4-4368-935C-794A8B5A6091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
