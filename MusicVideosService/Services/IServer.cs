@@ -2,7 +2,7 @@
 {
     public interface IServer : IHostedService
     {
-        void PlayNextVideo();
+        void PlayNextVideo(bool previousError);
 
         void Play();
 

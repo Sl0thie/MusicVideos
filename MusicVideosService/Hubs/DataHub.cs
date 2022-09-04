@@ -59,12 +59,14 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerEnded {id}");
+                Log.Information($"VideoHub.ServePlayerEnded {id} {currrentId}");
 
+                // By switch the current id to -1 after the event,
+                // the event is not fired twice if there is more than one client.
                 if (id == currrentId)
                 {
                     currrentId = -1;
-                    server.PlayNextVideo();
+                    server.PlayNextVideo(false);
                 }
             }
             catch (Exception ex)
@@ -77,12 +79,12 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerError {id}");
+                Log.Information($"VideoHub.ServePlayerError {id} {currrentId}");
 
                 if (id == currrentId)
                 {
                     currrentId = -1;
-                    server.PlayNextVideo();
+                    server.PlayNextVideo(true);
                 }
             }
             catch (Exception ex)
@@ -95,12 +97,12 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServeScreenClick {id}");
+                Log.Information($"VideoHub.ServeScreenClick {id} {currrentId}");
 
                 if (id == currrentId)
                 {
                     currrentId = -1;
-                    server.PlayNextVideo();
+                    server.PlayNextVideo(false);
                 }
             }
             catch (Exception ex)

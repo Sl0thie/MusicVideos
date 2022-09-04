@@ -60,7 +60,7 @@ window.addEventListener('load', function () {
 // Once connected to hub get the first video to play.
 function connectionStarted() {
     window.addEventListener('error', logError);
-    connection.invoke('Play');
+    //connection.invoke('Play');
 }
 //#endregion
 
@@ -73,7 +73,7 @@ function playVideo(video) {
     console.log('playVideo');
 
     try {
-        player.src = video.virtualPath;
+        player.src = video.virtualPath.replace("''","'");
         playerVideoId = video.id.toString();
         player.play();
 
@@ -103,6 +103,7 @@ function playVideo(video) {
     }
     catch (error) {
         logError(error);
+        connection.invoke('ServerPlayerError', parseInt(playerVideoId));
     }
 
     console.log('Id: ' + video.id);
@@ -121,7 +122,7 @@ function playerplay() {
 
 function playerended() {
     playerplaying = false;
-    connection.invoke('ServerPlayerEnded', playerVideoId);
+    connection.invoke('ServerPlayerEnded', parseInt(playerVideoId));
 }
 
 function playerready() {
@@ -129,7 +130,7 @@ function playerready() {
 }
 
 function playererror() {
-    connection.invoke('ServerPlayerError', playerVideoId);
+    connection.invoke('ServerPlayerError', parseInt(playerVideoId));
 }
 
 //#region Overlay
