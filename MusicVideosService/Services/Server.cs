@@ -5,6 +5,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Timers;
+
+    using Microsoft.AspNetCore.Hosting.Server;
     using Microsoft.AspNetCore.SignalR;
     using Microsoft.AspNetCore.SignalR.Client;
     using MusicVideosService.Models;
@@ -12,7 +14,6 @@
 
     public class Server : BackgroundService, IServer
     {
-        private static System.Timers.Timer timer;
         private HubConnection hub;
         private IDataStore dataStore;
         private PlayState playState = PlayState.PlayingRandom;
@@ -22,6 +23,7 @@
         private int currentId = -1;
         private DateTime videoStarted;
         private TimeSpan videoPaused;
+        private DateTime nextClick = DateTime.Now;
 
         /// <summary>
         /// Used to generate random numbers.
@@ -40,23 +42,51 @@
             {
                 this.dataStore = dataStore;
 
-                // Create a connnection to the SignalR hub.
+                // Create a connection to the SignalR hub.
                 hub = new HubConnectionBuilder()
-                           .WithUrl("http://192.168.0.6:930/dataHub")
+                           .WithUrl("http://192.168.0.6:933/dataHub")
                            .WithAutomaticReconnect()
                            .Build();
 
+                _ = hub.On<int>("ServerPlayerEnded", (id) => PlayerEnded(id));
+                _ = hub.On<int>("ServerPlayerError", (id) => PlayerError(id));
+                _ = hub.On<int>("ServerPlayerScreenClicked", (id) => PlayerScreenClicked(id));
                 _ = hub.StartAsync();
-
-                timer = new System.Timers.Timer(60000 * 60);
-                timer.Elapsed += Timer_Elapsed;
-                timer.AutoReset = true;
-                timer.Enabled = true;
-                timer.Start();
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
+            }
+        }
+
+        private void PlayerEnded(int id)
+        {
+            // By switch the current id to -1 after the event,
+            // the event is not fired twice if there is more than one client.
+            if (id == currentId)
+            {
+                currentId = -1;
+                PlayNextVideo(true, false);
+            }
+        }
+
+        private void PlayerError(int id)
+        {
+            if (id == currentId)
+            {
+                currentId = -1;
+                PlayNextVideo(false, true);
+            }
+        }
+
+        private void PlayerScreenClicked(int id)
+        {
+            Log.Information($"Server.PlayerScreenClicked {id}");
+
+            if (nextClick < DateTime.Now)
+            {
+                PlayNextVideo(false, false);
+                nextClick = DateTime.Now.AddMilliseconds(500);
             }
         }
 
@@ -70,27 +100,17 @@
             return Task.CompletedTask;
         }
 
-        private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
-        {
-            // Log.Information("Worker Timer_Elapsed");
-            try
-            {
-                Log.Information($"Timer Elapsed {DateTime.Now}");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message, ex);
-            }
-        }
-
-
-        public async void PlayNextVideo(bool previousError)
+        public async void PlayNextVideo(bool playedInFull, bool previousError)
         {
             if (currentId > -1)
             {
                 Video previousVideo = dataStore.SelectVideoFromId(currentId);
                 previousVideo.PlayCount++;
-                previousVideo.PlayTime += (DateTime.Now - videoStarted).TotalMilliseconds + videoPaused.TotalMilliseconds;
+
+                if (playedInFull)
+                {
+                    previousVideo.FullPlayCount++;
+                }
 
                 if (previousError)
                 {
@@ -163,7 +183,7 @@
                     videoStarted = DateTime.Now;
                     currentId = nextVideo.Id;
 
-                    await hub.InvokeAsync("ClientPlayVideo", nextVideo);
+                    await hub.InvokeAsync("HubPlayVideo", nextVideo);
 
                     keepsearching = false;
 
@@ -171,31 +191,6 @@
                 }
             }
             while (keepsearching);
-        }
-
-        public void Next()
-        {
-            Log.Information("Server.Next");
-        }
-
-        public void Pause()
-        {
-            Log.Information("Server.Pause");
-        }
-
-        public void Play()
-        {
-            Log.Information("Server.Play");
-        }
-
-        public void Previous()
-        {
-            Log.Information("Server.Previous");
-        }
-
-        public void Stop()
-        {
-            Log.Information("Server.Stop");
         }
     }
 }

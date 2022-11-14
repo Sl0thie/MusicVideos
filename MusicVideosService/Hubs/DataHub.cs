@@ -7,16 +7,13 @@
 
     public class DataHub : Hub
     {
-        private static int currrentId;
         private readonly IDataStore dataStore;
-        private readonly IServer server;
 
-        public DataHub(IDataStore dataStore, IServer server)
+        public DataHub(IDataStore dataStore)
         {
             try
             {
                 this.dataStore = dataStore;
-                this.server = server;
             }
             catch (Exception ex)
             {
@@ -24,13 +21,12 @@
             }
         }
 
-        public void ClientPlayVideo(Video video)
+        public void HubPlayVideo(Video video)
         {
             try
             {
                 Log.Information($"VideoHub.ClientPlayVideo {video.Id}");
 
-                currrentId = video.Id;
                 _ = Clients.All.SendAsync("ClientPlayVideo", video);
             }
             catch (Exception ex)
@@ -39,7 +35,7 @@
             }
         }
 
-        public void ServerUpdateVideoProprties(string videoId, string duration, string videoWidth, string videoHeight)
+        public void HubUpdateVideoProperties(string videoId, string duration, string videoWidth, string videoHeight)
         {
             try
             {
@@ -55,19 +51,13 @@
             }
         }
 
-        public void ServerPlayerEnded(int id)
+        public void HubPlayerEnded(int id)
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerEnded {id} {currrentId}");
+                Log.Information($"VideoHub.ServePlayerEnded {id}");
 
-                // By switch the current id to -1 after the event,
-                // the event is not fired twice if there is more than one client.
-                if (id == currrentId)
-                {
-                    currrentId = -1;
-                    server.PlayNextVideo(false);
-                }
+                _ = Clients.All.SendAsync("ServerPlayerEnded", id);
             }
             catch (Exception ex)
             {
@@ -75,17 +65,13 @@
             }
         }
 
-        public void ServerPlayerError(int id)
+        public void HubPlayerError(int id)
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerError {id} {currrentId}");
+                Log.Information($"VideoHub.ServePlayerError {id}");
 
-                if (id == currrentId)
-                {
-                    currrentId = -1;
-                    server.PlayNextVideo(true);
-                }
+                _ = Clients.All.SendAsync("ServerPlayerError", id);
             }
             catch (Exception ex)
             {
@@ -93,51 +79,18 @@
             }
         }
 
-        public void ServerScreenClick(int id)
+        public void HubScreenClick(int id)
         {
             try
             {
-                Log.Information($"VideoHub.ServeScreenClick {id} {currrentId}");
+                Log.Information($"VideoHub.HubScreenClick {id}");
 
-                if (id == currrentId)
-                {
-                    currrentId = -1;
-                    server.PlayNextVideo(false);
-                }
+                _ = Clients.All.SendAsync("ServerPlayerScreenClicked", id);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
             }
         }
-
-        #region Commands
-
-        public async Task Next()
-        {
-            server.Next();
-        }
-
-        public async Task Pause()
-        {
-            server.Pause();
-        }
-
-        public async Task Play()
-        {
-            server.Play();
-        }
-
-        public async Task Previous()
-        {
-            server.Previous();
-        }
-
-        public async Task Stop()
-        {
-            server.Stop();
-        }
-
-        #endregion
     }
 }

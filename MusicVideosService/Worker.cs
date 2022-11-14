@@ -23,7 +23,7 @@ namespace MusicVideosService
             try
             {
                 hubContext = hub;
-                timer = new System.Timers.Timer(1000);
+                timer = new System.Timers.Timer(60000);
                 timer.Elapsed += Timer_Elapsed;
                 timer.AutoReset = true;
                 timer.Enabled = true;

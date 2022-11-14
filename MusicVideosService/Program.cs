@@ -14,11 +14,14 @@ using MusicVideosService.Services;
 using Serilog;
 
 // Setup logging for the application.
+Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Debug()
     .WriteTo.File("MusicVideosService - .txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
+Log.Information($"MusicVideosService Started: {DateTime.Now}");
+Log.Information($"Environment CurrentDirectory: {Environment.CurrentDirectory}");
 
 // Add config items.
 Config.Application.TryAdd("DatabasePath", @"VideoData.db3");
@@ -48,35 +51,20 @@ builder.Services.AddSingleton<IDataStore, DataStore>(p =>
     return dataStore;
 });
 
-builder.Services.AddSingleton<IServer, Server>(p =>
-{
-    IDataStore dataStore = p.GetService<IDataStore>();
-    Server server = new Server(dataStore);
-    return server;
-});
-
-//builder.Services.AddHostedService<IServer>(p =>
-//{
-//    IDataStore dataStore = p.GetService<IDataStore>();
-//    IServer server = new Server(dataStore);
-//    return server;
-//});
-
-//builder.Services.AddHostedService(provider =>
-//{
-//    IHubContext<DataHub>? hubContext = provider.GetService<IHubContext<DataHub>>();
-//    Worker aWorker = new(hubContext);
-//    return aWorker;
-//});
-
-//builder.Services.AddHostedService<IServer>(p =>
+//builder.Services.AddSingleton<IServer, Server>(p =>
 //{
 //    IDataStore dataStore = p.GetService<IDataStore>();
 //    Server server = new Server(dataStore);
 //    return server;
 //});
 
-builder.WebHost.ConfigureKestrel(configureOptions: (context, serverOptions) => serverOptions.Listen(IPAddress.Parse("192.168.0.6"), 930));
+builder.Services.AddHostedService<IServer>(p =>
+{
+    IDataStore? dataStore = p.GetService<IDataStore>();
+    return new Server(dataStore);
+});
+
+builder.WebHost.ConfigureKestrel(configureOptions: (context, serverOptions) => serverOptions.Listen(IPAddress.Parse("192.168.0.6"), 933));
 
 builder.Host.UseWindowsService();
 

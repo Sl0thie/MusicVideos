@@ -35,11 +35,6 @@
         /// </summary>
         public string Album { get; set; } = string.Empty;
 
-        ///// <summary>
-        ///// Gets or sets the UNC path to the file. (to be obsolete soon).
-        ///// </summary>
-        //public string Path { get; set; } = string.Empty;
-
         /// <summary>
         /// Gets or sets the file extension.
         /// </summary>
@@ -76,14 +71,14 @@
         public int PlayCount { get; set; }
 
         /// <summary>
+        /// Gets or sets the total number or times the video has been played.
+        /// </summary>
+        public int FullPlayCount { get; set; }
+
+        /// <summary>
         /// Gets or sets the total number or times the video has been queued.
         /// </summary>
         public int QueuedCount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the total time the video has been played.
-        /// </summary>
-        public double PlayTime { get; set; }
 
         /// <summary>
         /// Gets or sets the rating of the video.

@@ -12,7 +12,7 @@ let fadeoutId;                 // Fade interval Id.
 let opacity;                   // Overlay opacity value.
 let connection;                // SignalR connection object.
 let volume = 1;                // Volume for the video element.
-let currentIndex;              // Index of the current Video.
+let currentIndex = -1;         // Index of the current Video.
 let hubId = '';
 
 // Element objects.
@@ -23,7 +23,7 @@ let songtitle = document.getElementsByClassName('songtitle');
 let clock = document.getElementsByClassName('clock');
 let nextPlayer = 0;
 let playerplaying = false;
-let playerVideoId = 0;
+let playerVideoId = -1;
 
 //#endregion
 //#region Initialization
@@ -34,7 +34,10 @@ window.addEventListener('load', function () {
     player.addEventListener('error', function (evt) {logError(evt.target.error);});
 
     // Create the SignalR object.
-    connection = new signalR.HubConnectionBuilder().withUrl('/dataHub').build();
+    connection = new signalR.HubConnectionBuilder()
+        .withAutomaticReconnect()
+        .withUrl('/dataHub')
+        .build();
 
     // Calls playVideo when received.
     connection.on('clientPlayVideo', function (video) {
@@ -103,7 +106,7 @@ function playVideo(video) {
     }
     catch (error) {
         logError(error);
-        connection.invoke('ServerPlayerError', parseInt(playerVideoId));
+        connection.invoke('HubPlayerError', parseInt(playerVideoId));
     }
 
     console.log('Id: ' + video.id);
@@ -113,7 +116,7 @@ function playVideo(video) {
 
 function screenClick() {
     console.log('function screenClick ' + playerVideoId);
-    connection.invoke('ServerScreenClick', parseInt(playerVideoId));
+    connection.invoke('HubScreenClick', parseInt(playerVideoId));
 }
 
 function playerplay() {
@@ -122,15 +125,15 @@ function playerplay() {
 
 function playerended() {
     playerplaying = false;
-    connection.invoke('ServerPlayerEnded', parseInt(playerVideoId));
+    connection.invoke('HubPlayerEnded', parseInt(playerVideoId));
 }
 
 function playerready() {
-    connection.invoke('ServerUpdateVideoProprties', playerVideoId, player.duration.toString(), player.videoWidth.toString(), player.videoHeight.toString());   
+    connection.invoke('HubUpdateVideoProperties', playerVideoId, player.duration.toString(), player.videoWidth.toString(), player.videoHeight.toString());   
 }
 
 function playererror() {
-    connection.invoke('ServerPlayerError', parseInt(playerVideoId));
+    connection.invoke('HubPlayerError', parseInt(playerVideoId));
 }
 
 //#region Overlay

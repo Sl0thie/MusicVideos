@@ -213,12 +213,14 @@ namespace FileImporter
                     continue;
                 }
 
-                if (!GetDetailFromWeb(video))
-                {
-                    Log("GetDetailFromWeb failed : " + video.Artist + " - " + video.Title);
-                    MoveFileToErrorFolder(video);
-                    continue;
-                }
+                // Disabled for now to speed up process while debugging.
+
+                //if (!GetDetailFromWeb(video))
+                //{
+                //    Log("GetDetailFromWeb failed : " + video.Artist + " - " + video.Title);
+                //    MoveFileToErrorFolder(video);
+                //    continue;
+                //}
 
                 if (!MoveToFolder(video))
                 {
@@ -269,6 +271,7 @@ namespace FileImporter
             catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex.Message);
+                //throw;
             }
         }
 

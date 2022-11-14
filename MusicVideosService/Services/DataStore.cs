@@ -2,40 +2,12 @@
 {
     using System;
     using System.Text;
-
     using MusicVideosService.Models;
-
     using Serilog;
-
     using SQLite;
 
     public class DataStore : IDataStore
     {
-        ///// <summary>
-        ///// File name for the database.
-        ///// </summary>
-        //private const string DatabasePath = "VideoData.db3";
-
-        ///// <summary>
-        ///// Path that the files are to be imported from.
-        ///// </summary>
-        //private const string ImportPath = @"F:\Music Videos for Import";
-
-        ///// <summary>
-        ///// // Base path that the files are stored.
-        ///// </summary>
-        //private const string BasePath = @"F:\Music Videos";
-
-        ///// <summary>
-        ///// Path that the error files are stored.
-        ///// </summary>
-        //private const string ErrorPath = @"F:\Music Videos Errors";
-
-        ///// <summary>
-        ///// The virtual path of the directory holding the video files.
-        ///// </summary>
-        //private const string VirtualPath = @"/Music Videos";
-
         /// <summary>
         /// Flags for the database.
         /// </summary>
@@ -43,8 +15,6 @@
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
-
-
 
         /// <summary>
         /// Connection to the sqlite database.
@@ -65,6 +35,8 @@
             // Create the Video table if it is not already created.
             _ = videosDatabase.CreateTableAsync<Video>();
 
+            //CheckExistingVideos();
+
             // Import videos.
             Task<int> rv = GetNoOfVideosAsync();
             if (rv.Result == 0)
@@ -78,6 +50,8 @@
 
             // Import new videos.
             ImportNewVideos();
+
+            Log.Information("DataStore.Constructor finished.");
         }
 
         public Video SelectVideoFromId(int id)
