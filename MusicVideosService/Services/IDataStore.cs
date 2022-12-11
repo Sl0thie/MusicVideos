@@ -9,5 +9,9 @@
         Task InsertOrUpdateVideo(Video video);
 
         Task UpdateVideoPropertiesAsync(int id, int duration, int width, int height);
+
+        Task<int> GetNoOfVideosAsync();
+
+        Video SelectVideoFromRandomId(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace MusicVideosService.Services
 {
     using System;
+    using System.Reflection;
     using System.Text;
     using MusicVideosService.Models;
     using Serilog;
@@ -62,6 +63,24 @@
             return videos[0];
         }
 
+        public Video SelectVideoFromRandomId(int id)
+        {
+            try
+            {
+                Log.Information($"SelectVideoFromRandomId id {id}");
+
+                // Get the video object from the database.
+                Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [RandomIndexLow] <= {id} AND [RandomIndexHigh] >= {id}");
+                List<Video> videos = rv.Result;
+                return videos[0];
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                return null;
+            }
+        }
+
         public async Task InsertOrUpdateVideo(Video video)
         {
             if (video is object)
@@ -107,8 +126,8 @@
                     videos[0].Duration = duration;
                     videos[0].VideoWidth = width;
                     videos[0].VideoHeight = height;
-                    videos[0].LastPlayed = DateTime.Now;
-                    videos[0].PlayCount++;
+                    //videos[0].LastPlayed = DateTime.Now;
+                    //videos[0].PlayCount++;
 
                     await InsertOrUpdateVideo(videos[0]);
                 }
@@ -215,7 +234,7 @@
             }
         }
 
-        private async Task<int> GetNoOfVideosAsync()
+        public async Task<int> GetNoOfVideosAsync()
         {
             int rows = await videosDatabase.Table<Video>().CountAsync();
             return rows;

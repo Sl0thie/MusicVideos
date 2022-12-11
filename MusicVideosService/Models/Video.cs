@@ -80,10 +80,21 @@
         /// </summary>
         public int QueuedCount { get; set; }
 
+        public long TotalPlayTime { get; set; }
+
         /// <summary>
         /// Gets or sets the rating of the video.
         /// </summary>
         public int Rating { get; set; } = 50;
+
+        public int RandomIndexLow { get; set; }
+
+        public int RandomIndexHigh { get; set; }
+
+        /// <summary>
+        /// Gets or sets the calculated rating of the video.
+        /// </summary>
+        public double CalculatedRating { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the last time the video was played.

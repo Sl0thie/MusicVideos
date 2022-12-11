@@ -29,7 +29,7 @@ Config.Application.TryAdd("ImportPath", @"F:\Music Videos for Import");
 Config.Application.TryAdd("BasePath", @"F:\Music Videos");
 Config.Application.TryAdd("ErrorPath", @"F:\Music Videos Errors");
 Config.Application.TryAdd("VirtualPath", @"/Music Videos");
-Config.Application.TryAdd("MinutesBetweenReplays", 10);
+Config.Application.TryAdd("MinutesBetweenReplays", 120);
 
 // Config web application.
 WebApplicationOptions? options = new()

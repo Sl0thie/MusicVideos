@@ -114,6 +114,14 @@ function playVideo(video) {
     console.log('Title: ' + video.title);
 }
 
+function keyDown(key) {
+    window.alert("KeyDown " + key);
+}
+
+function keyUp(key) {
+    window.alert("KeyUp " + key);
+}
+
 function screenClick() {
     console.log('function screenClick ' + playerVideoId);
     connection.invoke('HubScreenClick', parseInt(playerVideoId));
