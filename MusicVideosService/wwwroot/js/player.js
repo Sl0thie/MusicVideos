@@ -25,6 +25,10 @@ let nextPlayer = 0;
 let playerplaying = false;
 let playerVideoId = -1;
 
+let nextClick = 0;
+
+
+
 //#endregion
 //#region Initialization
 window.addEventListener('load', function () {
@@ -124,7 +128,13 @@ function keyUp(key) {
 
 function screenClick() {
     console.log('function screenClick ' + playerVideoId);
-    connection.invoke('HubScreenClick', parseInt(playerVideoId));
+
+    // Try and stop double clicks.
+    if (nextClick < new Date().getTime()) {
+
+        connection.invoke('HubScreenClick', parseInt(playerVideoId));
+        nextClick = new Date().getTime() + 1000;
+    }
 }
 
 function playerplay() {

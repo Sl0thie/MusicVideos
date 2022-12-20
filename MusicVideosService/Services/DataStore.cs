@@ -36,6 +36,9 @@
             // Create the Video table if it is not already created.
             _ = videosDatabase.CreateTableAsync<Video>();
 
+            // Create the Played table as well.
+            _ = videosDatabase.CreateTableAsync<Played>();
+
             //CheckExistingVideos();
 
             // Import videos.
@@ -63,11 +66,11 @@
             return videos[0];
         }
 
-        public Video SelectVideoFromRandomId(int id)
+        public Video SelectVideoFromRandomId(long id)
         {
             try
             {
-                Log.Information($"SelectVideoFromRandomId id {id}");
+                //Log.Information($"SelectVideoFromRandomId id {id}");
 
                 // Get the video object from the database.
                 Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [RandomIndexLow] <= {id} AND [RandomIndexHigh] >= {id}");
@@ -87,7 +90,7 @@
             {
                 try
                 {
-                    Log.Information($"InsertOrUpdateVideo: {video.Artist} - {video.Title} - {video.Duration}");
+                    //Log.Information($"InsertOrUpdateVideo: {video.Artist} - {video.Title} - {video.Duration}");
 
                     // Get video from the database.
                     Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Id] = '{video.Id}'");
@@ -96,12 +99,12 @@
                     // Update the video or add it if it is not already there.
                     if (videos.Count == 1)
                     {
-                        Log.Information("Updating");
+                        //Log.Information("Updating");
                         _ = await videosDatabase.UpdateAsync(video);
                     }
                     else
                     {
-                        Log.Information("Inserting");
+                        //Log.Information("Inserting");
                         _ = await videosDatabase.InsertAsync(video);
                     }
                 }
@@ -114,8 +117,6 @@
 
         public async Task UpdateVideoPropertiesAsync(int id, int duration, int width, int height)
         {
-            Log.Information("Videos.UpdateVideoPropertiesAsync");
-
             try
             {
                 // Get video from the database.
@@ -126,9 +127,6 @@
                     videos[0].Duration = duration;
                     videos[0].VideoWidth = width;
                     videos[0].VideoHeight = height;
-                    //videos[0].LastPlayed = DateTime.Now;
-                    //videos[0].PlayCount++;
-
                     await InsertOrUpdateVideo(videos[0]);
                 }
             }
@@ -202,7 +200,7 @@
         {
             try
             {
-                Log.Information($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
+                //Log.Information($"SaveVideoAsync: {video.Artist} - {video.Title} - {video.Duration}");
 
                 // Get video from the database.
                 Task<List<Video>> rv = videosDatabase.QueryAsync<Video>($"SELECT * FROM [Video] WHERE [Artist] = '{video.Artist}' AND [Title] = '{video.Title}'");
@@ -238,6 +236,18 @@
         {
             int rows = await videosDatabase.Table<Video>().CountAsync();
             return rows;
+        }
+
+        public async Task InsertPlayed(Played item)
+        {
+            try
+            {
+                _ = await videosDatabase.InsertAsync(item);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
         }
     }
 }

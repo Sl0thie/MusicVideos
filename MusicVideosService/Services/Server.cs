@@ -24,7 +24,7 @@
         private DateTime videoStarted;
         private TimeSpan videoPaused;
         private DateTime nextClick = DateTime.Now;
-        private int MaxRandomIndex = 0;
+        private long MaxRandomIndex = 0;
 
         /// <summary>
         /// Used to generate random numbers.
@@ -88,10 +88,31 @@
 
                     Video video = dataStore.SelectVideoFromId(index);
 
-                    if (video.PlayCount == 0) // Song has not been played yet. Base value for an unplayed video = 10000 for now.
+
+                    // Quick fix for "double click"?
+                    if (video.PlayCount == 1)
                     {
+                        if (video.TotalPlayTime == 0)
+                        {
+                            video.PlayCount = 0;
+                        }
+                    }
+
+                    if (video.PlayCount == 0)
+                    {
+                        if (video.Rating != 50)
+                        {
+                            video.Rating = 50;
+                        }
+                    }
+
+                    if (video.PlayCount == 0)
+                    {
+                        // Song has not been played yet.
                         video.RandomIndexLow = MaxRandomIndex;
-                        MaxRandomIndex += 10000;
+
+                        // Add a base value for unplayed videos. The larger the number the bigger chance of it being played.
+                        MaxRandomIndex += 1;
                         video.RandomIndexHigh = MaxRandomIndex;
                         MaxRandomIndex += 1;
                     }
@@ -99,23 +120,19 @@
                     {
                         // Get average duration.
                         long avgDuration = video.TotalPlayTime / video.PlayCount;
-
                         video.Rating = (int)((double)avgDuration / (double)video.Duration * 100) + 1;
-
                         video.RandomIndexLow = MaxRandomIndex;
-                        MaxRandomIndex += video.Rating * 100;
+                        MaxRandomIndex += (long)(video.Rating * video.Rating * video.PlayCount * 1);
                         video.RandomIndexHigh = MaxRandomIndex;
                         MaxRandomIndex += 1;
                     }
 
-                    Log.Information($"{videoIds.Count} video {video.Id} {video.Artist} - {video.Title} {video.RandomIndexLow} {video.RandomIndexHigh}");
+                    Log.Information($"{videoIds.Count} video {video.Id} {video.Artist} - {video.Title} {video.RandomIndexLow} {video.RandomIndexHigh} = {video.RandomIndexHigh - video.RandomIndexLow}");
 
                     await dataStore.InsertOrUpdateVideo(video);
                 }
 
                 Log.Information("Finish RateVideosAsync");
-
-                //MaxRandomIndex -= 1;
             }
             catch (Exception ex)
             {
@@ -125,22 +142,12 @@
 
         private void PlayerEnded(int id)
         {
-            // By switch the current id to -1 after the event,
-            // the event is not fired twice if there is more than one client.
-            if (id == currentId)
-            {
-                //currentId = -1;
-                PlayNextVideo(true, false);
-            }
+            PlayNextVideo(true, false);
         }
 
         private void PlayerError(int id)
         {
-            if (id == currentId)
-            {
-                //currentId = -1;
-                PlayNextVideo(false, true);
-            }
+            PlayNextVideo(false, true);
         }
 
         private void PlayerScreenClicked(int id)
@@ -150,7 +157,7 @@
             if (nextClick < DateTime.Now)
             {
                 PlayNextVideo(false, false);
-                nextClick = DateTime.Now.AddMilliseconds(500);
+                nextClick = DateTime.Now.AddMilliseconds(1000);
             }
         }
 
@@ -200,6 +207,13 @@
                 }
 
                 await dataStore.InsertOrUpdateVideo(previousVideo);
+
+                Played nextPlayed = new Played();
+                nextPlayed.VideoId = previousVideo.Id;
+                nextPlayed.Start = videoStarted;
+                nextPlayed.Finish = previousVideo.LastPlayed;
+                nextPlayed.Duration = (int)totalmilliseconds;
+                await dataStore.InsertPlayed(nextPlayed);
             }
 
             try
@@ -252,13 +266,7 @@
                 try
                 {
                     // Pick a random index from the filtered videos.
-                    //int index = rnd.Next(0, (int)Config.Application["TotalVideos"] + 1);
-                    //Video nextVideo = dataStore.SelectVideoFromId(index);
-
-                    int index = rnd.Next(1, MaxRandomIndex);
-
-                    Log.Information($"PlayRandomVideoAsync index {index}");
-
+                    long index = rnd.NextInt64(1, MaxRandomIndex);
                     Video nextVideo = dataStore.SelectVideoFromRandomId(index);
 
                     // Check if the video's last played is past the limit.
@@ -271,7 +279,7 @@
 
                         keepsearching = false;
 
-                        Log.Information($"PlayRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Id}");
+                        //Log.Information($"PlayRandomVideoAsync: {nextVideo.Artist} - {nextVideo.Title} - {nextVideo.Id}");
                     }
                 }
                 catch (Exception ex)

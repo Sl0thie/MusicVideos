@@ -80,16 +80,25 @@
         /// </summary>
         public int QueuedCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the TotalPlayTime.
+        /// </summary>
         public long TotalPlayTime { get; set; }
 
         /// <summary>
         /// Gets or sets the rating of the video.
         /// </summary>
-        public int Rating { get; set; } = 50;
+        public double Rating { get; set; } = 50;
 
-        public int RandomIndexLow { get; set; }
+        /// <summary>
+        /// Gets or sets the RandomindexLow.
+        /// </summary>
+        public long RandomIndexLow { get; set; }
 
-        public int RandomIndexHigh { get; set; }
+        /// <summary>
+        /// Gets or sets the RandomIndexHigh.
+        /// </summary>
+        public long RandomIndexHigh { get; set; }
 
         /// <summary>
         /// Gets or sets the calculated rating of the video.

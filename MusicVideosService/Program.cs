@@ -51,13 +51,6 @@ builder.Services.AddSingleton<IDataStore, DataStore>(p =>
     return dataStore;
 });
 
-//builder.Services.AddSingleton<IServer, Server>(p =>
-//{
-//    IDataStore dataStore = p.GetService<IDataStore>();
-//    Server server = new Server(dataStore);
-//    return server;
-//});
-
 builder.Services.AddHostedService<IServer>(p =>
 {
     IDataStore? dataStore = p.GetService<IDataStore>();

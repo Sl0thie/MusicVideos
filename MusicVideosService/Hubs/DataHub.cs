@@ -25,7 +25,7 @@
         {
             try
             {
-                Log.Information($"VideoHub.ClientPlayVideo {video.Id}");
+                //Log.Information($"DataHub.ClientPlayVideo {video.Id}");
 
                 _ = Clients.All.SendAsync("ClientPlayVideo", video);
             }
@@ -39,7 +39,7 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServerUpdateVideoProprties {videoId}");
+                //Log.Information($"DataHub.ServerUpdateVideoProprties {videoId}");
 
                 // Convert duration to milliseconds.
                 int durationFixed = (int)(Convert.ToDouble(duration) * 1000);
@@ -55,7 +55,7 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerEnded {id}");
+                //Log.Information($"DataHub.ServePlayerEnded {id}");
 
                 _ = Clients.All.SendAsync("ServerPlayerEnded", id);
             }
@@ -69,7 +69,7 @@
         {
             try
             {
-                Log.Information($"VideoHub.ServePlayerError {id}");
+                //Log.Information($"DataHub.ServePlayerError {id}");
 
                 _ = Clients.All.SendAsync("ServerPlayerError", id);
             }
@@ -83,7 +83,7 @@
         {
             try
             {
-                Log.Information($"VideoHub.HubScreenClick {id}");
+                //Log.Information($"DataHub.HubScreenClick {id}");
 
                 _ = Clients.All.SendAsync("ServerPlayerScreenClicked", id);
             }

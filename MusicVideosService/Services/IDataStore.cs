@@ -12,6 +12,8 @@
 
         Task<int> GetNoOfVideosAsync();
 
-        Video SelectVideoFromRandomId(int id);
+        Video SelectVideoFromRandomId(long id);
+
+        Task InsertPlayed(Played item);
     }
 }
